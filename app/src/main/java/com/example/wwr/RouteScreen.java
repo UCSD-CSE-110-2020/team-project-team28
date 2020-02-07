@@ -55,7 +55,6 @@ public class RouteScreen extends AppCompatActivity {
                 1000, 200.69, 5);
 
 
-
         routeScreenView = findViewById(R.id.routeScreen);
         routeScreenView.setHasFixedSize(true);
         routeLayoutManager = new LinearLayoutManager(this);
