@@ -8,8 +8,10 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Chronometer;
 
 public class WalkScreenActivity extends AppCompatActivity {
 
@@ -37,6 +39,11 @@ public class WalkScreenActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        Chronometer chronometer = findViewById(R.id.chronometer);
+        chronometer.setBase(SystemClock.elapsedRealtime());
+        chronometer.start();
+
     }
 
 }
