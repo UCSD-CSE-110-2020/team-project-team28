@@ -1,5 +1,6 @@
 package com.example.wwr;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -11,6 +12,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,6 +31,20 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        Button startButton = (Button) findViewById(R.id.start_button);
+
+        startButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                walkActivity();
+            }
+        });
+    }
+
+    public void walkActivity(){
+        Intent intent = new Intent(this, WalkScreenActivity.class);
+        startActivity(intent);
     }
 
     @Override
