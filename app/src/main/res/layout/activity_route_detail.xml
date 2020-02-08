@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RouteDetail">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/route_information_page"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Route Name"
+            android:id="@+id/route_detail_title" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Note"
+            android:id="@+id/route_detail_note"
+            android:layout_below="@id/route_detail_title" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Steps"
+            android:id="@+id/route_detail_steps"
+            android:layout_below="@id/route_detail_note" />
+
+    </LinearLayout>
+
+</RelativeLayout>
+
+
+
+
