@@ -9,8 +9,8 @@ public class Route {
     private int totalMinutes;
     private int image;
 
-    Route (String name, String startLocation, int totalSteps, double totalMiles, int totalMinutes,
-           int image) {
+
+    Route (String name, String startLocation, int totalSteps, double totalMiles, int totalMinutes, int image) {
         this.name = name;
         this.startLocation = startLocation;
         this.totalSteps = totalSteps;
