@@ -18,7 +18,7 @@ public class RouteUnitTest {
         Route myRoute = new Route("La Jolla","Fox",3,
                 60,100, "Hello", true, 0);
         assertEquals(myRoute.getName(), "La Jolla");
-        assertEquals(myRoute.getMiles(), 60);
+        assertEquals(myRoute.getMiles(), 60, 0.0);
     }
 
     @Test
