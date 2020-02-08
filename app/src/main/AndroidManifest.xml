@@ -9,6 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".RouteDetail"></activity>
+        <activity android:name=".RouteScreen" />
         <activity
             android:name=".WalkScreenActivity"
             android:label="@string/title_activity_walk_screen"

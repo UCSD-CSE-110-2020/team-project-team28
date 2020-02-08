@@ -7,13 +7,15 @@ public class Route {
     private int totalSteps;
     private double totalMiles;
     private int totalMinutes;
+    private int image;
 
-    Route (String name, String startLocation, int totalSteps, double totalMiles, int totalMinutes) {
+    Route (String name, String startLocation, int totalSteps, double totalMiles, int totalMinutes, int image) {
         this.name = name;
         this.startLocation = startLocation;
         this.totalSteps = totalSteps;
         this.totalMiles = totalMiles;
         this.totalMinutes = totalMinutes;
+        this.image = image;
     }
 
     public void updateRouteName(String name) {
@@ -54,5 +56,9 @@ public class Route {
 
     public int getTotalMinutes() {
         return this.totalMinutes;
+    }
+
+    public int getImage() {
+        return this.image;
     }
 }
