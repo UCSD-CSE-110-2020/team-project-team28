@@ -55,16 +55,16 @@ public class RouteScreenAdapter extends RecyclerView.Adapter<RouteScreenAdapter.
             int position = getAdapterPosition();
             Route currentRoute = routeList.get(position);
             Intent intent = new Intent(this.context, RouteDetail.class);
-            intent.putExtra("routeName", currentRoute.getName());
-            intent.putExtra("note", currentRoute.getNote());
-            intent.putExtra("steps", Integer.toString(currentRoute.getSteps()));
+            intent.putExtra("routeName", "Route Name: " + currentRoute.getName());
+            intent.putExtra("startLocation", "Start Location: " + currentRoute.getStartLocation());
+            intent.putExtra("timeTaken", "Time Taken: " + Integer.toString(currentRoute.getTotalMinutes()));
+            intent.putExtra("steps", "Steps: " + Integer.toString(currentRoute.getSteps()));
+            intent.putExtra("distance", "Distance: " + Double.toString(currentRoute.getTotalMinutes()));
+            intent.putExtra("note", "Notes: " + currentRoute.getNote());
 
             this.context.startActivity(intent);
-
         }
     }
-
-
 
     @NonNull
     @Override
