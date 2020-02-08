@@ -34,7 +34,7 @@ public class RouteScreen extends AppCompatActivity {
                 40000, 230.0, 300, "Wow", true);
 
         addToRouteList("Home", "California",
-                6510, 110.0, 70, "Great Run", true);
+                6510, 110.0, 70, "Great Run asdfddfaksfjlfjlasjflajdfladjslfjaklsdjflkadsjfkladsjflkdjasklfjdaslkfjaldksjfklajkfajl", true);
 
         addToRouteList("Staples", "California",
                 320, 10.0, 5, "Not good", false);
