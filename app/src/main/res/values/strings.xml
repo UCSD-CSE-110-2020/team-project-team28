@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">WWR</string>
     <string name="action_settings">Settings</string>
+    <string name="main_screen_button_to_routes">Routes</string>
+    <string name="daily_activity">DAILY ACTIVITY</string>
+    <string name="daily_steps">STEPS: </string>
+    <string name="daily_distance">DISTANCE: </string>
+    <string name="daily_empty"></string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="daily_start">START</string>
+
 </resources>
