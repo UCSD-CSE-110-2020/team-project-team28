@@ -31,13 +31,17 @@ public class RoutesActivity extends AppCompatActivity {
         surfaceGroup = findViewById(R.id.groupSurface);
         difficultyGroup = findViewById(R.id.groupDifficulty);
 
+        routeName = (EditText)findViewById(R.id.routeName);
+        startLocation = (EditText)findViewById(R.id.startLocation);
+        notes = (EditText)findViewById(R.id.notes);
+
         routeName.setText(EMPTY_STRING);
         startLocation.setText(EMPTY_STRING);
         notes.setText(EMPTY_STRING);
 
     } // end onCreate()
 
-    public void OK (View view) {
+    public void pressOK (View view) {
         // grab radio button selections
         int radioId = flatGroup.getCheckedRadioButtonId();
         flatButton = findViewById(radioId);

@@ -9,16 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-<<<<<<< HEAD
         <activity android:name=".RouteDetail"></activity>
+
         <activity android:name=".RouteScreen" />
+
         <activity
             android:name=".WalkScreenActivity"
             android:label="@string/title_activity_walk_screen"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-=======
+
         <activity android:name=".RoutesActivity"></activity>
->>>>>>> d1fba8415cb279f093743c86c0994d108c42d973
+
         <activity
             android:name=".MainActivity"
             android:label="Route Information"

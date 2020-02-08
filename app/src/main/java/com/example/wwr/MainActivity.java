@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 walkActivity();
             }
         });
+
     }
 
     public void walkActivity(){

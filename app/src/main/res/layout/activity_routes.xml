@@ -217,6 +217,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@android:string/ok"
-        android:onClick="OK"/>
+        android:onClick="pressOK"/>
 
 </LinearLayout>
