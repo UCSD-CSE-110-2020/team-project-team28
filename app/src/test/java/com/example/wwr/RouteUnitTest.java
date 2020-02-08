@@ -15,15 +15,15 @@ public class RouteUnitTest {
 
     @Test
     public void testRoute() {
-        Route myRoute = new Route("La Jolla","Fox","02/06/20",3,
-                60,100);
+        Route myRoute = new Route("La Jolla","Fox",3,
+                60,100, 1);
         assertEquals(myRoute.getName(), "La Jolla");
     }
 
     @Test
     public void testUpdateSteps() {
-        Route myRoute = new Route("La Jolla","Fox","02/06/20",3,
-                60,100);
+        Route myRoute = new Route("La Jolla","Fox", 3,
+                60,100, 1);
         assertEquals(myRoute.getName(), "La Jolla");
         myRoute.updateMinutes(1000);
         assertEquals(myRoute.getTotalMinutes(), 1000);
