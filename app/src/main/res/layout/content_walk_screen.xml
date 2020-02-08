@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:layout_marginTop="104dp"
-        android:background="#b2dfdb"
+        android:background="#77D3D3"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#ad1457"
@@ -47,4 +47,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.225" />
+
+    <TextView
+        android:id="@+id/steps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Steps"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/distance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chronometer" />
+
+    <TextView
+        android:id="@+id/distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="136dp"
+        android:text="Distance"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/end_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
