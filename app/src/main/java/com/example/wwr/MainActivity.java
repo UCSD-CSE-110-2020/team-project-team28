@@ -31,6 +31,20 @@ public class MainActivity extends AppCompatActivity {
                 switchToRouteScreen();
             }
         });
+
+        Button startButton = (Button) findViewById(R.id.start_button);
+
+        startButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                walkActivity();
+            }
+        });
+    }
+
+    public void walkActivity(){
+        Intent intent = new Intent(this, WalkScreenActivity.class);
+        startActivity(intent);
     }
 
     public void switchToRouteScreen() {
