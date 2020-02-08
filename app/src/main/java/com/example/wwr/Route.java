@@ -15,8 +15,9 @@ public class Route {
            String note, boolean isFavorite, int image) {
         this.name = name;
         this.startLocation = startLocation;
-        this.totalSteps = totalSteps;
-        this.totalMiles = totalMiles; //
+
+        this.totalSteps = totalSteps; //
+        this.totalMiles = totalMiles;
         this.totalMinutes = totalMinutes;
         this.note = note;
         this.isFavorite = isFavorite;
