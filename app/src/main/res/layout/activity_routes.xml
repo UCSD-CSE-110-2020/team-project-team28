@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".RoutesActivity">
+
+    <TextView
+        android:id="@+id/fillRouteText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fill-in Route Information Below:"
+        android:textSize="24sp"
+        tools:layout_editor_absoluteX="82dp"
+        tools:layout_editor_absoluteY="80dp"
+        />
+
+    <EditText
+        android:id="@+id/startLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Start Location"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.276"
+        />
+
+    <EditText
+        android:id="@+id/routeName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Route Name"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.18" />
+
+
+    <RadioGroup
+        android:id="@+id/groupFlat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="259dp">
+
+        <TextView
+            android:id="@+id/radio_header_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Flat or Hilly?"
+            />
+
+        <RadioButton
+            android:id="@+id/radio_hilly"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hilly"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="270dp"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/radio_flat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Flat"
+            tools:layout_editor_absoluteX="134dp"
+            tools:layout_editor_absoluteY="270dp" />
+
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/groupLoop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="306dp">
+
+        <TextView
+            android:id="@+id/radio_header_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Loop or Out-And-Back?" />
+
+        <RadioButton
+            android:id="@+id/radio_loop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Loop"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/radio_out_and_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Out-And-Back" />
+
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/groupStreet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="349dp">
+
+        <TextView
+            android:id="@+id/radio_header_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Street or Trail?" />
+
+        <RadioButton
+            android:id="@+id/radio_street"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Street"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/radio_trail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Trail" />
+
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/groupSurface"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="394dp">
+
+        <TextView
+            android:id="@+id/radio_header_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Even or Uneven Surface?" />
+
+        <RadioButton
+            android:id="@+id/radio_even"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Even Surface"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/radio_uneven"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Uneven Surface" />
+
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/groupDifficulty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="445dp">
+
+        <TextView
+            android:id="@+id/radio_header_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Difficulty?" />
+
+        <RadioButton
+            android:id="@+id/radio_easy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Easy"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/radio_moderate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Moderate" />
+
+        <RadioButton
+            android:id="@+id/radio_difficult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Difficult" />
+
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/notes"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="Notes"
+        android:inputType="textEmailAddress"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="505dp" />
+
+    <Button
+        android:id="@+id/button_ok"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@android:string/ok"
+        android:onClick="OK"/>
+
+</LinearLayout>
