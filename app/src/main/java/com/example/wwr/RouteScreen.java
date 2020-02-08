@@ -15,8 +15,6 @@ public class RouteScreen extends AppCompatActivity {
     private RecyclerView.Adapter routeAdapter;
     private RecyclerView.LayoutManager routeLayoutManager;
 
-//    Context context;
-
     ArrayList<Route> routeList = new ArrayList<>();
 
 
@@ -27,16 +25,22 @@ public class RouteScreen extends AppCompatActivity {
 
 
        addToRouteList("Home", "California",
-                100, 100.0, 10, "5", true);
+                6510, 110.0, 70, "Great Run", true);
+
+       addToRouteList("Staples", "California",
+                320, 10.0, 5, "Not good", false);
+
+        addToRouteList("Wedding", "Miami",
+                40000, 230.0, 300, "Wow", true);
 
         addToRouteList("Home", "California",
-                100, 100.0, 10, "5", false);
+                6510, 110.0, 70, "Great Run", true);
 
-        addToRouteList("Home", "California",
-                100, 100.0, 10, "5", true);
+        addToRouteList("Staples", "California",
+                320, 10.0, 5, "Not good", false);
 
-        addToRouteList("Home", "California",
-                100, 100.0, 10, "5", false);
+        addToRouteList("Wedding", "Miami",
+                40000, 230.0, 300, "Wow", true);
 
 
         routeScreenView = findViewById(R.id.routeScreen);
