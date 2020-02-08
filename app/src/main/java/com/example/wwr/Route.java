@@ -7,15 +7,20 @@ public class Route {
     private int totalSteps;
     private double totalMiles;
     private int totalMinutes;
+    private String note;
+    private boolean isFavorite;
     private int image;
 
-
-    Route (String name, String startLocation, int totalSteps, double totalMiles, int totalMinutes, int image) {
+    Route (String name, String startLocation, int totalSteps, double totalMiles, int totalMinutes,
+           String note, boolean isFavorite, int image) {
         this.name = name;
         this.startLocation = startLocation;
-        this.totalSteps = totalSteps;
+
+        this.totalSteps = totalSteps; //
         this.totalMiles = totalMiles;
         this.totalMinutes = totalMinutes;
+        this.note = note;
+        this.isFavorite = isFavorite;
         this.image = image;
     }
 
@@ -61,5 +66,13 @@ public class Route {
 
     public int getImage() {
         return this.image;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setFavorite(boolean favorite) {
+        this.isFavorite = favorite;
     }
 }

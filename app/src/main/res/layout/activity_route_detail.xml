@@ -19,15 +19,43 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Note"
-            android:id="@+id/route_detail_note"
-            android:layout_below="@id/route_detail_title" />
+            android:text="Start Location:"
+            android:id="@+id/route_detail_start_location"
+            android:layout_below="@id/route_detail_title"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Time Taken:"
+            android:id="@+id/route_detail_time_taken"
+            android:layout_below="@id/route_detail_start_location"
+            />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Steps"
             android:id="@+id/route_detail_steps"
-            android:layout_below="@id/route_detail_note" />
+            android:layout_below="@id/route_detail_time_taken" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Distance:"
+            android:id="@+id/route_detail_distance"
+            android:layout_below="@id/route_detail_steps" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Note"
+            android:id="@+id/route_detail_note"
+            android:layout_below="@id/route_detail_distance" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:text="Start" />
+
 
     </LinearLayout>
 

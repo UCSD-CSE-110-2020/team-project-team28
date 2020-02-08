@@ -15,8 +15,6 @@ public class RouteScreen extends AppCompatActivity {
     private RecyclerView.Adapter routeAdapter;
     private RecyclerView.LayoutManager routeLayoutManager;
 
-//    Context context;
-
     ArrayList<Route> routeList = new ArrayList<>();
 
 
@@ -26,41 +24,29 @@ public class RouteScreen extends AppCompatActivity {
         setContentView(R.layout.activity_route_screen);
 
 
-       addToRouteList(true, "Home", "California",
-               100, 100.0, 5);
+       addToRouteList("Home", "California",
+                6510, 110.0, 70, "Great Run", true);
 
-        addToRouteList(false, "HomeStruck", "Californian",
-                1000, 200.69, 5);
+       addToRouteList("Staples", "California",
+                320, 10.0, 5, "Not good", false);
 
-        addToRouteList(true, "Home", "California",
-                100, 100.0, 5);
+        addToRouteList("Wedding", "Miami",
+                40000, 230.0, 300, "Wow", true);
 
-        addToRouteList(false, "HomeStruck", "Californian",
-                1000, 200.69, 5);
+        addToRouteList("Home", "California",
+                6510, 110.0, 70, "Great Run asdfddfaksfjlfjlasjflajdfladjslfjaklsdjflkadsjfkladsjflkdjasklfjdaslkfjaldksjfklajkfajl", true);
 
-        addToRouteList(true, "Home", "California",
-                100, 100.0, 5);
+        addToRouteList("Staples", "California",
+                320, 10.0, 5, "Not good", false);
 
-        addToRouteList(false, "HomeStruck", "Californian",
-                1000, 200.69, 5);
-
-        addToRouteList(true, "Home", "California",
-                100, 100.0, 5);
-
-        addToRouteList(false, "HomeStruck", "Californian",
-                1000, 200.69, 5);
-
-        addToRouteList(true, "Home", "California",
-                100, 100.0, 5);
-
-        addToRouteList(false, "HomeStruck", "Californian",
-                1000, 200.69, 5);
+        addToRouteList("Wedding", "Miami",
+                40000, 230.0, 300, "Wow", true);
 
 
         routeScreenView = findViewById(R.id.routeScreen);
         routeScreenView.setHasFixedSize(true);
         routeLayoutManager = new LinearLayoutManager(this);
-        routeAdapter = new RouteScreenAdapter(routeList);
+        routeAdapter = new RouteScreenAdapter(routeList, this);
 
         routeScreenView.setLayoutManager(routeLayoutManager);
         routeScreenView.setAdapter(routeAdapter);
@@ -75,15 +61,16 @@ public class RouteScreen extends AppCompatActivity {
         });
     }
 
-    public void addToRouteList(boolean isFavorite, String routeName, String startingLocation,
-                         int totalSteps, double totalMiles, int totalMinutes) {
+    public void addToRouteList(String routeName, String startingLocation,
+                         int totalSteps, double totalMiles, int totalMinutes, String note,
+                               boolean isFavorite) {
 
         if (isFavorite) {
             routeList.add(new Route(routeName, startingLocation, totalSteps, totalMiles,
-                    totalMinutes, R.drawable.ic_stars_black_24dp));
+                    totalMinutes, note, isFavorite, R.drawable.ic_stars_black_24dp));
         } else {
             routeList.add(new Route(routeName, startingLocation, totalSteps, totalMiles,
-                    totalMinutes, 0));
+                    totalMinutes, note, isFavorite, 0));
         }
     }
 }
