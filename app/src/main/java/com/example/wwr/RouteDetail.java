@@ -2,7 +2,10 @@ package com.example.wwr;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -32,6 +35,15 @@ public class RouteDetail extends AppCompatActivity {
         steps.setText(getIntent().getStringExtra("steps"));
         distance.setText(getIntent().getStringExtra("distance"));
         note.setText(getIntent().getStringExtra("note"));
+
+        Button routeInfo = (Button) findViewById(R.id.route_info_start_button);
+        routeInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), WalkScreenActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 }
