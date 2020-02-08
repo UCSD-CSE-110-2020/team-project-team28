@@ -26,41 +26,23 @@ public class RouteScreen extends AppCompatActivity {
         setContentView(R.layout.activity_route_screen);
 
 
-       addToRouteList(true, "Home", "California",
-               100, 100.0, 5);
+       addToRouteList("Home", "California",
+                100, 100.0, 10, "5", true);
 
-        addToRouteList(false, "HomeStruck", "Californian",
-                1000, 200.69, 5);
+        addToRouteList("Home", "California",
+                100, 100.0, 10, "5", false);
 
-        addToRouteList(true, "Home", "California",
-                100, 100.0, 5);
+        addToRouteList("Home", "California",
+                100, 100.0, 10, "5", true);
 
-        addToRouteList(false, "HomeStruck", "Californian",
-                1000, 200.69, 5);
-
-        addToRouteList(true, "Home", "California",
-                100, 100.0, 5);
-
-        addToRouteList(false, "HomeStruck", "Californian",
-                1000, 200.69, 5);
-
-        addToRouteList(true, "Home", "California",
-                100, 100.0, 5);
-
-        addToRouteList(false, "HomeStruck", "Californian",
-                1000, 200.69, 5);
-
-        addToRouteList(true, "Home", "California",
-                100, 100.0, 5);
-
-        addToRouteList(false, "HomeStruck", "Californian",
-                1000, 200.69, 5);
+        addToRouteList("Home", "California",
+                100, 100.0, 10, "5", false);
 
 
         routeScreenView = findViewById(R.id.routeScreen);
         routeScreenView.setHasFixedSize(true);
         routeLayoutManager = new LinearLayoutManager(this);
-        routeAdapter = new RouteScreenAdapter(routeList);
+        routeAdapter = new RouteScreenAdapter(routeList, this);
 
         routeScreenView.setLayoutManager(routeLayoutManager);
         routeScreenView.setAdapter(routeAdapter);
@@ -75,15 +57,16 @@ public class RouteScreen extends AppCompatActivity {
         });
     }
 
-    public void addToRouteList(boolean isFavorite, String routeName, String startingLocation,
-                         int totalSteps, double totalMiles, int totalMinutes) {
+    public void addToRouteList(String routeName, String startingLocation,
+                         int totalSteps, double totalMiles, int totalMinutes, String note,
+                               boolean isFavorite) {
 
         if (isFavorite) {
             routeList.add(new Route(routeName, startingLocation, totalSteps, totalMiles,
-                    totalMinutes, R.drawable.ic_stars_black_24dp));
+                    totalMinutes, note, isFavorite, R.drawable.ic_stars_black_24dp));
         } else {
             routeList.add(new Route(routeName, startingLocation, totalSteps, totalMiles,
-                    totalMinutes, 0));
+                    totalMinutes, note, isFavorite, 0));
         }
     }
 }
