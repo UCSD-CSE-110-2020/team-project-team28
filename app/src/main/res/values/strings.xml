@@ -10,4 +10,5 @@
     <string name="daily_activity_empty_value"></string>
     <string name="intentional_walk">LAST INTENTIONAL WALK</string>
     <string name="last_walk_time">TIME: </string>
+    <string name="title_activity_ask_height_">AskHeight_Activity</string>
 </resources>

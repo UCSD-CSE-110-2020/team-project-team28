@@ -10,9 +10,6 @@ import static org.junit.Assert.*;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 public class RouteUnitTest {
-
-
-
     @Test
     public void testRoute() {
         Route myRoute = new Route("La Jolla","Fox",3,
