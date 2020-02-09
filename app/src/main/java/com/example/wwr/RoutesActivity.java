@@ -92,7 +92,6 @@ public class RoutesActivity extends AppCompatActivity {
         editor.putString("route list", json);
         editor.apply();
 
-
         finish();
     }
 
