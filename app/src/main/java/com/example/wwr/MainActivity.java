@@ -2,6 +2,7 @@ package com.example.wwr;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.example.wwr.fitness.FitnessService;
@@ -94,6 +95,12 @@ public class MainActivity extends AppCompatActivity {
         t.setText(String.valueOf(stepCount));
     }
 
+    public int getCurrentSteps(){
+        TextView t = findViewById(R.id.daily_steps_num);
+        int currentSteps = Integer.parseInt(t.getText().toString());
+        return currentSteps;
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -111,8 +118,21 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void walkActivity(){
+        fitnessService.updateStepCount();
+        int startSteps = getCurrentSteps();
         Intent intent = new Intent(this, WalkScreenActivity.class);
         startActivity(intent);
+        fitnessService.updateStepCount();
+        int endSteps = getCurrentSteps();
+        int totalSteps = endSteps - startSteps;
+        TextView t = findViewById(R.id.last_steps_num);
+        t.setText(String.valueOf(totalSteps));
+
+        SharedPreferences sharedPreferences = getSharedPreferences("recentWalk", MODE_PRIVATE);
+        //Long totalTime = sharedPreferences.getLong("time", 0);
+        Long totalTime = sharedPreferences.getLong("time", 0);
+        TextView displayTime = (TextView) findViewById(R.id.last_time_num);
+        displayTime.setText(totalTime.toString());
     }
 
     public void switchToRouteScreen() {

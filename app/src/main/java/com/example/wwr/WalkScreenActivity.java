@@ -1,5 +1,6 @@
 package com.example.wwr;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -13,6 +14,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
 
+import com.example.wwr.MainActivity;
+
 public class WalkScreenActivity extends AppCompatActivity {
 
     @Override
@@ -21,6 +24,7 @@ public class WalkScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_walk_screen);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -31,18 +35,27 @@ public class WalkScreenActivity extends AppCompatActivity {
             }
         });
 
+        Chronometer chronometer = findViewById(R.id.chronometer);
+        chronometer.setBase(SystemClock.elapsedRealtime());
+        chronometer.start();
         Button endButton = (Button) findViewById(R.id.end_button);
 
         endButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
+                long time = SystemClock.elapsedRealtime() - chronometer.getBase();
+                //String time_string = chronometer.getContentDescription().toString();
+                SharedPreferences sharedPreferences = getSharedPreferences("recentWalk", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                editor.putLong("time",time);
+                //editor.putString("time", time_string);
+                editor.apply();
+
                 finish();
             }
         });
 
-        Chronometer chronometer = findViewById(R.id.chronometer);
-        chronometer.setBase(SystemClock.elapsedRealtime());
-        chronometer.start();
 
     }
 

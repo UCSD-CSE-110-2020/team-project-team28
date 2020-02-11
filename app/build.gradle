@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 28
 
     testOptions {
         animationsDisabled = true
@@ -19,7 +19,7 @@ android {
     defaultConfig {
         applicationId "com.example.wwr"
         minSdkVersion 24
-        targetSdkVersion 29
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -29,6 +29,16 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file("external/debug.keystore")
+        }
+    }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
     }
 }
 
@@ -50,3 +60,4 @@ dependencies {
     androidTestImplementation 'androidx.test:rules:1.2.0'
     implementation 'com.google.code.gson:gson:2.8.2'
 }
+
