@@ -72,7 +72,16 @@ public class MainActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
+                fitnessService.updateStepCount();
+                int startSteps = getCurrentSteps();
                 walkActivity();
+                int endSteps = getCurrentSteps();
+                int totalSteps = endSteps - startSteps;
+                fitnessService.updateStepCount();
+
+                TextView t = findViewById(R.id.last_steps_num);
+                t.setText(String.valueOf(totalSteps));
+
             }
         });
 
@@ -80,7 +89,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-//    public void launchStepCountActivity() {
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences sharedPreferences = getSharedPreferences("recentWalk", MODE_PRIVATE);
+        //Long totalTime = sharedPreferences.getLong("time", 0);
+        Long totalTime = sharedPreferences.getLong("time", 0);
+        TextView displayTime = (TextView) findViewById(R.id.last_time_num);
+        displayTime.setText(totalTime.toString());
+    }
+
+    //    public void launchStepCountActivity() {
 //        Intent intent = new Intent(this, MainActivity.class);
 //        intent.putExtra(FITNESS_SERVICE_KEY, fitnessServiceKey);
 //        startActivity(intent);
@@ -118,21 +137,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void walkActivity(){
-        fitnessService.updateStepCount();
-        int startSteps = getCurrentSteps();
         Intent intent = new Intent(this, WalkScreenActivity.class);
         startActivity(intent);
-        fitnessService.updateStepCount();
-        int endSteps = getCurrentSteps();
-        int totalSteps = endSteps - startSteps;
-        TextView t = findViewById(R.id.last_steps_num);
-        t.setText(String.valueOf(totalSteps));
 
-        SharedPreferences sharedPreferences = getSharedPreferences("recentWalk", MODE_PRIVATE);
-        //Long totalTime = sharedPreferences.getLong("time", 0);
-        Long totalTime = sharedPreferences.getLong("time", 0);
-        TextView displayTime = (TextView) findViewById(R.id.last_time_num);
-        displayTime.setText(totalTime.toString());
+
     }
 
     public void switchToRouteScreen() {

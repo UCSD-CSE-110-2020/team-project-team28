@@ -7,7 +7,7 @@
     <string name="daily_activity_title_text">DAILY ACTIVITY</string>
     <string name="daily_activity_steps">STEPS: </string>
     <string name="daily_activity_distance">DISTANCE: </string>
-    <string name="daily_activity_empty_value"></string>
+    <string name="daily_activity_empty_value">0</string>
     <string name="intentional_walk">LAST INTENTIONAL WALK</string>
     <string name="last_walk_time">TIME: </string>
 </resources>
