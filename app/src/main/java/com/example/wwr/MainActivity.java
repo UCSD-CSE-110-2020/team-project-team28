@@ -16,6 +16,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.wwr.fitness.FitnessService;
 import com.example.wwr.fitness.FitnessServiceFactory;
+import com.example.wwr.fitness.GoogleFitAdapter;
 
 public class MainActivity extends AppCompatActivity {
     public static final String FITNESS_SERVICE_KEY = "FITNESS_SERVICE_KEY";
@@ -26,22 +27,18 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-        Button btnUpdateSteps = findViewById(R.id.updateSteps);
-        btnUpdateSteps.setOnClickListener(new View.OnClickListener() {
+        FitnessServiceFactory.put(fitnessServiceKey, new FitnessServiceFactory.BluePrint() {
             @Override
-            public void onClick(View v) {
-                fitnessService.updateStepCount();
+            public FitnessService create(MainActivity mainactivity) {
+                return new GoogleFitAdapter(mainactivity);
             }
         });
 
-        fitnessService.setup();
 
         Button button = (Button) findViewById(R.id.dailyActivityToRoutes);
         button.setOnClickListener(new View.OnClickListener() {
@@ -53,6 +50,16 @@ public class MainActivity extends AppCompatActivity {
 
         Button startButton = (Button) findViewById(R.id.start_button);
         fitnessService = FitnessServiceFactory.create(fitnessServiceKey, this);
+
+        Button btnUpdateSteps = findViewById(R.id.updateSteps);
+        btnUpdateSteps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fitnessService.updateStepCount();
+            }
+        });
+
+        fitnessService.setup();
 
         SharedPreferences prefs = getSharedPreferences("prefs",MODE_PRIVATE);
         boolean firstStart = prefs.getBoolean("firstStart",true);
@@ -79,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void heightActivity(){
-
         Intent intent = new Intent(this,AskHeight_Activity.class);
         startActivity(intent);
         SharedPreferences prefs = getSharedPreferences("prefs",MODE_PRIVATE);
