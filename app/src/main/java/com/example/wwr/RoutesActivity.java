@@ -19,15 +19,13 @@ public class RoutesActivity extends AppCompatActivity {
     RadioGroup flatGroup, loopGroup, streetGroup, surfaceGroup, difficultyGroup;
     RadioButton flatButton, loopButton, streetButton, surfaceButton, difficultyButton;
     EditText routeName, startLocation, notes;
-    Button okButton;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_routes);
 
-        //initialize all group variables
+        // Initialize all group variables.
         flatGroup = findViewById(R.id.groupFlat);
         loopGroup = findViewById(R.id.groupLoop);
         streetGroup = findViewById(R.id.groupStreet);
@@ -40,7 +38,6 @@ public class RoutesActivity extends AppCompatActivity {
         routeName.setText(EMPTY_STRING);
         startLocation.setText(EMPTY_STRING);
         notes.setText(EMPTY_STRING);
-
     } // end onCreate()
 
     public void pressOK (View view) {

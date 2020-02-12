@@ -35,7 +35,6 @@ public class RouteScreenAdapter extends RecyclerView.Adapter<RouteScreenAdapter.
         ArrayList<Route> routeList;
         Context context;
 
-
         public RouteScreenViewHolder(View view, Context context, ArrayList<Route> routeList) {
             super(view);
             this.routeList = routeList;
@@ -47,7 +46,6 @@ public class RouteScreenAdapter extends RecyclerView.Adapter<RouteScreenAdapter.
             mText2 = view.findViewById(R.id.text2);
             mText3 = view.findViewById(R.id.text3);
             mText4 = view.findViewById(R.id.text4);
-
         }
 
         @Override

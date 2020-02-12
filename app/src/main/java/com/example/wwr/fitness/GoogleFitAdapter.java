@@ -14,9 +14,6 @@ import com.google.android.gms.fitness.data.Field;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 
-//import com.example.wwr.StepCountActivity;
-import com.example.wwr.MainActivity;
-
 public class GoogleFitAdapter implements FitnessService {
     private final int GOOGLE_FIT_PERMISSIONS_REQUEST_CODE = System.identityHashCode(this) & 0xFFFF;
     private final String TAG = "GoogleFitAdapter";
@@ -69,7 +66,6 @@ public class GoogleFitAdapter implements FitnessService {
                     }
                 });
     }
-
 
     /**
      * Reads the current daily step total, computed from midnight of the current day on the device's

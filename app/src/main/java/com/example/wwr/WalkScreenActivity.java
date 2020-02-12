@@ -25,7 +25,6 @@ public class WalkScreenActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,14 +48,11 @@ public class WalkScreenActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
 
                 editor.putLong("time",time);
-                //editor.putString("time", time_string);
                 editor.apply();
 
                 finish();
             }
         });
-
-
     }
 
 }

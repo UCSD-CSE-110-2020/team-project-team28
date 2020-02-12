@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.example.wwr.MainActivity;
-//import com.example.wwr.StepCountActivity;
 
 public class FitnessServiceFactory {
 
@@ -27,4 +26,3 @@ public class FitnessServiceFactory {
         FitnessService create(MainActivity mainActivity);
     }
 }
-
