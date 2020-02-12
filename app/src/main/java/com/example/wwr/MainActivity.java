@@ -90,9 +90,6 @@ public class MainActivity extends AppCompatActivity {
         displayTime.setText(totalTime.toString());
     }
 
-//    public void setFitnessServiceKey(String fitnessServiceKey) {
-//        this.fitnessServiceKey = fitnessServiceKey;
-//    }
 
     public void setStepCount(long stepCount) {
         TextView t = findViewById(R.id.daily_steps_num);
