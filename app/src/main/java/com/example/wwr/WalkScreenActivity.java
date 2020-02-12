@@ -3,6 +3,8 @@ package com.example.wwr;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import com.example.wwr.fitness.FitnessService;
+import com.example.wwr.fitness.FitnessServiceFactory;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -17,6 +19,10 @@ import android.widget.Chronometer;
 import com.example.wwr.MainActivity;
 
 public class WalkScreenActivity extends AppCompatActivity {
+
+    public static final String FITNESS_SERVICE_KEY = "FITNESS_SERVICE_KEY";
+
+    private FitnessService fitnessService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

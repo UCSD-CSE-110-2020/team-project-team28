@@ -16,7 +16,7 @@ public class Route {
         this.name = name;
         this.startLocation = startLocation;
 
-        this.totalSteps = totalSteps; //
+        this.totalSteps = totalSteps;
         this.totalMiles = totalMiles;
         this.totalMinutes = totalMinutes;
         this.note = note;
