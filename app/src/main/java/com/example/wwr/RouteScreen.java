@@ -22,7 +22,6 @@ public class RouteScreen extends AppCompatActivity {
     public static RecyclerView.LayoutManager routeLayoutManager;
 
     public static ArrayList<Route> routeList;
-//    public static ArrayList<Route> routeList = new ArrayList<Route>();
 
     public void loadData() {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
@@ -32,7 +31,7 @@ public class RouteScreen extends AppCompatActivity {
         routeList = gson.fromJson(json, type);
 
         if (routeList == null) {
-            routeList = new ArrayList<Route>();
+            routeList = new ArrayList<>();
         }
     }
 
@@ -78,13 +77,11 @@ public class RouteScreen extends AppCompatActivity {
     public static void addToRouteList(String routeName, String startingLocation,
                          int totalSteps, double totalMiles, int totalMinutes, String note,
                                boolean isFavorite) {
-
+        int image = 0;
         if (isFavorite) {
-            routeList.add(new Route(routeName, startingLocation, totalSteps, totalMiles,
-                    totalMinutes, note, isFavorite, R.drawable.ic_stars_black_24dp));
-        } else {
-            routeList.add(new Route(routeName, startingLocation, totalSteps, totalMiles,
-                    totalMinutes, note, isFavorite, 0));
+            image = R.drawable.ic_stars_black_24dp;
         }
+        routeList.add(new Route(routeName, startingLocation, totalSteps, totalMiles,
+                totalMinutes, note, isFavorite, image));
     }
 }

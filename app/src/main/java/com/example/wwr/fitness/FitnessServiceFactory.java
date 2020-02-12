@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FitnessServiceFactory {
+
     private static final String TAG = "[FitnessServiceFactory]";
 
     private static Map<String, BluePrint> blueprints = new HashMap<>();

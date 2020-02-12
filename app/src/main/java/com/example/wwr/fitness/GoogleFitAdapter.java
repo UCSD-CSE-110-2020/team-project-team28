@@ -1,5 +1,3 @@
-
-
 package com.example.wwr.fitness;
 
 import androidx.annotation.NonNull;
@@ -15,7 +13,6 @@ import com.google.android.gms.fitness.data.DataType;
 import com.google.android.gms.fitness.data.Field;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-
 
 public class GoogleFitAdapter implements FitnessService {
     private final int GOOGLE_FIT_PERMISSIONS_REQUEST_CODE = System.identityHashCode(this) & 0xFFFF;
@@ -70,7 +67,6 @@ public class GoogleFitAdapter implements FitnessService {
                 });
     }
 
-
     /**
      * Reads the current daily step total, computed from midnight of the current day on the device's
      * current timezone.
@@ -104,7 +100,6 @@ public class GoogleFitAdapter implements FitnessService {
                             }
                         });
     }
-
 
     @Override
     public int getRequestCode() {
