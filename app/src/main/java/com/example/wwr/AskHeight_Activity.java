@@ -22,12 +22,10 @@ public class AskHeight_Activity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         Button enter = (Button)findViewById(R.id.enter_button);
         enter.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-
                 EditText height = (EditText) findViewById(R.id.height_input);
                 SharedPreferences sharedPreferences = getSharedPreferences("height",MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -36,8 +34,6 @@ public class AskHeight_Activity extends AppCompatActivity {
                 finish();
             }
         });
-
-
 
     }
 

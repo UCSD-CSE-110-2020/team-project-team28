@@ -17,6 +17,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.wwr.fitness.FitnessService;
 import com.example.wwr.fitness.FitnessServiceFactory;
 import com.example.wwr.fitness.GoogleFitAdapter;
+import com.google.android.gms.fitness.request.DataReadRequest;
 
 public class MainActivity extends AppCompatActivity {
     public static final String FITNESS_SERVICE_KEY = "FITNESS_SERVICE_KEY";
@@ -38,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
                 return new GoogleFitAdapter(mainactivity);
             }
         });
-
 
         Button button = (Button) findViewById(R.id.dailyActivityToRoutes);
         button.setOnClickListener(new View.OnClickListener() {
@@ -80,9 +80,9 @@ public class MainActivity extends AppCompatActivity {
 
                 TextView t = findViewById(R.id.last_steps_num);
                 t.setText(String.valueOf(totalSteps));
-
             }
         });
+
     }
 
     public void heightActivity(){
@@ -92,17 +92,21 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor =prefs.edit();
         editor.putBoolean("firstStart",false);
         editor.apply();
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         SharedPreferences sharedPreferences = getSharedPreferences("recentWalk", MODE_PRIVATE);
-        //Long totalTime = sharedPreferences.getLong("time", 0);
         Long totalTime = sharedPreferences.getLong("time", 0);
+        int totalInt = totalTime.intValue() / 1000;
+        String hours = totalInt / 3600 + "hrs ";
+        String minutes = (totalInt / 60) % 60 + "min ";
+        String seconds = totalInt % 60 + "s";
+        String time = hours + minutes + seconds;
+
         TextView displayTime = (TextView) findViewById(R.id.last_time_num);
-        displayTime.setText(totalTime.toString());
+        displayTime.setText(time);
     }
 
     public void setStepCount(long stepCount) {
@@ -158,7 +162,6 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
