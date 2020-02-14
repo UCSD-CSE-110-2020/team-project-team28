@@ -87,7 +87,6 @@ public class RouteScreenAdapter extends RecyclerView.Adapter<RouteScreenAdapter.
 
     }
 
-
     @Override
     public int getItemCount() {
         return routeList.size();

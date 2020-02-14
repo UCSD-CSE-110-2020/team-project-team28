@@ -11,6 +11,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.content.SharedPreferences;
 
+import com.google.gson.Gson;
+
 public class RoutesActivity extends AppCompatActivity {
     private final String EMPTY_STRING = "";
 
@@ -64,7 +66,7 @@ public class RoutesActivity extends AppCompatActivity {
         notes = (EditText) findViewById(R.id.routeNotes);
 
         // now save values
-        SharedPreferences userPref = getSharedPreferences(routeName.getText().toString() + "_info", MODE_PRIVATE);
+        SharedPreferences userPref = getSharedPreferences("shared preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = userPref.edit();
 
         // set info
@@ -77,8 +79,6 @@ public class RoutesActivity extends AppCompatActivity {
         editor.putString("difficulty", difficultyButton.getText().toString());
         editor.putString("notes", notes.getText().toString());
 
-
-        // apply changes
         editor.apply();
 
         RouteScreen.addToRouteList(routeName.getText().toString(),
@@ -86,6 +86,11 @@ public class RoutesActivity extends AppCompatActivity {
                 notes.getText().toString(), false);
 
         RouteScreen.notifyInsert();
+
+        Gson gson = new Gson();
+        String json = gson.toJson(RouteScreen.routeList);
+        editor.putString("route list", json);
+        editor.apply();
 
         finish();
     }
