@@ -11,6 +11,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.content.SharedPreferences;
 
+import com.google.android.gms.common.server.converter.StringToIntConverter;
 import com.google.gson.Gson;
 
 public class RoutesActivity extends AppCompatActivity {
@@ -77,6 +78,7 @@ public class RoutesActivity extends AppCompatActivity {
         editor.putString("notes", notes.getText().toString());
 
         editor.apply();
+
 
         RouteScreen.addToRouteList(routeName.getText().toString(),
                 startLocation.getText().toString(), 0, 0, 0,

@@ -1,5 +1,6 @@
 package com.example.wwr;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -17,12 +18,7 @@ import android.widget.Button;
 import android.widget.Chronometer;
 
 import com.example.wwr.MainActivity;
-
 public class WalkScreenActivity extends AppCompatActivity {
-
-    public static final String FITNESS_SERVICE_KEY = "FITNESS_SERVICE_KEY";
-
-    private FitnessService fitnessService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +43,8 @@ public class WalkScreenActivity extends AppCompatActivity {
                 editor.putLong("time",time);
                 editor.apply();
 
+                Intent intent = new Intent(getApplicationContext(), RoutesActivity.class);
+                startActivity(intent);
                 finish();
             }
         });

@@ -11,11 +11,12 @@
         android:id="@+id/route_information_page"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <TextView
+            android:id="@+id/route_detail_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Route Name"
-            android:id="@+id/route_detail_title" />
+            android:text="Route Name" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -17,7 +17,6 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.wwr.fitness.FitnessService;
 import com.example.wwr.fitness.FitnessServiceFactory;
 import com.example.wwr.fitness.GoogleFitAdapter;
-import com.google.android.gms.fitness.request.DataReadRequest;
 
 public class MainActivity extends AppCompatActivity {
     public static final String FITNESS_SERVICE_KEY = "FITNESS_SERVICE_KEY";
@@ -25,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private FitnessService fitnessService;
     private TextView textSteps;
+    private long startSteps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
         Button startButton = (Button) findViewById(R.id.start_button);
         fitnessService = FitnessServiceFactory.create(fitnessServiceKey, this);
 
+
+        // For debugging
         Button btnUpdateSteps = findViewById(R.id.updateSteps);
         btnUpdateSteps.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,25 +66,24 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("prefs",MODE_PRIVATE);
         boolean firstStart = prefs.getBoolean("firstStart",true);
 
-        if(firstStart){
+        if (firstStart) {
             heightActivity();
         }
+
 
         startButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 fitnessService.updateStepCount();
-                int startSteps = getCurrentSteps();
-                walkActivity();
-                int endSteps = getCurrentSteps();
-                int totalSteps = endSteps - startSteps;
-                fitnessService.updateStepCount();
 
-                TextView t = findViewById(R.id.last_steps_num);
-                t.setText(String.valueOf(totalSteps));
+                TextView steps = (TextView) findViewById(R.id.last_steps_num);
+
+                String step = startSteps + "";
+
+                steps.setText(step);
+                walkActivity();
             }
         });
-
     }
 
     public void heightActivity(){
@@ -97,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        // Update the time.
         SharedPreferences sharedPreferences = getSharedPreferences("recentWalk", MODE_PRIVATE);
         Long totalTime = sharedPreferences.getLong("time", 0);
         int totalInt = totalTime.intValue() / 1000;
@@ -107,17 +109,22 @@ public class MainActivity extends AppCompatActivity {
 
         TextView displayTime = (TextView) findViewById(R.id.last_time_num);
         displayTime.setText(time);
+
+        fitnessService.updateStepCount();
     }
 
     public void setStepCount(long stepCount) {
         TextView t = findViewById(R.id.daily_steps_num);
         t.setText(String.valueOf(stepCount));
-    }
 
-    public int getCurrentSteps(){
-        TextView t = findViewById(R.id.daily_steps_num);
-        int currentSteps = Integer.parseInt(t.getText().toString());
-        return currentSteps;
+        String total = (stepCount - this.startSteps) + "" ;
+
+
+        this.startSteps = stepCount;
+
+
+        TextView daily = findViewById(R.id.last_distance_num);
+        daily.setText(String.valueOf(total));
     }
 
     @Override
@@ -165,4 +172,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void storeSteps(long total) {
+        this.startSteps = total;
+    }
 }

@@ -7,12 +7,15 @@ import android.view.ViewParent;
 
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.filters.LargeTest;
+import androidx.test.internal.runner.InstrumentationConnection;
+import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,8 +38,13 @@ public class TestHeightPage {
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
+    @BeforeClass
+    public static void beforeClass() {
+    }
+
     @Test
     public void testHeightPage() {
+
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.height_input),
                         childAtPosition(

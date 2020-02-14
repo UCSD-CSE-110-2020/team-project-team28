@@ -38,11 +38,6 @@ public class TestDisplayDailySteps {
     public void displayDailySteps() {
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.enter_button), withText("Enter"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                2),
                         isDisplayed()));
         appCompatButton.perform(click());
 
