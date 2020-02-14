@@ -41,6 +41,7 @@ public class RouteDetail extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), WalkScreenActivity.class);
+                intent.putExtra("route name", getIntent().getStringExtra("routeName"));
                 startActivity(intent);
             }
         });

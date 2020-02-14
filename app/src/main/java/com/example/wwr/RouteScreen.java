@@ -54,12 +54,20 @@ public class RouteScreen extends AppCompatActivity {
         routeScreenView.setLayoutManager(routeLayoutManager);
         routeScreenView.setAdapter(routeAdapter);
 
+        Intent previous = getIntent();
+
+        if (previous.getBooleanExtra("goToDetail", false)) {
+            Intent intent = new Intent(this, RoutesActivity.class);
+            startActivity(intent);
+        }
+
         Button backToMainMenu = (Button) findViewById(R.id.backToMainMenuButton);
 
         backToMainMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -83,5 +91,7 @@ public class RouteScreen extends AppCompatActivity {
         }
         routeList.add(new Route(routeName, startingLocation, totalSteps, totalMiles,
                 totalMinutes, note, isFavorite, image));
+
+        notifyInsert();
     }
 }

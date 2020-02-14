@@ -1,15 +1,20 @@
 package com.example.wwr;
 
 import android.app.Activity;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -17,14 +22,22 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.wwr.fitness.FitnessService;
 import com.example.wwr.fitness.FitnessServiceFactory;
 import com.example.wwr.fitness.GoogleFitAdapter;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     public static final String FITNESS_SERVICE_KEY = "FITNESS_SERVICE_KEY";
     private String fitnessServiceKey = "GOOGLE_FIT";
     private static final String TAG = "MainActivity";
-    private FitnessService fitnessService;
-    private TextView textSteps;
+    public static FitnessService fitnessService;
     private long startSteps;
+    private long stepsDelta;
+
+    private GoogleFitService googleFitService;
+    private boolean isBound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Intent intent = new Intent(this, GoogleFitService.class);
+        bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
 
         FitnessServiceFactory.put(fitnessServiceKey, new FitnessServiceFactory.BluePrint() {
             @Override
@@ -63,13 +79,13 @@ public class MainActivity extends AppCompatActivity {
 
         fitnessService.setup();
 
+
         SharedPreferences prefs = getSharedPreferences("prefs",MODE_PRIVATE);
         boolean firstStart = prefs.getBoolean("firstStart",true);
 
         if (firstStart) {
             heightActivity();
         }
-
 
         startButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -85,6 +101,32 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    private ServiceConnection serviceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            GoogleFitService.LocalService localService = (GoogleFitService.LocalService)service;
+            googleFitService = localService.getService();
+            isBound = true;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            isBound = false;
+        }
+    };
+
+    @Override
+    protected void onDestroy() {
+        if (isBound) {
+            unbindService(serviceConnection);
+            isBound = false;
+        }
+        super.onDestroy();
+    }
+
+
+
 
     public void heightActivity(){
         Intent intent = new Intent(this,AskHeight_Activity.class);
@@ -117,6 +159,11 @@ public class MainActivity extends AppCompatActivity {
         TextView t = findViewById(R.id.daily_steps_num);
         t.setText(String.valueOf(stepCount));
 
+        this.stepsDelta = stepCount - this.startSteps;
+
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+
+
         String total = (stepCount - this.startSteps) + "" ;
 
 
@@ -143,6 +190,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void walkActivity(){
         Intent intent = new Intent(this, WalkScreenActivity.class);
+        intent.putExtra("previousClass", "MainActivity");
         startActivity(intent);
     }
 

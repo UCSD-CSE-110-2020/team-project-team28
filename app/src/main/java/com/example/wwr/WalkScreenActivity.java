@@ -16,6 +16,8 @@ import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.wwr.MainActivity;
 public class WalkScreenActivity extends AppCompatActivity {
@@ -32,6 +34,14 @@ public class WalkScreenActivity extends AppCompatActivity {
         chronometer.start();
         Button endButton = (Button) findViewById(R.id.end_button);
 
+        Intent previous = getIntent();
+
+        TextView routeName = findViewById(R.id.route_name);
+        String name = previous.getStringExtra("route name");
+        if (name != null) {
+            routeName.setText(name);
+        }
+
         endButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -43,8 +53,18 @@ public class WalkScreenActivity extends AppCompatActivity {
                 editor.putLong("time",time);
                 editor.apply();
 
-                Intent intent = new Intent(getApplicationContext(), RoutesActivity.class);
+                String previousString = "";
+
+                previousString = previous.getStringExtra("previousClass");
+
+                Intent intent = new Intent(getApplicationContext(), RouteScreen.class);
+
+                if (previousString != null && previousString.equals("MainActivity")) {
+                    intent.putExtra("goToDetail", true);
+                }
+
                 startActivity(intent);
+
                 finish();
             }
         });
