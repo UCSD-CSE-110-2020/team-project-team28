@@ -21,9 +21,11 @@ import com.example.wwr.fitness.FitnessServiceFactory;
 import com.example.wwr.fitness.GoogleFitAdapter;
 
 public class MainActivity extends AppCompatActivity {
-    private String fitnessServiceKey = "GOOGLE_FIT";
+    public static final String fitnessServiceKey = "GOOGLE_FIT";
     private static final String TAG = "MainActivity";
     public static FitnessService fitnessService;
+    final int BOOST_STEPS = 500;
+    final String MOCK_STEP_COUNTER= "stepMultiplierCount";
     public static long startSteps;
     public static long finalSteps;
     //context for the SharedPreferences in the walkingDistanceMiles
@@ -84,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         startButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 try {
@@ -98,6 +101,19 @@ public class MainActivity extends AppCompatActivity {
                 walkActivity();
             }
         });
+
+        Button mockPageBtn = (Button) findViewById(R.id.goToMockPage);
+        mockPageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mockPageActivity();
+            }
+        });
+    }
+
+    public void mockPageActivity() {
+        Intent intent = new Intent(this, MockScreenActivity.class);
+        startActivity(intent);
     }
 
     public void heightActivity(){
@@ -137,9 +153,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setStepCount(long stepCount) {
+        SharedPreferences prefs = getSharedPreferences("prefs",MODE_PRIVATE);
+        int stepMultiplier = prefs.getInt(MOCK_STEP_COUNTER, 0);
+        long totalSteps = stepCount + (stepMultiplier * BOOST_STEPS);
         TextView t = findViewById(R.id.daily_steps_num);
-        t.setText(String.valueOf(stepCount));
-        this.startSteps = stepCount;
+        t.setText(String.valueOf(totalSteps));
+        this.startSteps = totalSteps;
     }
 
     public void setFinalStepCount(long stepCount) {
