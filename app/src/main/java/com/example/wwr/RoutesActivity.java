@@ -17,6 +17,7 @@ public class RoutesActivity extends AppCompatActivity {
     RadioButton flatButton, loopButton, streetButton, surfaceButton, difficultyButton;
     EditText routeName, startLocation, notes;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

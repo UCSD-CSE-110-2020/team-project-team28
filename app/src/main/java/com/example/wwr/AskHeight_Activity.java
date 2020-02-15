@@ -31,7 +31,6 @@ public class AskHeight_Activity extends AppCompatActivity {
         inches = (EditText) findViewById(R.id.inches_input);
         inches.addTextChangedListener(heightWatcher);
 
-
         enter.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
