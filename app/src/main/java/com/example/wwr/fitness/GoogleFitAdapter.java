@@ -101,6 +101,36 @@ public class GoogleFitAdapter implements FitnessService {
                         });
     }
 
+    public void setFinalStepCount() {
+        if (account == null) {
+            return;
+        }
+
+        Fitness.getHistoryClient(activity, account)
+                .readDailyTotal(DataType.TYPE_STEP_COUNT_DELTA)
+                .addOnSuccessListener(
+                        new OnSuccessListener<DataSet>() {
+                            @Override
+                            public void onSuccess(DataSet dataSet) {
+                                Log.d(TAG, dataSet.toString());
+                                long total =
+                                        dataSet.isEmpty()
+                                                ? 0
+                                                : dataSet.getDataPoints().get(0).getValue(Field.FIELD_STEPS).asInt();
+
+                                activity.setFinalStepCount(total);
+                                Log.d(TAG, "Total steps: " + total);
+                            }
+                        })
+                .addOnFailureListener(
+                        new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.d(TAG, "There was a problem getting the step count.", e);
+                            }
+                        });
+    }
+
     @Override
     public int getRequestCode() {
         return GOOGLE_FIT_PERMISSIONS_REQUEST_CODE;

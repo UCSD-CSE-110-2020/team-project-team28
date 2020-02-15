@@ -2,23 +2,12 @@ package com.example.wwr;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.content.SharedPreferences;
-import android.widget.Toast;
-
-import com.example.wwr.fitness.FitnessService;
-import com.google.android.gms.common.server.converter.StringToIntConverter;
-import com.google.android.gms.fitness.Fitness;
 import com.google.gson.Gson;
 
 public class RoutesActivity extends AppCompatActivity {
@@ -27,11 +16,6 @@ public class RoutesActivity extends AppCompatActivity {
     RadioGroup flatGroup, loopGroup, streetGroup, surfaceGroup, difficultyGroup;
     RadioButton flatButton, loopButton, streetButton, surfaceButton, difficultyButton;
     EditText routeName, startLocation, notes;
-
-
-    private GoogleFitService googleFitService;
-    private boolean isBound;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,25 +35,7 @@ public class RoutesActivity extends AppCompatActivity {
         routeName.setText(EMPTY_STRING);
         startLocation.setText(EMPTY_STRING);
         notes.setText(EMPTY_STRING);
-
-        Intent intent = new Intent(this, GoogleFitService.class);
-        bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
     } // end onCreate()
-
-    private ServiceConnection serviceConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            GoogleFitService.LocalService localService = (GoogleFitService.LocalService)service;
-            googleFitService = localService.getService();
-            isBound = true;
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            isBound = false;
-        }
-    };
-
 
     public void pressOK (View view) {
         // grab radio button selections
@@ -111,14 +77,13 @@ public class RoutesActivity extends AppCompatActivity {
 
         Gson gson = new Gson();
 
-        Long steps = new Long(userPref.getLong("steps", 0));
+        long steps = MainActivity.finalSteps - MainActivity.startSteps;
+        long seconds = (int) getIntent().getLongExtra("newTime", 0) / 1000;
 
         if (!routeName.getText().toString().equals(EMPTY_STRING) ) {
             RouteScreen.addToRouteList(routeName.getText().toString(),
-                    startLocation.getText().toString(), steps.intValue(), 0, 0,
-                    notes.getText().toString(), false);
-
-            RouteScreen.notifyInsert();
+                    startLocation.getText().toString(), steps, 0,
+                    seconds, notes.getText().toString(), false);
 
             String json = gson.toJson(RouteScreen.routeList);
             editor.putString("route list", json);
@@ -126,7 +91,6 @@ public class RoutesActivity extends AppCompatActivity {
         }
 
         finish();
-
     }
 
 } // end RoutesActivity

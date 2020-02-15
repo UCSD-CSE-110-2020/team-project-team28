@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class AskHeight_Activity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +33,5 @@ public class AskHeight_Activity extends AppCompatActivity {
                 finish();
             }
         });
-
     }
-
 }
