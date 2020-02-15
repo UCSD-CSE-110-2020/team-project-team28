@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
         SharedPreferences prefs = getSharedPreferences("prefs",MODE_PRIVATE);
         SharedPreferences.Editor editor =prefs.edit();
-       // editor.putBoolean("firstStart",false);
+        editor.putBoolean("firstStart",false);
         editor.apply();
     }
 
