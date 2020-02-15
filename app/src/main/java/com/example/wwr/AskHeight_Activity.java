@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class AskHeight_Activity extends AppCompatActivity {
-
     private EditText feet;
     private EditText inches;
     private Button enter;
@@ -65,8 +64,8 @@ public class AskHeight_Activity extends AppCompatActivity {
                 finish();
             }
         });
-
     }
+
     public TextWatcher heightWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -88,9 +87,5 @@ public class AskHeight_Activity extends AppCompatActivity {
 
         }
     };
-    public void display(View view){
-
-
-    }
 
 }

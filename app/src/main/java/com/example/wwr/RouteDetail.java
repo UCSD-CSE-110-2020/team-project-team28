@@ -7,8 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 
 public class RouteDetail extends AppCompatActivity {
     TextView name;
@@ -41,9 +44,11 @@ public class RouteDetail extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), WalkScreenActivity.class);
+                intent.putExtra("route name", getIntent().getStringExtra("routeName"));
+                intent.putExtra("previousActivity", "Route Detail");
                 startActivity(intent);
             }
         });
-
     }
+
 }

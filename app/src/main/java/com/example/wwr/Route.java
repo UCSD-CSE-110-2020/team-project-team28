@@ -1,46 +1,37 @@
 package com.example.wwr;
 
 public class Route {
-
     private String name;
     private String startLocation;
-    private int totalSteps;
-    private double totalMiles;
-    private int totalMinutes;
+    private long totalSteps;
+    private long totalMiles;
+    private long totalSeconds;
     private String note;
     private boolean isFavorite;
     private int image;
 
-    Route (String name, String startLocation, int totalSteps, double totalMiles, int totalMinutes,
+    Route (String name, String startLocation, long totalSteps, long totalMiles, long totalSeconds,
            String note, boolean isFavorite, int image) {
         this.name = name;
         this.startLocation = startLocation;
 
         this.totalSteps = totalSteps;
         this.totalMiles = totalMiles;
-        this.totalMinutes = totalMinutes;
+        this.totalSeconds = totalSeconds;
         this.note = note;
         this.isFavorite = isFavorite;
         this.image = image;
     }
 
-    public void updateRouteName(String name) {
-        this.name = name;
-    }
-
-    public void updateStartLocation(String startLocation) {
-        this.startLocation = startLocation;
-    }
-
-    public void updateSteps(int steps) {
+    public void updateSteps(long steps) {
         this.totalSteps = steps;
     }
 
-    public void updateMinutes(int minutes) {
-        this.totalMinutes = minutes;
+    public void updateSeconds(long seconds) {
+        this.totalSeconds = seconds;
     }
 
-    public void updateMiles(double miles) {
+    public void updateMiles(long miles) {
         this.totalMiles = miles;
     }
 
@@ -52,16 +43,16 @@ public class Route {
         return this.startLocation;
     }
 
-    public int getSteps() {
+    public long getSteps() {
         return this.totalSteps;
     }
 
-    public double getMiles() {
+    public long getTotalMiles() {
         return this.totalMiles;
     }
 
-    public int getTotalMinutes() {
-        return this.totalMinutes;
+    public long getTotalSeconds() {
+        return this.totalSeconds;
     }
 
     public int getImage() {

@@ -19,12 +19,11 @@ import com.example.wwr.fitness.FitnessServiceFactory;
 import com.example.wwr.fitness.GoogleFitAdapter;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String FITNESS_SERVICE_KEY = "FITNESS_SERVICE_KEY";
     private String fitnessServiceKey = "GOOGLE_FIT";
     private static final String TAG = "MainActivity";
-    private FitnessService fitnessService;
-    private TextView textSteps;
-    private long startSteps;
+    public static FitnessService fitnessService;
+    public static long startSteps;
+    public static long finalSteps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,15 +50,7 @@ public class MainActivity extends AppCompatActivity {
         Button startButton = (Button) findViewById(R.id.start_button);
         fitnessService = FitnessServiceFactory.create(fitnessServiceKey, this);
 
-
-        // For debugging
-        Button btnUpdateSteps = findViewById(R.id.updateSteps);
-        btnUpdateSteps.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fitnessService.updateStepCount();
-            }
-        });
+        GoogleFitSingleton.setFitnessService(fitnessService);
 
         fitnessService.setup();
 
@@ -70,17 +61,15 @@ public class MainActivity extends AppCompatActivity {
             heightActivity();
         }
 
-
         startButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 fitnessService.updateStepCount();
 
                 TextView steps = (TextView) findViewById(R.id.last_steps_num);
-
                 String step = startSteps + "";
-
                 steps.setText(step);
+
                 walkActivity();
             }
         });
@@ -95,7 +84,17 @@ public class MainActivity extends AppCompatActivity {
         editor.apply();
     }
 
-    @Override
+    public void walkActivity() {
+        Intent intent = new Intent(getApplicationContext(), WalkScreenActivity.class);
+        intent.putExtra("previousClass", "MainActivity");
+        startActivity(intent);
+    }
+
+    public void switchToRouteScreen() {
+        Intent intent = new Intent(this, RouteScreen.class);
+        startActivity(intent);
+    }
+
     protected void onResume() {
         super.onResume();
         // Update the time.
@@ -109,22 +108,16 @@ public class MainActivity extends AppCompatActivity {
 
         TextView displayTime = (TextView) findViewById(R.id.last_time_num);
         displayTime.setText(time);
-
-        fitnessService.updateStepCount();
     }
 
     public void setStepCount(long stepCount) {
         TextView t = findViewById(R.id.daily_steps_num);
         t.setText(String.valueOf(stepCount));
-
-        String total = (stepCount - this.startSteps) + "" ;
-
-
         this.startSteps = stepCount;
+    }
 
-
-        TextView daily = findViewById(R.id.last_distance_num);
-        daily.setText(String.valueOf(total));
+    public void setFinalStepCount(long stepCount) {
+        this.finalSteps = stepCount;
     }
 
     @Override
@@ -139,16 +132,6 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Log.e(TAG, "ERROR, google fit result code: " + resultCode);
         }
-    }
-
-    public void walkActivity(){
-        Intent intent = new Intent(this, WalkScreenActivity.class);
-        startActivity(intent);
-    }
-
-    public void switchToRouteScreen() {
-        Intent intent = new Intent(this, RouteScreen.class);
-        startActivity(intent);
     }
 
     @Override
@@ -172,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void storeSteps(long total) {
-        this.startSteps = total;
+    public void setFitnessServiceKey(String fitnessServiceKey) {
+        this.fitnessServiceKey = fitnessServiceKey;
     }
 }
