@@ -39,7 +39,7 @@ public class TestHeightDistanceEstimate {
     @Test
     public void testHeightDistanceEstimate() {
         ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.height_input),
+                allOf(withId(R.id.feet_input),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),

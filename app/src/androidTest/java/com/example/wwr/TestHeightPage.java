@@ -7,8 +7,6 @@ import android.view.ViewParent;
 
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.filters.LargeTest;
-import androidx.test.internal.runner.InstrumentationConnection;
-import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 
@@ -46,7 +44,7 @@ public class TestHeightPage {
     public void testHeightPage() {
 
         ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.height_input),
+                allOf(withId(R.id.feet_input),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
