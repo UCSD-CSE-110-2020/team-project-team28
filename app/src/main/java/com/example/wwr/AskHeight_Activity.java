@@ -55,7 +55,7 @@ public class AskHeight_Activity extends AppCompatActivity {
                 int feet_int = Integer.valueOf(sharedPreferences.getString("feet_string",""));
                 int total_inches = (feet_int*12) +inches_int;
 
-                System.out.println(total_inches);
+                //System.out.println(total_inches);
 
                 SharedPreferences sharedPreferences2 = getSharedPreferences("total_inches",MODE_PRIVATE);
                 SharedPreferences.Editor editor2 = sharedPreferences2.edit();
