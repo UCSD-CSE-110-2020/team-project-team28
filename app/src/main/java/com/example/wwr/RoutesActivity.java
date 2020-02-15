@@ -31,9 +31,9 @@ public class RoutesActivity extends AppCompatActivity {
         surfaceGroup = findViewById(R.id.groupSurface);
         difficultyGroup = findViewById(R.id.groupDifficulty);
 
-        routeName = (EditText)findViewById(R.id.routeName);
-        startLocation = (EditText)findViewById(R.id.startLocation);
-        notes = (EditText)findViewById(R.id.notes);
+        routeName = (EditText)findViewById(R.id.routeNamePage);
+        startLocation = (EditText)findViewById(R.id.startLocationName);
+        notes = (EditText)findViewById(R.id.routeNotes);
 
         routeName.setText(EMPTY_STRING);
         startLocation.setText(EMPTY_STRING);
@@ -59,9 +59,9 @@ public class RoutesActivity extends AppCompatActivity {
         difficultyButton = findViewById(radioId);
 
         // grab user inputted text
-        routeName = (EditText)findViewById(R.id.routeName);
-        startLocation = (EditText)findViewById(R.id.startLocation);
-        notes = (EditText)findViewById(R.id.notes);
+        routeName = (EditText)findViewById(R.id.routeNamePage);
+        startLocation = (EditText)findViewById(R.id.startLocationName);
+        notes = (EditText)findViewById(R.id.routeNotes);
 
         // now save values
         SharedPreferences userPref = getSharedPreferences(routeName.getText().toString() + "_info", MODE_PRIVATE);
