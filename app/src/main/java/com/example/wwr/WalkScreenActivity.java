@@ -53,10 +53,10 @@ public class WalkScreenActivity extends AppCompatActivity {
                 previousString = previous.getStringExtra("previousClass");
 
                 Intent intent = new Intent(getApplicationContext(), RouteScreen.class);
+                intent.putExtra("newTime", time);
 
                 if (previousString != null && previousString.equals("MainActivity")) {
                     intent.putExtra("goToDetail", true);
-                    intent.putExtra("newTime", time);
                 }
 
                 String previousActivity = previous.getStringExtra("previousActivity");
