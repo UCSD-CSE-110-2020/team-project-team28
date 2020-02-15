@@ -81,12 +81,18 @@ public class MainActivity extends AppCompatActivity {
             heightActivity();
         }
 
+<<<<<<< HEAD
         SharedPreferences sharedPreferences = getSharedPreferences("total_inches", MODE_PRIVATE);
         this.inches = sharedPreferences.getInt("total_inch", 0);
 
 
         startButton.setOnClickListener(new View.OnClickListener() {
 
+=======
+
+
+        startButton.setOnClickListener(new View.OnClickListener(){
+>>>>>>> mockSteps working + unit test
             @Override
             public void onClick(View view) {
                 try {
