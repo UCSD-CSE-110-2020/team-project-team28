@@ -17,6 +17,7 @@ public class AskHeight_Activity extends AppCompatActivity {
     private EditText feet;
     private EditText inches;
     private Button enter;
+    private int total_inch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,19 @@ public class AskHeight_Activity extends AppCompatActivity {
                 SharedPreferences.Editor editor1 = sharedPreferences1.edit();
                 editor1.putString("inches_string", inches.getText().toString());
                 editor1.apply();
+
+
+                int inches_int = Integer.valueOf(sharedPreferences1.getString("inches_string",""));
+                int feet_int = Integer.valueOf(sharedPreferences.getString("feet_string",""));
+                int total_inches = (feet_int*12) +inches_int;
+
+                System.out.println(total_inches);
+
+                SharedPreferences sharedPreferences2 = getSharedPreferences("total_inches",MODE_PRIVATE);
+                SharedPreferences.Editor editor2 = sharedPreferences2.edit();
+                editor2.putInt("total_inch",total_inches);
+                editor2.apply();
+
                 finish();
             }
         });
@@ -74,6 +88,9 @@ public class AskHeight_Activity extends AppCompatActivity {
 
         }
     };
+    public void display(View view){
 
+
+    }
 
 }
