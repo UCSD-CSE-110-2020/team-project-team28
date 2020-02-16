@@ -175,5 +175,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void setFitnessServiceKey(String fitnessServiceKey) {
         this.fitnessServiceKey = fitnessServiceKey;
+        fitnessService = FitnessServiceFactory.create(fitnessServiceKey, this);
+    }
+
+    public void updateSteps(){
+        fitnessService.updateStepCount();
     }
 }
