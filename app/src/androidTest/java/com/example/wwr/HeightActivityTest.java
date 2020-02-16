@@ -63,7 +63,6 @@ public class HeightActivityTest {
 
     @Test
     public void heightActivityTest() {
-
         FitnessServiceFactory.put(TEST_SERVICE, new FitnessServiceFactory.BluePrint() {
             @Override
             public FitnessService create(MainActivity stepCountActivity) {
@@ -74,21 +73,11 @@ public class HeightActivityTest {
         mActivityTestRule.getActivity().setFitnessServiceKey(TEST_SERVICE);
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.feet_input),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                2),
                         isDisplayed()));
         appCompatEditText.perform(replaceText("5"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.inches_input),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                3),
                         isDisplayed()));
         appCompatEditText2.perform(replaceText("3"), closeSoftKeyboard());
 

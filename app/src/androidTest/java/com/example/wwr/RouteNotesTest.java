@@ -1,6 +1,5 @@
 package com.example.wwr;
 
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -40,9 +39,7 @@ import static org.hamcrest.Matchers.is;
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class RouteNotesTest {
-
     private static final String TEST_SERVICE = "TEST_SERVICE";
-
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
@@ -62,7 +59,6 @@ public class RouteNotesTest {
 
     @Test
     public void routeNotesTest() {
-
         FitnessServiceFactory.put(TEST_SERVICE, new FitnessServiceFactory.BluePrint() {
             @Override
             public FitnessService create(MainActivity stepCountActivity) {
@@ -86,8 +82,6 @@ public class RouteNotesTest {
                 allOf(withId(R.id.enter_button), withText("CONFIRM"),
                         isDisplayed()));
         appCompatButton.perform(click());
-
-
 
         ViewInteraction appCompatButton2 = onView(
                 allOf(withId(R.id.dailyActivityToRoutes), withText("ROUTES"),

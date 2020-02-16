@@ -1,6 +1,5 @@
 package com.example.wwr;
 
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -54,7 +53,7 @@ public class AddRouteTest2 {
         editor.apply();
 
         prefs = activity.getSharedPreferences("prefs", Context.MODE_PRIVATE);
-        editor =prefs.edit();
+        editor = prefs.edit();
         editor.clear();
         editor.apply();
     }
@@ -69,109 +68,45 @@ public class AddRouteTest2 {
             }
         });
 
-
         mActivityTestRule.getActivity().setFitnessServiceKey(TEST_SERVICE);
 
        ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.feet_input),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                2),
                         isDisplayed()));
         appCompatEditText.perform(replaceText("5"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.feet_input), withText("5"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                2),
                         isDisplayed()));
         appCompatEditText2.perform(click());
 
-        ViewInteraction appCompatEditText3 = onView(
-                allOf(withId(R.id.feet_input), withText("5"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                2),
-                        isDisplayed()));
-        appCompatEditText3.perform(click());
-
-        ViewInteraction appCompatEditText4 = onView(
-                allOf(withId(R.id.inches_input),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                3),
-                        isDisplayed()));
-        appCompatEditText4.perform(click());
-
         ViewInteraction appCompatEditText5 = onView(
                 allOf(withId(R.id.inches_input),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                3),
                         isDisplayed()));
         appCompatEditText5.perform(replaceText("10"), closeSoftKeyboard());
 
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.enter_button), withText("CONFIRM"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                4),
                         isDisplayed()));
         appCompatButton.perform(click());
 
-
-
         ViewInteraction appCompatButton2 = onView(
                 allOf(withId(R.id.start_button), withText("START"),
-                        childAtPosition(
-                                allOf(withId(R.id.include),
-                                        childAtPosition(
-                                                withId(R.id.coordinatorLayout),
-                                                1)),
-                                1),
                         isDisplayed()));
         appCompatButton2.perform(click());
 
         ViewInteraction appCompatButton3 = onView(
                 allOf(withId(R.id.end_button), withText("End"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                0),
                         isDisplayed()));
         appCompatButton3.perform(click());
 
         ViewInteraction appCompatEditText6 = onView(
                 allOf(withId(R.id.routeNamePage),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                1),
                         isDisplayed()));
         appCompatEditText6.perform(replaceText("Walk"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText7 = onView(
                 allOf(withId(R.id.startLocationName),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                2),
                         isDisplayed()));
         appCompatEditText7.perform(replaceText("Home"), closeSoftKeyboard());
 

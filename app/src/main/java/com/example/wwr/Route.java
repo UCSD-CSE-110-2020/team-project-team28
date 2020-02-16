@@ -42,7 +42,7 @@ public class Route {
         this.totalSeconds = seconds;
     }
 
-    public void updateMiles(long miles) {
+    public void updateMiles(double miles) {
         this.totalMiles = miles;
     }
 

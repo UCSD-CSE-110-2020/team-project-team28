@@ -28,10 +28,8 @@ public class RoutesActivityNotesTest {
         intent = new Intent(ApplicationProvider.getApplicationContext(), RoutesActivity.class);
     }
 
-
     @Test
     public void notesSaved(){
-
         ActivityScenario<RoutesActivity> scenario = ActivityScenario.launch(intent);
         //ActivityScenario<AskHeight_Activity> scenario = activityTestRule.getScenario();
 
@@ -42,8 +40,6 @@ public class RoutesActivityNotesTest {
             routeName.setText("");
             notes.setText("Notes for the route");
 
-
-
             Button okButton = activity.findViewById(R.id.button_ok);
 
             okButton.performClick();
@@ -52,7 +48,6 @@ public class RoutesActivityNotesTest {
             String notes_str = sharedPreferences.getString("notes","");
 
             assertEquals("Notes for the route", notes_str);
-
         });
     }
 

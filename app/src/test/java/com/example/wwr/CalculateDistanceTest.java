@@ -14,7 +14,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import com.example.wwr.fitness.FitnessServiceFactory;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -22,7 +21,7 @@ import static android.content.Context.MODE_PRIVATE;
 import static org.junit.Assert.*;
 
 @RunWith(AndroidJUnit4.class)
-public class AskHeight_ActivityTest {
+public class CalculateDistanceTest {
     private Intent intent;
 
     @Before
@@ -38,15 +37,19 @@ public class AskHeight_ActivityTest {
             EditText inches = activity.findViewById(R.id.inches_input);
             Button enter = activity.findViewById(R.id.enter_button);
 
-            feet.setText("5");
-            inches.setText("10");
+            feet.setText("6");
+            inches.setText("2");
 
             enter.performClick();
 
-            SharedPreferences sharedPreferences = activity.getSharedPreferences("inches",MODE_PRIVATE);
-            String inches_str = sharedPreferences.getString("inches_string","");
+            SharedPreferences sharedPreferences = activity.getSharedPreferences("total_inches",MODE_PRIVATE);
+            int totalInches = sharedPreferences.getInt("total_inch",0);
 
-            assertEquals("10", inches_str);
+            assertEquals(totalInches, 74);
+
+            DistanceCalculator calculator = new WalkingDistanceMiles();
+            double miles = calculator.getDistance(0);
+            assertEquals((int) miles, 0);
         });
     }
 
