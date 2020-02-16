@@ -18,6 +18,8 @@ public class RoutesActivity extends AppCompatActivity {
     RadioButton flatButton, loopButton, streetButton, surfaceButton, difficultyButton;
     EditText routeName, startLocation, notes;
 
+    public DistanceCalculator walkingDistanceMiles;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +38,8 @@ public class RoutesActivity extends AppCompatActivity {
         routeName.setText(EMPTY_STRING);
         startLocation.setText(EMPTY_STRING);
         notes.setText(EMPTY_STRING);
+
+        this.walkingDistanceMiles = new walkingDistanceMiles();
     } // end onCreate()
 
     public void pressOK (View view) {
@@ -86,6 +90,7 @@ public class RoutesActivity extends AppCompatActivity {
 
         long steps = MainActivity.finalSteps - MainActivity.startSteps;
         long seconds = (int) getIntent().getLongExtra("newTime", 0) / 1000;
+        double miles = this.walkingDistanceMiles.getDistance(steps);
 
         if (getIntent().getBooleanExtra("addNewRoute", false)) {
             steps = 0;
@@ -93,7 +98,7 @@ public class RoutesActivity extends AppCompatActivity {
 
         if (!routeName.getText().toString().equals(EMPTY_STRING) ) {
             RouteScreen.addToRouteList(routeName.getText().toString(),
-                    startLocation.getText().toString(), steps, 0,
+                    startLocation.getText().toString(), steps, miles,
                     seconds, flatOrHilly, loopOrOut, streetOrTrail, surface, difficulty,
                     notes.getText().toString(), false);
 

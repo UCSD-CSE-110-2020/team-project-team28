@@ -23,6 +23,8 @@ public class RouteScreen extends AppCompatActivity {
     public static ArrayList<Route> routeList;
     public static int currentPosition;
 
+    public DistanceCalculator walkingDistanceMiles;
+
     public void loadData() {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         Gson gson = new Gson();
@@ -42,6 +44,8 @@ public class RouteScreen extends AppCompatActivity {
 
         loadData();
 
+        this.walkingDistanceMiles = new walkingDistanceMiles();
+
         routeScreenView = findViewById(R.id.routeScreen);
         routeScreenView.setHasFixedSize(true);
         routeLayoutManager = new LinearLayoutManager(this);
@@ -60,7 +64,10 @@ public class RouteScreen extends AppCompatActivity {
             if (this.currentPosition < routeList.size()) {
                 int seconds = (int) getIntent().getLongExtra("newTime", 0) / 1000;
                 long steps = MainActivity.finalSteps - MainActivity.startSteps;
+                double miles = this.walkingDistanceMiles.getDistance(steps);
+                MainActivity.miles = miles;
                 routeList.get(this.currentPosition).updateSteps(steps);
+                routeList.get(this.currentPosition).updateMiles(miles);
                 routeList.get(this.currentPosition).updateSeconds(seconds);
                 routeAdapter.notifyDataSetChanged();
                 saveData();

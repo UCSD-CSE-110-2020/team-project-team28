@@ -1,6 +1,7 @@
 package com.example.wwr;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -25,6 +26,11 @@ public class MainActivity extends AppCompatActivity {
     public static long startSteps;
     public static long finalSteps;
 
+    //context for the SharedPreferences in the walkingDistanceMiles
+    public static Context context;
+
+    public static double miles;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
+        this.context = getApplicationContext();
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -90,6 +97,13 @@ public class MainActivity extends AppCompatActivity {
                 walkActivity();
             }
         });
+    }
+
+    /*
+     * Returns a reference to the context in MainActivity
+     */
+    public static Context getMainActivityContext() {
+        return context;
     }
 
     public void heightActivity(){
