@@ -4,20 +4,31 @@ public class Route {
     private String name;
     private String startLocation;
     private long totalSteps;
-    private long totalMiles;
+    private double totalMiles;
     private long totalSeconds;
+    private String flatOrHilly;
+    private String loopOrOut;
+    private String streetOrTrail;
+    private String surface;
+    private String difficulty;
     private String note;
     private boolean isFavorite;
     private int image;
 
-    Route (String name, String startLocation, long totalSteps, long totalMiles, long totalSeconds,
-           String note, boolean isFavorite, int image) {
+    Route (String name, String startLocation, long totalSteps, double totalMiles, long totalSeconds,
+           String flatOrHilly, String loopOrOut, String streetOrTrail, String surface,
+           String difficulty, String note, boolean isFavorite, int image) {
         this.name = name;
         this.startLocation = startLocation;
-
         this.totalSteps = totalSteps;
         this.totalMiles = totalMiles;
         this.totalSeconds = totalSeconds;
+        this.flatOrHilly = flatOrHilly;
+        this.loopOrOut = loopOrOut;
+        this.streetOrTrail = streetOrTrail;
+        this.surface = surface;
+        this.difficulty = difficulty;
+        this.surface = surface;
         this.note = note;
         this.isFavorite = isFavorite;
         this.image = image;
@@ -47,7 +58,7 @@ public class Route {
         return this.totalSteps;
     }
 
-    public long getTotalMiles() {
+    public double getTotalMiles() {
         return this.totalMiles;
     }
 
@@ -58,6 +69,16 @@ public class Route {
     public int getImage() {
         return this.image;
     }
+
+    public String getFlatOrHilly() { return this.flatOrHilly; }
+
+    public String getLoopOrOut() { return this.loopOrOut; }
+
+    public String getStreetOrTrail() { return this.streetOrTrail; }
+
+    public String getSurface() { return this.surface; }
+
+    public String getDifficulty() { return this.difficulty; }
 
     public String getNote() {
         return note;
