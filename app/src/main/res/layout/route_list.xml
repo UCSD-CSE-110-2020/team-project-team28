@@ -30,14 +30,27 @@
             />
 
         <TextView
-            android:id="@+id/text2"
+            android:id="@+id/startingPoint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/route_name"
             android:layout_marginStart="8dp"
             android:layout_marginTop="0dp"
-            android:text="Line2"
+            android:text="Line1"
             android:textColor="@android:color/holo_blue_dark"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_toEndOf="@+id/favorite"/>
+
+        <TextView
+            android:id="@+id/totalTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/startingPoint"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="0dp"
+            android:text="Line2"
+            android:textColor="@android:color/holo_orange_dark"
             android:textSize="15sp"
             android:textStyle="bold"
             android:layout_toEndOf="@+id/favorite"/>
@@ -45,26 +58,26 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/text2"
+            android:layout_below="@id/totalTime"
             android:layout_marginStart="8dp"
             android:text="Line3"
             android:textColor="@android:color/holo_red_light"
             android:textSize="15sp"
             android:textStyle="bold"
-            android:id="@+id/text3"
+            android:id="@+id/totalSteps"
             android:layout_toEndOf="@+id/favorite"
             />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/text3"
+            android:layout_below="@id/totalSteps"
             android:layout_marginStart="8dp"
             android:text="Line4"
             android:textColor="@android:color/holo_green_light"
             android:textSize="15sp"
             android:textStyle="bold"
-            android:id="@+id/text4"
+            android:id="@+id/totalDistance"
             android:layout_toEndOf="@+id/favorite"
             />
 

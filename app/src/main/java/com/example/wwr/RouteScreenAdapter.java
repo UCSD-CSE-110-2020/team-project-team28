@@ -25,9 +25,10 @@ public class RouteScreenAdapter extends RecyclerView.Adapter<RouteScreenAdapter.
     public static class RouteScreenViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener  {
         public ImageView image;
         public TextView routeName;
-        public TextView mText2;
-        public TextView mText3;
-        public TextView mText4;
+        public TextView startingPoint;
+        public TextView totalTime;
+        public TextView totalSteps;
+        public TextView totalDistance;
 
         ArrayList<Route> routeList;
         Context context;
@@ -40,9 +41,10 @@ public class RouteScreenAdapter extends RecyclerView.Adapter<RouteScreenAdapter.
             view.setOnClickListener(this);
             image = view.findViewById(R.id.favorite);
             routeName = view.findViewById(R.id.route_name);
-            mText2 = view.findViewById(R.id.text2);
-            mText3 = view.findViewById(R.id.text3);
-            mText4 = view.findViewById(R.id.text4);
+            startingPoint = view.findViewById(R.id.startingPoint);
+            totalTime = view.findViewById(R.id.totalTime);
+            totalSteps = view.findViewById(R.id.totalSteps);
+            totalDistance = view.findViewById(R.id.totalDistance);
         }
 
         @Override
@@ -56,6 +58,9 @@ public class RouteScreenAdapter extends RecyclerView.Adapter<RouteScreenAdapter.
             intent.putExtra("timeTaken", "Seconds Taken: " + (currentRoute.getTotalSeconds()));
             intent.putExtra("steps", "Steps: " + (currentRoute.getSteps()));
             intent.putExtra("distance", "Distance: " + (currentRoute.getTotalMiles()));
+            intent.putExtra("features", "Features: \n" + currentRoute.getFlatOrHilly()
+                    + "\n" + currentRoute.getLoopOrOut() + "\n" + currentRoute.getStreetOrTrail() +
+                    "\n" + currentRoute.getSurface() + "\n" + currentRoute.getDifficulty());
             intent.putExtra("note", "Notes: " + currentRoute.getNote());
             RouteScreen.setCurrentPosition(position);
 
@@ -78,9 +83,10 @@ public class RouteScreenAdapter extends RecyclerView.Adapter<RouteScreenAdapter.
 
         holder.image.setImageResource(currentRoute.getImage());
         holder.routeName.setText(currentRoute.getName());
-        holder.mText2.setText(currentRoute.getStartLocation());
-        holder.mText3.setText(Long.toString(currentRoute.getSteps()));
-        holder.mText4.setText(Double.toString(currentRoute.getTotalMiles()));
+        holder.startingPoint.setText("Starting Location: " + currentRoute.getStartLocation());
+        holder.totalTime.setText("Total Time: " + currentRoute.getTotalSeconds() + "s");
+        holder.totalSteps.setText("Total Steps: " + currentRoute.getSteps() + " steps");
+        holder.totalDistance.setText("Total Distance: " + currentRoute.getTotalMiles() + " miles");
     }
 
     @Override

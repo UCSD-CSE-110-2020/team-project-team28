@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 
 public class GoogleFitAdapter implements FitnessService {
+
     private final int GOOGLE_FIT_PERMISSIONS_REQUEST_CODE = System.identityHashCode(this) & 0xFFFF;
     private final String TAG = "GoogleFitAdapter";
     private GoogleSignInAccount account;
@@ -24,7 +25,6 @@ public class GoogleFitAdapter implements FitnessService {
     public GoogleFitAdapter(MainActivity activity) {
         this.activity = activity;
     }
-
 
     public void setup() {
         FitnessOptions fitnessOptions = FitnessOptions.builder()
@@ -87,9 +87,8 @@ public class GoogleFitAdapter implements FitnessService {
                                         dataSet.isEmpty()
                                                 ? 0
                                                 : dataSet.getDataPoints().get(0).getValue(Field.FIELD_STEPS).asInt();
-
-                                activity.setStepCount(total);
                                 Log.d(TAG, "Total steps: " + total);
+                                activity.setStepCount(total);
                             }
                         })
                 .addOnFailureListener(
@@ -118,8 +117,8 @@ public class GoogleFitAdapter implements FitnessService {
                                                 ? 0
                                                 : dataSet.getDataPoints().get(0).getValue(Field.FIELD_STEPS).asInt();
 
-                                activity.setFinalStepCount(total);
                                 Log.d(TAG, "Total steps: " + total);
+                                activity.setFinalStepCount(total);
                             }
                         })
                 .addOnFailureListener(
@@ -135,4 +134,6 @@ public class GoogleFitAdapter implements FitnessService {
     public int getRequestCode() {
         return GOOGLE_FIT_PERMISSIONS_REQUEST_CODE;
     }
+
+
 }

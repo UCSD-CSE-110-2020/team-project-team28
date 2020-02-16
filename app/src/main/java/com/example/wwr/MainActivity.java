@@ -30,6 +30,20 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getIntent().getStringExtra("previousActivity") != null &&
+            getIntent().getStringExtra("previousActivity").equals("Route Detail")) {
+            try {
+                fitnessService.updateStepCount();
+                wait(1000);
+                Log.d("SECOND", "DISPLAY SECOND" + this.startSteps);
+            } catch (Exception e) {
+            }
+            Intent intent = new Intent(getApplicationContext(), WalkScreenActivity.class);
+            intent.putExtra("previousScreen", "Route Detail");
+            startActivity(intent);
+        }
+
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -56,24 +70,25 @@ public class MainActivity extends AppCompatActivity {
 
         fitnessService.setup();
 
-        SharedPreferences prefs = getSharedPreferences("prefs",MODE_PRIVATE);
-        boolean firstStart = prefs.getBoolean("firstStart",true);
+        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
+        boolean firstStart = prefs.getBoolean("firstStart", true);
 
         if (firstStart) {
             heightActivity();
         }
 
-
-
-        startButton.setOnClickListener(new View.OnClickListener(){
+        startButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
-                fitnessService.updateStepCount();
+            public void onClick(View view) {
+                try {
+                    fitnessService.updateStepCount();
+                    wait(1000);
+                } catch (Exception e) {
+                }
 
                 TextView steps = (TextView) findViewById(R.id.last_steps_num);
                 String step = startSteps + "";
                 steps.setText(step);
-
                 walkActivity();
             }
         });
@@ -138,12 +153,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void setFinalStepCount(long stepCount) {
         this.finalSteps = stepCount;
+        TextView t = findViewById(R.id.daily_steps_num);
+        t.setText(String.valueOf(stepCount));
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         // If authentication was required during google fit setup, this will be called after the user authenticates
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == fitnessService.getRequestCode()) {

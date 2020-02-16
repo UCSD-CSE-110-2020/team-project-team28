@@ -35,14 +35,12 @@ public class AskHeight_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view){
                 //Feet input
-
                 SharedPreferences sharedPreferences = getSharedPreferences("feet",MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("feet_string", feet.getText().toString());
                 editor.apply();
 
                 // Inches input
-
                 SharedPreferences sharedPreferences1 = getSharedPreferences("inches",MODE_PRIVATE);
                 SharedPreferences.Editor editor1 = sharedPreferences1.edit();
                 editor1.putString("inches_string", inches.getText().toString());
@@ -60,12 +58,10 @@ public class AskHeight_Activity extends AppCompatActivity {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-
             String feetInput = feet.getText().toString().trim();
             String inchInput = inches.getText().toString().trim();
 
             enter.setEnabled(!feetInput.isEmpty() && !inchInput.isEmpty());
-
         }
 
         @Override

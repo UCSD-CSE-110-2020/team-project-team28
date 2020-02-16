@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -49,8 +50,6 @@ public class RouteScreen extends AppCompatActivity {
         routeScreenView.setLayoutManager(routeLayoutManager);
         routeScreenView.setAdapter(routeAdapter);
 
-        SharedPreferences userPref = getSharedPreferences("shared preferences", MODE_PRIVATE);
-
         if (getIntent().getBooleanExtra("goToDetail", false)) {
             Intent intent = new Intent(this, RoutesActivity.class);
             intent.putExtra("newTime", getIntent().getLongExtra("newTime", 0));
@@ -59,10 +58,9 @@ public class RouteScreen extends AppCompatActivity {
 
         if (getIntent().getBooleanExtra("updateRoute", false)) {
             if (this.currentPosition < routeList.size()) {
-                // long steps = // Insert steps later in updateSteps
                 int seconds = (int) getIntent().getLongExtra("newTime", 0) / 1000;
-
-                routeList.get(this.currentPosition).updateSteps(6000);
+                long steps = MainActivity.finalSteps - MainActivity.startSteps;
+                routeList.get(this.currentPosition).updateSteps(steps);
                 routeList.get(this.currentPosition).updateSeconds(seconds);
                 routeAdapter.notifyDataSetChanged();
                 saveData();
@@ -83,20 +81,23 @@ public class RouteScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), RoutesActivity.class);
+                intent.putExtra("addNewRoute", true);
                 startActivity(intent);
             }
         });
     }
 
-    public static void addToRouteList(String routeName, String startingLocation,
-                         long totalSteps, long totalMiles, long totalSeconds, String note,
-                               boolean isFavorite) {
+    public static void addToRouteList(String routeName, String startingLocation, long totalSteps,
+                                      double totalMiles, long totalSeconds, String flatOrHilly,
+                                      String loopOrOut, String streetOrTrail, String surface,
+                                      String difficulty, String note, boolean isFavorite) {
         int image = 0;
         if (isFavorite) {
             image = R.drawable.ic_stars_black_24dp;
         }
         routeList.add(new Route(routeName, startingLocation, totalSteps, totalMiles,
-                totalSeconds, note, isFavorite, image));
+                totalSeconds, flatOrHilly, loopOrOut, streetOrTrail, surface, difficulty,
+                note, isFavorite, image));
         routeAdapter.notifyDataSetChanged();
     }
 
