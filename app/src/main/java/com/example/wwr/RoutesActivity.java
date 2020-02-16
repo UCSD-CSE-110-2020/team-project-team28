@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -36,6 +37,19 @@ public class RoutesActivity extends AppCompatActivity {
         routeName.setText(EMPTY_STRING);
         startLocation.setText(EMPTY_STRING);
         notes.setText(EMPTY_STRING);
+
+
+        Button ok_button = findViewById(R.id.button_ok);
+        ok_button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                pressOK(view);
+            }
+        });
+
+
+
+
     } // end onCreate()
 
     public void pressOK (View view) {
