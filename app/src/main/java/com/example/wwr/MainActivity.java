@@ -33,6 +33,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (getIntent().getStringExtra("FITNESS_SERVICE_KEY") != null){
+            setFitnessServiceKey(getIntent().getStringExtra("FITNESS_SERVICE_KEY"));
+        }
+
+
         if (getIntent().getStringExtra("previousActivity") != null &&
             getIntent().getStringExtra("previousActivity").equals("Route Detail")) {
             try {
