@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".WalkScreenActivity">
+    tools:context=".AskHeight_Activity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -20,6 +20,6 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_walk_screen" />
+    <include layout="@layout/content_ask_height_" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

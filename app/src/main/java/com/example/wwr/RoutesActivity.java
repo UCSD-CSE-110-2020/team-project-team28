@@ -2,15 +2,12 @@ package com.example.wwr;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.content.SharedPreferences;
-
 import com.google.gson.Gson;
 
 public class RoutesActivity extends AppCompatActivity {
@@ -19,7 +16,6 @@ public class RoutesActivity extends AppCompatActivity {
     RadioGroup flatGroup, loopGroup, streetGroup, surfaceGroup, difficultyGroup;
     RadioButton flatButton, loopButton, streetButton, surfaceButton, difficultyButton;
     EditText routeName, startLocation, notes;
-    Button okButton;
 
 
     @Override
@@ -27,7 +23,7 @@ public class RoutesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_routes);
 
-        //initialize all group variables
+        // Initialize all group variables.
         flatGroup = findViewById(R.id.groupFlat);
         loopGroup = findViewById(R.id.groupLoop);
         streetGroup = findViewById(R.id.groupStreet);
@@ -40,7 +36,6 @@ public class RoutesActivity extends AppCompatActivity {
         routeName.setText(EMPTY_STRING);
         startLocation.setText(EMPTY_STRING);
         notes.setText(EMPTY_STRING);
-
     } // end onCreate()
 
     public void pressOK (View view) {
@@ -81,16 +76,20 @@ public class RoutesActivity extends AppCompatActivity {
 
         editor.apply();
 
-        RouteScreen.addToRouteList(routeName.getText().toString(),
-                startLocation.getText().toString(), 0, 0, 0,
-                notes.getText().toString(), false);
-
-        RouteScreen.notifyInsert();
-
         Gson gson = new Gson();
-        String json = gson.toJson(RouteScreen.routeList);
-        editor.putString("route list", json);
-        editor.apply();
+
+        long steps = MainActivity.finalSteps - MainActivity.startSteps;
+        long seconds = (int) getIntent().getLongExtra("newTime", 0) / 1000;
+
+        if (!routeName.getText().toString().equals(EMPTY_STRING) ) {
+            RouteScreen.addToRouteList(routeName.getText().toString(),
+                    startLocation.getText().toString(), steps, 0,
+                    seconds, notes.getText().toString(), false);
+
+            String json = gson.toJson(RouteScreen.routeList);
+            editor.putString("route list", json);
+            editor.apply();
+        }
 
         finish();
     }

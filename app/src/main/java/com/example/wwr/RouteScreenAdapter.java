@@ -6,15 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-
-import static androidx.core.content.ContextCompat.startActivity;
 
 public class RouteScreenAdapter extends RecyclerView.Adapter<RouteScreenAdapter.RouteScreenViewHolder> {
     private ArrayList<Route> routeList;
@@ -35,7 +32,6 @@ public class RouteScreenAdapter extends RecyclerView.Adapter<RouteScreenAdapter.
         ArrayList<Route> routeList;
         Context context;
 
-
         public RouteScreenViewHolder(View view, Context context, ArrayList<Route> routeList) {
             super(view);
             this.routeList = routeList;
@@ -47,7 +43,6 @@ public class RouteScreenAdapter extends RecyclerView.Adapter<RouteScreenAdapter.
             mText2 = view.findViewById(R.id.text2);
             mText3 = view.findViewById(R.id.text3);
             mText4 = view.findViewById(R.id.text4);
-
         }
 
         @Override
@@ -55,12 +50,14 @@ public class RouteScreenAdapter extends RecyclerView.Adapter<RouteScreenAdapter.
             int position = getAdapterPosition();
             Route currentRoute = routeList.get(position);
             Intent intent = new Intent(this.context, RouteDetail.class);
+
             intent.putExtra("routeName", "Route Name: " + currentRoute.getName());
             intent.putExtra("startLocation", "Start Location: " + currentRoute.getStartLocation());
-            intent.putExtra("timeTaken", "Time Taken: " + Integer.toString(currentRoute.getTotalMinutes()));
-            intent.putExtra("steps", "Steps: " + Integer.toString(currentRoute.getSteps()));
-            intent.putExtra("distance", "Distance: " + Double.toString(currentRoute.getTotalMinutes()));
+            intent.putExtra("timeTaken", "Seconds Taken: " + (currentRoute.getTotalSeconds()));
+            intent.putExtra("steps", "Steps: " + (currentRoute.getSteps()));
+            intent.putExtra("distance", "Distance: " + (currentRoute.getTotalMiles()));
             intent.putExtra("note", "Notes: " + currentRoute.getNote());
+            RouteScreen.setCurrentPosition(position);
 
             this.context.startActivity(intent);
         }
@@ -82,13 +79,13 @@ public class RouteScreenAdapter extends RecyclerView.Adapter<RouteScreenAdapter.
         holder.image.setImageResource(currentRoute.getImage());
         holder.routeName.setText(currentRoute.getName());
         holder.mText2.setText(currentRoute.getStartLocation());
-        holder.mText3.setText(Integer.toString(currentRoute.getSteps()));
-        holder.mText4.setText(Double.toString(currentRoute.getMiles()));
-
+        holder.mText3.setText(Long.toString(currentRoute.getSteps()));
+        holder.mText4.setText(Double.toString(currentRoute.getTotalMiles()));
     }
 
     @Override
     public int getItemCount() {
         return routeList.size();
     }
+
 }
