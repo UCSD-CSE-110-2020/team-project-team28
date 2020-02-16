@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -29,6 +30,7 @@ public class RouteScreen extends AppCompatActivity {
         String json = sharedPreferences.getString("route list", null);
         Type type = new TypeToken<ArrayList<Route>>() {}.getType();
         routeList = gson.fromJson(json, type);
+        Log.d("loadRouteList", "Route list has been loaded");
 
         if (routeList == null) {
             routeList = new ArrayList<>();
@@ -53,6 +55,7 @@ public class RouteScreen extends AppCompatActivity {
         if (getIntent().getBooleanExtra("goToDetail", false)) {
             Intent intent = new Intent(this, RoutesActivity.class);
             intent.putExtra("newTime", getIntent().getLongExtra("newTime", 0));
+            Log.d("goToDetail", "Add the completed route from walk screen.");
             startActivity(intent);
         }
 
@@ -63,6 +66,7 @@ public class RouteScreen extends AppCompatActivity {
                 routeList.get(this.currentPosition).updateSteps(steps);
                 routeList.get(this.currentPosition).updateSeconds(seconds);
                 routeAdapter.notifyDataSetChanged();
+                Log.d("updateOldWalk", "Update the old walk.");
                 saveData();
             }
         }
@@ -99,6 +103,7 @@ public class RouteScreen extends AppCompatActivity {
                 totalSeconds, flatOrHilly, loopOrOut, streetOrTrail, surface, difficulty,
                 note, isFavorite, image));
         routeAdapter.notifyDataSetChanged();
+        Log.d("notifyList", "Notify list that the data has been updated.");
     }
 
     public static void setCurrentPosition(int position) {
@@ -112,6 +117,7 @@ public class RouteScreen extends AppCompatActivity {
         String json = gson.toJson(RouteScreen.routeList);
         editor.putString("route list", json);
         editor.apply();
+        Log.d("loadRouteList", "Route list has been saved");
     }
 
 }

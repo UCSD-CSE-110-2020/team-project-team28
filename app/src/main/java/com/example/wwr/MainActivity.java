@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
             try {
                 fitnessService.updateStepCount();
                 wait(1000);
-                Log.d("SECOND", "DISPLAY SECOND" + this.startSteps);
             } catch (Exception e) {
             }
             Intent intent = new Intent(getApplicationContext(), WalkScreenActivity.class);
@@ -72,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
         boolean firstStart = prefs.getBoolean("firstStart", true);
 
         if (firstStart) {
+            Log.d("firstLogin", "Height input because of first installation of the app.");
             heightActivity();
         }
 
@@ -125,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
 
         TextView displayTime = (TextView) findViewById(R.id.last_time_num);
         displayTime.setText(time);
+        Log.d("updateTime", "Time has been updated.");
     }
 
     public void setStepCount(long stepCount) {

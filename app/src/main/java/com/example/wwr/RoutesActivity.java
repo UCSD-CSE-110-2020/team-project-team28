@@ -3,6 +3,7 @@ package com.example.wwr;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -114,6 +115,7 @@ public class RoutesActivity extends AppCompatActivity {
             String json = gson.toJson(RouteScreen.routeList);
             editor.putString("route list", json);
             editor.apply();
+            Log.d("createdNewRouteList", "New route has been added");
         }
         finish();
     }

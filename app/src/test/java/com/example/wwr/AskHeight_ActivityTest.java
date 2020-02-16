@@ -33,7 +33,6 @@ public class AskHeight_ActivityTest {
     @Test
     public void testHeightSaved(){
         ActivityScenario<AskHeight_Activity> scenario = ActivityScenario.launch(intent);
-        //ActivityScenario<AskHeight_Activity> scenario = activityTestRule.getScenario();
         scenario.onActivity(activity -> {
             EditText feet = activity.findViewById(R.id.feet_input);
             EditText inches = activity.findViewById(R.id.inches_input);
@@ -48,10 +47,8 @@ public class AskHeight_ActivityTest {
             String inches_str = sharedPreferences.getString("inches_string","");
 
             assertEquals("10", inches_str);
-
         });
     }
-
 
 }
 
