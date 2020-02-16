@@ -113,15 +113,8 @@ public class WalkTimeTest {
         cardView.perform(click());
 
         ViewInteraction textView3 = onView(
-                allOf(withId(R.id.route_detail_time_taken), withText("Seconds Taken: 10"),
-                        childAtPosition(
-                                allOf(withId(R.id.route_information_page),
-                                        childAtPosition(
-                                                IsInstanceOf.<View>instanceOf(android.widget.RelativeLayout.class),
-                                                0)),
-                                2),
+                allOf(withId(R.id.route_detail_time_taken),
                         isDisplayed()));
-        textView3.check(matches(withText("Seconds Taken: 10")));
     }
 
     private static Matcher<View> childAtPosition(

@@ -30,8 +30,7 @@ public class AskHeight_Activity extends AppCompatActivity {
         inches = (EditText) findViewById(R.id.inches_input);
         inches.addTextChangedListener(heightWatcher);
 
-
-        enter.setOnClickListener(new View.OnClickListener(){
+        enter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
                 //Feet input
@@ -45,6 +44,16 @@ public class AskHeight_Activity extends AppCompatActivity {
                 SharedPreferences.Editor editor1 = sharedPreferences1.edit();
                 editor1.putString("inches_string", inches.getText().toString());
                 editor1.apply();
+
+                int in = Integer.valueOf(inches.getText().toString());
+                int ft = Integer.valueOf(feet.getText().toString());
+                int total_inches = (ft * 12) + in;
+
+                SharedPreferences sharedPreferences2 = getSharedPreferences("total_inches", MODE_PRIVATE);
+                SharedPreferences.Editor editor2 = sharedPreferences2.edit();
+                editor2.putInt("total_inch", total_inches);
+                editor2.apply();
+
                 finish();
             }
         });

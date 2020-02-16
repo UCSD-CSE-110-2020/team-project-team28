@@ -30,7 +30,6 @@ public class RouteScreenTest {
     @Test
     public void testRouteScreen(){
         ActivityScenario<RouteScreen> scenario = ActivityScenario.launch(intent);
-
         scenario.onActivity(activity -> {
             Button addButton = activity.findViewById(R.id.addRouteButton);
             assertNotNull(addButton);

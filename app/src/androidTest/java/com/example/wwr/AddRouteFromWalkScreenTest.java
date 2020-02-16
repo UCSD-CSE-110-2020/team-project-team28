@@ -1,6 +1,4 @@
 package com.example.wwr;
-
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -39,9 +37,6 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
 
-
-
-
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class AddRouteFromWalkScreenTest {
@@ -74,6 +69,7 @@ public class AddRouteFromWalkScreenTest {
         });
 
        mActivityTestRule.getActivity().setFitnessServiceKey(TEST_SERVICE);
+
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.feet_input),
                         isDisplayed()));
@@ -135,28 +131,8 @@ public class AddRouteFromWalkScreenTest {
         textView.check(matches(withText("Trail")));
 
         ViewInteraction textView2 = onView(
-                allOf(withId(R.id.startingPoint),
+                allOf(withId(R.id.startingPoint), withText("Park"),
                         isDisplayed()));
-        textView2.check(matches(withText("Park")));
-    }
-
-    private static Matcher<View> childAtPosition(
-            final Matcher<View> parentMatcher, final int position) {
-
-        return new TypeSafeMatcher<View>() {
-            @Override
-            public void describeTo(Description description) {
-                description.appendText("Child at position " + position + " in parent ");
-                parentMatcher.describeTo(description);
-            }
-
-            @Override
-            public boolean matchesSafely(View view) {
-                ViewParent parent = view.getParent();
-                return parent instanceof ViewGroup && parentMatcher.matches(parent)
-                        && view.equals(((ViewGroup) parent).getChildAt(position));
-            }
-        };
     }
 
     private class TestFitnessService implements FitnessService {

@@ -1,6 +1,5 @@
 package com.example.wwr;
 
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -69,7 +68,6 @@ public class AddRouteTest2 {
             }
         });
 
-
         mActivityTestRule.getActivity().setFitnessServiceKey(TEST_SERVICE);
 
        ViewInteraction appCompatEditText = onView(
@@ -81,16 +79,6 @@ public class AddRouteTest2 {
                 allOf(withId(R.id.feet_input), withText("5"),
                         isDisplayed()));
         appCompatEditText2.perform(click());
-
-        ViewInteraction appCompatEditText3 = onView(
-                allOf(withId(R.id.feet_input), withText("5"),
-                        isDisplayed()));
-        appCompatEditText3.perform(click());
-
-        ViewInteraction appCompatEditText4 = onView(
-                allOf(withId(R.id.inches_input),
-                        isDisplayed()));
-        appCompatEditText4.perform(click());
 
         ViewInteraction appCompatEditText5 = onView(
                 allOf(withId(R.id.inches_input),
