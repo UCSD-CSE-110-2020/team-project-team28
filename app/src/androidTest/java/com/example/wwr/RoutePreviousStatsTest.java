@@ -25,8 +25,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static android.content.Context.MODE_PRIVATE;
-import static androidx.test.InstrumentationRegistry.getContext;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
@@ -39,12 +37,10 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
 
-
-
-
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class AddRouteFromWalkScreenTest {
+public class RoutePreviousStatsTest {
+
     private static final String TEST_SERVICE = "TEST_SERVICE";
 
     @Rule
@@ -60,88 +56,45 @@ public class AddRouteFromWalkScreenTest {
 
         prefs = activity.getSharedPreferences("prefs", Context.MODE_PRIVATE);
         editor =prefs.edit();
-        editor.clear();
+        editor.putBoolean("firstStart",false);
         editor.apply();
     }
 
 
     @Test
-    public void addRouteFromWalkScreenTest() {
+    public void routePreviousStatsTest() {
 
         FitnessServiceFactory.put(TEST_SERVICE, new FitnessServiceFactory.BluePrint() {
             @Override
             public FitnessService create(MainActivity stepCountActivity) {
-                return new TestFitnessService(stepCountActivity);
+                return new RoutePreviousStatsTest.TestFitnessService(stepCountActivity);
             }
         });
 
-       mActivityTestRule.getActivity().setFitnessServiceKey(TEST_SERVICE);
-        ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.feet_input),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                2),
-                        isDisplayed()));
-        appCompatEditText.perform(replaceText("5"), closeSoftKeyboard());
-
-        ViewInteraction appCompatEditText2 = onView(
-                allOf(withId(R.id.feet_input), withText("5"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                2),
-                        isDisplayed()));
-        appCompatEditText2.perform(click());
-
-        ViewInteraction appCompatEditText3 = onView(
-                allOf(withId(R.id.inches_input),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                3),
-                        isDisplayed()));
-        appCompatEditText3.perform(replaceText("7"), closeSoftKeyboard());
-
-        ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.enter_button), withText("CONFIRM"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                4),
-                        isDisplayed()));
-        appCompatButton.perform(click());
-
-
-
-
+        mActivityTestRule.getActivity().setFitnessServiceKey(TEST_SERVICE);
 
         ViewInteraction appCompatButton2 = onView(
-                allOf(withId(R.id.dailyActivityToRoutes), withText("ROUTES"),
+                allOf(withId(R.id.start_button), withText("START"),
                         childAtPosition(
                                 allOf(withId(R.id.include),
                                         childAtPosition(
                                                 withId(R.id.coordinatorLayout),
                                                 1)),
-                                0),
+                                1),
                         isDisplayed()));
         appCompatButton2.perform(click());
 
         ViewInteraction appCompatButton3 = onView(
-                allOf(withId(R.id.addRouteButton), withText("Add Route"),
+                allOf(withId(R.id.end_button), withText("End"),
                         childAtPosition(
                                 childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                2),
+                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
+                                        1),
+                                0),
                         isDisplayed()));
         appCompatButton3.perform(click());
 
-        ViewInteraction appCompatEditText4 = onView(
+        ViewInteraction appCompatEditText3 = onView(
                 allOf(withId(R.id.routeNamePage),
                         childAtPosition(
                                 childAtPosition(
@@ -149,50 +102,7 @@ public class AddRouteFromWalkScreenTest {
                                         0),
                                 1),
                         isDisplayed()));
-        appCompatEditText4.perform(replaceText("Trail"), closeSoftKeyboard());
-
-        ViewInteraction appCompatEditText5 = onView(
-                allOf(withId(R.id.startLocationName),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                2),
-                        isDisplayed()));
-        appCompatEditText5.perform(replaceText("Park"), closeSoftKeyboard());
-
-        ViewInteraction appCompatRadioButton = onView(
-                allOf(withId(R.id.radio_out_and_back), withText("Out-And-Back"),
-                        childAtPosition(
-                                allOf(withId(R.id.groupLoop),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
-                                                4)),
-                                2),
-                        isDisplayed()));
-        appCompatRadioButton.perform(click());
-
-        ViewInteraction appCompatRadioButton2 = onView(
-                allOf(withId(R.id.radio_trail), withText("Trail"),
-                        childAtPosition(
-                                allOf(withId(R.id.groupStreet),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
-                                                5)),
-                                2),
-                        isDisplayed()));
-        appCompatRadioButton2.perform(click());
-
-        /*ViewInteraction appCompatRadioButton3 = onView(
-                allOf(withId(R.id.radio_uneven), withText("Uneven Surface"),
-                        childAtPosition(
-                                allOf(withId(R.id.groupSurface),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
-                                                6)),
-                                2),
-                        isDisplayed()));
-        appCompatRadioButton3.perform(click());*/
+        appCompatEditText3.perform(replaceText("Route"), closeSoftKeyboard());
 
         ViewInteraction appCompatButton4 = onView(
                 allOf(withId(R.id.button_ok), withText("OK"),
@@ -205,19 +115,24 @@ public class AddRouteFromWalkScreenTest {
         appCompatButton4.perform(click());
 
         ViewInteraction textView = onView(
-                allOf(withId(R.id.route_name), withText("Trail"),
+                allOf(withId(R.id.totalTime), withText("Total Time: 0s"),
                         childAtPosition(
                                 childAtPosition(
                                         IsInstanceOf.<View>instanceOf(android.widget.FrameLayout.class),
                                         0),
-                                1),
+                                3),
                         isDisplayed()));
-        textView.check(matches(withText("Trail")));
+        textView.check(matches(isDisplayed()));
 
         ViewInteraction textView2 = onView(
-                allOf(withId(R.id.startingPoint), withText("Park"),
+                allOf(withId(R.id.totalSteps), withText("Total Steps: 0 steps"),
+                        childAtPosition(
+                                childAtPosition(
+                                        IsInstanceOf.<View>instanceOf(android.widget.FrameLayout.class),
+                                        0),
+                                4),
                         isDisplayed()));
-        textView2.check(matches(withText("Park")));
+        textView2.check(matches(isDisplayed()));
     }
 
     private static Matcher<View> childAtPosition(
@@ -238,7 +153,6 @@ public class AddRouteFromWalkScreenTest {
             }
         };
     }
-
     private class TestFitnessService implements FitnessService {
         private static final String TAG = "[TestFitnessService]: ";
         private MainActivity stepCountActivity;

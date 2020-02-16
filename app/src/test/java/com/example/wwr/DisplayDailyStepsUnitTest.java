@@ -20,7 +20,7 @@ import org.junit.runner.RunWith;
 import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(AndroidJUnit4.class)
-public class StepCountActivityUnitTest {
+public class DisplayDailyStepsUnitTest {
     private static final String TEST_SERVICE = "TEST_SERVICE";
 
     private Intent intent;
