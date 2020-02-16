@@ -37,19 +37,18 @@ public class WalkScreenTest {
             assertNotNull(activity.findViewById(R.id.chronometer));
             TextView routeName = activity.findViewById(R.id.route_name);
             assertEquals(routeName.getText(), "Route Name");
-            try {
-                sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
             Button endButton = activity.findViewById(R.id.end_button);
             endButton.performClick();
+        });
 
+        Intent intent1 = new Intent(ApplicationProvider.getApplicationContext(), RouteScreen.class);
+
+        ActivityScenario<RouteScreen> scenario1 = ActivityScenario.launch(intent1);
+        scenario1.onActivity(activity -> {
             SharedPreferences sharedPreferences = activity.getSharedPreferences("recentWalk", MODE_PRIVATE);
             long time = sharedPreferences.getLong("time", -1);
             assertEquals(time, 0);
         });
     }
-
 }
 

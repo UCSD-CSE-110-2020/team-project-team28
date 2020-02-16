@@ -30,7 +30,7 @@ public class CalculateDistanceTest {
     }
 
     @Test
-    public void testHeightSaved(){
+    public void testDistanceFromHeight(){
         ActivityScenario<AskHeight_Activity> scenario = ActivityScenario.launch(intent);
         scenario.onActivity(activity -> {
             EditText feet = activity.findViewById(R.id.feet_input);
@@ -46,10 +46,15 @@ public class CalculateDistanceTest {
             int totalInches = sharedPreferences.getInt("total_inch",0);
 
             assertEquals(totalInches, 74);
+        });
 
-            DistanceCalculator calculator = new WalkingDistanceMiles();
-            double miles = calculator.getDistance(0);
-            assertEquals((int) miles, 0);
+        Intent intent1 = new Intent(ApplicationProvider.getApplicationContext(), MainActivity.class);
+        ActivityScenario<MainActivity> scenario1 = ActivityScenario.launch(intent1);
+        scenario1.onActivity(activity -> {
+           DistanceCalculator calculator = new WalkingDistanceMiles();
+           activity.inches = 74;
+           double miles = calculator.getDistance(0);
+           assertEquals((int) miles, 0);
         });
     }
 
