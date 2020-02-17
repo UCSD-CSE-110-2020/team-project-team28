@@ -8,6 +8,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -54,6 +55,7 @@ public class AskHeight_Activity extends AppCompatActivity {
                 editor2.putInt("total_inch", total_inches);
                 editor2.apply();
 
+                Log.d("saveHeight", "Height has been saved.");
                 finish();
             }
         });
@@ -62,7 +64,6 @@ public class AskHeight_Activity extends AppCompatActivity {
     public TextWatcher heightWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
         }
 
         @Override
@@ -75,7 +76,6 @@ public class AskHeight_Activity extends AppCompatActivity {
 
         @Override
         public void afterTextChanged(Editable s) {
-
         }
     };
 }

@@ -63,7 +63,6 @@ public class RouteScreenAdapter extends RecyclerView.Adapter<RouteScreenAdapter.
                     "\n" + currentRoute.getSurface() + "\n" + currentRoute.getDifficulty());
             intent.putExtra("note", "Notes: " + currentRoute.getNote());
             RouteScreen.setCurrentPosition(position);
-
             this.context.startActivity(intent);
         }
     }

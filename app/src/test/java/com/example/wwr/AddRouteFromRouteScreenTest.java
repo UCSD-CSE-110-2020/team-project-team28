@@ -1,5 +1,4 @@
 package com.example.wwr;
-
 import android.content.Intent;
 import android.widget.Button;
 import androidx.test.core.app.ActivityScenario;
@@ -8,10 +7,11 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 @RunWith(AndroidJUnit4.class)
-public class RouteScreenTest {
+public class AddRouteFromRouteScreenTest {
     private Intent intent;
 
     @Before
@@ -20,7 +20,7 @@ public class RouteScreenTest {
     }
 
     @Test
-    public void testRouteScreen(){
+    public void testAddRouteFromRouteScreen(){
         ActivityScenario<RouteScreen> scenario = ActivityScenario.launch(intent);
         scenario.onActivity(activity -> {
             Button addButton = activity.findViewById(R.id.addRouteButton);
@@ -28,19 +28,12 @@ public class RouteScreenTest {
 
             assertEquals(RouteScreen.routeList.size(), 0);
             assertEquals(RouteScreen.currentPosition, 0);
+            RouteScreen.addToRouteList("All star", "California", 100,
+                    100, 9, "flat", "loop",
+                    "street", "even", "hard", "Wow", false);
             addButton.performClick();
-
-            RouteScreen.addToRouteList("Home", "California", 100,
-                    10, 99, "flat", "loop",
-                    "street", "even", "hard", "Wow", false);
             assertEquals(RouteScreen.routeList.size(), 1);
-            assertEquals(RouteScreen.routeList.get(RouteScreen.currentPosition).getName(), "Home");
-
-            RouteScreen.addToRouteList("CSE 110", "California", 100,
-                    10, 99, "flat", "loop",
-                    "street", "even", "hard", "Wow", false);
-            assertEquals(RouteScreen.routeList.size(), 2);
-            assertEquals(RouteScreen.routeList.get(RouteScreen.routeList.size() - 1).getName(), "CSE 110");
+            assertEquals(RouteScreen.routeList.get(RouteScreen.currentPosition).getName(), "All star");
         });
     }
 }

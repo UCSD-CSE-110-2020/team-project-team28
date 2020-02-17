@@ -47,8 +47,7 @@ public class RouteDetail extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.putExtra("route name", getIntent().getStringExtra("routeName"));
                 intent.putExtra("previousActivity", "Route Detail");
-
-                Log.d("FIRST", "DISPLAY FIRST");
+                Log.d("restartWalk", "Restart existing walk.");
                 startActivity(intent);
             }
         });

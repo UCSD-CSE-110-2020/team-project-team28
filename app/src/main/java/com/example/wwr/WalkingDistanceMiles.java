@@ -1,10 +1,5 @@
 package com.example.wwr;
-
-import android.content.SharedPreferences;
 import android.util.Log;
-import android.widget.Toast;
-
-import static android.content.Context.MODE_PRIVATE;
 
 public class WalkingDistanceMiles implements DistanceCalculator {
     private static final double STRIDE_FACTOR = 0.413;

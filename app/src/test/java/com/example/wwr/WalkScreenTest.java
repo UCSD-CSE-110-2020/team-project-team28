@@ -2,16 +2,11 @@ package com.example.wwr;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.core.app.ApplicationProvider;
-import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,14 +21,21 @@ public class WalkScreenTest {
 
     @Before
     public void setUp() {
-        intent = new Intent(ApplicationProvider.getApplicationContext(), WalkScreenActivity.class);
+        intent = new Intent(ApplicationProvider.getApplicationContext(), MainActivity.class);
     }
 
     @Test
     public void testWalkScreen(){
-        ActivityScenario<WalkScreenActivity> scenario = ActivityScenario.launch(intent);
-
+        ActivityScenario<MainActivity> scenario = ActivityScenario.launch(intent);
         scenario.onActivity(activity -> {
+            activity.setStepCount(0);
+            Button mockPage = activity.findViewById(R.id.start_button);
+            mockPage.performClick();
+        });
+
+        Intent intent1 = new Intent(ApplicationProvider.getApplicationContext(), WalkScreenActivity.class);
+        ActivityScenario<WalkScreenActivity> scenario1 = ActivityScenario.launch(intent1);
+        scenario1.onActivity(activity -> {
             assertNotNull(activity.findViewById(R.id.chronometer));
             TextView routeName = activity.findViewById(R.id.route_name);
             assertEquals(routeName.getText(), "Route Name");
@@ -50,6 +52,5 @@ public class WalkScreenTest {
             assertEquals(time, 0);
         });
     }
-
 }
 

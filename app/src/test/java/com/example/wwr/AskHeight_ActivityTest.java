@@ -49,5 +49,4 @@ public class AskHeight_ActivityTest {
             assertEquals("10", inches_str);
         });
     }
-
 }
