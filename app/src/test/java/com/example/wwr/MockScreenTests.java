@@ -33,14 +33,14 @@ public class MockScreenTests {
 
             TextView t = activity.findViewById(R.id.daily_steps_num);
             activity.setStepCount(0);
-            Button mockPage = activity.findViewById(R.id.goToMockPage);
+            Button mockPage = activity.findViewById(R.id.start_button);
             mockPage.performClick();
         });
 
-        Intent intent1 = new Intent(ApplicationProvider.getApplicationContext(), MockScreenActivity.class);
+        Intent intent1 = new Intent(ApplicationProvider.getApplicationContext(), WalkScreenActivity.class);
 
         // mock screen activity
-        ActivityScenario<MockScreenActivity> scenario1 = ActivityScenario.launch(intent1);
+        ActivityScenario<WalkScreenActivity> scenario1 = ActivityScenario.launch(intent1);
         scenario1.onActivity(activity -> {
 
             Button addSteps = activity.findViewById(R.id.addMockSteps);
