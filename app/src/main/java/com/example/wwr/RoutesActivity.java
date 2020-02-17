@@ -84,7 +84,11 @@ public class RoutesActivity extends AppCompatActivity {
 
         Gson gson = new Gson();
 
-        long steps = MainActivity.finalSteps - MainActivity.startSteps;
+        //long steps = MainActivity.finalSteps - MainActivity.startSteps;
+        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
+        long previousSteps = prefs.getLong("totalSteps", 0);
+        //long steps = MainActivity.finalSteps - MainActivity.startSteps;
+        long steps = MainActivity.startSteps - previousSteps;
         long seconds = (int) getIntent().getLongExtra("newTime", 0) / 1000;
 
         if (getIntent().getBooleanExtra("addNewRoute", false)) {

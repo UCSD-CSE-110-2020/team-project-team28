@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -29,11 +30,17 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+        //fitnessService.updateStepCount();
+        //Toast.makeText(getApplicationContext(), "Starting the Main Activity " + MainActivity.startSteps+"", Toast.LENGTH_LONG).show();
+
+
         if (getIntent().getStringExtra("previousActivity") != null &&
-            getIntent().getStringExtra("previousActivity").equals("Route Detail")) {
+                getIntent().getStringExtra("previousActivity").equals("Route Detail")) {
             try {
                 fitnessService.updateStepCount();
+                //Toast.makeText(getApplicationContext(), "route detail " + MainActivity.startSteps+"", Toast.LENGTH_LONG).show();
                 wait(1000);
                 Log.d("SECOND", "DISPLAY SECOND" + this.startSteps);
             } catch (Exception e) {
@@ -92,19 +99,6 @@ public class MainActivity extends AppCompatActivity {
                 walkActivity();
             }
         });
-
-        Button mockPageBtn = (Button) findViewById(R.id.goToMockPage);
-        mockPageBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mockPageActivity();
-            }
-        });
-    }
-
-    public void mockPageActivity() {
-        Intent intent = new Intent(this, MockScreenActivity.class);
-        startActivity(intent);
     }
 
     public void heightActivity(){
@@ -149,6 +143,14 @@ public class MainActivity extends AppCompatActivity {
         TextView t = findViewById(R.id.daily_steps_num);
         t.setText(String.valueOf(totalSteps));
         this.startSteps = totalSteps;
+    }
+
+    public void setLastStepCount(long stepCunt) {
+        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
+        long previousSteps = MainActivity.startSteps - prefs.getLong("totalSteps", 0);
+        TextView displaySteps = (TextView) findViewById(R.id.last_steps_num);
+        displaySteps.setText(String.valueOf(previousSteps));
+
     }
 
     public void setFinalStepCount(long stepCount) {
