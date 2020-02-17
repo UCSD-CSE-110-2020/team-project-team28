@@ -21,9 +21,11 @@ import com.example.wwr.fitness.FitnessServiceFactory;
 import com.example.wwr.fitness.GoogleFitAdapter;
 
 public class MainActivity extends AppCompatActivity {
-    private String fitnessServiceKey = "GOOGLE_FIT";
+    public static final String fitnessServiceKey = "GOOGLE_FIT";
     private static final String TAG = "MainActivity";
     public static FitnessService fitnessService;
+    final int BOOST_STEPS = 500;
+    final String MOCK_STEP_COUNTER= "stepMultiplierCount";
     public static long startSteps;
     public static long finalSteps;
     //context for the SharedPreferences in the walkingDistanceMiles
@@ -32,11 +34,17 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+        //fitnessService.updateStepCount();
+        //Toast.makeText(getApplicationContext(), "Starting the Main Activity " + MainActivity.startSteps+"", Toast.LENGTH_LONG).show();
+
+
         if (getIntent().getStringExtra("previousActivity") != null &&
-            getIntent().getStringExtra("previousActivity").equals("Route Detail")) {
+                getIntent().getStringExtra("previousActivity").equals("Route Detail")) {
             try {
                 fitnessService.updateStepCount();
+                //Toast.makeText(getApplicationContext(), "route detail " + MainActivity.startSteps+"", Toast.LENGTH_LONG).show();
                 wait(1000);
             } catch (Exception e) {
             }
@@ -83,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         this.inches = sharedPreferences.getInt("total_inch", 0);
 
 
-        startButton.setOnClickListener(new View.OnClickListener() {
+        startButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 try {
@@ -137,9 +145,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setStepCount(long stepCount) {
+        SharedPreferences prefs = getSharedPreferences("prefs",MODE_PRIVATE);
+        int stepMultiplier = prefs.getInt(MOCK_STEP_COUNTER, 0);
+        long totalSteps = stepCount + (stepMultiplier * BOOST_STEPS);
         TextView t = findViewById(R.id.daily_steps_num);
-        t.setText(String.valueOf(stepCount));
-        this.startSteps = stepCount;
+        t.setText(String.valueOf(totalSteps));
+        this.startSteps = totalSteps;
+    }
+
+    public void setLastStepCount(long stepCunt) {
+        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
+        long previousSteps = MainActivity.startSteps - prefs.getLong("totalSteps", 0);
+        TextView displaySteps = (TextView) findViewById(R.id.last_steps_num);
+        displaySteps.setText(String.valueOf(previousSteps));
+
     }
 
     public void setFinalStepCount(long stepCount) {
@@ -182,8 +201,9 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void setFitnessServiceKey(String fitnessServiceKey) {
-        this.fitnessServiceKey = fitnessServiceKey;
-        fitnessService = FitnessServiceFactory.create(fitnessServiceKey, this);
-    }
+//    public void setFitnessServiceKey(String fitnessServiceKey) {
+//        this.fitnessServiceKey = fitnessServiceKey;
+//        fitnessService = FitnessServiceFactory.create(fitnessServiceKey, this);
+//    }
+
 }

@@ -40,13 +40,15 @@ public class RouteDetail extends AppCompatActivity {
         features.setText(getIntent().getStringExtra("features"));
         note.setText(getIntent().getStringExtra("note"));
 
-        Button routeInfo = (Button) findViewById(R.id.route_info_start_button);
-        routeInfo.setOnClickListener(new View.OnClickListener() {
+        Button startFromExistingRoute = (Button) findViewById(R.id.route_info_start_button);
+        startFromExistingRoute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.putExtra("route name", getIntent().getStringExtra("routeName"));
                 intent.putExtra("previousActivity", "Route Detail");
+
+                Log.d("FIRST", "DISPLAY FIRST");
                 startActivity(intent);
             }
         });

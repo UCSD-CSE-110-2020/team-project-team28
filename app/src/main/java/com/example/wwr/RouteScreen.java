@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.wwr.fitness.FitnessService;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -63,12 +64,29 @@ public class RouteScreen extends AppCompatActivity {
 
         if (getIntent().getBooleanExtra("updateRoute", false)) {
             if (this.currentPosition < routeList.size()) {
+
+                //Toast.makeText(getApplicationContext(), "I'm here bitch", Toast.LENGTH_LONG).show();
+
                 int seconds = (int) getIntent().getLongExtra("newTime", 0) / 1000;
-                long steps = MainActivity.finalSteps - MainActivity.startSteps;
-                double miles = walkingDistanceMiles.getDistance(steps);
+                //long steps = MainActivity.finalSteps - MainActivity.startSteps;
+                //double miles = walkingDistanceMiles.getDistance(steps);
+                //
+                SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
+                long previousSteps = prefs.getLong("totalSteps", 0);
+
+                //long steps = MainActivity.finalSteps - MainActivity.startSteps;
+                //long steps = MainActivity.startSteps - previousSteps;
+                FitnessService fitnessService = GoogleFitSingleton.getFitnessService();
+                fitnessService.updateStepCount();
+                long steps = MainActivity.startSteps - previousSteps;
+
+                //long steps = MainActivity.startSteps;
+
+                //Toast.makeText(getApplicationContext(), steps + "", Toast.LENGTH_LONG).show();
+
                 routeList.get(this.currentPosition).updateSteps(steps);
                 routeList.get(this.currentPosition).updateSeconds(seconds);
-                routeList.get(this.currentPosition).updateMiles(miles);
+                //routeList.get(this.currentPosition).updateMiles(miles);
                 routeAdapter.notifyDataSetChanged();
                 Log.d("updateOldWalk", "Update the old walk.");
                 saveData();
