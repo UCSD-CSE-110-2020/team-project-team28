@@ -201,4 +201,8 @@ public class MainActivity extends AppCompatActivity {
         this.fitnessServiceKey = fitnessServiceKey;
         fitnessService = FitnessServiceFactory.create(fitnessServiceKey, this);
     }
+
+    public void updateSteps() {
+        fitnessService.updateStepCount();
+    }
 }
