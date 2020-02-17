@@ -121,7 +121,7 @@ public class WalkScreenActivity extends AppCompatActivity {
                 } catch (Exception e) {
                 }
 
-                long time = SystemClock.elapsedRealtime() - chronometer.getBase();
+                //long time = SystemClock.elapsedRealtime() - chronometer.getBase();
                 SharedPreferences sharedPreferences = getSharedPreferences("recentWalk", MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
 

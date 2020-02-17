@@ -86,7 +86,7 @@ public class RouteScreen extends AppCompatActivity {
 
                 routeList.get(this.currentPosition).updateSteps(steps);
                 routeList.get(this.currentPosition).updateSeconds(seconds);
-                routeList.get(this.currentPosition).updateMiles(miles);
+                //routeList.get(this.currentPosition).updateMiles(miles);
                 routeAdapter.notifyDataSetChanged();
                 Log.d("updateOldWalk", "Update the old walk.");
                 saveData();
