@@ -96,7 +96,7 @@ public class AddRouteTest2 {
         appCompatButton2.perform(click());
 
         ViewInteraction appCompatButton3 = onView(
-                allOf(withId(R.id.end_button), withText("End"),
+                allOf(withId(R.id.end_button), withText("END WALK"),
                         isDisplayed()));
         appCompatButton3.perform(click());
 
