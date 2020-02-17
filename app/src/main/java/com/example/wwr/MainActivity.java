@@ -87,18 +87,11 @@ public class MainActivity extends AppCompatActivity {
             heightActivity();
         }
 
-<<<<<<< HEAD
         SharedPreferences sharedPreferences = getSharedPreferences("total_inches", MODE_PRIVATE);
         this.inches = sharedPreferences.getInt("total_inch", 0);
 
 
-        startButton.setOnClickListener(new View.OnClickListener() {
-
-=======
-
-
         startButton.setOnClickListener(new View.OnClickListener(){
->>>>>>> mockSteps working + unit test
             @Override
             public void onClick(View view) {
                 try {
@@ -207,9 +200,12 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+<<<<<<< HEAD
 
     public void setFitnessServiceKey(String fitnessServiceKey) {
         this.fitnessServiceKey = fitnessServiceKey;
         fitnessService = FitnessServiceFactory.create(fitnessServiceKey, this);
     }
+=======
+>>>>>>> 2cd8eb7bbc7a2ad34113b2446674b32a50099316
 }
