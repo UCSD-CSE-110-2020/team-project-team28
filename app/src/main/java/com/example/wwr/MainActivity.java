@@ -76,9 +76,6 @@ public class MainActivity extends AppCompatActivity {
             heightActivity();
         }
 
-        SharedPreferences sharedPreferences = getSharedPreferences("total_inches", MODE_PRIVATE);
-        this.inches = sharedPreferences.getInt("total_inch", 0);
-
         startButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -87,10 +84,11 @@ public class MainActivity extends AppCompatActivity {
                     wait(1000);
                 } catch (Exception e) {
                 }
-
                 TextView steps = (TextView) findViewById(R.id.last_steps_num);
                 String step = startSteps + "";
                 steps.setText(step);
+                SharedPreferences sharedPreferences = getSharedPreferences("total_inches", MODE_PRIVATE);
+                MainActivity.inches = sharedPreferences.getInt("total_inch", 0);
                 walkActivity();
             }
         });
@@ -118,6 +116,12 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onResume() {
         super.onResume();
+        try {
+            fitnessService.updateStepCount();
+            wait(1000);
+        } catch (Exception e) {
+        }
+
         // Update the time.
         SharedPreferences sharedPreferences = getSharedPreferences("recentWalk", MODE_PRIVATE);
         Long totalTime = sharedPreferences.getLong("time", 0);

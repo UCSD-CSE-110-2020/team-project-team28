@@ -125,20 +125,35 @@ public class WalkScreenActivity extends AppCompatActivity {
                     editor.putLong("time", time);
                     editor.apply();
                 } else {
-                    long mockWalkTime = mockEndTime - mockStartTime;
+                    long mockWalkTime;
+                    String startTime;
+                    String endTime;
+                    int startTimeInt;
+                    int endTimeInt;
 
-                    String startTime = String.valueOf(mockStartTime);
-                    String endTime = String.valueOf(mockEndTime);
+                    int milTimeConversion;
 
-                    startTime = startTime.substring(0, 2);
-                    endTime = endTime.substring(0, 2);
+                    if(mockStartTime == 0) {
 
-                    int startTimeInt = Integer.parseInt(startTime);
-                    int endTimeInt = Integer.parseInt(endTime);
+                        mockWalkTime = mockEndTime;
+                        endTime = String.valueOf(mockEndTime);
+                        endTime = endTime.substring(0, 1);
+                        endTimeInt = Integer.parseInt(endTime);
+                        milTimeConversion = (endTimeInt) * 40;
+                    } else {
+                        mockWalkTime = mockEndTime - mockStartTime;
 
-                    int milTimeConversion = (endTimeInt - startTimeInt) * 40;
+                        startTime = String.valueOf(mockStartTime);
+                        endTime = String.valueOf(mockEndTime);
 
-                    // at this point we have it in minutes
+                        startTime = startTime.substring(0, 2);
+                        endTime = endTime.substring(0, 2);
+
+                        startTimeInt = Integer.parseInt(startTime);
+                        endTimeInt = Integer.parseInt(endTime);
+
+                        milTimeConversion = (endTimeInt - startTimeInt) * 40;
+                    }
                     mockWalkTime -= milTimeConversion;
                     mockWalkTime *= 60000;
                     time = mockWalkTime;

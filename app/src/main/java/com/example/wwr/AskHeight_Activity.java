@@ -70,7 +70,6 @@ public class AskHeight_Activity extends AppCompatActivity {
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             String feetInput = feet.getText().toString().trim();
             String inchInput = inches.getText().toString().trim();
-
             enter.setEnabled(!feetInput.isEmpty() && !inchInput.isEmpty());
         }
 
