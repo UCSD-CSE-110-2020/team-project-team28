@@ -1,6 +1,7 @@
 package com.example.wwr;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -24,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
     public static FitnessService fitnessService;
     public static long startSteps;
     public static long finalSteps;
+    //context for the SharedPreferences in the walkingDistanceMiles
+    public static double miles;
+    public static int inches;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,14 +38,12 @@ public class MainActivity extends AppCompatActivity {
             try {
                 fitnessService.updateStepCount();
                 wait(1000);
-                Log.d("SECOND", "DISPLAY SECOND" + this.startSteps);
             } catch (Exception e) {
             }
             Intent intent = new Intent(getApplicationContext(), WalkScreenActivity.class);
             intent.putExtra("previousScreen", "Route Detail");
             startActivity(intent);
         }
-
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -72,8 +75,13 @@ public class MainActivity extends AppCompatActivity {
         boolean firstStart = prefs.getBoolean("firstStart", true);
 
         if (firstStart) {
+            Log.d("firstLogin", "Height input because of first installation of the app.");
             heightActivity();
         }
+
+        SharedPreferences sharedPreferences = getSharedPreferences("total_inches", MODE_PRIVATE);
+        this.inches = sharedPreferences.getInt("total_inch", 0);
+
 
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
 
         TextView displayTime = (TextView) findViewById(R.id.last_time_num);
         displayTime.setText(time);
+        Log.d("updateTime", "Time has been updated.");
     }
 
     public void setStepCount(long stepCount) {
@@ -171,5 +180,10 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void setFitnessServiceKey(String fitnessServiceKey) {
+        this.fitnessServiceKey = fitnessServiceKey;
+        fitnessService = FitnessServiceFactory.create(fitnessServiceKey, this);
     }
 }

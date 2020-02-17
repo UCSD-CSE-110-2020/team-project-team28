@@ -33,6 +33,7 @@ public class WalkScreenActivity extends AppCompatActivity {
 
         if (name != null) {
             routeName.setText(name);
+            Log.d("routeNameSet", "Route name has been set");
         }
 
         Button endButton = (Button) findViewById(R.id.end_button);
@@ -43,12 +44,10 @@ public class WalkScreenActivity extends AppCompatActivity {
                 try {
                     fitnessService.setFinalStepCount();
                     wait(100000);
-                    Log.d("THIRD", "DISPLAY THIRD" + MainActivity.finalSteps);
                 } catch (Exception e) {
                 }
 
                 long time = SystemClock.elapsedRealtime() - chronometer.getBase();
-                //String time_string = chronometer.getContentDescription().toString();
                 SharedPreferences sharedPreferences = getSharedPreferences("recentWalk", MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
 
@@ -71,7 +70,6 @@ public class WalkScreenActivity extends AppCompatActivity {
                     try {
                         wait(100000);
                     } catch (Exception e) {
-
                     }
                 }
                 startActivity(intent);

@@ -47,20 +47,8 @@ public class RouteDetail extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.putExtra("route name", getIntent().getStringExtra("routeName"));
                 intent.putExtra("previousActivity", "Route Detail");
-
-                Log.d("FIRST", "DISPLAY FIRST");
-
                 startActivity(intent);
             }
         });
     }
-
-    /*
-    @Override
-    public void onResume() {
-        super.onResume();
-        Toast.makeText(getApplicationContext(), MainActivity.finalSteps - MainActivity.startSteps + "      ", Toast.LENGTH_LONG).show();
-    }
-
-     */
 }
