@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class WalkScreenActivity extends AppCompatActivity {
     private int mockStartTime;
@@ -29,11 +28,9 @@ public class WalkScreenActivity extends AppCompatActivity {
 
         Chronometer chronometer = findViewById(R.id.chronometer);
         Intent previous = getIntent();
-
         TextView routeName = findViewById(R.id.route_name);
 
         String name = previous.getStringExtra("route name");
-
         if (name != null) {
             routeName.setText(name);
             Log.d("routeNameSet", "Route name has been set");
@@ -41,51 +38,46 @@ public class WalkScreenActivity extends AppCompatActivity {
 
         Button startWalk = (Button) findViewById(R.id.startWalk);
         startWalk.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
-
                 startPressed = true;
                 chronometer.setBase(SystemClock.elapsedRealtime());
                 chronometer.start();
+                Log.d("chronometerStart", "Chronometer has been started");
             }
         });
 
         // button to grab mock time
         Button newStartTime = (Button) findViewById(R.id.submitStartTime);
-        Button newEndTime = (Button) findViewById(R.id.submitEndTime);
-
         newStartTime.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
-
                 EditText x = (EditText) findViewById(R.id.startTimeEdit);
                 String time = x.getText().toString();
                 mockStartTime = Integer.parseInt(time);
                 chronometer.stop();
+                Log.d("chronometerStop", "Chronometer has been stopped.");
             }
         });
 
+        Button newEndTime = (Button) findViewById(R.id.submitEndTime);
         newEndTime.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
-
                 EditText x = (EditText) findViewById(R.id.endTimeEdit);
                 String time = x.getText().toString();
                 mockEndTime = Integer.parseInt(time);
                 mockTotalTime = mockEndTime - mockStartTime;
+                Log.d("mockTimeCalculated", "Mock time has been calculated.");
             }
         });
-
 
         Button addSteps = (Button) findViewById(R.id.addMockSteps);
         addSteps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //MainActivity.stepMultiplier++;
-                SharedPreferences prefs = getSharedPreferences("prefs",MODE_PRIVATE);
+                SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
                 boolean firstMultiplier = prefs.getBoolean("firstMultiplier", true);
                 SharedPreferences.Editor editor = prefs.edit();
                 if (firstMultiplier) {
@@ -104,7 +96,6 @@ public class WalkScreenActivity extends AppCompatActivity {
         FitnessService fitnessService = GoogleFitSingleton.getFitnessService();
         fitnessService.updateStepCount();
 
-        //Toast.makeText(getApplicationContext(), String.valueOf(MainActivity.startSteps), Toast.LENGTH_LONG).show();
         Button endButton = (Button) findViewById(R.id.end_button);
         endButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -116,26 +107,21 @@ public class WalkScreenActivity extends AppCompatActivity {
                     editor.putLong("totalSteps", MainActivity.startSteps);
                     editor.apply();
                     fitnessService.updateStepCount();
-                    //fitnessService.setFinalStepCount();
                     wait(100000);
                 } catch (Exception e) {
                 }
 
-                //long time = SystemClock.elapsedRealtime() - chronometer.getBase();
                 SharedPreferences sharedPreferences = getSharedPreferences("recentWalk", MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
 
                 long time;
-
                 // Need to see if mock time was used, if so need to use mock time
                 if (mockTotalTime == 0) {
-
                     if (!startPressed) {
                         time = 0;
                     } else {
                         time = SystemClock.elapsedRealtime() - chronometer.getBase();
                     }
-
                     editor.putLong("time", time);
                     editor.apply();
                 } else {
@@ -151,7 +137,6 @@ public class WalkScreenActivity extends AppCompatActivity {
                     int endTimeInt = Integer.parseInt(endTime);
 
                     int milTimeConversion = (endTimeInt - startTimeInt) * 40;
-
 
                     // at this point we have it in minutes
                     mockWalkTime -= milTimeConversion;

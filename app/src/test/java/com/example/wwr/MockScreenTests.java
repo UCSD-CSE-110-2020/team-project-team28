@@ -3,20 +3,12 @@ package com.example.wwr;
 import android.content.Intent;
 import android.widget.Button;
 import android.widget.TextView;
-
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
-
-import org.apache.tools.ant.Main;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import com.example.wwr.fitness.FitnessService;
-import com.example.wwr.fitness.FitnessServiceFactory;
 import static com.google.common.truth.Truth.assertThat;
-
 
 @RunWith(AndroidJUnit4.class)
 public class MockScreenTests {

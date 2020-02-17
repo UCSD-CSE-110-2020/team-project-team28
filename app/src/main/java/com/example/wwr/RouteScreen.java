@@ -44,14 +44,12 @@ public class RouteScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_route_screen);
-
         loadData();
 
         routeScreenView = findViewById(R.id.routeScreen);
         routeScreenView.setHasFixedSize(true);
         routeLayoutManager = new LinearLayoutManager(this);
         routeAdapter = new RouteScreenAdapter(routeList, this);
-
         routeScreenView.setLayoutManager(routeLayoutManager);
         routeScreenView.setAdapter(routeAdapter);
 
@@ -64,29 +62,22 @@ public class RouteScreen extends AppCompatActivity {
 
         if (getIntent().getBooleanExtra("updateRoute", false)) {
             if (this.currentPosition < routeList.size()) {
-
-                //Toast.makeText(getApplicationContext(), "I'm here bitch", Toast.LENGTH_LONG).show();
-
                 int seconds = (int) getIntent().getLongExtra("newTime", 0) / 1000;
-                //long steps = MainActivity.finalSteps - MainActivity.startSteps;
-                //double miles = walkingDistanceMiles.getDistance(steps);
-                //
                 SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
                 long previousSteps = prefs.getLong("totalSteps", 0);
-
-                //long steps = MainActivity.finalSteps - MainActivity.startSteps;
-                //long steps = MainActivity.startSteps - previousSteps;
                 FitnessService fitnessService = GoogleFitSingleton.getFitnessService();
                 fitnessService.updateStepCount();
                 long steps = MainActivity.startSteps - previousSteps;
-
-                //long steps = MainActivity.startSteps;
-
-                //Toast.makeText(getApplicationContext(), steps + "", Toast.LENGTH_LONG).show();
+                double miles = walkingDistanceMiles.getDistance(steps);
 
                 routeList.get(this.currentPosition).updateSteps(steps);
                 routeList.get(this.currentPosition).updateSeconds(seconds);
-                //routeList.get(this.currentPosition).updateMiles(miles);
+                routeList.get(this.currentPosition).updateMiles(miles);
+
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putString("last intentional steps", String.format("%.2f", miles));
+                editor.apply();
+
                 routeAdapter.notifyDataSetChanged();
                 Log.d("updateOldWalk", "Update the old walk.");
                 saveData();

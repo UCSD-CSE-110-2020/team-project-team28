@@ -1,7 +1,6 @@
 package com.example.wwr;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,9 +9,8 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.content.SharedPreferences;
-import android.widget.Toast;
-
 import com.google.gson.Gson;
+import java.text.DecimalFormat;
 
 public class RoutesActivity extends AppCompatActivity {
     private final String EMPTY_STRING = "";
@@ -40,7 +38,6 @@ public class RoutesActivity extends AppCompatActivity {
         routeName.setText(EMPTY_STRING);
         startLocation.setText(EMPTY_STRING);
         notes.setText(EMPTY_STRING);
-
 
         Button ok_button = findViewById(R.id.button_ok);
         ok_button.setOnClickListener(new View.OnClickListener(){
@@ -98,21 +95,26 @@ public class RoutesActivity extends AppCompatActivity {
 
         Gson gson = new Gson();
 
-        //long steps = MainActivity.finalSteps - MainActivity.startSteps;
         SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor1 = prefs.edit();
         long previousSteps = prefs.getLong("totalSteps", 0);
-        //long steps = MainActivity.finalSteps - MainActivity.startSteps;
         long steps = MainActivity.startSteps - previousSteps;
         long seconds = (int) getIntent().getLongExtra("newTime", 0) / 1000;
 
         if (getIntent().getBooleanExtra("addNewRoute", false)) {
             steps = 0;
         }
+
         double miles = this.walkingDistanceMiles.getDistance(steps);
+        String strMiles = new DecimalFormat("#.##").format(miles);
+        Double formattedMiles = Double.valueOf(strMiles);
+        //String milesString = String.format("%.2f", miles);
+        editor1.putString("last intentional steps", strMiles);
+        editor1.apply();
 
         if (!routeName.getText().toString().equals(EMPTY_STRING) ) {
             RouteScreen.addToRouteList(routeName.getText().toString(),
-                    startLocation.getText().toString(), steps, miles, seconds, flatOrHilly,
+                    startLocation.getText().toString(), steps, formattedMiles, seconds, flatOrHilly,
                     loopOrOut, streetOrTrail, surface, difficulty,
                     notes.getText().toString(), false);
 
