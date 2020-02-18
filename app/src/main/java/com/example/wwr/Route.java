@@ -1,43 +1,45 @@
 package com.example.wwr;
 
 public class Route {
-
     private String name;
     private String startLocation;
-    private int totalSteps;
+    private long totalSteps;
     private double totalMiles;
-    private int totalMinutes;
+    private long totalSeconds;
+    private String flatOrHilly;
+    private String loopOrOut;
+    private String streetOrTrail;
+    private String surface;
+    private String difficulty;
     private String note;
     private boolean isFavorite;
     private int image;
 
-    Route (String name, String startLocation, int totalSteps, double totalMiles, int totalMinutes,
-           String note, boolean isFavorite, int image) {
+    Route (String name, String startLocation, long totalSteps, double totalMiles, long totalSeconds,
+           String flatOrHilly, String loopOrOut, String streetOrTrail, String surface,
+           String difficulty, String note, boolean isFavorite, int image) {
         this.name = name;
         this.startLocation = startLocation;
-
-        this.totalSteps = totalSteps; //
+        this.totalSteps = totalSteps;
         this.totalMiles = totalMiles;
-        this.totalMinutes = totalMinutes;
+        this.totalSeconds = totalSeconds;
+        this.flatOrHilly = flatOrHilly;
+        this.loopOrOut = loopOrOut;
+        this.streetOrTrail = streetOrTrail;
+        this.surface = surface;
+        this.difficulty = difficulty;
+        this.surface = surface;
         this.note = note;
         this.isFavorite = isFavorite;
         this.image = image;
     }
 
-    public void updateRouteName(String name) {
-        this.name = name;
-    }
-
-    public void updateStartLocation(String startLocation) {
-        this.startLocation = startLocation;
-    }
-
-    public void updateSteps(int steps) {
+    public void updateSteps(long steps) {
         this.totalSteps = steps;
     }
 
-    public void updateMinutes(int minutes) {
-        this.totalMinutes = minutes;
+    public void updateSeconds(long seconds) {
+        this.totalSeconds = seconds;
     }
 
     public void updateMiles(double miles) {
@@ -52,21 +54,31 @@ public class Route {
         return this.startLocation;
     }
 
-    public int getSteps() {
+    public long getSteps() {
         return this.totalSteps;
     }
 
-    public double getMiles() {
+    public double getTotalMiles() {
         return this.totalMiles;
     }
 
-    public int getTotalMinutes() {
-        return this.totalMinutes;
+    public long getTotalSeconds() {
+        return this.totalSeconds;
     }
 
     public int getImage() {
         return this.image;
     }
+
+    public String getFlatOrHilly() { return this.flatOrHilly; }
+
+    public String getLoopOrOut() { return this.loopOrOut; }
+
+    public String getStreetOrTrail() { return this.streetOrTrail; }
+
+    public String getSurface() { return this.surface; }
+
+    public String getDifficulty() { return this.difficulty; }
 
     public String getNote() {
         return note;

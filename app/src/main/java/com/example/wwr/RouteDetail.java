@@ -1,14 +1,15 @@
 package com.example.wwr;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import org.w3c.dom.Text;
+import com.example.wwr.fitness.FitnessService;
 
 public class RouteDetail extends AppCompatActivity {
     TextView name;
@@ -16,6 +17,7 @@ public class RouteDetail extends AppCompatActivity {
     TextView timeTaken;
     TextView steps;
     TextView distance;
+    TextView features;
     TextView note;
 
     @Override
@@ -27,6 +29,7 @@ public class RouteDetail extends AppCompatActivity {
         timeTaken = (TextView) findViewById(R.id.route_detail_time_taken);
         steps = (TextView) findViewById(R.id.route_detail_steps);
         distance = (TextView) findViewById(R.id.route_detail_distance);
+        features = (TextView) findViewById(R.id.route_detail_features);
         note = (TextView) findViewById(R.id.route_detail_note);
 
         name.setText(getIntent().getStringExtra("routeName"));
@@ -34,16 +37,19 @@ public class RouteDetail extends AppCompatActivity {
         timeTaken.setText(getIntent().getStringExtra("timeTaken"));
         steps.setText(getIntent().getStringExtra("steps"));
         distance.setText(getIntent().getStringExtra("distance"));
+        features.setText(getIntent().getStringExtra("features"));
         note.setText(getIntent().getStringExtra("note"));
 
-        Button routeInfo = (Button) findViewById(R.id.route_info_start_button);
-        routeInfo.setOnClickListener(new View.OnClickListener() {
+        Button startFromExistingRoute = (Button) findViewById(R.id.route_info_start_button);
+        startFromExistingRoute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), WalkScreenActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.putExtra("route name", getIntent().getStringExtra("routeName"));
+                intent.putExtra("previousActivity", "Route Detail");
+                Log.d("restartWalk", "Restart existing walk.");
                 startActivity(intent);
             }
         });
-
     }
 }
