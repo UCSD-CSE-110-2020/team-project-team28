@@ -6,15 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-
-import static androidx.core.content.ContextCompat.startActivity;
 
 public class RouteScreenAdapter extends RecyclerView.Adapter<RouteScreenAdapter.RouteScreenViewHolder> {
     private ArrayList<Route> routeList;
@@ -28,13 +25,13 @@ public class RouteScreenAdapter extends RecyclerView.Adapter<RouteScreenAdapter.
     public static class RouteScreenViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener  {
         public ImageView image;
         public TextView routeName;
-        public TextView mText2;
-        public TextView mText3;
-        public TextView mText4;
+        public TextView startingPoint;
+        public TextView totalTime;
+        public TextView totalSteps;
+        public TextView totalDistance;
 
         ArrayList<Route> routeList;
         Context context;
-
 
         public RouteScreenViewHolder(View view, Context context, ArrayList<Route> routeList) {
             super(view);
@@ -44,10 +41,10 @@ public class RouteScreenAdapter extends RecyclerView.Adapter<RouteScreenAdapter.
             view.setOnClickListener(this);
             image = view.findViewById(R.id.favorite);
             routeName = view.findViewById(R.id.route_name);
-            mText2 = view.findViewById(R.id.text2);
-            mText3 = view.findViewById(R.id.text3);
-            mText4 = view.findViewById(R.id.text4);
-
+            startingPoint = view.findViewById(R.id.startingPoint);
+            totalTime = view.findViewById(R.id.totalTime);
+            totalSteps = view.findViewById(R.id.totalSteps);
+            totalDistance = view.findViewById(R.id.totalDistance);
         }
 
         @Override
@@ -55,13 +52,17 @@ public class RouteScreenAdapter extends RecyclerView.Adapter<RouteScreenAdapter.
             int position = getAdapterPosition();
             Route currentRoute = routeList.get(position);
             Intent intent = new Intent(this.context, RouteDetail.class);
+
             intent.putExtra("routeName", "Route Name: " + currentRoute.getName());
             intent.putExtra("startLocation", "Start Location: " + currentRoute.getStartLocation());
-            intent.putExtra("timeTaken", "Time Taken: " + Integer.toString(currentRoute.getTotalMinutes()));
-            intent.putExtra("steps", "Steps: " + Integer.toString(currentRoute.getSteps()));
-            intent.putExtra("distance", "Distance: " + Double.toString(currentRoute.getTotalMinutes()));
+            intent.putExtra("timeTaken", "Seconds Taken: " + (currentRoute.getTotalSeconds()));
+            intent.putExtra("steps", "Steps: " + (currentRoute.getSteps()));
+            intent.putExtra("distance", "Distance: " + (currentRoute.getTotalMiles()));
+            intent.putExtra("features", "Features: \n" + currentRoute.getFlatOrHilly()
+                    + "\n" + currentRoute.getLoopOrOut() + "\n" + currentRoute.getStreetOrTrail() +
+                    "\n" + currentRoute.getSurface() + "\n" + currentRoute.getDifficulty());
             intent.putExtra("note", "Notes: " + currentRoute.getNote());
-
+            RouteScreen.setCurrentPosition(position);
             this.context.startActivity(intent);
         }
     }
@@ -81,14 +82,15 @@ public class RouteScreenAdapter extends RecyclerView.Adapter<RouteScreenAdapter.
 
         holder.image.setImageResource(currentRoute.getImage());
         holder.routeName.setText(currentRoute.getName());
-        holder.mText2.setText(currentRoute.getStartLocation());
-        holder.mText3.setText(Integer.toString(currentRoute.getSteps()));
-        holder.mText4.setText(Double.toString(currentRoute.getMiles()));
-
+        holder.startingPoint.setText("Starting Location: " + currentRoute.getStartLocation());
+        holder.totalTime.setText("Total Time: " + currentRoute.getTotalSeconds() + "s");
+        holder.totalSteps.setText("Total Steps: " + currentRoute.getSteps() + " steps");
+        holder.totalDistance.setText("Total Distance: " + currentRoute.getTotalMiles() + " miles");
     }
 
     @Override
     public int getItemCount() {
         return routeList.size();
     }
+
 }
