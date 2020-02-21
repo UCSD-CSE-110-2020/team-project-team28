@@ -43,7 +43,7 @@ public class AddRouteFromWalkScreenTest {
     private static final String TEST_SERVICE = "TEST_SERVICE";
 
     @Rule
-    public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
+    public ActivityTestRule<LogInActivity> mActivityTestRule = new ActivityTestRule<>(LogInActivity.class);
 
     @Before
     public void start() {
@@ -69,6 +69,11 @@ public class AddRouteFromWalkScreenTest {
         });
 
        mActivityTestRule.getActivity().setFitnessServiceKey(TEST_SERVICE);
+
+        ViewInteraction appCompatButton100 = onView(
+                allOf(withId(R.id.startWWRButton),
+                        isDisplayed()));
+        appCompatButton100.perform(click());
 
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.feet_input),
@@ -156,7 +161,7 @@ public class AddRouteFromWalkScreenTest {
         @Override
         public void updateStepCount() {
             System.out.println(TAG + "updateStepCount");
-            //stepCountActivity.setStepCount(1337);
+            stepCountActivity.setStepCount(1337);
         }
 
         @Override

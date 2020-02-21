@@ -108,7 +108,6 @@ public class RoutesActivity extends AppCompatActivity {
         double miles = this.walkingDistanceMiles.getDistance(steps);
         String strMiles = new DecimalFormat("#.##").format(miles);
         Double formattedMiles = Double.valueOf(strMiles);
-        //String milesString = String.format("%.2f", miles);
         editor1.putString("last intentional steps", strMiles);
         editor1.apply();
 

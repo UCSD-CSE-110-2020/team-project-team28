@@ -44,7 +44,7 @@ public class RouteDetail extends AppCompatActivity {
         startFromExistingRoute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), LogInActivity.class);
                 intent.putExtra("route name", getIntent().getStringExtra("routeName"));
                 intent.putExtra("previousActivity", "Route Detail");
                 Log.d("restartWalk", "Restart existing walk.");

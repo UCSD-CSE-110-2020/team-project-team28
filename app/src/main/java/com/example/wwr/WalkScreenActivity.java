@@ -15,8 +15,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class WalkScreenActivity extends AppCompatActivity {
-    private int mockStartTime;
-    private int mockEndTime;
+    private String mockStartTime;
+    private String mockEndTime;
     private int mockTotalTime = 0;
     private boolean startPressed = false;
     @Override
@@ -54,7 +54,7 @@ public class WalkScreenActivity extends AppCompatActivity {
             public void onClick(View view) {
                 EditText x = (EditText) findViewById(R.id.startTimeEdit);
                 String time = x.getText().toString();
-                mockStartTime = Integer.parseInt(time);
+                mockStartTime = time;
                 chronometer.stop();
                 Log.d("chronometerStop", "Chronometer has been stopped.");
             }
@@ -66,8 +66,8 @@ public class WalkScreenActivity extends AppCompatActivity {
             public void onClick(View view) {
                 EditText x = (EditText) findViewById(R.id.endTimeEdit);
                 String time = x.getText().toString();
-                mockEndTime = Integer.parseInt(time);
-                mockTotalTime = mockEndTime - mockStartTime;
+                mockEndTime = time;
+                mockTotalTime = Integer.parseInt(mockEndTime) - Integer.parseInt(mockStartTime);
                 Log.d("mockTimeCalculated", "Mock time has been calculated.");
             }
         });
@@ -76,7 +76,6 @@ public class WalkScreenActivity extends AppCompatActivity {
         addSteps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //MainActivity.stepMultiplier++;
                 SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
                 boolean firstMultiplier = prefs.getBoolean("firstMultiplier", true);
                 SharedPreferences.Editor editor = prefs.edit();
@@ -125,25 +124,24 @@ public class WalkScreenActivity extends AppCompatActivity {
                     editor.putLong("time", time);
                     editor.apply();
                 } else {
-                    long mockWalkTime = mockEndTime - mockStartTime;
+                  int beginTotal = Integer.parseInt(mockStartTime);
+                  int endTotal = Integer.parseInt(mockEndTime);
 
-                    String startTime = String.valueOf(mockStartTime);
-                    String endTime = String.valueOf(mockEndTime);
+                  int beginMinutes = beginTotal % 100;
+                  int endMinutes = endTotal % 100;
 
-                    startTime = startTime.substring(0, 2);
-                    endTime = endTime.substring(0, 2);
+                  int beginHours = (beginTotal - beginMinutes) / 100;
+                  int endHours = (endTotal - endMinutes) / 100;
 
-                    int startTimeInt = Integer.parseInt(startTime);
-                    int endTimeInt = Integer.parseInt(endTime);
+                  int hourDifference = (endHours - beginHours) * 3600;
+                  int minDifference = (endMinutes - beginMinutes) * 60;
 
-                    int milTimeConversion = (endTimeInt - startTimeInt) * 40;
+                  int totalSeconds =  hourDifference + minDifference;
+                  totalSeconds = (totalSeconds < 0) ? (totalSeconds + (24*3600)) : totalSeconds;
+                  time = (long)totalSeconds * 1000;
 
-                    // at this point we have it in minutes
-                    mockWalkTime -= milTimeConversion;
-                    mockWalkTime *= 60000;
-                    time = mockWalkTime;
-                    editor.putLong("time", mockWalkTime);
-                    editor.apply();
+                  editor.putLong("time", time);
+                  editor.apply();
                 }
 
                 String previousString = "";

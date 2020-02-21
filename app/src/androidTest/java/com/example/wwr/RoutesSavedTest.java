@@ -43,16 +43,13 @@ import static org.hamcrest.Matchers.is;
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class RoutesSavedTest {
-
     private static final String TEST_SERVICE = "TEST_SERVICE";
 
     @Rule
-    public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class, false, false);
+    public ActivityTestRule<LogInActivity> mActivityTestRule = new ActivityTestRule<>(LogInActivity.class);
 
+    @Before
     public void start() {
-        Intent intent = new Intent();
-        mActivityTestRule.launchActivity(intent);
-
         Activity activity = mActivityTestRule.getActivity();
         SharedPreferences prefs = activity.getSharedPreferences("shared preferences", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
@@ -61,16 +58,12 @@ public class RoutesSavedTest {
 
         prefs = activity.getSharedPreferences("prefs", Context.MODE_PRIVATE);
         editor =prefs.edit();
-        //editor.clear();
-        editor.putBoolean("firstStart",false);
+        editor.clear();
         editor.apply();
     }
+
     @Test
     public void routesSavedTest() {
-
-        start();
-
-
         FitnessServiceFactory.put(TEST_SERVICE, new FitnessServiceFactory.BluePrint() {
             @Override
             public FitnessService create(MainActivity stepCountActivity) {
@@ -79,13 +72,15 @@ public class RoutesSavedTest {
         });
 
         mActivityTestRule.getActivity().setFitnessServiceKey(TEST_SERVICE);
-        /*ViewInteraction appCompatEditText = onView(
+
+        ViewInteraction appCompatButton100 = onView(
+                allOf(withId(R.id.startWWRButton),
+                        isDisplayed()));
+        appCompatButton100.perform(click());
+
+
+        ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.feet_input),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                2),
                         isDisplayed()));
         appCompatEditText.perform(replaceText("5"), closeSoftKeyboard());
         ViewInteraction appCompatEditText2 = onView(
@@ -105,7 +100,7 @@ public class RoutesSavedTest {
                                         1),
                                 4),
                         isDisplayed()));
-        appCompatButton.perform(click()); */
+        appCompatButton.perform(click());
 
         ViewInteraction appCompatButton2 = onView(
                 allOf(withId(R.id.dailyActivityToRoutes), withText("ROUTES"),
@@ -221,17 +216,6 @@ public class RoutesSavedTest {
                         isDisplayed()));
         appCompatRadioButton3.perform(click());
 
-        /*ViewInteraction appCompatRadioButton4 = onView(
-                allOf(withId(R.id.radio_uneven), withText("Uneven Surface"),
-                        childAtPosition(
-                                allOf(withId(R.id.groupSurface),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
-                                                6)),
-                                2),
-                        isDisplayed()));
-        appCompatRadioButton4.perform(click());*/
-
         ViewInteraction appCompatRadioButton5 = onView(
                 allOf(withId(R.id.radio_trail), withText("Trail"),
                         childAtPosition(
@@ -284,71 +268,6 @@ public class RoutesSavedTest {
                         isDisplayed()));
         appCompatButton7.perform(click());
 
-
-        // close app
-        //mActivityTestRule.getActivity().finish();
-        //mActivityTestRule.getActivity().launch();
-
-        //mActivityTestRule.finishActivity();
-
-    }
-
-
-
-    @Test
-    public void routesSavedTest2() {
-        Intent intent2 = new Intent();
-        mActivityTestRule.launchActivity(intent2);
-
-
-        ViewInteraction appCompatButton8 = onView(
-                allOf(withId(R.id.dailyActivityToRoutes), withText("ROUTES"),
-                        childAtPosition(
-                                allOf(withId(R.id.include),
-                                        childAtPosition(
-                                                withId(R.id.coordinatorLayout),
-                                                1)),
-                                0),
-                        isDisplayed()));
-        appCompatButton8.perform(click());
-
-        ViewInteraction textView = onView(
-                allOf(withId(R.id.route_name), withText("Hike"),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.FrameLayout.class),
-                                        0),
-                                1),
-                        isDisplayed()));
-        textView.check(matches(withText("Hike")));
-
-        ViewInteraction relativeLayout = onView(
-                allOf(childAtPosition(
-                        childAtPosition(
-                                withId(R.id.routeScreen),
-                                0),
-                        0),
-                        isDisplayed()));
-        relativeLayout.check(matches(isDisplayed()));
-
-        ViewInteraction relativeLayout2 = onView(
-                allOf(childAtPosition(
-                        childAtPosition(
-                                withId(R.id.routeScreen),
-                                1),
-                        0),
-                        isDisplayed()));
-        relativeLayout2.check(matches(isDisplayed()));
-
-        ViewInteraction textView2 = onView(
-                allOf(withId(R.id.route_name), withText("Mountain Trail"),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.FrameLayout.class),
-                                        0),
-                                1),
-                        isDisplayed()));
-        textView2.check(matches(withText("Mountain Trail")));
     }
 
     private static Matcher<View> childAtPosition(
@@ -371,7 +290,6 @@ public class RoutesSavedTest {
 
     }
 
-
     private class TestFitnessService implements FitnessService {
         private static final String TAG = "[TestFitnessService]: ";
         private MainActivity stepCountActivity;
@@ -393,7 +311,6 @@ public class RoutesSavedTest {
         @Override
         public void updateStepCount() {
             System.out.println(TAG + "updateStepCount");
-            //stepCountActivity.setStepCount(1337);
         }
 
         @Override
