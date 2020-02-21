@@ -89,11 +89,6 @@ public class Scenario3Test {
 
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.enter_button), withText("CONFIRM"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                4),
                         isDisplayed()));
         appCompatButton.perform(click());
 
@@ -110,203 +105,101 @@ public class Scenario3Test {
 
         ViewInteraction appCompatEditText3 = onView(
                 allOf(withId(R.id.startTimeEdit), withText("0000"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                7),
                         isDisplayed()));
         appCompatEditText3.perform(replaceText("1200"));
 
         ViewInteraction appCompatEditText4 = onView(
                 allOf(withId(R.id.startTimeEdit), withText("1200"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                7),
                         isDisplayed()));
         appCompatEditText4.perform(closeSoftKeyboard());
 
         ViewInteraction appCompatButton3 = onView(
                 allOf(withId(R.id.submitStartTime), withText("Submit"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                10),
                         isDisplayed()));
         appCompatButton3.perform(click());
 
         ViewInteraction appCompatButton4 = onView(
                 allOf(withId(R.id.startWalk), withText("Start walk"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                12),
                         isDisplayed()));
         appCompatButton4.perform(click());
 
         ViewInteraction appCompatButton5 = onView(
                 allOf(withId(R.id.addMockSteps), withText("AddSteps"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                5),
                         isDisplayed()));
         appCompatButton5.perform(click());
 
         ViewInteraction appCompatButton6 = onView(
                 allOf(withId(R.id.addMockSteps), withText("AddSteps"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                5),
                         isDisplayed()));
         appCompatButton6.perform(click());
 
         ViewInteraction appCompatButton7 = onView(
                 allOf(withId(R.id.addMockSteps), withText("AddSteps"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                5),
                         isDisplayed()));
         appCompatButton7.perform(click());
 
         ViewInteraction appCompatButton8 = onView(
                 allOf(withId(R.id.addMockSteps), withText("AddSteps"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                5),
                         isDisplayed()));
         appCompatButton8.perform(click());
 
         ViewInteraction appCompatButton9 = onView(
                 allOf(withId(R.id.addMockSteps), withText("AddSteps"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                5),
                         isDisplayed()));
         appCompatButton9.perform(click());
 
         ViewInteraction appCompatEditText5 = onView(
                 allOf(withId(R.id.endTimeEdit), withText("0000"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                9),
                         isDisplayed()));
         appCompatEditText5.perform(replaceText("1300"));
 
         ViewInteraction appCompatEditText6 = onView(
                 allOf(withId(R.id.endTimeEdit), withText("1300"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                9),
                         isDisplayed()));
         appCompatEditText6.perform(closeSoftKeyboard());
 
         ViewInteraction appCompatButton10 = onView(
                 allOf(withId(R.id.submitEndTime), withText("Submit"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                11),
                         isDisplayed()));
         appCompatButton10.perform(click());
 
         ViewInteraction appCompatButton11 = onView(
                 allOf(withId(R.id.end_button), withText("End walk"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                0),
                         isDisplayed()));
         appCompatButton11.perform(click());
 
         ViewInteraction appCompatEditText7 = onView(
                 allOf(withId(R.id.routeNamePage),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                1),
                         isDisplayed()));
         appCompatEditText7.perform(replaceText("Mission Hills"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText8 = onView(
                 allOf(withId(R.id.startLocationName),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                2),
                         isDisplayed()));
         appCompatEditText8.perform(replaceText("Washington and Hawk"), closeSoftKeyboard());
 
         ViewInteraction appCompatRadioButton = onView(
                 allOf(withId(R.id.radio_flat), withText("Flat"),
-                        childAtPosition(
-                                allOf(withId(R.id.groupFlat),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
-                                                3)),
-                                2),
                         isDisplayed()));
         appCompatRadioButton.perform(click());
 
         ViewInteraction appCompatRadioButton2 = onView(
                 allOf(withId(R.id.radio_moderate), withText("Moderate"),
-                        childAtPosition(
-                                allOf(withId(R.id.groupDifficulty),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
-                                                7)),
-                                2),
                         isDisplayed()));
         appCompatRadioButton2.perform(click());
 
         ViewInteraction appCompatEditText9 = onView(
                 allOf(withId(R.id.routeNotes),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                8),
                         isDisplayed()));
         appCompatEditText9.perform(replaceText("Historic houses. Park on Hawk."), closeSoftKeyboard());
 
         ViewInteraction appCompatButton12 = onView(
                 allOf(withId(R.id.button_ok), withText("OK"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                9),
                         isDisplayed()));
         appCompatButton12.perform(click());
 
         ViewInteraction textView = onView(
                 allOf(withId(R.id.route_name), withText("Mission Hills"),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.FrameLayout.class),
-                                        0),
-                                1),
                         isDisplayed()));
         textView.check(matches(withText("Mission Hills")));
 

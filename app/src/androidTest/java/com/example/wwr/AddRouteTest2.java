@@ -118,11 +118,6 @@ public class AddRouteTest2 {
 
         ViewInteraction appCompatButton4 = onView(
                 allOf(withId(R.id.button_ok), withText("OK"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                9),
                         isDisplayed()));
         appCompatButton4.perform(click());
 
@@ -138,23 +133,11 @@ public class AddRouteTest2 {
 
         ViewInteraction textView = onView(
                 allOf(withId(R.id.route_detail_title), withText("Route Name: Walk"),
-                        childAtPosition(
-                                allOf(withId(R.id.route_information_page),
-                                        childAtPosition(
-                                                IsInstanceOf.<View>instanceOf(android.widget.RelativeLayout.class),
-                                                0)),
-                                0),
                         isDisplayed()));
         textView.check(matches(withText("Route Name: Walk")));
 
         ViewInteraction textView2 = onView(
                 allOf(withId(R.id.route_detail_start_location), withText("Start Location: Home"),
-                        childAtPosition(
-                                allOf(withId(R.id.route_information_page),
-                                        childAtPosition(
-                                                IsInstanceOf.<View>instanceOf(android.widget.RelativeLayout.class),
-                                                0)),
-                                1),
                         isDisplayed()));
         textView2.check(matches(withText("Start Location: Home")));
     }

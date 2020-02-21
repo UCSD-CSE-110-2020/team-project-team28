@@ -77,7 +77,6 @@ public class HeightActivityTest {
                         isDisplayed()));
         appCompatButton100.perform(click());
 
-
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.feet_input),
                         isDisplayed()));

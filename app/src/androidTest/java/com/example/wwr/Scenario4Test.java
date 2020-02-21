@@ -120,12 +120,6 @@ public class Scenario4Test {
                 allOf(withId(R.id.route_name), withText("Park Run"),
                         isDisplayed()));
         textView.check(matches(withText("Park Run")));
-
-        /*ViewInteraction relativeLayout = onView(
-                allOf(isDisplayed()));
-        relativeLayout.check(matches(isDisplayed()));
-
-         */
     }
 
     private static Matcher<View> childAtPosition(

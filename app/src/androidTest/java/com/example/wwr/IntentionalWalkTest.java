@@ -70,192 +70,96 @@ public class IntentionalWalkTest {
         mActivityTestRule.getActivity().setFitnessServiceKey(TEST_SERVICE);
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.startWWRButton), withText("Start wwr!"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                0),
                         isDisplayed()));
         appCompatButton.perform(click());
 
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.feet_input),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                0),
                         isDisplayed()));
         appCompatEditText.perform(replaceText("5"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.inches_input),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                3),
                         isDisplayed()));
         appCompatEditText2.perform(replaceText("5"), closeSoftKeyboard());
 
         ViewInteraction appCompatButton2 = onView(
                 allOf(withId(R.id.enter_button), withText("CONFIRM"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                4),
                         isDisplayed()));
         appCompatButton2.perform(click());
 
         ViewInteraction appCompatButton3 = onView(
                 allOf(withId(R.id.start_button), withText("START"),
-                        childAtPosition(
-                                allOf(withId(R.id.include),
-                                        childAtPosition(
-                                                withId(R.id.coordinatorLayout),
-                                                1)),
-                                1),
                         isDisplayed()));
         appCompatButton3.perform(click());
 
         ViewInteraction appCompatEditText3 = onView(
                 allOf(withId(R.id.startTimeEdit), withText("0000"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                7),
                         isDisplayed()));
         appCompatEditText3.perform(replaceText("1200"));
 
         ViewInteraction appCompatEditText4 = onView(
                 allOf(withId(R.id.startTimeEdit), withText("1200"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                7),
                         isDisplayed()));
         appCompatEditText4.perform(closeSoftKeyboard());
 
         ViewInteraction appCompatButton4 = onView(
                 allOf(withId(R.id.submitStartTime), withText("Submit"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                10),
                         isDisplayed()));
         appCompatButton4.perform(click());
 
         ViewInteraction appCompatButton5 = onView(
                 allOf(withId(R.id.startWalk), withText("Start walk"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                12),
                         isDisplayed()));
         appCompatButton5.perform(click());
 
         ViewInteraction appCompatButton6 = onView(
                 allOf(withId(R.id.addMockSteps), withText("AddSteps"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                5),
                         isDisplayed()));
         appCompatButton6.perform(click());
 
         ViewInteraction appCompatButton7 = onView(
                 allOf(withId(R.id.addMockSteps), withText("AddSteps"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                5),
                         isDisplayed()));
         appCompatButton7.perform(click());
 
         ViewInteraction appCompatButton8 = onView(
                 allOf(withId(R.id.addMockSteps), withText("AddSteps"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                5),
                         isDisplayed()));
         appCompatButton8.perform(click());
 
         ViewInteraction appCompatEditText5 = onView(
                 allOf(withId(R.id.endTimeEdit), withText("0000"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                9),
                         isDisplayed()));
         appCompatEditText5.perform(replaceText("1300"));
 
         ViewInteraction appCompatEditText6 = onView(
                 allOf(withId(R.id.endTimeEdit), withText("1300"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                9),
                         isDisplayed()));
         appCompatEditText6.perform(closeSoftKeyboard());
 
         ViewInteraction appCompatButton9 = onView(
                 allOf(withId(R.id.submitEndTime), withText("Submit"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                11),
                         isDisplayed()));
         appCompatButton9.perform(click());
 
         ViewInteraction appCompatButton10 = onView(
                 allOf(withId(R.id.end_button), withText("End walk"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                0),
                         isDisplayed()));
         appCompatButton10.perform(click());
 
         ViewInteraction appCompatEditText7 = onView(
                 allOf(withId(R.id.routeNamePage),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                1),
                         isDisplayed()));
         appCompatEditText7.perform(replaceText("Home"), closeSoftKeyboard());
 
         ViewInteraction appCompatButton11 = onView(
                 allOf(withId(R.id.button_ok), withText("OK"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                9),
                         isDisplayed()));
         appCompatButton11.perform(click());
 
         ViewInteraction appCompatButton12 = onView(
                 allOf(withId(R.id.backToMainMenuButton), withText("Go Back To Main Menu"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                1),
                         isDisplayed()));
         appCompatButton12.perform(click());
 
