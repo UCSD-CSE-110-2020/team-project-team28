@@ -43,11 +43,10 @@ import static org.hamcrest.Matchers.is;
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class Scenario5Test {
-
     private static final String TEST_SERVICE = "TEST_SERVICE";
 
     @Rule
-    public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class, false, false);
+    public ActivityTestRule<LogInActivity> mActivityTestRule = new ActivityTestRule<>(LogInActivity.class, false, false);
 
     public void start() {
         Intent intent = new Intent();
@@ -61,16 +60,13 @@ public class Scenario5Test {
 
         prefs = activity.getSharedPreferences("prefs", Context.MODE_PRIVATE);
         editor =prefs.edit();
-        //editor.clear();
-        editor.putBoolean("firstStart",false);
+        editor.clear();
         editor.apply();
     }
+
     @Test
     public void scenario5Test() {
-
         start();
-
-
         FitnessServiceFactory.put(TEST_SERVICE, new FitnessServiceFactory.BluePrint() {
             @Override
             public FitnessService create(MainActivity stepCountActivity) {
@@ -79,24 +75,22 @@ public class Scenario5Test {
         });
 
         mActivityTestRule.getActivity().setFitnessServiceKey(TEST_SERVICE);
-        /*ViewInteraction appCompatEditText = onView(
+
+        ViewInteraction appCompatButton100 = onView(
+                allOf(withId(R.id.startWWRButton),
+                        isDisplayed()));
+        appCompatButton100.perform(click());
+
+        ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.feet_input),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                2),
                         isDisplayed()));
         appCompatEditText.perform(replaceText("5"), closeSoftKeyboard());
+
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.inches_input),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                3),
                         isDisplayed()));
         appCompatEditText2.perform(replaceText("4"), closeSoftKeyboard());
+
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.enter_button), withText("CONFIRM"),
                         childAtPosition(
@@ -105,7 +99,7 @@ public class Scenario5Test {
                                         1),
                                 4),
                         isDisplayed()));
-        appCompatButton.perform(click()); */
+        appCompatButton.perform(click());
 
         ViewInteraction appCompatButton2 = onView(
                 allOf(withId(R.id.dailyActivityToRoutes), withText("ROUTES"),
@@ -221,17 +215,6 @@ public class Scenario5Test {
                         isDisplayed()));
         appCompatRadioButton3.perform(click());
 
-        /*ViewInteraction appCompatRadioButton4 = onView(
-                allOf(withId(R.id.radio_uneven), withText("Uneven Surface"),
-                        childAtPosition(
-                                allOf(withId(R.id.groupSurface),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
-                                                6)),
-                                2),
-                        isDisplayed()));
-        appCompatRadioButton4.perform(click());*/
-
         ViewInteraction appCompatRadioButton5 = onView(
                 allOf(withId(R.id.radio_trail), withText("Trail"),
                         childAtPosition(
@@ -283,23 +266,28 @@ public class Scenario5Test {
                                 1),
                         isDisplayed()));
         appCompatButton7.perform(click());
-
-
-        // close app
-        //mActivityTestRule.getActivity().finish();
-        //mActivityTestRule.getActivity().launch();
-
-        //mActivityTestRule.finishActivity();
-
     }
 
 
 
     @Test
     public void scenario5Test2() {
-        Intent intent2 = new Intent();
-        mActivityTestRule.launchActivity(intent2);
+        Intent intent = new Intent();
+        mActivityTestRule.launchActivity(intent);
 
+        FitnessServiceFactory.put(TEST_SERVICE, new FitnessServiceFactory.BluePrint() {
+            @Override
+            public FitnessService create(MainActivity stepCountActivity) {
+                return new Scenario5Test.TestFitnessService(stepCountActivity);
+            }
+        });
+
+        mActivityTestRule.getActivity().setFitnessServiceKey(TEST_SERVICE);
+
+        ViewInteraction appCompatButton100 = onView(
+                allOf(withId(R.id.startWWRButton),
+                        isDisplayed()));
+        appCompatButton100.perform(click());
 
         ViewInteraction appCompatButton8 = onView(
                 allOf(withId(R.id.dailyActivityToRoutes), withText("ROUTES"),
@@ -368,9 +356,7 @@ public class Scenario5Test {
                         && view.equals(((ViewGroup) parent).getChildAt(position));
             }
         };
-
     }
-
 
     private class TestFitnessService implements FitnessService {
         private static final String TAG = "[TestFitnessService]: ";

@@ -41,18 +41,13 @@ import static org.hamcrest.Matchers.is;
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class Scenario3Test {
-
     private static final String TEST_SERVICE = "TEST_SERVICE";
 
     @Rule
-    public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
+    public ActivityTestRule<LogInActivity> mActivityTestRule = new ActivityTestRule<>(LogInActivity.class);
 
     @Before
     public void start() {
-
-        Intent intent = new Intent();
-        mActivityTestRule.launchActivity(intent);
-
         Activity activity = mActivityTestRule.getActivity();
         SharedPreferences prefs = activity.getSharedPreferences("shared preferences", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
@@ -62,7 +57,6 @@ public class Scenario3Test {
         prefs = activity.getSharedPreferences("prefs", Context.MODE_PRIVATE);
         editor =prefs.edit();
         editor.clear();
-        //editor.putBoolean("firstStart",false);
         editor.apply();
     }
 
@@ -74,25 +68,22 @@ public class Scenario3Test {
                 return new Scenario3Test.TestFitnessService(stepCountActivity);
             }
         });
+
         mActivityTestRule.getActivity().setFitnessServiceKey(TEST_SERVICE);
 
-        /*ViewInteraction appCompatEditText = onView(
+        ViewInteraction appCompatButton100 = onView(
+                allOf(withId(R.id.startWWRButton),
+                        isDisplayed()));
+        appCompatButton100.perform(click());
+
+
+        ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.feet_input),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                2),
                         isDisplayed()));
         appCompatEditText.perform(replaceText("5"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.inches_input),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                3),
                         isDisplayed()));
         appCompatEditText2.perform(replaceText("11"), closeSoftKeyboard());
 
@@ -104,7 +95,7 @@ public class Scenario3Test {
                                         1),
                                 4),
                         isDisplayed()));
-        appCompatButton.perform(click());*/
+        appCompatButton.perform(click());
 
         ViewInteraction appCompatButton2 = onView(
                 allOf(withId(R.id.start_button), withText("START"),

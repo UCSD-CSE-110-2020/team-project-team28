@@ -88,8 +88,7 @@ public class RouteScreen extends AppCompatActivity {
         backToMainMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
+                RouteScreen.super.onBackPressed();
             }
         });
 

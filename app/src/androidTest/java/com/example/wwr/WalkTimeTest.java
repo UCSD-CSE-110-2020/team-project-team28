@@ -43,7 +43,7 @@ import static org.hamcrest.Matchers.is;
 public class WalkTimeTest {
     private static final String TEST_SERVICE = "TEST_SERVICE";
     @Rule
-    public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
+    public ActivityTestRule<LogInActivity> mActivityTestRule = new ActivityTestRule<>(LogInActivity.class);
 
     @Before
     public void start() {
@@ -55,7 +55,6 @@ public class WalkTimeTest {
 
         prefs = activity.getSharedPreferences("prefs", Context.MODE_PRIVATE);
         editor = prefs.edit();
-        //editor.clear();
         editor.putBoolean("firstStart",false);
         editor.apply();
     }
@@ -68,22 +67,21 @@ public class WalkTimeTest {
                 return new WalkTimeTest.TestFitnessService(stepCountActivity);
             }
         });
+
         mActivityTestRule.getActivity().setFitnessServiceKey(TEST_SERVICE);
+
+        ViewInteraction appCompatButton100 = onView(
+                allOf(withId(R.id.startWWRButton),
+                        isDisplayed()));
+        appCompatButton100.perform(click());
 
         ViewInteraction appCompatButton2 = onView(
                 allOf(withId(R.id.start_button), withText("START"),
                         isDisplayed()));
         appCompatButton2.perform(click());
 
-        //pause
-        try {
-            sleep(10000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         ViewInteraction appCompatButton3 = onView(
-                allOf(withId(R.id.end_button), withText("End"),
+                allOf(withId(R.id.end_button), withText("END WALK"),
                         isDisplayed()));
         appCompatButton3.perform(click());
 
