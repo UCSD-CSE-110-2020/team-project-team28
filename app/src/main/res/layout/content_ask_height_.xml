@@ -9,6 +9,19 @@
     tools:showIn="@layout/activity_ask_height_">
 
 
+    <EditText
+        android:id="@+id/feet_input"
+        android:layout_width="43dp"
+        android:layout_height="54dp"
+        android:textColorHighlight="#2196F3"
+        android:textColorLink="#00000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.72"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.586" />
+
     <TextView
         android:id="@+id/enter_inches"
         android:layout_width="132dp"
@@ -34,19 +47,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.599" />
-
-    <EditText
-        android:id="@+id/feet_input"
-        android:layout_width="43dp"
-        android:layout_height="54dp"
-        android:textColorHighlight="#2196F3"
-        android:textColorLink="#00000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.72"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.597" />
 
     <EditText
         android:id="@+id/inches_input"

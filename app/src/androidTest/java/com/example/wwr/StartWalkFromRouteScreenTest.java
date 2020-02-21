@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
+import androidx.test.core.app.ApplicationProvider;
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
@@ -43,7 +44,7 @@ public class StartWalkFromRouteScreenTest {
     private static final String TEST_SERVICE = "TEST_SERVICE";
 
     @Rule
-    public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
+    public ActivityTestRule<LogInActivity> mActivityTestRule = new ActivityTestRule<>(LogInActivity.class);
 
     @Before
     public void start() {
@@ -68,7 +69,12 @@ public class StartWalkFromRouteScreenTest {
             }
         });
 
+        mActivityTestRule.getActivity().setFitnessServiceKey(TEST_SERVICE);
 
+        ViewInteraction appCompatButton100 = onView(
+                allOf(withId(R.id.startWWRButton),
+                        isDisplayed()));
+        appCompatButton100.perform(click());
 
         ViewInteraction appCompatButton2 = onView(
                 allOf(withId(R.id.dailyActivityToRoutes), withText("ROUTES"),
@@ -120,36 +126,6 @@ public class StartWalkFromRouteScreenTest {
                         0),
                         isDisplayed()));
         cardView.perform(click());
-
-        ViewInteraction appCompatButton5 = onView(
-                allOf(withId(R.id.route_info_start_button), withText("Start"),
-                        childAtPosition(
-                                allOf(withId(R.id.route_information_page),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.RelativeLayout")),
-                                                0)),
-                                7),
-                        isDisplayed()));
-        appCompatButton5.perform(click());
-
-        ViewInteraction viewGroup = onView(
-                allOf(childAtPosition(
-                        childAtPosition(
-                                withId(android.R.id.content),
-                                0),
-                        1),
-                        isDisplayed()));
-        viewGroup.check(matches(isDisplayed()));
-
-        ViewInteraction appCompatButton6 = onView(
-                allOf(withId(R.id.end_button), withText("End"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                0),
-                        isDisplayed()));
-        appCompatButton6.perform(click());
     }
 
     private static Matcher<View> childAtPosition(
