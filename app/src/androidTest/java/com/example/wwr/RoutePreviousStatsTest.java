@@ -44,7 +44,7 @@ public class RoutePreviousStatsTest {
     private static final String TEST_SERVICE = "TEST_SERVICE";
 
     @Rule
-    public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
+    public ActivityTestRule<LogInActivity> mActivityTestRule = new ActivityTestRule<>(LogInActivity.class);
 
     @Before
     public void start() {
@@ -60,7 +60,6 @@ public class RoutePreviousStatsTest {
         editor.apply();
     }
 
-
     @Test
     public void routePreviousStatsTest() {
 
@@ -72,6 +71,11 @@ public class RoutePreviousStatsTest {
         });
 
         mActivityTestRule.getActivity().setFitnessServiceKey(TEST_SERVICE);
+
+        ViewInteraction appCompatButton100 = onView(
+                allOf(withId(R.id.startWWRButton),
+                        isDisplayed()));
+        appCompatButton100.perform(click());
 
         ViewInteraction appCompatButton2 = onView(
                 allOf(withId(R.id.start_button), withText("START"),
@@ -85,7 +89,7 @@ public class RoutePreviousStatsTest {
         appCompatButton2.perform(click());
 
         ViewInteraction appCompatButton3 = onView(
-                allOf(withId(R.id.end_button), withText("End"),
+                allOf(withId(R.id.end_button),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),

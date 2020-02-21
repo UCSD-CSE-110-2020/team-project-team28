@@ -30,7 +30,7 @@ public class DisplayDailyStepsUnitTest {
     public void setUp() {
         FitnessServiceFactory.put(TEST_SERVICE, TestFitnessService::new);
         intent = new Intent(ApplicationProvider.getApplicationContext(),  MainActivity.class);
-        //intent.putExtra(MainActivity.FITNESS_SERVICE_KEY, TEST_SERVICE);
+        intent.putExtra(MainActivity.FITNESS_SERVICE_KEY, TEST_SERVICE);
     }
 
     @Test
@@ -39,7 +39,6 @@ public class DisplayDailyStepsUnitTest {
 
         ActivityScenario<MainActivity> scenario = ActivityScenario.launch(intent);
         scenario.onActivity(activity -> {
-            activity.setFitnessServiceKey(TEST_SERVICE);
             TextView textSteps = activity.findViewById(R.id.daily_steps_num);
             activity.updateSteps();
             assertThat(textSteps.getText().toString()).isEqualTo(String.valueOf(nextStepCount));

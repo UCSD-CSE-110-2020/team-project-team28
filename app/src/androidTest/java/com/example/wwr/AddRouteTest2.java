@@ -42,7 +42,7 @@ import static org.hamcrest.Matchers.is;
 public class AddRouteTest2 {
     private static final String TEST_SERVICE = "TEST_SERVICE";
     @Rule
-    public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
+    public ActivityTestRule<LogInActivity> mActivityTestRule = new ActivityTestRule<>(LogInActivity.class);
 
     @Before
     public void start(){
@@ -56,19 +56,25 @@ public class AddRouteTest2 {
         editor = prefs.edit();
         editor.clear();
         editor.apply();
+
+
     }
 
     @Test
     public void addRouteTest2() {
-
         FitnessServiceFactory.put(TEST_SERVICE, new FitnessServiceFactory.BluePrint() {
             @Override
             public FitnessService create(MainActivity stepCountActivity) {
-                return new AddRouteTest2.TestFitnessService(stepCountActivity);
+                return new TestFitnessService(stepCountActivity);
             }
         });
 
         mActivityTestRule.getActivity().setFitnessServiceKey(TEST_SERVICE);
+
+        ViewInteraction appCompatButton100 = onView(
+                allOf(withId(R.id.startWWRButton),
+                        isDisplayed()));
+        appCompatButton100.perform(click());
 
        ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.feet_input),
@@ -96,7 +102,7 @@ public class AddRouteTest2 {
         appCompatButton2.perform(click());
 
         ViewInteraction appCompatButton3 = onView(
-                allOf(withId(R.id.end_button), withText("End"),
+                allOf(withId(R.id.end_button), withText("END WALK"),
                         isDisplayed()));
         appCompatButton3.perform(click());
 
@@ -192,7 +198,7 @@ public class AddRouteTest2 {
         @Override
         public void updateStepCount() {
             System.out.println(TAG + "updateStepCount");
-            //stepCountActivity.setStepCount(1337);
+            stepCountActivity.setStepCount(1337);
         }
 
         @Override
