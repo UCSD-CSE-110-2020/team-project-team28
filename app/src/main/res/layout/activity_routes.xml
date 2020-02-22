@@ -16,8 +16,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
+            android:layout_marginBottom="32dp"
             android:text="Fill-in Route Information Below:"
             android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/routeNamePage"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -30,8 +32,9 @@
             android:ems="10"
             android:hint="Start Location"
             android:inputType="textPersonName"
-            app:layout_constraintTop_toBottomOf="@+id/routeNamePage"
-            tools:layout_editor_absoluteX="0dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/routeNamePage" />
 
         <EditText
             android:id="@+id/routeNamePage"
@@ -52,8 +55,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/startLocationName"
-            tools:layout_editor_absoluteX="-1dp">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/startLocationName">
 
             <RadioButton
                 android:id="@+id/radio_hilly"
@@ -80,8 +84,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/groupFlat"
-            tools:layout_editor_absoluteX="0dp">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/groupFlat">
 
             <RadioButton
                 android:id="@+id/radio_loop"
@@ -104,8 +109,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/groupLoop"
-            tools:layout_editor_absoluteX="0dp">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/groupLoop">
 
             <RadioButton
                 android:id="@+id/radio_street"
@@ -128,8 +134,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/groupStreet"
-            tools:layout_editor_absoluteX="0dp">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/groupStreet">
 
             <RadioButton
                 android:id="@+id/radio_even"
@@ -152,8 +159,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/groupSurface"
-            tools:layout_editor_absoluteX="0dp">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/groupSurface">
 
             <RadioButton
                 android:id="@+id/radio_easy"
@@ -194,9 +202,10 @@
             android:onClick="pressOK"
             android:text="@android:string/ok"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/routeNotes"
-            app:layout_constraintVertical_bias="0.157"
-            tools:layout_editor_absoluteX="0dp" />
+            app:layout_constraintVertical_bias="0.157" />
 
         <TextView
             android:id="@+id/radio_header_3"
@@ -206,8 +215,11 @@
             android:layout_marginBottom="5dp"
             android:text="Street or Trail?"
             app:layout_constraintBottom_toTopOf="@+id/groupStreet"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.009"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/groupLoop"
-            tools:layout_editor_absoluteX="0dp" />
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/radio_header_2"
@@ -217,8 +229,11 @@
             android:layout_marginBottom="7dp"
             android:text="Loop or Out-And-Back?"
             app:layout_constraintBottom_toTopOf="@+id/groupLoop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.011"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/groupFlat"
-            tools:layout_editor_absoluteX="0dp" />
+            app:layout_constraintVertical_bias="0.125" />
 
         <TextView
             android:id="@+id/radio_header_1"
@@ -227,8 +242,11 @@
             android:layout_marginTop="13dp"
             android:text="Flat or Hilly?"
             app:layout_constraintBottom_toTopOf="@+id/groupFlat"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.009"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/startLocationName"
-            tools:layout_editor_absoluteX="0dp" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/radio_header_4"
@@ -238,9 +256,11 @@
             android:layout_marginBottom="9dp"
             android:text="Even or Uneven Surface?"
             app:layout_constraintBottom_toTopOf="@+id/groupSurface"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.011"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/groupStreet"
-            app:layout_constraintVertical_bias="0.0"
-            tools:layout_editor_absoluteX="0dp" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/radio_header_5"
@@ -250,7 +270,10 @@
             android:layout_marginBottom="4dp"
             android:text="Difficulty?"
             app:layout_constraintBottom_toTopOf="@+id/groupDifficulty"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.008"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/groupSurface"
-            tools:layout_editor_absoluteX="3dp" />
+            app:layout_constraintVertical_bias="1.0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
