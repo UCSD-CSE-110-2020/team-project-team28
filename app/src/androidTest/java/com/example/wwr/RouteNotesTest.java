@@ -28,6 +28,7 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
+import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
@@ -104,14 +105,12 @@ public class RouteNotesTest {
         appCompatEditText3.perform(replaceText("Tester"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText4 = onView(
-                allOf(withId(R.id.routeNotes),
-                        isDisplayed()));
-        appCompatEditText4.perform(replaceText("Testing Notes"), closeSoftKeyboard());
+                allOf(withId(R.id.routeNotes)));
+        appCompatEditText4.perform(scrollTo(), replaceText("Testing Notes"), closeSoftKeyboard());
 
         ViewInteraction appCompatButton4 = onView(
-                allOf(withId(R.id.button_ok), withText("OK"),
-                        isDisplayed()));
-        appCompatButton4.perform(click());
+                allOf(withId(R.id.button_ok), withText("OK")));
+        appCompatButton4.perform(scrollTo(), click());
 
         ViewInteraction cardView = onView(
                 allOf(childAtPosition(
