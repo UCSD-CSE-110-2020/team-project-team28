@@ -31,6 +31,7 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
+import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
@@ -125,138 +126,65 @@ public class RoutesSavedTest {
 
         ViewInteraction appCompatEditText3 = onView(
                 allOf(withId(R.id.routeNamePage),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                1),
                         isDisplayed()));
         appCompatEditText3.perform(replaceText("Hike"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText4 = onView(
                 allOf(withId(R.id.startLocationName),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                2),
                         isDisplayed()));
         appCompatEditText4.perform(replaceText("Park"), closeSoftKeyboard());
 
         ViewInteraction appCompatRadioButton = onView(
                 allOf(withId(R.id.radio_trail), withText("Trail"),
-                        childAtPosition(
-                                allOf(withId(R.id.groupStreet),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
-                                                5)),
-                                2),
                         isDisplayed()));
         appCompatRadioButton.perform(click());
 
         ViewInteraction appCompatRadioButton2 = onView(
                 allOf(withId(R.id.radio_moderate), withText("Moderate"),
-                        childAtPosition(
-                                allOf(withId(R.id.groupDifficulty),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
-                                                7)),
-                                2),
                         isDisplayed()));
-        appCompatRadioButton2.perform(click());
+        appCompatRadioButton2.perform(scrollTo(), click());
 
         ViewInteraction appCompatEditText5 = onView(
-                allOf(withId(R.id.routeNotes),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                8),
-                        isDisplayed()));
-        appCompatEditText5.perform(replaceText("Nice walk"), closeSoftKeyboard());
+                allOf(withId(R.id.routeNotes)));
+        appCompatEditText5.perform(scrollTo(), replaceText("Nice walk"), closeSoftKeyboard());
 
         ViewInteraction appCompatButton4 = onView(
-                allOf(withId(R.id.button_ok), withText("OK"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                9),
-                        isDisplayed()));
-        appCompatButton4.perform(click());
+                allOf(withId(R.id.button_ok), withText("OK")));
+        appCompatButton4.perform(scrollTo(), click());
 
         ViewInteraction appCompatButton5 = onView(
                 allOf(withId(R.id.addRouteButton), withText("Add Route"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                2),
                         isDisplayed()));
         appCompatButton5.perform(click());
 
         ViewInteraction appCompatEditText6 = onView(
                 allOf(withId(R.id.routeNamePage),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                1),
                         isDisplayed()));
         appCompatEditText6.perform(replaceText("Mountain Trail"), closeSoftKeyboard());
 
         ViewInteraction appCompatRadioButton3 = onView(
                 allOf(withId(R.id.radio_out_and_back), withText("Out-And-Back"),
-                        childAtPosition(
-                                allOf(withId(R.id.groupLoop),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
-                                                4)),
-                                2),
                         isDisplayed()));
         appCompatRadioButton3.perform(click());
 
         ViewInteraction appCompatRadioButton5 = onView(
                 allOf(withId(R.id.radio_trail), withText("Trail"),
-                        childAtPosition(
-                                allOf(withId(R.id.groupStreet),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
-                                                5)),
-                                2),
                         isDisplayed()));
         appCompatRadioButton5.perform(click());
 
         ViewInteraction appCompatRadioButton6 = onView(
                 allOf(withId(R.id.radio_difficult), withText("Difficult"),
-                        childAtPosition(
-                                allOf(withId(R.id.groupDifficulty),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
-                                                7)),
-                                3),
                         isDisplayed()));
-        appCompatRadioButton6.perform(click());
+        appCompatRadioButton6.perform(scrollTo(), click());
 
         ViewInteraction appCompatEditText7 = onView(
                 allOf(withId(R.id.startLocationName),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                2),
                         isDisplayed()));
         appCompatEditText7.perform(replaceText("Base"), closeSoftKeyboard());
 
         ViewInteraction appCompatButton6 = onView(
-                allOf(withId(R.id.button_ok), withText("OK"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                9),
-                        isDisplayed()));
-        appCompatButton6.perform(click());
+                allOf(withId(R.id.button_ok), withText("OK")));
+        appCompatButton6.perform(scrollTo(), click());
 
         ViewInteraction appCompatButton7 = onView(
                 allOf(withId(R.id.backToMainMenuButton), withText("Go Back To Main Menu"),
