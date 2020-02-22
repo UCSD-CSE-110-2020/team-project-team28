@@ -29,6 +29,8 @@ import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
+import static androidx.test.espresso.action.ViewActions.scrollTo;
+import static androidx.test.espresso.action.ViewActions.swipeUp;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
@@ -230,24 +232,12 @@ public class IntentionalWalkTest {
         appCompatButton10.perform(click());
 
         ViewInteraction appCompatEditText7 = onView(
-                allOf(withId(R.id.routeNamePage),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                1),
-                        isDisplayed()));
+                allOf(withId(R.id.routeNamePage), isDisplayed()));
         appCompatEditText7.perform(replaceText("Home"), closeSoftKeyboard());
 
         ViewInteraction appCompatButton11 = onView(
-                allOf(withId(R.id.button_ok), withText("OK"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                9),
-                        isDisplayed()));
-        appCompatButton11.perform(click());
+                allOf(withId(R.id.button_ok), withText("OK")));
+        appCompatButton11.perform(scrollTo(), click());
 
         ViewInteraction appCompatButton12 = onView(
                 allOf(withId(R.id.backToMainMenuButton), withText("Go Back To Main Menu"),

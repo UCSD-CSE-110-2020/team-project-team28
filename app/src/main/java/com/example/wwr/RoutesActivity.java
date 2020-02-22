@@ -1,6 +1,7 @@
 package com.example.wwr;
 
 import androidx.appcompat.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -31,9 +32,10 @@ public class RoutesActivity extends AppCompatActivity {
         streetGroup = findViewById(R.id.groupStreet);
         surfaceGroup = findViewById(R.id.groupSurface);
         difficultyGroup = findViewById(R.id.groupDifficulty);
-        routeName = findViewById(R.id.routeNamePage);
-        startLocation = findViewById(R.id.startLocationName);
-        notes = findViewById(R.id.routeNotes);
+
+        routeName = (EditText)findViewById(R.id.routeNamePage);
+        startLocation = (EditText)findViewById(R.id.startLocationName);
+        notes = (EditText)findViewById(R.id.routeNotes);
 
         routeName.setText(EMPTY_STRING);
         startLocation.setText(EMPTY_STRING);

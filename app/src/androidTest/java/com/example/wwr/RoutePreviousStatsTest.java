@@ -29,6 +29,7 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
+import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
@@ -100,23 +101,12 @@ public class RoutePreviousStatsTest {
 
         ViewInteraction appCompatEditText3 = onView(
                 allOf(withId(R.id.routeNamePage),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                1),
                         isDisplayed()));
         appCompatEditText3.perform(replaceText("Route"), closeSoftKeyboard());
 
         ViewInteraction appCompatButton4 = onView(
-                allOf(withId(R.id.button_ok), withText("OK"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                9),
-                        isDisplayed()));
-        appCompatButton4.perform(click());
+                allOf(withId(R.id.button_ok), withText("OK")));
+        appCompatButton4.perform(scrollTo(), click());
 
         ViewInteraction textView = onView(
                 allOf(withId(R.id.totalTime), withText("Total Time: 0s"),

@@ -30,6 +30,7 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
+import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
@@ -112,9 +113,8 @@ public class Scenario4Test {
         appCompatRadioButton.perform(click());
 
         ViewInteraction appCompatButton4 = onView(
-                allOf(withId(R.id.button_ok), withText("OK"),
-                        isDisplayed()));
-        appCompatButton4.perform(click());
+                allOf(withId(R.id.button_ok), withText("OK")));
+        appCompatButton4.perform(scrollTo(),click());
 
         ViewInteraction textView = onView(
                 allOf(withId(R.id.route_name), withText("Park Run"),

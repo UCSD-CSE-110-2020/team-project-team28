@@ -209,11 +209,6 @@ public class MainActivity extends AppCompatActivity {
         fitnessService.updateStepCount();
     }
 
-
-
-
-
-
     public void setCount(long stepCount) {
         TextView t = findViewById(R.id.daily_steps_num);
         t.setText(String.valueOf(stepCount));
