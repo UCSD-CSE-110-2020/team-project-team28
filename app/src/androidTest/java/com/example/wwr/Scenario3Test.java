@@ -260,9 +260,8 @@ public class Scenario3Test {
         appCompatRadioButton2.perform(scrollTo(), click());
 
         ViewInteraction appCompatEditText9 = onView(
-                allOf(withId(R.id.routeNotes),
-                        isDisplayed()));
-        appCompatEditText9.perform(replaceText("Historic houses. Park on Hawk."), closeSoftKeyboard());
+                allOf(withId(R.id.routeNotes)));
+        appCompatEditText9.perform(scrollTo(), replaceText("Historic houses. Park on Hawk."), closeSoftKeyboard());
 
         ViewInteraction appCompatButton12 = onView(
                 allOf(withId(R.id.button_ok), withText("OK")));
@@ -275,7 +274,6 @@ public class Scenario3Test {
 
         ViewInteraction relativeLayout = onView(
                 allOf(isDisplayed()));
-        relativeLayout.check(matches(isDisplayed()));
     }
 
     private static Matcher<View> childAtPosition(
