@@ -2,6 +2,7 @@ package com.example.wwr;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +14,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class RouteScreenAdapter extends RecyclerView.Adapter<RouteScreenAdapter.RouteScreenViewHolder> {
     private ArrayList<Route> routeList;
     Context context;
 
+
     public RouteScreenAdapter(ArrayList<Route> routeList, Context context) {
         this.routeList = routeList;
         this.context = context;
+
     }
 
     public static class RouteScreenViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener  {
@@ -45,6 +50,7 @@ public class RouteScreenAdapter extends RecyclerView.Adapter<RouteScreenAdapter.
             totalTime = view.findViewById(R.id.totalTime);
             totalSteps = view.findViewById(R.id.totalSteps);
             totalDistance = view.findViewById(R.id.totalDistance);
+
         }
 
         @Override
@@ -62,7 +68,11 @@ public class RouteScreenAdapter extends RecyclerView.Adapter<RouteScreenAdapter.
                     + "\n" + currentRoute.getLoopOrOut() + "\n" + currentRoute.getStreetOrTrail() +
                     "\n" + currentRoute.getSurface() + "\n" + currentRoute.getDifficulty());
             intent.putExtra("note", "Notes: " + currentRoute.getNote());
-            RouteScreen.setCurrentPosition(position);
+
+            SharedPreferences sp = context.getSharedPreferences("prefs", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sp.edit();
+            editor.putString("currPos", String.valueOf(position));
+
             this.context.startActivity(intent);
         }
     }

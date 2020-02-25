@@ -13,15 +13,19 @@ import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class WalkScreenActivity extends AppCompatActivity {
     private String mockStartTime;
     private String mockEndTime;
     private int mockTotalTime = 0;
     private boolean startPressed = false;
+    private UserInfo user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        user = new UserInfo(this);
+
         setContentView(R.layout.activity_walk_screen);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -31,6 +35,7 @@ public class WalkScreenActivity extends AppCompatActivity {
         TextView routeName = findViewById(R.id.route_name);
 
         String name = previous.getStringExtra("route name");
+
         if (name != null) {
             routeName.setText(name);
             Log.d("routeNameSet", "Route name has been set");
@@ -43,6 +48,7 @@ public class WalkScreenActivity extends AppCompatActivity {
                 startPressed = true;
                 chronometer.setBase(SystemClock.elapsedRealtime());
                 chronometer.start();
+                user.saveCurrentSteps();
                 Log.d("chronometerStart", "Chronometer has been started");
             }
         });
@@ -76,18 +82,7 @@ public class WalkScreenActivity extends AppCompatActivity {
         addSteps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
-                boolean firstMultiplier = prefs.getBoolean("firstMultiplier", true);
-                SharedPreferences.Editor editor = prefs.edit();
-                if (firstMultiplier) {
-                    editor.putBoolean("firstMultiplier", false);
-                    editor.putInt("stepMultiplierCount", 1);
-                    editor.apply();
-                } else {
-                    int temp = prefs.getInt("stepMultiplierCount", 0);
-                    editor.putInt("stepMultiplierCount", ++temp);
-                    editor.apply();
-                }
+                user.increaseDailyMockSteps();
             }
         });
 
@@ -100,18 +95,10 @@ public class WalkScreenActivity extends AppCompatActivity {
             @Override
             public void onClick(View view){
                 try {
-                    // when end the walk
-                    SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = prefs.edit();
-                    editor.putLong("totalSteps", MainActivity.startSteps);
-                    editor.apply();
                     fitnessService.updateStepCount();
                     wait(100000);
                 } catch (Exception e) {
                 }
-
-                SharedPreferences sharedPreferences = getSharedPreferences("recentWalk", MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
 
                 long time;
                 // Need to see if mock time was used, if so need to use mock time
@@ -121,8 +108,8 @@ public class WalkScreenActivity extends AppCompatActivity {
                     } else {
                         time = SystemClock.elapsedRealtime() - chronometer.getBase();
                     }
-                    editor.putLong("time", time);
-                    editor.apply();
+                    user.setLastIntentionalWalkTime(time);
+
                 } else {
                   int beginTotal = Integer.parseInt(mockStartTime);
                   int endTotal = Integer.parseInt(mockEndTime);
@@ -140,19 +127,20 @@ public class WalkScreenActivity extends AppCompatActivity {
                   totalSeconds = (totalSeconds < 0) ? (totalSeconds + (24*3600)) : totalSeconds;
                   time = (long)totalSeconds * 1000;
 
-                  editor.putLong("time", time);
-                  editor.apply();
+                  user.setLastIntentionalWalkTime(time);
                 }
 
                 String previousString = "";
                 previousString = previous.getStringExtra("previousClass");
                 Intent intent = new Intent(getApplicationContext(), RouteScreen.class);
 
+                // the case where you start a brand new walk
                 if (previousString != null && previousString.equals("MainActivity")) {
                     intent.putExtra("goToDetail", true);
                     intent.putExtra("newTime", time);
                 }
 
+                // the case where you started an existing walk
                 String previousActivity = previous.getStringExtra("previousScreen");
                 if (previousActivity != null && previousActivity.equals("Route Detail")) {
                     intent.putExtra("updateRoute", true);
@@ -165,7 +153,7 @@ public class WalkScreenActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        });
+        }); // end of end walk button
     }
 
 }
