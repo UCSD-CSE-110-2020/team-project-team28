@@ -20,8 +20,9 @@ import com.example.wwr.fitness.FitnessServiceFactory;
 import com.example.wwr.fitness.GoogleFitAdapter;
 
 public class MainActivity extends AppCompatActivity {
-    public static String fitnessServiceKey = "GOOGLE_FIT";
+    public static final String FITNESS_SERVICE_KEY = "FITNESS_SERVICE_KEY";
     private static final String TAG = "MainActivity";
+
     public static FitnessService fitnessService;
     final int BOOST_STEPS = 500;
     public static long startSteps;
@@ -38,11 +39,18 @@ public class MainActivity extends AppCompatActivity {
 
         if (getIntent().getStringExtra("previousActivity") != null &&
                 getIntent().getStringExtra("previousActivity").equals("Route Detail")) {
+            String fitnessServiceKey = getIntent().getStringExtra(FITNESS_SERVICE_KEY);
+            fitnessService = FitnessServiceFactory.create(fitnessServiceKey, this);
+            fitnessService.setup();
+            fitnessService.updateStepCount();
+            GoogleFitSingleton.setFitnessService(fitnessService);
+
             try {
                 fitnessService.updateStepCount();
                 wait(1000);
             } catch (Exception e) {
             }
+
             Intent intent = new Intent(getApplicationContext(), WalkScreenActivity.class);
             intent.putExtra("previousScreen", "Route Detail");
             startActivity(intent);
@@ -52,12 +60,20 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FitnessServiceFactory.put(fitnessServiceKey, new FitnessServiceFactory.BluePrint() {
-            @Override
-            public FitnessService create(MainActivity mainactivity) {
-                return new GoogleFitAdapter(mainactivity);
-            }
-        });
+
+        String fitnessServiceKey = getIntent().getStringExtra(FITNESS_SERVICE_KEY);
+        fitnessService = FitnessServiceFactory.create(fitnessServiceKey, this);
+        fitnessService.setup();
+        fitnessService.updateStepCount();
+        GoogleFitSingleton.setFitnessService(fitnessService);
+
+        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
+        boolean firstStart = prefs.getBoolean("firstStart", true);
+
+        if (firstStart) {
+            Log.d("firstLogin", "Height input because of first installation of the app.");
+            heightActivity();
+        }
 
         Button button = (Button) findViewById(R.id.dailyActivityToRoutes);
         button.setOnClickListener(new View.OnClickListener() {
@@ -68,18 +84,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Button startButton = (Button) findViewById(R.id.start_button);
-        fitnessService = FitnessServiceFactory.create(fitnessServiceKey, this);
-        GoogleFitSingleton.setFitnessService(fitnessService);
-        fitnessService.setup();
-
-        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
-        boolean firstStart = prefs.getBoolean("firstStart", true);
-
-        if (firstStart) {
-            Log.d("firstLogin", "Height input because of first installation of the app.");
-            heightActivity();
-        }
-
         startButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -152,13 +156,6 @@ public class MainActivity extends AppCompatActivity {
         Log.d("updateIntentionalWalk", "Last intentional walk details have been updated.");
     }
 
-
-    public void setFinalStepCount(long stepCount) {
-        this.finalSteps = stepCount;
-        TextView t = findViewById(R.id.daily_steps_num);
-        t.setText(String.valueOf(stepCount));
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -193,12 +190,12 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void setFitnessServiceKey(String fitnessServiceKey) {
-        this.fitnessServiceKey = fitnessServiceKey;
-        fitnessService = FitnessServiceFactory.create(fitnessServiceKey, this);
-    }
-
     public void updateSteps() {
         fitnessService.updateStepCount();
+    }
+
+    public void setCount(long stepCount) {
+        TextView t = findViewById(R.id.daily_steps_num);
+        t.setText(String.valueOf(stepCount));
     }
 }

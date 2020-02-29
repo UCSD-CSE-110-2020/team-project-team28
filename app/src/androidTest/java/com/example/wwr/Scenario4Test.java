@@ -30,6 +30,7 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
+import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
@@ -41,18 +42,13 @@ import static org.hamcrest.Matchers.is;
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class Scenario4Test {
-
     private static final String TEST_SERVICE = "TEST_SERVICE";
 
     @Rule
-    public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
+    public ActivityTestRule<LogInActivity> mActivityTestRule = new ActivityTestRule<>(LogInActivity.class);
 
     @Before
     public void start() {
-
-        Intent intent = new Intent();
-        mActivityTestRule.launchActivity(intent);
-
         Activity activity = mActivityTestRule.getActivity();
         SharedPreferences prefs = activity.getSharedPreferences("shared preferences", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
@@ -61,23 +57,27 @@ public class Scenario4Test {
 
         prefs = activity.getSharedPreferences("prefs", Context.MODE_PRIVATE);
         editor =prefs.edit();
-        //editor.clear();
-        editor.putBoolean("firstStart",false);
+        editor.clear();
         editor.apply();
     }
 
     @Test
     public void scenario4Test() {
-
         FitnessServiceFactory.put(TEST_SERVICE, new FitnessServiceFactory.BluePrint() {
             @Override
             public FitnessService create(MainActivity stepCountActivity) {
                 return new Scenario4Test.TestFitnessService(stepCountActivity);
             }
         });
+
         mActivityTestRule.getActivity().setFitnessServiceKey(TEST_SERVICE);
 
-        /*ViewInteraction appCompatEditText = onView(
+        ViewInteraction appCompatButton100 = onView(
+                allOf(withId(R.id.startWWRButton),
+                        isDisplayed()));
+        appCompatButton100.perform(click());
+
+        ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.feet_input),
                         isDisplayed()));
         appCompatEditText.perform(replaceText("5"), closeSoftKeyboard());
@@ -92,8 +92,6 @@ public class Scenario4Test {
                         isDisplayed()));
         appCompatButton.perform(click());
 
-
-         */
         ViewInteraction appCompatButton2 = onView(
                 allOf(withId(R.id.dailyActivityToRoutes), withText("ROUTES"),
                         isDisplayed()));
@@ -115,9 +113,8 @@ public class Scenario4Test {
         appCompatRadioButton.perform(click());
 
         ViewInteraction appCompatButton4 = onView(
-                allOf(withId(R.id.button_ok), withText("OK"),
-                        isDisplayed()));
-        appCompatButton4.perform(click());
+                allOf(withId(R.id.button_ok), withText("OK")));
+        appCompatButton4.perform(scrollTo(),click());
 
         ViewInteraction textView = onView(
                 allOf(withId(R.id.route_name), withText("Park Run"),

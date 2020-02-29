@@ -42,7 +42,7 @@ public class DailyActivityDisplayedTest {
     private static final String TEST_SERVICE = "TEST_SERVICE";
 
     @Rule
-    public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
+    public ActivityTestRule<LogInActivity> mActivityTestRule = new ActivityTestRule<>(LogInActivity.class);
 
     @Before
     public void start() {
@@ -53,15 +53,13 @@ public class DailyActivityDisplayedTest {
         editor.apply();
 
         prefs = activity.getSharedPreferences("prefs", Context.MODE_PRIVATE);
-        editor =prefs.edit();
+        editor = prefs.edit();
         editor.putBoolean("firstStart",false);
         editor.apply();
     }
 
-
     @Test
     public void dailyActivityDisplayedTest() {
-
         FitnessServiceFactory.put(TEST_SERVICE, new FitnessServiceFactory.BluePrint() {
             @Override
             public FitnessService create(MainActivity stepCountActivity) {
@@ -71,30 +69,29 @@ public class DailyActivityDisplayedTest {
 
         mActivityTestRule.getActivity().setFitnessServiceKey(TEST_SERVICE);
 
+        ViewInteraction appCompatButton100 = onView(
+                allOf(withId(R.id.startWWRButton),
+                        isDisplayed()));
+        appCompatButton100.perform(click());
 
         ViewInteraction textView = onView(
-                allOf(withId(R.id.daily_steps_num), withText("0"),
+                allOf(withId(R.id.daily_steps_num), withText("1337"),
                         isDisplayed()));
         textView.check(matches(isDisplayed()));
 
         ViewInteraction textView2 = onView(
-                allOf(withId(R.id.daily_distance_num), withText("0"),
+                allOf(withId(R.id.daily_distance_num),
                         isDisplayed()));
         textView2.check(matches(isDisplayed()));
 
-        //walk steps and update
-        //mActivityTestRule.getActivity().updateSteps();
-
-
         ViewInteraction textView3 = onView(
-                allOf(withId(R.id.daily_steps_num), withText("0"),
+                allOf(withId(R.id.daily_steps_num), withText("1337"),
                         isDisplayed()));
-        textView3.check(matches(withText("0")));
+        textView3.check(matches(withText("1337")));
 
         ViewInteraction textView4 = onView(
-                allOf(withId(R.id.daily_distance_num), withText("0"),
+                allOf(withId(R.id.daily_distance_num),
                         isDisplayed()));
-        textView4.check(matches(withText("0")));
     }
 
     private static Matcher<View> childAtPosition(

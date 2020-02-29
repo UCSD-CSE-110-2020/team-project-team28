@@ -31,6 +31,8 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
+import static androidx.test.espresso.action.ViewActions.scrollTo;
+import static androidx.test.espresso.action.ViewActions.swipeDown;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
@@ -43,11 +45,10 @@ import static org.hamcrest.Matchers.is;
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class Scenario5Test {
-
     private static final String TEST_SERVICE = "TEST_SERVICE";
 
     @Rule
-    public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class, false, false);
+    public ActivityTestRule<LogInActivity> mActivityTestRule = new ActivityTestRule<>(LogInActivity.class, false, false);
 
     public void start() {
         Intent intent = new Intent();
@@ -61,16 +62,13 @@ public class Scenario5Test {
 
         prefs = activity.getSharedPreferences("prefs", Context.MODE_PRIVATE);
         editor =prefs.edit();
-        //editor.clear();
-        editor.putBoolean("firstStart",false);
+        editor.clear();
         editor.apply();
     }
+
     @Test
     public void scenario5Test() {
-
         start();
-
-
         FitnessServiceFactory.put(TEST_SERVICE, new FitnessServiceFactory.BluePrint() {
             @Override
             public FitnessService create(MainActivity stepCountActivity) {
@@ -79,24 +77,22 @@ public class Scenario5Test {
         });
 
         mActivityTestRule.getActivity().setFitnessServiceKey(TEST_SERVICE);
-        /*ViewInteraction appCompatEditText = onView(
+
+        ViewInteraction appCompatButton100 = onView(
+                allOf(withId(R.id.startWWRButton),
+                        isDisplayed()));
+        appCompatButton100.perform(click());
+
+        ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.feet_input),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                2),
                         isDisplayed()));
         appCompatEditText.perform(replaceText("5"), closeSoftKeyboard());
+
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.inches_input),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.coordinatorlayout.widget.CoordinatorLayout")),
-                                        1),
-                                3),
                         isDisplayed()));
         appCompatEditText2.perform(replaceText("4"), closeSoftKeyboard());
+
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.enter_button), withText("CONFIRM"),
                         childAtPosition(
@@ -105,7 +101,7 @@ public class Scenario5Test {
                                         1),
                                 4),
                         isDisplayed()));
-        appCompatButton.perform(click()); */
+        appCompatButton.perform(click());
 
         ViewInteraction appCompatButton2 = onView(
                 allOf(withId(R.id.dailyActivityToRoutes), withText("ROUTES"),
@@ -130,65 +126,31 @@ public class Scenario5Test {
 
         ViewInteraction appCompatEditText3 = onView(
                 allOf(withId(R.id.routeNamePage),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                1),
                         isDisplayed()));
         appCompatEditText3.perform(replaceText("Rose Canyon Loop"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText4 = onView(
                 allOf(withId(R.id.startLocationName),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                2),
                         isDisplayed()));
         appCompatEditText4.perform(replaceText("Park"), closeSoftKeyboard());
 
         ViewInteraction appCompatRadioButton = onView(
                 allOf(withId(R.id.radio_trail), withText("Trail"),
-                        childAtPosition(
-                                allOf(withId(R.id.groupStreet),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
-                                                5)),
-                                2),
                         isDisplayed()));
         appCompatRadioButton.perform(click());
 
         ViewInteraction appCompatRadioButton2 = onView(
                 allOf(withId(R.id.radio_moderate), withText("Moderate"),
-                        childAtPosition(
-                                allOf(withId(R.id.groupDifficulty),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
-                                                7)),
-                                2),
                         isDisplayed()));
-        appCompatRadioButton2.perform(click());
+        appCompatRadioButton2.perform(scrollTo(), click());
 
         ViewInteraction appCompatEditText5 = onView(
-                allOf(withId(R.id.routeNotes),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                8),
-                        isDisplayed()));
-        appCompatEditText5.perform(replaceText("Nice walk"), closeSoftKeyboard());
+                allOf(withId(R.id.routeNotes)));
+        appCompatEditText5.perform(scrollTo(), replaceText("Nice walk"), closeSoftKeyboard());
 
         ViewInteraction appCompatButton4 = onView(
-                allOf(withId(R.id.button_ok), withText("OK"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                9),
-                        isDisplayed()));
-        appCompatButton4.perform(click());
+                allOf(withId(R.id.button_ok), withText("OK")));
+        appCompatButton4.perform(scrollTo(), click());
 
         ViewInteraction appCompatButton5 = onView(
                 allOf(withId(R.id.addRouteButton), withText("Add Route"),
@@ -202,104 +164,58 @@ public class Scenario5Test {
 
         ViewInteraction appCompatEditText6 = onView(
                 allOf(withId(R.id.routeNamePage),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                1),
                         isDisplayed()));
         appCompatEditText6.perform(replaceText("Forest Walk"), closeSoftKeyboard());
 
         ViewInteraction appCompatRadioButton3 = onView(
                 allOf(withId(R.id.radio_out_and_back), withText("Out-And-Back"),
-                        childAtPosition(
-                                allOf(withId(R.id.groupLoop),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
-                                                4)),
-                                2),
                         isDisplayed()));
         appCompatRadioButton3.perform(click());
 
-        /*ViewInteraction appCompatRadioButton4 = onView(
-                allOf(withId(R.id.radio_uneven), withText("Uneven Surface"),
-                        childAtPosition(
-                                allOf(withId(R.id.groupSurface),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
-                                                6)),
-                                2),
-                        isDisplayed()));
-        appCompatRadioButton4.perform(click());*/
-
         ViewInteraction appCompatRadioButton5 = onView(
                 allOf(withId(R.id.radio_trail), withText("Trail"),
-                        childAtPosition(
-                                allOf(withId(R.id.groupStreet),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
-                                                5)),
-                                2),
                         isDisplayed()));
         appCompatRadioButton5.perform(click());
 
         ViewInteraction appCompatRadioButton6 = onView(
                 allOf(withId(R.id.radio_difficult), withText("Difficult"),
-                        childAtPosition(
-                                allOf(withId(R.id.groupDifficulty),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
-                                                7)),
-                                3),
                         isDisplayed()));
-        appCompatRadioButton6.perform(click());
+        appCompatRadioButton6.perform(scrollTo(), click());
 
         ViewInteraction appCompatEditText7 = onView(
                 allOf(withId(R.id.startLocationName),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                2),
                         isDisplayed()));
-        appCompatEditText7.perform(replaceText("Base"), closeSoftKeyboard());
+        appCompatEditText7.perform(scrollTo(), replaceText("Base"), closeSoftKeyboard());
 
         ViewInteraction appCompatButton6 = onView(
-                allOf(withId(R.id.button_ok), withText("OK"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                9),
-                        isDisplayed()));
-        appCompatButton6.perform(click());
+                allOf(withId(R.id.button_ok), withText("OK")));
+        appCompatButton6.perform(scrollTo(), click());
 
         ViewInteraction appCompatButton7 = onView(
-                allOf(withId(R.id.backToMainMenuButton), withText("Go Back To Main Menu"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                1),
-                        isDisplayed()));
+                allOf(withId(R.id.backToMainMenuButton), withText("Go Back To Main Menu")));
         appCompatButton7.perform(click());
-
-
-        // close app
-        //mActivityTestRule.getActivity().finish();
-        //mActivityTestRule.getActivity().launch();
-
-        //mActivityTestRule.finishActivity();
-
     }
 
 
 
     @Test
     public void scenario5Test2() {
-        Intent intent2 = new Intent();
-        mActivityTestRule.launchActivity(intent2);
+        Intent intent = new Intent();
+        mActivityTestRule.launchActivity(intent);
 
+        FitnessServiceFactory.put(TEST_SERVICE, new FitnessServiceFactory.BluePrint() {
+            @Override
+            public FitnessService create(MainActivity stepCountActivity) {
+                return new Scenario5Test.TestFitnessService(stepCountActivity);
+            }
+        });
+
+        mActivityTestRule.getActivity().setFitnessServiceKey(TEST_SERVICE);
+
+        ViewInteraction appCompatButton100 = onView(
+                allOf(withId(R.id.startWWRButton),
+                        isDisplayed()));
+        appCompatButton100.perform(click());
 
         ViewInteraction appCompatButton8 = onView(
                 allOf(withId(R.id.dailyActivityToRoutes), withText("ROUTES"),
@@ -314,39 +230,21 @@ public class Scenario5Test {
 
         ViewInteraction textView = onView(
                 allOf(withId(R.id.route_name), withText("Rose Canyon Loop"),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.FrameLayout.class),
-                                        0),
-                                1),
                         isDisplayed()));
         textView.check(matches(withText("Rose Canyon Loop")));
 
         ViewInteraction relativeLayout = onView(
-                allOf(childAtPosition(
-                        childAtPosition(
-                                withId(R.id.routeScreen),
-                                0),
-                        0),
+                allOf(withId(R.id.routeScreen),
                         isDisplayed()));
         relativeLayout.check(matches(isDisplayed()));
 
         ViewInteraction relativeLayout2 = onView(
-                allOf(childAtPosition(
-                        childAtPosition(
-                                withId(R.id.routeScreen),
-                                1),
-                        0),
+                allOf(withId(R.id.routeScreen),
                         isDisplayed()));
         relativeLayout2.check(matches(isDisplayed()));
 
         ViewInteraction textView2 = onView(
                 allOf(withId(R.id.route_name), withText("Forest Walk"),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.FrameLayout.class),
-                                        0),
-                                1),
                         isDisplayed()));
         textView2.check(matches(withText("Forest Walk")));
     }
@@ -368,9 +266,7 @@ public class Scenario5Test {
                         && view.equals(((ViewGroup) parent).getChildAt(position));
             }
         };
-
     }
-
 
     private class TestFitnessService implements FitnessService {
         private static final String TAG = "[TestFitnessService]: ";

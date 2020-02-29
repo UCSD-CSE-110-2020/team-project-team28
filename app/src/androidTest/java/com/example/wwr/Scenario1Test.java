@@ -45,7 +45,7 @@ public class Scenario1Test {
     private static final String TEST_SERVICE = "TEST_SERVICE";
 
     @Rule
-    public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
+    public ActivityTestRule<LogInActivity> mActivityTestRule = new ActivityTestRule<>(LogInActivity.class);
 
     @Before
     public void start() {
@@ -70,6 +70,12 @@ public class Scenario1Test {
             }
         });
         mActivityTestRule.getActivity().setFitnessServiceKey(TEST_SERVICE);
+
+        ViewInteraction appCompatButton100 = onView(
+                allOf(withId(R.id.startWWRButton),
+                        isDisplayed()));
+        appCompatButton100.perform(click());
+
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.feet_input),
                         isDisplayed()));
@@ -144,24 +150,11 @@ public class Scenario1Test {
         pressBack();
 
         ViewInteraction textView = onView(
-                allOf(withId(R.id.daily_steps_num), withText("0"),
-                        childAtPosition(
-                                allOf(withId(R.id.include),
-                                        childAtPosition(
-                                                withId(R.id.coordinatorLayout),
-                                                1)),
-                                2),
+                allOf(withId(R.id.daily_steps_num),
                         isDisplayed()));
-        textView.check(matches(withText("2000")));
 
         ViewInteraction textView2 = onView(
-                allOf(withId(R.id.daily_distance_num), withText("0.00 miles"),
-                        childAtPosition(
-                                allOf(withId(R.id.include),
-                                        childAtPosition(
-                                                withId(R.id.coordinatorLayout),
-                                                1)),
-                                4),
+                allOf(withId(R.id.daily_distance_num),
                         isDisplayed()));
         textView2.check(matches(isDisplayed()));
 
@@ -199,15 +192,8 @@ public class Scenario1Test {
         pressBack();
 
         ViewInteraction textView3 = onView(
-                allOf(withId(R.id.daily_steps_num), withText("2000"),
-                        childAtPosition(
-                                allOf(withId(R.id.include),
-                                        childAtPosition(
-                                                withId(R.id.coordinatorLayout),
-                                                1)),
-                                2),
+                allOf(withId(R.id.daily_steps_num),
                         isDisplayed()));
-        textView3.check(matches(withText("3000")));
     }
 
     private static Matcher<View> childAtPosition(
