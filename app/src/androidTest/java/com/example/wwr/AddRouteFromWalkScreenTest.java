@@ -162,11 +162,9 @@ public class AddRouteFromWalkScreenTest {
         @Override
         public void updateStepCount() {
             System.out.println(TAG + "updateStepCount");
-            stepCountActivity.setStepCount(1337);
+            //stepCountActivity.setStepCount(1337);
         }
 
-        @Override
-        public void setFinalStepCount(){}
 
     }
 }

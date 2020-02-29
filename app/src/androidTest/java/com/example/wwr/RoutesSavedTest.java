@@ -241,8 +241,5 @@ public class RoutesSavedTest {
             System.out.println(TAG + "updateStepCount");
         }
 
-        @Override
-        public void setFinalStepCount(){}
-
     }
 }

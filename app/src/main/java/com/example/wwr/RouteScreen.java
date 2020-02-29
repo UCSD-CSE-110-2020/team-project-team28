@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 public class RouteScreen extends AppCompatActivity {
     private UserInfo user;
+    public static int currentPosition;
     public static RecyclerView routeScreenView;
     public static RecyclerView.Adapter routeAdapter;
     public static RecyclerView.LayoutManager routeLayoutManager;
@@ -65,7 +66,7 @@ public class RouteScreen extends AppCompatActivity {
         String currPos = sp.getString("currPos", "0");
 
         // this gets called when we have a walk on an existing route
-        int currentPosition = Integer.parseInt(currPos);
+        currentPosition = Integer.parseInt(currPos);
 
         if (getIntent().getBooleanExtra("updateRoute", false)) {
 

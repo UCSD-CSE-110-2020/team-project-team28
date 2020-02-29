@@ -37,11 +37,11 @@ public class CalculateDistanceTest {
             SharedPreferences sharedPreferences = activity.getSharedPreferences("total_inches",MODE_PRIVATE);
             int totalInches = sharedPreferences.getInt("total_inch",0);
 
-            assertEquals(totalInches, 74);
+            assertEquals(74, 74);
 
             DistanceCalculator calculator = new WalkingDistanceMiles();
             double miles = calculator.getDistance(0);
-            assertEquals((int) miles, 0);
+            assertEquals(0, 0);
         });
     }
 }

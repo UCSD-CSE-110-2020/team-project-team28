@@ -317,9 +317,5 @@ public class Scenario3Test {
             System.out.println(TAG + "updateStepCount");
             //stepCountActivity.setStepCount(1337);
         }
-
-        @Override
-        public void setFinalStepCount(){}
-
     }
 }
