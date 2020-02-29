@@ -194,11 +194,8 @@ public class AddRouteTest2 {
         @Override
         public void updateStepCount() {
             System.out.println(TAG + "updateStepCount");
-            stepCountActivity.setStepCount(1337);
+            //stepCountActivity.setStepCount(1337);
         }
-
-        @Override
-        public void setFinalStepCount(){}
 
     }
 }

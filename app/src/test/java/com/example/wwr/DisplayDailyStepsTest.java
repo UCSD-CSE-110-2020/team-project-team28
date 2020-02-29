@@ -66,12 +66,7 @@ public class DisplayDailyStepsTest {
         @Override
         public void updateStepCount() {
             System.out.println(TAG + "updateStepCount");
-            stepCountActivity.setStepCount(1000);
-        }
-
-        @Override
-        public void setFinalStepCount() {
-            System.out.println(TAG + "updateStepCount");
+            //stepCountActivity.setStepCount(1000);
         }
     }
 }

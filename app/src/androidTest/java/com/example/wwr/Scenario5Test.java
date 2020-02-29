@@ -292,8 +292,5 @@ public class Scenario5Test {
             //stepCountActivity.setStepCount(1337);
         }
 
-        @Override
-        public void setFinalStepCount(){}
-
     }
 }

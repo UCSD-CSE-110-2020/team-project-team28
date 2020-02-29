@@ -20,12 +20,12 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class RouteScreen extends AppCompatActivity {
+    private UserInfo user;
+    public static int currentPosition;
     public static RecyclerView routeScreenView;
     public static RecyclerView.Adapter routeAdapter;
     public static RecyclerView.LayoutManager routeLayoutManager;
     public static ArrayList<Route> routeList;
-    public static int currentPosition;
-    DistanceCalculator walkingDistanceMiles = new WalkingDistanceMiles();
 
     public void loadData() {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
@@ -43,6 +43,7 @@ public class RouteScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        user = new UserInfo(this);
         setContentView(R.layout.activity_route_screen);
         loadData();
 
@@ -53,6 +54,7 @@ public class RouteScreen extends AppCompatActivity {
         routeScreenView.setLayoutManager(routeLayoutManager);
         routeScreenView.setAdapter(routeAdapter);
 
+        // if the route doesn't exist yet
         if (getIntent().getBooleanExtra("goToDetail", false)) {
             Intent intent = new Intent(this, RoutesActivity.class);
             intent.putExtra("newTime", getIntent().getLongExtra("newTime", 0));
@@ -60,24 +62,27 @@ public class RouteScreen extends AppCompatActivity {
             startActivity(intent);
         }
 
+        SharedPreferences sp = getSharedPreferences("prefs", MODE_PRIVATE);
+        String currPos = sp.getString("currPos", "0");
+
+        // this gets called when we have a walk on an existing route
+        currentPosition = Integer.parseInt(currPos);
+
         if (getIntent().getBooleanExtra("updateRoute", false)) {
-            if (this.currentPosition < routeList.size()) {
-                int seconds = (int) getIntent().getLongExtra("newTime", 0) / 1000;
-                SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
-                long previousSteps = prefs.getLong("totalSteps", 0);
+
+            if (currentPosition < routeList.size()) {
+
+                // get the last walk's time, smiles, and distance
+                int seconds = (int)user.getLastIntentionalTime();
+                long currSteps = user.getLastIntentSteps();
+                double miles = user.getLastIntentMiles();
+
                 FitnessService fitnessService = GoogleFitSingleton.getFitnessService();
                 fitnessService.updateStepCount();
-                long steps = MainActivity.startSteps - previousSteps;
-                double miles = walkingDistanceMiles.getDistance(steps);
 
-                routeList.get(this.currentPosition).updateSteps(steps);
-                routeList.get(this.currentPosition).updateSeconds(seconds);
-                routeList.get(this.currentPosition).updateMiles(miles);
-
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putString("last intentional steps", String.format("%.2f", miles));
-                editor.apply();
-
+                routeList.get(currentPosition).updateSteps(currSteps);
+                routeList.get(currentPosition).updateSeconds(seconds);
+                routeList.get(currentPosition).updateMiles(miles);
                 routeAdapter.notifyDataSetChanged();
                 Log.d("updateOldWalk", "Update the old walk.");
                 saveData();
@@ -118,9 +123,6 @@ public class RouteScreen extends AppCompatActivity {
         Log.d("notifyList", "Notify list that the data has been updated.");
     }
 
-    public static void setCurrentPosition(int position) {
-        currentPosition = position;
-    }
 
     public void saveData() {
         SharedPreferences userPref = getSharedPreferences("shared preferences", MODE_PRIVATE);

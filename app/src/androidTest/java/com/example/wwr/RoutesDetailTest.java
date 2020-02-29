@@ -181,8 +181,6 @@ public class RoutesDetailTest {
             //stepCountActivity.setStepCount(1337);
         }
 
-        @Override
-        public void setFinalStepCount(){}
 
     }
 }

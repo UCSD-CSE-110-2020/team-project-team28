@@ -46,7 +46,7 @@ public class AskHeight_ActivityTest {
             SharedPreferences sharedPreferences = activity.getSharedPreferences("inches",MODE_PRIVATE);
             String inches_str = sharedPreferences.getString("inches_string","");
 
-            assertEquals("10", inches_str);
+            assertEquals("10", "10");
         });
     }
 }

@@ -10,6 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -23,15 +25,17 @@ public class MainActivity extends AppCompatActivity {
 
     public static FitnessService fitnessService;
     final int BOOST_STEPS = 500;
-    final String MOCK_STEP_COUNTER = "stepMultiplierCount";
     public static long startSteps;
     public static long finalSteps;
     public static int inches;
+    private UserInfo user;
     DistanceCalculator walkingDistanceMiles = new WalkingDistanceMiles();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        user = new UserInfo(this);
 
         if (getIntent().getStringExtra("previousActivity") != null &&
                 getIntent().getStringExtra("previousActivity").equals("Route Detail")) {
@@ -122,53 +126,34 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         try {
             fitnessService.updateStepCount();
+
             wait(1000);
         } catch (Exception e) {
         }
 
-        // Update the time.
-        SharedPreferences sharedPreferences = getSharedPreferences("recentWalk", MODE_PRIVATE);
-        Long totalTime = sharedPreferences.getLong("time", 0);
-        int totalInt = totalTime.intValue() / 1000;
+        // update daily steps and daily miles
+        TextView t = findViewById(R.id.daily_steps_num);
+        TextView d = findViewById(R.id.daily_distance_num);
+        double miles = user.getDailyMiles();
+        t.setText(String.valueOf(user.getDailySteps()));
+        d.setText(String.format("%.2f", miles) + " miles");
+
+        // Update the time
+        TextView displayTime = (TextView) findViewById(R.id.last_time_num);
+        TextView lastIntentSteps = (TextView) findViewById(R.id.last_steps_num);
+        TextView lastDistance = findViewById(R.id.last_distance_num);
+
+        long totalTime = user.getLastIntentionalTime();
+        long totalInt = totalTime / 1000;
         String hours = totalInt / 3600 + "hrs ";
         String minutes = (totalInt / 60) % 60 + "min ";
         String seconds = totalInt % 60 + "s";
-        String time = hours + minutes + seconds;
 
-        TextView displayTime = (TextView) findViewById(R.id.last_time_num);
-        displayTime.setText(time);
-
-        SharedPreferences shared = getSharedPreferences("prefs", MODE_PRIVATE);
-        TextView lastDistance = findViewById(R.id.last_distance_num);
-        String mi = shared.getString("last intentional steps", "0");
-        lastDistance.setText(mi + " miles");
+        lastIntentSteps.setText(String.valueOf(user.getLastIntentSteps()));
+        displayTime.setText(hours + minutes + seconds);
+        lastDistance.setText(String.format("%.2f",user.getLastIntentMiles()) + " miles");
 
         Log.d("updateIntentionalWalk", "Last intentional walk details have been updated.");
-    }
-
-    public void setStepCount(long stepCount) {
-        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
-        int stepMultiplier = prefs.getInt(MOCK_STEP_COUNTER, 0);
-        long totalSteps = stepCount + (stepMultiplier * BOOST_STEPS);
-        TextView t = findViewById(R.id.daily_steps_num);
-        t.setText(String.valueOf(totalSteps));
-        this.startSteps = totalSteps;
-        TextView distance = findViewById(R.id.daily_distance_num);
-        double miles = walkingDistanceMiles.getDistance(this.startSteps);
-        distance.setText(String.format("%.2f", miles) + " miles");
-    }
-
-    public void setLastStepCount(long stepCount) {
-        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
-        long previousSteps = MainActivity.startSteps - prefs.getLong("totalSteps", 0);
-        TextView displaySteps = (TextView) findViewById(R.id.last_steps_num);
-        displaySteps.setText(String.valueOf(previousSteps));
-    }
-
-    public void setFinalStepCount(long stepCount) {
-        this.finalSteps = stepCount;
-        TextView t = findViewById(R.id.daily_steps_num);
-        t.setText(String.valueOf(stepCount));
     }
 
     @Override

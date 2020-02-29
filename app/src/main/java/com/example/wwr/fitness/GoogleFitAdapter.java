@@ -1,9 +1,14 @@
 package com.example.wwr.fitness;
 
 import androidx.annotation.NonNull;
+
+import android.content.SharedPreferences;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.wwr.MainActivity;
+import com.example.wwr.UserInfo;
+import com.example.wwr.fitness.FitnessService;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.fitness.Fitness;
@@ -13,6 +18,8 @@ import com.google.android.gms.fitness.data.DataType;
 import com.google.android.gms.fitness.data.Field;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class GoogleFitAdapter implements FitnessService {
 
@@ -88,38 +95,8 @@ public class GoogleFitAdapter implements FitnessService {
                                                 ? 0
                                                 : dataSet.getDataPoints().get(0).getValue(Field.FIELD_STEPS).asInt();
                                 Log.d(TAG, "Total steps: " + total);
-                                activity.setStepCount(total);
-                                activity.setLastStepCount(total);
-                            }
-                        })
-                .addOnFailureListener(
-                        new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.d(TAG, "There was a problem getting the step count.", e);
-                            }
-                        });
-    }
-
-    public void setFinalStepCount() {
-        if (account == null) {
-            return;
-        }
-
-        Fitness.getHistoryClient(activity, account)
-                .readDailyTotal(DataType.TYPE_STEP_COUNT_DELTA)
-                .addOnSuccessListener(
-                        new OnSuccessListener<DataSet>() {
-                            @Override
-                            public void onSuccess(DataSet dataSet) {
-                                Log.d(TAG, dataSet.toString());
-                                long total =
-                                        dataSet.isEmpty()
-                                                ? 0
-                                                : dataSet.getDataPoints().get(0).getValue(Field.FIELD_STEPS).asInt();
-
-                                Log.d(TAG, "Total steps: " + total);
-                                activity.setFinalStepCount(total);
+                                UserInfo usr = new UserInfo(activity);
+                                usr.setDailySteps(total);
                             }
                         })
                 .addOnFailureListener(

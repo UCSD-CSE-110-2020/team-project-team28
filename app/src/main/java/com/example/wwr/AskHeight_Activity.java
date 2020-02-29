@@ -24,6 +24,7 @@ public class AskHeight_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_ask_height_);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        UserInfo.createDataBase(this);
 
         enter = (Button)findViewById(R.id.enter_button);
         feet = (EditText) findViewById(R.id.feet_input);
@@ -34,25 +35,14 @@ public class AskHeight_Activity extends AppCompatActivity {
         enter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
-                //Feet input
-                SharedPreferences sharedPreferences = getSharedPreferences("feet",MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("feet_string", feet.getText().toString());
-                editor.apply();
-
-                // Inches input
-                SharedPreferences sharedPreferences1 = getSharedPreferences("inches",MODE_PRIVATE);
-                SharedPreferences.Editor editor1 = sharedPreferences1.edit();
-                editor1.putString("inches_string", inches.getText().toString());
-                editor1.apply();
 
                 int in = Integer.valueOf(inches.getText().toString());
                 int ft = Integer.valueOf(feet.getText().toString());
-                int total_inches = (ft * 12) + in;
+                int totalInches = (ft * 12) + in;
 
-                SharedPreferences sharedPreferences2 = getSharedPreferences("total_inches", MODE_PRIVATE);
+                SharedPreferences sharedPreferences2 = getSharedPreferences("prefs", MODE_PRIVATE);
                 SharedPreferences.Editor editor2 = sharedPreferences2.edit();
-                editor2.putInt("total_inch", total_inches);
+                editor2.putInt("totalInches", totalInches);
                 editor2.apply();
 
                 Log.d("saveHeight", "Height has been saved.");

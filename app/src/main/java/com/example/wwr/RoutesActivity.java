@@ -15,6 +15,7 @@ import java.text.DecimalFormat;
 
 public class RoutesActivity extends AppCompatActivity {
     private final String EMPTY_STRING = "";
+    private UserInfo user;
 
     RadioGroup flatGroup, loopGroup, streetGroup, surfaceGroup, difficultyGroup;
     RadioButton flatButton, loopButton, streetButton, surfaceButton, difficultyButton;
@@ -24,6 +25,7 @@ public class RoutesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        user = new UserInfo(this);
         setContentView(R.layout.activity_routes);
 
         // Initialize all group variables.
@@ -73,6 +75,8 @@ public class RoutesActivity extends AppCompatActivity {
         startLocation = (EditText) findViewById(R.id.startLocationName);
         notes = (EditText) findViewById(R.id.routeNotes);
 
+
+
         // now save values
         SharedPreferences userPref = getSharedPreferences("shared preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = userPref.edit();
@@ -97,25 +101,21 @@ public class RoutesActivity extends AppCompatActivity {
 
         Gson gson = new Gson();
 
-        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
-        SharedPreferences.Editor editor1 = prefs.edit();
-        long previousSteps = prefs.getLong("totalSteps", 0);
-        long steps = MainActivity.startSteps - previousSteps;
-        long seconds = (int) getIntent().getLongExtra("newTime", 0) / 1000;
+        long totalSteps = user.getLastIntentSteps();
+        long seconds = user.getLastIntentionalTime();
 
         if (getIntent().getBooleanExtra("addNewRoute", false)) {
-            steps = 0;
+            totalSteps = 0;
         }
 
-        double miles = this.walkingDistanceMiles.getDistance(steps);
+        double miles = user.getLastIntentMiles();
         String strMiles = new DecimalFormat("#.##").format(miles);
         Double formattedMiles = Double.valueOf(strMiles);
-        editor1.putString("last intentional steps", strMiles);
-        editor1.apply();
 
+        // check to make sure user added a name to the route before saving
         if (!routeName.getText().toString().equals(EMPTY_STRING) ) {
             RouteScreen.addToRouteList(routeName.getText().toString(),
-                    startLocation.getText().toString(), steps, formattedMiles, seconds, flatOrHilly,
+                    startLocation.getText().toString(), totalSteps, formattedMiles, seconds, flatOrHilly,
                     loopOrOut, streetOrTrail, surface, difficulty,
                     notes.getText().toString(), false);
 
