@@ -3,7 +3,6 @@ package com.example.wwr;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.widget.Toast;
 
 /*
  * Whole purpose of this class is to put all stats and methods of a user in one place

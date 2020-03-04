@@ -2,13 +2,10 @@ package com.example.wwr.fitness;
 
 import androidx.annotation.NonNull;
 
-import android.content.SharedPreferences;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.wwr.MainActivity;
 import com.example.wwr.UserInfo;
-import com.example.wwr.fitness.FitnessService;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.fitness.Fitness;
@@ -18,8 +15,6 @@ import com.google.android.gms.fitness.data.DataType;
 import com.google.android.gms.fitness.data.Field;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-
-import static android.content.Context.MODE_PRIVATE;
 
 public class GoogleFitAdapter implements FitnessService {
 

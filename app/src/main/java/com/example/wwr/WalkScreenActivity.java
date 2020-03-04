@@ -1,7 +1,6 @@
 package com.example.wwr;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import com.example.wwr.fitness.FitnessService;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +12,6 @@ import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class WalkScreenActivity extends AppCompatActivity {
     private String mockStartTime;

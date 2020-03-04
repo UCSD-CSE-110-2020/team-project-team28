@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.wwr">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LogInActivity">
+        <activity android:name="com.example.wwr.LogInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,17 +19,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AskHeight_Activity"
+            android:name="com.example.wwr.AskHeight_Activity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".RoutesActivity" />
-        <activity android:name=".RouteDetail" />
-        <activity android:name=".RouteScreen" />
+        <activity android:name="com.example.wwr.RoutesActivity" />
+        <activity android:name="com.example.wwr.RouteDetail" />
+        <activity android:name="com.example.wwr.RouteScreen" />
         <activity
-            android:name=".WalkScreenActivity"
+            android:name="com.example.wwr.WalkScreenActivity"
             android:label="@string/title_activity_walk_screen"
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <service android:name="MyFirebaseMessagingService">
+        <service android:name="com.example.wwr.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
@@ -35,7 +37,7 @@
 
 
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.wwr.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>

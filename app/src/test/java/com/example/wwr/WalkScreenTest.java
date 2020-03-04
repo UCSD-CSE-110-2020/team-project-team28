@@ -1,19 +1,14 @@
 package com.example.wwr;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.widget.Button;
-import android.widget.TextView;
-import androidx.test.core.app.ActivityScenario;
+
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static android.content.Context.MODE_PRIVATE;
 import static java.lang.Thread.sleep;
-import static org.junit.Assert.*;
 
 @RunWith(AndroidJUnit4.class)
 public class WalkScreenTest {

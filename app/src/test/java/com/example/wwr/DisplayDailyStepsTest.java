@@ -2,7 +2,7 @@ package com.example.wwr;
 
 import android.content.Intent;
 import android.widget.Button;
-import android.widget.TextView;
+
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
