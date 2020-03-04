@@ -75,11 +75,19 @@ public class MainActivity extends AppCompatActivity {
             heightActivity();
         }
 
-        Button button = (Button) findViewById(R.id.dailyActivityToRoutes);
-        button.setOnClickListener(new View.OnClickListener() {
+        Button myRouteButton = (Button) findViewById(R.id.dailyActivityToRoutes);
+        myRouteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 switchToRouteScreen();
+            }
+        });
+
+        Button teamRouteButton = (Button) findViewById(R.id.teamRoutesButton);
+        teamRouteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switchToTeamRouteScreen();
             }
         });
 
@@ -119,6 +127,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void switchToRouteScreen() {
         Intent intent = new Intent(this, RouteScreen.class);
+        startActivity(intent);
+    }
+
+    public void switchToTeamRouteScreen() {
+        Intent intent = new Intent(this, TeamRouteScreen.class);
         startActivity(intent);
     }
 

@@ -104,7 +104,7 @@ public class Scenario5Test {
         appCompatButton.perform(click());
 
         ViewInteraction appCompatButton2 = onView(
-                allOf(withId(R.id.dailyActivityToRoutes), withText("ROUTES"),
+                allOf(withId(R.id.dailyActivityToRoutes), withText("MY ROUTES"),
                         childAtPosition(
                                 allOf(withId(R.id.include),
                                         childAtPosition(
@@ -218,7 +218,7 @@ public class Scenario5Test {
         appCompatButton100.perform(click());
 
         ViewInteraction appCompatButton8 = onView(
-                allOf(withId(R.id.dailyActivityToRoutes), withText("ROUTES"),
+                allOf(withId(R.id.dailyActivityToRoutes), withText("MY ROUTES"),
                         childAtPosition(
                                 allOf(withId(R.id.include),
                                         childAtPosition(

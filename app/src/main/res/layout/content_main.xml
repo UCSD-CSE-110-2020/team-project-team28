@@ -12,12 +12,11 @@
         android:id="@+id/dailyActivityToRoutes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/daily_activity_routes_button"
+        android:layout_marginTop="12dp"
+        android:text="MY ROUTES"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/daily_distance_num" />
+        app:layout_constraintTop_toBottomOf="@+id/teamRoutesButton" />
 
     <Button
         android:id="@+id/start_button"
@@ -164,5 +163,15 @@
         app:layout_constraintHorizontal_bias="0.74"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/last_distance" />
+
+    <Button
+        android:id="@+id/teamRoutesButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:text="Team Routes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/daily_distance_num" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -104,7 +104,7 @@ public class RoutesSavedTest {
         appCompatButton.perform(click());
 
         ViewInteraction appCompatButton2 = onView(
-                allOf(withId(R.id.dailyActivityToRoutes), withText("ROUTES"),
+                allOf(withId(R.id.dailyActivityToRoutes), withText("MY ROUTES"),
                         childAtPosition(
                                 allOf(withId(R.id.include),
                                         childAtPosition(

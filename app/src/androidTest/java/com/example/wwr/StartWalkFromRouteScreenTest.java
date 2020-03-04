@@ -78,13 +78,7 @@ public class StartWalkFromRouteScreenTest {
         appCompatButton100.perform(click());
 
         ViewInteraction appCompatButton2 = onView(
-                allOf(withId(R.id.dailyActivityToRoutes), withText("ROUTES"),
-                        childAtPosition(
-                                allOf(withId(R.id.include),
-                                        childAtPosition(
-                                                withId(R.id.coordinatorLayout),
-                                                1)),
-                                0),
+                allOf(withId(R.id.dailyActivityToRoutes), withText("MY ROUTES"),
                         isDisplayed()));
         appCompatButton2.perform(click());
 
