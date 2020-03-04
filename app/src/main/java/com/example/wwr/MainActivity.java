@@ -10,14 +10,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.wwr.fitness.FitnessService;
 import com.example.wwr.fitness.FitnessServiceFactory;
-import com.example.wwr.fitness.GoogleFitAdapter;
 
 public class MainActivity extends AppCompatActivity {
     public static final String FITNESS_SERVICE_KEY = "FITNESS_SERVICE_KEY";
@@ -75,6 +73,14 @@ public class MainActivity extends AppCompatActivity {
             heightActivity();
         }
 
+        Button teamButton = findViewById(R.id.team_page_button);
+        teamButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToTeamPage();
+            }
+        });
+
         Button myRouteButton = (Button) findViewById(R.id.dailyActivityToRoutes);
         myRouteButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void heightActivity(){
+    public void heightActivity() {
         Intent intent = new Intent(this,AskHeight_Activity.class);
         startActivity(intent);
         SharedPreferences prefs = getSharedPreferences("prefs",MODE_PRIVATE);
@@ -132,6 +138,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void switchToTeamRouteScreen() {
         Intent intent = new Intent(this, TeamRouteScreen.class);
+        startActivity(intent);
+    }
+
+    public void goToTeamPage() {
+        Intent intent = new Intent(this, TeamPageScreen.class);
         startActivity(intent);
     }
 
