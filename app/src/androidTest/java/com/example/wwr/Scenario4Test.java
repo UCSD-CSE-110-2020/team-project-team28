@@ -93,7 +93,7 @@ public class Scenario4Test {
         appCompatButton.perform(click());
 
         ViewInteraction appCompatButton2 = onView(
-                allOf(withId(R.id.dailyActivityToRoutes), withText("ROUTES"),
+                allOf(withId(R.id.dailyActivityToRoutes), withText("MY ROUTES"),
                         isDisplayed()));
         appCompatButton2.perform(click());
 
