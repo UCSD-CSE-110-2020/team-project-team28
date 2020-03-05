@@ -1,9 +1,13 @@
 package com.example.wwr;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,11 +17,21 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.wwr.fitness.FitnessService;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class RouteScreen extends AppCompatActivity {
     private UserInfo user;
@@ -26,6 +40,7 @@ public class RouteScreen extends AppCompatActivity {
     public static RecyclerView.Adapter routeAdapter;
     public static RecyclerView.LayoutManager routeLayoutManager;
     public static ArrayList<Route> routeList;
+    public String TAG = "Upload to firestore";
 
     public void loadData() {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
@@ -104,6 +119,40 @@ public class RouteScreen extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), RoutesActivity.class);
                 intent.putExtra("addNewRoute", true);
                 startActivity(intent);
+            }
+        });
+
+        // Upload the routes
+        Button uploadRouteButton = (Button) findViewById(R.id.uploadRouteButton);
+        uploadRouteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                Map<String, Object> user = new HashMap<>();
+                user.put("team", routeList);
+
+                SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
+                String userName = sharedPreferences.getString("userName", "");
+
+                db.collection("routes").document(userName)
+                        .set(user)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Log.d(TAG, "DocumentSnapshot successfully written!");
+                                Toast.makeText(getApplicationContext(), "Routes successfully uploaded!",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.w(TAG, "Error writing document", e);
+                                Toast.makeText(getApplicationContext(), "Upload failed!",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
             }
         });
     }

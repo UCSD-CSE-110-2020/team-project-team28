@@ -16,6 +16,8 @@ import android.widget.EditText;
 public class AskHeight_Activity extends AppCompatActivity {
     private EditText feet;
     private EditText inches;
+    private EditText enterName;
+    private EditText enterEmail;
     private Button enter;
 
     @Override
@@ -28,9 +30,14 @@ public class AskHeight_Activity extends AppCompatActivity {
 
         enter = (Button)findViewById(R.id.enter_button);
         feet = (EditText) findViewById(R.id.feet_input);
-        feet.addTextChangedListener(heightWatcher);
         inches = (EditText) findViewById(R.id.inches_input);
+        enterName = findViewById(R.id.enter_name);
+        enterEmail = findViewById(R.id.enter_email);
+
+        feet.addTextChangedListener(heightWatcher);
         inches.addTextChangedListener(heightWatcher);
+        enterName.addTextChangedListener(heightWatcher);
+        enterEmail.addTextChangedListener(heightWatcher);
 
         enter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,11 +45,15 @@ public class AskHeight_Activity extends AppCompatActivity {
 
                 int in = Integer.valueOf(inches.getText().toString());
                 int ft = Integer.valueOf(feet.getText().toString());
+                String userName = enterName.getText().toString();
+                String userEmail = enterEmail.getText().toString();
                 int totalInches = (ft * 12) + in;
 
                 SharedPreferences sharedPreferences2 = getSharedPreferences("prefs", MODE_PRIVATE);
                 SharedPreferences.Editor editor2 = sharedPreferences2.edit();
                 editor2.putInt("totalInches", totalInches);
+                editor2.putString("userName", userName);
+                editor2.putString("userEmail", userEmail);
                 editor2.apply();
 
                 Log.d("saveHeight", "Height has been saved.");
@@ -60,6 +71,8 @@ public class AskHeight_Activity extends AppCompatActivity {
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             String feetInput = feet.getText().toString().trim();
             String inchInput = inches.getText().toString().trim();
+            String nameInput = enterName.getText().toString().trim();
+            String emailInput = enterEmail.getText().toString().trim();
             enter.setEnabled(!feetInput.isEmpty() && !inchInput.isEmpty());
         }
 
