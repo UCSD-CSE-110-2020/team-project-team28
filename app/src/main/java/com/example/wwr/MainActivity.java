@@ -19,6 +19,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.wwr.chat.ChatService;
 import com.example.wwr.fitness.FitnessService;
 import com.example.wwr.fitness.FitnessServiceFactory;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -58,6 +59,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //pass the test
+        FirebaseApp.initializeApp(this);
+
         super.onCreate(savedInstanceState);
 
         user = new UserInfo(this);

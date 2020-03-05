@@ -63,16 +63,6 @@ public class AddMemberActivity extends AppCompatActivity {
                 .collection(COLLECTION_KEY)
                 .document(DOCUMENT_KEY)
                 .collection(MESSAGES_KEY);
-        //SharedPreferences sharedPreferences = getSharedPreferences("Notifications", Context.MODE_PRIVATE);
-
-        //from = sharedPreferences.getString(FROM_KEY, null);
-
-        //chat = FirebaseFirestore.getInstance()
-        //        .collection(COLLECTION_KEY)
-        //        .document(DOCUMENT_KEY)
-        //        .collection(MESSAGES_KEY);
-
-        //initMessageUpdateListener();
 
         EditText email = findViewById(R.id.teamEmail);
 
@@ -118,67 +108,4 @@ public class AddMemberActivity extends AppCompatActivity {
 
 
     }
-        //email.addTextChangedListener(new TextWatcher() {
-        //    @Override
-        //    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-        //    }
-
-        //    @Override
-        //    public void onTextChanged(CharSequence s, int start, int before, int count) {
-        //        from = s.toString();
-        //        sharedPreferences.edit().putString(FROM_KEY, from).apply();
-        //    }
-
-        //    @Override
-        //    public void afterTextChanged(Editable s) {
-
-        //    }
-        //});
-    }
-
-    //private void sendNotification() {
-    //    if (from == null || from.isEmpty()) {
-    //        Toast.makeText(this, "Enter an email", Toast.LENGTH_LONG).show();
-    //        return;
-    //    }
-
-    //    EditText messageView = findViewById(R.id.teamEmail);
-
-    //    Map<String, String> newMessage = new HashMap<>();
-    //    newMessage.put(FROM_KEY, from);
-    //    newMessage.put(TEXT_KEY, from + " has invited you to a team");
-
-    //    chat.add(newMessage).addOnSuccessListener(result -> {
-    //        messageView.setText("Insert Email");
-    //    }).addOnFailureListener(error -> {
-    //        Log.e(TAG, error.getLocalizedMessage());
-    //    });
-    //}
-
-    //private void initMessageUpdateListener() {
-    //    chat.addSnapshotListener((newChatSnapShot, error) -> {
-    //        if (error != null) {
-    //            Log.e(TAG, error.getLocalizedMessage());
-    //            return;
-    //        }
-
-    //        if (newChatSnapShot != null && !newChatSnapShot.isEmpty()) {
-    //            StringBuilder sb = new StringBuilder();
-    //            List<DocumentChange> documentChanges = newChatSnapShot.getDocumentChanges();
-    //            documentChanges.forEach(change -> {
-    //                QueryDocumentSnapshot document = change.getDocument();
-    //                sb.append(document.get(FROM_KEY));
-    //                sb.append(":\n");
-    //                sb.append(document.get(TEXT_KEY));
-    //                sb.append("\n");
-    //                sb.append("---\n");
-    //            });
-
-
-    //            //TextView chatView = findViewById(R.id.chat);
-    //            //chatView.append(sb.toString());
-    //        }
-    //    });
-    //}
 }

@@ -12,11 +12,6 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        chatServiceFactory = new ChatServiceFactory();
-    }
-
-    public static ChatServiceFactory setChatServiceFactory(ChatServiceFactory csf) {
-        return chatServiceFactory = csf;
         messageFactory = new MessageFactory();
     }
 
