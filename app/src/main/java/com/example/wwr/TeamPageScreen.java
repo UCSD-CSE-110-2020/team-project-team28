@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -58,19 +57,6 @@ public class TeamPageScreen extends AppCompatActivity {
                 TeamPageScreen.super.onBackPressed();
             }
         });
-
-        Button addMember = findViewById(R.id.addMemberButton);
-        addMember.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startAddMember();
-            }
-        });
-    }
-
-    public void startAddMember() {
-        Intent intent = new Intent(this, AddMemberActivity.class);
-        startActivity(intent);
     }
 
 }
