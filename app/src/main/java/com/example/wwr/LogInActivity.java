@@ -25,7 +25,7 @@ public class LogInActivity extends AppCompatActivity {
 
     private static final String TAG = "LogInActivity";
 
-    public FirebaseFirestore db = FirebaseFirestore.getInstance();
+//    public FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
