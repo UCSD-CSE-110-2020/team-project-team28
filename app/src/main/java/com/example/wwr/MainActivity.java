@@ -10,12 +10,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.wwr.fitness.FitnessService;
 import com.example.wwr.fitness.FitnessServiceFactory;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MainActivity extends AppCompatActivity {
     public static final String FITNESS_SERVICE_KEY = "FITNESS_SERVICE_KEY";
@@ -115,6 +117,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    //private void subscribeToNotificationsTopic() {
+    //    FirebaseMessaging.getInstance().subscribeToTopic(DOCUMENT_KEY)
+    //            .addOnCompleteListener(task -> {
+    //                        String msg = "Subscribed to notifications";
+    //                        if (!task.isSuccessful()) {
+    //                            msg = "Subscribe to notifications failed";
+    //                        }
+    //                        Log.d(TAG, msg);
+    //                        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+    //                    }
+    //            );
+    //}
+
 
     public void heightActivity() {
         Intent intent = new Intent(this,AskHeight_Activity.class);
