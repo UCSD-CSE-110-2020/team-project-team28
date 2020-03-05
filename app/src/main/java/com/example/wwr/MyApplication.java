@@ -4,8 +4,10 @@ import android.app.Application;
 
 import com.example.wwr.chat.ChatServiceFactory;
 
+import com.example.wwr.messaging.MessageFactory;
+
 public class MyApplication extends Application {
-    private static ChatServiceFactory chatServiceFactory;
+    private static MessageFactory messageFactory;
 
     @Override
     public void onCreate() {
@@ -13,11 +15,16 @@ public class MyApplication extends Application {
         chatServiceFactory = new ChatServiceFactory();
     }
 
-    public static ChatServiceFactory getChatServiceFactory() {
-        return chatServiceFactory;
-    }
-
     public static ChatServiceFactory setChatServiceFactory(ChatServiceFactory csf) {
         return chatServiceFactory = csf;
+        messageFactory = new MessageFactory();
+    }
+
+    public static MessageFactory getMessageFactory() {
+        return  messageFactory;
+    }
+
+    public static MessageFactory setMessageFactory(MessageFactory mf) {
+        return messageFactory = mf;
     }
 }
