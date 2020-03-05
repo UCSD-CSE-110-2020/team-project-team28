@@ -96,13 +96,13 @@ public class MainActivity extends AppCompatActivity {
                 .createFirebaseFirestoreChatService(COLLECTION_KEY, CHAT_ID, MESSAGES_KEY, FROM_KEY, TEXT_KEY, TIMESTAMP_KEY);
 
 */
-        chat = FirebaseFirestore.getInstance()
+      chat = FirebaseFirestore.getInstance()
                 .collection(COLLECTION_KEY)
                 .document(DOCUMENT_KEY)
                 .collection(MESSAGES_KEY);
 
         subscribeToNotificationsTopic();
-        sendMessage();
+        //sendMessage();
 
 
 

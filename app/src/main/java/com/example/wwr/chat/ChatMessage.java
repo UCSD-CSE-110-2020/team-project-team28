@@ -20,7 +20,7 @@ public class ChatMessage {
     public String toString() {
         return from +
                 ":\n" +
-                text +
+                "invited" + text + "to a team" +
                 "\n" +
                 "---\n";
     }

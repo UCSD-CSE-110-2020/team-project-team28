@@ -28,33 +28,29 @@ import java.util.List;
 import java.util.Map;
 
 public class AddMemberActivity extends AppCompatActivity {
+    private static final String TAG = "MainActivity";
 
-    //String TAG = AddMemberActivity.class.getSimpleName();
+    String from="Sarah";
+    String COLLECTION_KEY = "chats";
+    String CHAT_ID = "chat1";
+    String DOCUMENT_KEY = "chat1";
+    String MESSAGES_KEY = "messages";
+    String FROM_KEY = "from";
+    String TEXT_KEY = "text";
+    String TIMESTAMP_KEY = "timestamp";
 
-    //String COLLECTION_KEY = "chats";
-    //String DOCUMENT_KEY = "chats1";
-    //String MESSAGES_KEY = "messages";
-    //String FROM_KEY = "from";
-    //String TEXT_KEY = "text";
-    //String TIMESTAMP_KEY = "timestamp";
-
-    //CollectionReference chat;
-    //String from;
+    CollectionReference chat;
+    String email_str;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_member);
-        //SharedPreferences sharedPreferences = getSharedPreferences("Notifications", Context.MODE_PRIVATE);
 
-        //from = sharedPreferences.getString(FROM_KEY, null);
-
-        //chat = FirebaseFirestore.getInstance()
-        //        .collection(COLLECTION_KEY)
-        //        .document(DOCUMENT_KEY)
-        //        .collection(MESSAGES_KEY);
-
-        //initMessageUpdateListener();
+        chat = FirebaseFirestore.getInstance()
+                .collection(COLLECTION_KEY)
+                .document(DOCUMENT_KEY)
+                .collection(MESSAGES_KEY);
 
         EditText email = findViewById(R.id.teamEmail);
 
@@ -64,6 +60,7 @@ public class AddMemberActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //something about sending this user the notification
                 //sendNotification();
+                //sendMessage();
             }
         });
 
@@ -71,71 +68,33 @@ public class AddMemberActivity extends AppCompatActivity {
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                email_str = email.getText().toString();
+                sendMessage();
                 finish();
             }
         });
 
-        //email.addTextChangedListener(new TextWatcher() {
-        //    @Override
-        //    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-        //    }
-
-        //    @Override
-        //    public void onTextChanged(CharSequence s, int start, int before, int count) {
-        //        from = s.toString();
-        //        sharedPreferences.edit().putString(FROM_KEY, from).apply();
-        //    }
-
-        //    @Override
-        //    public void afterTextChanged(Editable s) {
-
-        //    }
-        //});
     }
 
-    //private void sendNotification() {
-    //    if (from == null || from.isEmpty()) {
-    //        Toast.makeText(this, "Enter an email", Toast.LENGTH_LONG).show();
-    //        return;
-    //    }
+    private void sendMessage() {
+        if (from == null || from.isEmpty()) {
+            Toast.makeText(this, "Enter your name", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-    //    EditText messageView = findViewById(R.id.teamEmail);
+        //EditText messageView = findViewById(R.id.text_message);
 
-    //    Map<String, String> newMessage = new HashMap<>();
-    //    newMessage.put(FROM_KEY, from);
-    //    newMessage.put(TEXT_KEY, from + " has invited you to a team");
+        Map<String, String> newMessage = new HashMap<>();
+        newMessage.put(FROM_KEY, from);
+        newMessage.put(TEXT_KEY, email_str);
 
-    //    chat.add(newMessage).addOnSuccessListener(result -> {
-    //        messageView.setText("Insert Email");
-    //    }).addOnFailureListener(error -> {
-    //        Log.e(TAG, error.getLocalizedMessage());
-    //    });
-    //}
-
-    //private void initMessageUpdateListener() {
-    //    chat.addSnapshotListener((newChatSnapShot, error) -> {
-    //        if (error != null) {
-    //            Log.e(TAG, error.getLocalizedMessage());
-    //            return;
-    //        }
-
-    //        if (newChatSnapShot != null && !newChatSnapShot.isEmpty()) {
-    //            StringBuilder sb = new StringBuilder();
-    //            List<DocumentChange> documentChanges = newChatSnapShot.getDocumentChanges();
-    //            documentChanges.forEach(change -> {
-    //                QueryDocumentSnapshot document = change.getDocument();
-    //                sb.append(document.get(FROM_KEY));
-    //                sb.append(":\n");
-    //                sb.append(document.get(TEXT_KEY));
-    //                sb.append("\n");
-    //                sb.append("---\n");
-    //            });
+        chat.add(newMessage).addOnSuccessListener(result -> {
+            //messageView.setText("");
+        }).addOnFailureListener(error -> {
+            Log.e(TAG, error.getLocalizedMessage());
+        });
 
 
-    //            //TextView chatView = findViewById(R.id.chat);
-    //            //chatView.append(sb.toString());
-    //        }
-    //    });
-    //}
+    }
 }
