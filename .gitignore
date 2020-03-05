@@ -4,3 +4,5 @@
 *.iml
 local.properties
 *.DS*
+*.json
+build/intermediates/lint-cache/maven.google/androidx/navigation/*

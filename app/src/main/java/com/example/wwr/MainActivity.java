@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,8 +17,17 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.wwr.chat.ChatService;
 import com.example.wwr.fitness.FitnessService;
 import com.example.wwr.fitness.FitnessServiceFactory;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.messaging.FirebaseMessaging;
+
+import java.util.HashMap;
+import java.util.Map;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
@@ -40,8 +50,29 @@ public class MainActivity extends AppCompatActivity {
     private UserInfo user;
     DistanceCalculator walkingDistanceMiles = new WalkingDistanceMiles();
 
+
+    //new
+    public static final String CHAT_MESSAGE_SERVICE_EXTRA = "CHAT_MESSAGE_SERVICE";
+
+    private static final String FIRESTORE_CHAT_SERVICE = "FIRESTORE_CHAT_SERVICE";
+
+    String COLLECTION_KEY = "chats";
+    String CHAT_ID = "chat1";
+    String DOCUMENT_KEY = "chat1";
+    String MESSAGES_KEY = "messages";
+    String FROM_KEY = "from";
+    String TEXT_KEY = "text";
+    String TIMESTAMP_KEY = "timestamp";
+
+    CollectionReference chat;
+    String from="Sarah";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //pass the test
+        FirebaseApp.initializeApp(this);
+
         super.onCreate(savedInstanceState);
         user = new UserInfo(this);
 
@@ -64,9 +95,30 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
+
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+
+
+        //new
+        /*chat = MyApplication
+                .getChatServiceFactory()
+                .createFirebaseFirestoreChatService(COLLECTION_KEY, CHAT_ID, MESSAGES_KEY, FROM_KEY, TEXT_KEY, TIMESTAMP_KEY);
+
+*/
+      chat = FirebaseFirestore.getInstance()
+                .collection(COLLECTION_KEY)
+                .document(DOCUMENT_KEY)
+                .collection(MESSAGES_KEY);
+
+        subscribeToNotificationsTopic();
+        //sendMessage();
+
+
 
         String fitnessServiceKey = getIntent().getStringExtra(FITNESS_SERVICE_KEY);
         fitnessService = FitnessServiceFactory.create(fitnessServiceKey, this);
@@ -124,6 +176,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    //private void subscribeToNotificationsTopic() {
+    //    FirebaseMessaging.getInstance().subscribeToTopic(DOCUMENT_KEY)
+    //            .addOnCompleteListener(task -> {
+    //                        String msg = "Subscribed to notifications";
+    //                        if (!task.isSuccessful()) {
+    //                            msg = "Subscribe to notifications failed";
+    //                        }
+    //                        Log.d(TAG, msg);
+    //                        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+    //                    }
+    //            );
+    //}
+
 
     public void heightActivity() {
         Intent intent = new Intent(this,AskHeight_Activity.class);
@@ -230,5 +296,42 @@ public class MainActivity extends AppCompatActivity {
     public void setCount(long stepCount) {
         TextView t = findViewById(R.id.daily_steps_num);
         t.setText(String.valueOf(stepCount));
+    }
+
+
+
+    ///// new
+    private void sendMessage() {
+        if (from == null || from.isEmpty()) {
+            Toast.makeText(this, "Enter your name", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        //EditText messageView = findViewById(R.id.text_message);
+
+        Map<String, String> newMessage = new HashMap<>();
+        newMessage.put(FROM_KEY, from);
+        newMessage.put(TEXT_KEY,"message1");
+
+        chat.add(newMessage).addOnSuccessListener(result -> {
+            //messageView.setText("");
+        }).addOnFailureListener(error -> {
+            Log.e(TAG, error.getLocalizedMessage());
+        });
+    }
+
+
+
+    private void subscribeToNotificationsTopic() {
+        FirebaseMessaging.getInstance().subscribeToTopic(CHAT_ID)
+                .addOnCompleteListener(task -> {
+                            String msg = "Subscribed to notifications";
+                            if (!task.isSuccessful()) {
+                                msg = "Subscribe to notifications failed";
+                            }
+                            Log.d(TAG, msg);
+                            Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                        }
+                );
     }
 }

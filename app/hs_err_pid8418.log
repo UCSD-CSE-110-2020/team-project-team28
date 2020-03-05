@@ -1,0 +1,1316 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGSEGV (0xb) at pc=0x00000001090efca0, pid=8418, tid=37123
+#
+# JRE version: Java(TM) SE Runtime Environment (10.0.2+13) (build 10.0.2+13)
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (10.0.2+13, mixed mode, tiered, compressed oops, g1 gc, bsd-amd64)
+# Problematic frame:
+# V  [libjvm.dylib+0x4efca0]  Klass::java_mirror() const+0x4
+#
+# No core dump will be written. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.java.com/bugreport/crash.jsp
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -Djava.awt.headless=true -Dorg.gradle.native=false -Xmx512m -Dfile.encoding=UTF-8 -Duser.country=US -Duser.language=en -Duser.variant -ea worker.org.gradle.process.internal.worker.GradleWorkerMain 'Gradle Test Executor 11'
+
+Host: MacBookPro15,2 x86_64 2300 MHz, 8 cores, 8G, Darwin 19.3.0
+Time: Wed Mar  4 22:18:41 2020 PST elapsed time: 8 seconds (0d 0h 0m 8s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007fcfbd216800):  JavaThread "SDK 28 Main Thread" [_thread_in_vm, id=37123, stack(0x0000700006da9000,0x0000700006ea9000)]
+
+Stack: [0x0000700006da9000,0x0000700006ea9000],  sp=0x0000700006e95330,  free space=944k
+Native frames: (J=compiled Java code, A=aot compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [libjvm.dylib+0x4efca0]  Klass::java_mirror() const+0x4
+V  [libjvm.dylib+0x3dd31a]  java_lang_Throwable::fill_in_stack_trace(Handle, methodHandle const&, Thread*)+0x802
+V  [libjvm.dylib+0x3dd522]  java_lang_Throwable::fill_in_stack_trace(Handle, methodHandle const&)+0x4e
+V  [libjvm.dylib+0x44b47f]  JVM_FillInStackTrace+0x8b
+C  [libjava.dylib+0x9f72]  Java_java_lang_Throwable_fillInStackTrace+0xe
+J 573  java.lang.Throwable.fillInStackTrace(I)Ljava/lang/Throwable; java.base@10.0.2 (0 bytes) @ 0x000000011da2886b [0x000000011da287c0+0x00000000000000ab]
+J 6496 c2 java.lang.Throwable.fillInStackTrace()Ljava/lang/Throwable; java.base@10.0.2 (29 bytes) @ 0x000000011df451d8 [0x000000011df45140+0x0000000000000098]
+J 1945 c1 java.lang.Throwable.<init>(Ljava/lang/String;Ljava/lang/Throwable;)V java.base@10.0.2 (39 bytes) @ 0x00000001168b107c [0x00000001168b0e80+0x00000000000001fc]
+J 733 c1 java.lang.ClassNotFoundException.<init>(Ljava/lang/String;)V java.base@10.0.2 (7 bytes) @ 0x00000001165e9954 [0x00000001165e9860+0x00000000000000f4]
+J 444 c1 jdk.internal.loader.BuiltinClassLoader.loadClass(Ljava/lang/String;Z)Ljava/lang/Class; java.base@10.0.2 (22 bytes) @ 0x0000000116564d1c [0x0000000116564b60+0x00000000000001bc]
+J 687 c1 java.lang.ClassLoader.loadClass(Ljava/lang/String;Z)Ljava/lang/Class; java.base@10.0.2 (122 bytes) @ 0x00000001165cd73c [0x00000001165cd160+0x00000000000005dc]
+J 346 c1 java.lang.ClassLoader.loadClass(Ljava/lang/String;)Ljava/lang/Class; java.base@10.0.2 (7 bytes) @ 0x000000011653dd3c [0x000000011653dc40+0x00000000000000fc]
+v  ~StubRoutines::call_stub
+V  [libjvm.dylib+0x3d8c0e]  JavaCalls::call_helper(JavaValue*, methodHandle const&, JavaCallArguments*, Thread*)+0x216
+V  [libjvm.dylib+0x3d8222]  JavaCalls::call_virtual(JavaValue*, Klass*, Symbol*, Symbol*, JavaCallArguments*, Thread*)+0x12a
+V  [libjvm.dylib+0x3d8371]  JavaCalls::call_virtual(JavaValue*, Handle, Klass*, Symbol*, Symbol*, Handle, Thread*)+0x79
+V  [libjvm.dylib+0x7163a8]  SystemDictionary::load_instance_class(Symbol*, Handle, Thread*)+0x250
+V  [libjvm.dylib+0x715445]  SystemDictionary::resolve_instance_class_or_null(Symbol*, Handle, Handle, Thread*)+0x4fd
+V  [libjvm.dylib+0x714b63]  SystemDictionary::resolve_or_fail(Symbol*, Handle, Handle, bool, Thread*)+0x1b
+V  [libjvm.dylib+0x283f64]  ConstantPool::klass_at_impl(constantPoolHandle const&, int, bool, Thread*)+0x10c
+V  [libjvm.dylib+0x69bffa]  ConstantPool::klass_at(int, Thread*)+0x4e
+V  [libjvm.dylib+0x50fba9]  LinkInfo::LinkInfo(constantPoolHandle const&, int, methodHandle const&, Thread*)+0x3f
+V  [libjvm.dylib+0x51137a]  LinkResolver::resolve_field_access(fieldDescriptor&, constantPoolHandle const&, int, methodHandle const&, Bytecodes::Code, Thread*)+0x22
+V  [libjvm.dylib+0x3cf875]  InterpreterRuntime::resolve_get_put(JavaThread*, Bytecodes::Code)+0x191
+V  [libjvm.dylib+0x3d074f]  InterpreterRuntime::resolve_from_cache(JavaThread*, Bytecodes::Code)+0x53
+j  androidx.cardview.widget.CardView.$$robo$$androidx_cardview_widget_CardView$__constructor__(Landroid/content/Context;Landroid/util/AttributeSet;I)V+36
+J 7078 c1 java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;I)V java.base@10.0.2 (20 bytes) @ 0x000000011715fa6c [0x000000011715f680+0x00000000000003ec]
+j  java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;I)V+45 java.base@10.0.2
+J 7338 c1 java.lang.invoke.LambdaForm$MH.reinvoke(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;I)V java.base@10.0.2 (29 bytes) @ 0x0000000117268324 [0x0000000117267e80+0x00000000000004a4]
+j  java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;I)V+82 java.base@10.0.2
+J 6625 c1 java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;ILjava/lang/Object;)V java.base@10.0.2 (23 bytes) @ 0x0000000116ff11d4 [0x0000000116ff0e00+0x00000000000003d4]
+j  androidx.cardview.widget.CardView.<init>(Landroid/content/Context;Landroid/util/AttributeSet;I)V+15
+j  androidx.cardview.widget.CardView.<init>(Landroid/content/Context;Landroid/util/AttributeSet;)V+6
+v  ~StubRoutines::call_stub
+V  [libjvm.dylib+0x3d8c0e]  JavaCalls::call_helper(JavaValue*, methodHandle const&, JavaCallArguments*, Thread*)+0x216
+V  [libjvm.dylib+0x69b6ba]  invoke(InstanceKlass*, methodHandle const&, Handle, bool, objArrayHandle, BasicType, objArrayHandle, bool, Thread*)+0x71d
+V  [libjvm.dylib+0x69bcc1]  Reflection::invoke_constructor(oopDesc*, objArrayHandle, Thread*)+0x10d
+V  [libjvm.dylib+0x4562ec]  JVM_NewInstanceFromConstructor+0xb3
+J 3750  jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Ljava/lang/reflect/Constructor;[Ljava/lang/Object;)Ljava/lang/Object; java.base@10.0.2 (0 bytes) @ 0x000000011dc17b18 [0x000000011dc17a40+0x00000000000000d8]
+J 3749 c1 jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance([Ljava/lang/Object;)Ljava/lang/Object; java.base@10.0.2 (89 bytes) @ 0x0000000116b5deec [0x0000000116b5db40+0x00000000000003ac]
+J 2084 c1 jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance([Ljava/lang/Object;)Ljava/lang/Object; java.base@10.0.2 (9 bytes) @ 0x0000000116916de4 [0x0000000116916ce0+0x0000000000000104]
+J 2067 c1 java.lang.reflect.Constructor.newInstance([Ljava/lang/Object;)Ljava/lang/Object; java.base@10.0.2 (76 bytes) @ 0x0000000116904e0c [0x0000000116904ba0+0x000000000000026c]
+j  android.view.LayoutInflater.$$robo$$android_view_LayoutInflater$createView(Ljava/lang/String;Ljava/lang/String;Landroid/util/AttributeSet;)Landroid/view/View;+346
+J 6988 c1 java.lang.invoke.DirectMethodHandle$Holder.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; java.base@10.0.2 (20 bytes) @ 0x000000011711076c [0x0000000117110380+0x00000000000003ec]
+J 6808 c1 java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; java.base@10.0.2 (83 bytes) @ 0x0000000117040d34 [0x00000001170409a0+0x0000000000000394]
+J 7208 c1 java.lang.invoke.DelegatingMethodHandle$Holder.delegate(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; java.base@10.0.2 (23 bytes) @ 0x00000001171caa0c [0x00000001171ca600+0x000000000000040c]
+J 5394 c1 java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; java.base@10.0.2 (109 bytes) @ 0x0000000116d2f944 [0x0000000116d2ef80+0x00000000000009c4]
+J 5393 c1 java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; java.base@10.0.2 (23 bytes) @ 0x0000000116d2e9b4 [0x0000000116d2e500+0x00000000000004b4]
+j  android.view.LayoutInflater.createView(Ljava/lang/String;Ljava/lang/String;Landroid/util/AttributeSet;)Landroid/view/View;+4
+j  android.view.LayoutInflater.$$robo$$android_view_LayoutInflater$createViewFromTag(Landroid/view/View;Ljava/lang/String;Landroid/content/Context;Landroid/util/AttributeSet;Z)Landroid/view/View;+218
+j  java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;I)Ljava/lang/Object;+20 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;I)Ljava/lang/Object;+49 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.delegate(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;I)Ljava/lang/Object;+23 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;I)Ljava/lang/Object;+90 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;+23 java.base@10.0.2
+j  android.view.LayoutInflater.createViewFromTag(Landroid/view/View;Ljava/lang/String;Landroid/content/Context;Landroid/util/AttributeSet;Z)Landroid/view/View;+8
+j  android.view.LayoutInflater.$$robo$$android_view_LayoutInflater$createViewFromTag(Landroid/view/View;Ljava/lang/String;Landroid/content/Context;Landroid/util/AttributeSet;)Landroid/view/View;+7
+J 7184 c1 java.lang.invoke.DirectMethodHandle$Holder.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; java.base@10.0.2 (22 bytes) @ 0x00000001171b32dc [0x00000001171b2f00+0x00000000000003dc]
+J 7183 c1 java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; java.base@10.0.2 (87 bytes) @ 0x00000001171b2434 [0x00000001171b2020+0x0000000000000414]
+j  java.lang.invoke.DelegatingMethodHandle$Holder.delegate(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;+21 java.base@10.0.2
+J 7182 c1 java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; java.base@10.0.2 (115 bytes) @ 0x00000001171b13dc [0x00000001171b0a00+0x00000000000009dc]
+J 7181 c1 java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; java.base@10.0.2 (25 bytes) @ 0x00000001171b043c [0x00000001171aff80+0x00000000000004bc]
+j  android.view.LayoutInflater.createViewFromTag(Landroid/view/View;Ljava/lang/String;Landroid/content/Context;Landroid/util/AttributeSet;)Landroid/view/View;+6
+j  android.view.LayoutInflater.$$robo$$android_view_LayoutInflater$inflate(Lorg/xmlpull/v1/XmlPullParser;Landroid/view/ViewGroup;Z)Landroid/view/View;+169
+j  java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;I)Ljava/lang/Object;+16 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;I)Ljava/lang/Object;+45 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.reinvoke(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;I)Ljava/lang/Object;+25 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;I)Ljava/lang/Object;+82 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;+19 java.base@10.0.2
+j  android.view.LayoutInflater.inflate(Lorg/xmlpull/v1/XmlPullParser;Landroid/view/ViewGroup;Z)Landroid/view/View;+4
+j  android.view.LayoutInflater.$$robo$$android_view_LayoutInflater$inflate(ILandroid/view/ViewGroup;Z)Landroid/view/View;+22
+j  java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;ILjava/lang/Object;I)Ljava/lang/Object;+16 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;ILjava/lang/Object;I)Ljava/lang/Object;+45 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.reinvoke(Ljava/lang/Object;Ljava/lang/Object;ILjava/lang/Object;I)Ljava/lang/Object;+25 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;ILjava/lang/Object;I)Ljava/lang/Object;+82 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;ILjava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;+19 java.base@10.0.2
+j  android.view.LayoutInflater.inflate(ILandroid/view/ViewGroup;Z)Landroid/view/View;+4
+j  com.example.wwr.RouteScreenAdapter.onCreateViewHolder(Landroid/view/ViewGroup;I)Lcom/example/wwr/RouteScreenAdapter$RouteScreenViewHolder;+11
+j  com.example.wwr.RouteScreenAdapter.onCreateViewHolder(Landroid/view/ViewGroup;I)Landroidx/recyclerview/widget/RecyclerView$ViewHolder;+3
+j  androidx.recyclerview.widget.RecyclerView$Adapter.$$robo$$androidx_recyclerview_widget_RecyclerView_Adapter$createViewHolder(Landroid/view/ViewGroup;I)Landroidx/recyclerview/widget/RecyclerView$ViewHolder;+8
+J 6428 c1 java.lang.invoke.DirectMethodHandle$Holder.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;I)Ljava/lang/Object; java.base@10.0.2 (18 bytes) @ 0x0000000116f6436c [0x0000000116f63f80+0x00000000000003ec]
+J 5344 c1 java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;I)Ljava/lang/Object; java.base@10.0.2 (79 bytes) @ 0x0000000116d0041c [0x0000000116d00020+0x00000000000003fc]
+J 6364 c1 java.lang.invoke.LambdaForm$MH.reinvoke(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;I)Ljava/lang/Object; java.base@10.0.2 (27 bytes) @ 0x0000000116f4e714 [0x0000000116f4e280+0x0000000000000494]
+J 5000 c1 java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;I)Ljava/lang/Object; java.base@10.0.2 (103 bytes) @ 0x0000000116501994 [0x00000001165016c0+0x00000000000002d4]
+J 4999 c1 java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object; java.base@10.0.2 (21 bytes) @ 0x00000001164dc07c [0x00000001164dbfe0+0x000000000000009c]
+j  androidx.recyclerview.widget.RecyclerView$Adapter.createViewHolder(Landroid/view/ViewGroup;I)Landroidx/recyclerview/widget/RecyclerView$ViewHolder;+3
+j  androidx.recyclerview.widget.RecyclerView$Recycler.$$robo$$androidx_recyclerview_widget_RecyclerView_Recycler$tryGetViewHolderForPositionByDeadline(IZJ)Landroidx/recyclerview/widget/RecyclerView$ViewHolder;+604
+j  java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;IIJ)Ljava/lang/Object;+16 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;IIJ)Ljava/lang/Object;+45 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.reinvoke(Ljava/lang/Object;Ljava/lang/Object;IIJ)Ljava/lang/Object;+25 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;IIJ)Ljava/lang/Object;+82 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;IIJLjava/lang/Object;)Ljava/lang/Object;+19 java.base@10.0.2
+j  androidx.recyclerview.widget.RecyclerView$Recycler.tryGetViewHolderForPositionByDeadline(IZJ)Landroidx/recyclerview/widget/RecyclerView$ViewHolder;+4
+j  androidx.recyclerview.widget.RecyclerView$Recycler.$$robo$$androidx_recyclerview_widget_RecyclerView_Recycler$getViewForPosition(IZ)Landroid/view/View;+6
+J 5343 c1 java.lang.invoke.DirectMethodHandle$Holder.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;II)Ljava/lang/Object; java.base@10.0.2 (18 bytes) @ 0x0000000116cfc19c [0x0000000116cfbe00+0x000000000000039c]
+J 5306 c1 java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;II)Ljava/lang/Object; java.base@10.0.2 (79 bytes) @ 0x0000000116ce8bbc [0x0000000116ce8820+0x000000000000039c]
+j  java.lang.invoke.LambdaForm$MH.reinvoke(Ljava/lang/Object;Ljava/lang/Object;II)Ljava/lang/Object;+23 java.base@10.0.2
+J 5039 c1 java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;II)Ljava/lang/Object; java.base@10.0.2 (103 bytes) @ 0x0000000116516b94 [0x00000001165168c0+0x00000000000002d4]
+J 5038 c1 java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;IILjava/lang/Object;)Ljava/lang/Object; java.base@10.0.2 (21 bytes) @ 0x00000001164f2c7c [0x00000001164f2be0+0x000000000000009c]
+j  androidx.recyclerview.widget.RecyclerView$Recycler.getViewForPosition(IZ)Landroid/view/View;+3
+...<more frames>...
+
+Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
+J 573  java.lang.Throwable.fillInStackTrace(I)Ljava/lang/Throwable; java.base@10.0.2 (0 bytes) @ 0x000000011da287f8 [0x000000011da287c0+0x0000000000000038]
+J 6496 c2 java.lang.Throwable.fillInStackTrace()Ljava/lang/Throwable; java.base@10.0.2 (29 bytes) @ 0x000000011df451d8 [0x000000011df45140+0x0000000000000098]
+J 1945 c1 java.lang.Throwable.<init>(Ljava/lang/String;Ljava/lang/Throwable;)V java.base@10.0.2 (39 bytes) @ 0x00000001168b107c [0x00000001168b0e80+0x00000000000001fc]
+J 733 c1 java.lang.ClassNotFoundException.<init>(Ljava/lang/String;)V java.base@10.0.2 (7 bytes) @ 0x00000001165e9954 [0x00000001165e9860+0x00000000000000f4]
+J 444 c1 jdk.internal.loader.BuiltinClassLoader.loadClass(Ljava/lang/String;Z)Ljava/lang/Class; java.base@10.0.2 (22 bytes) @ 0x0000000116564d1c [0x0000000116564b60+0x00000000000001bc]
+J 687 c1 java.lang.ClassLoader.loadClass(Ljava/lang/String;Z)Ljava/lang/Class; java.base@10.0.2 (122 bytes) @ 0x00000001165cd73c [0x00000001165cd160+0x00000000000005dc]
+J 346 c1 java.lang.ClassLoader.loadClass(Ljava/lang/String;)Ljava/lang/Class; java.base@10.0.2 (7 bytes) @ 0x000000011653dd3c [0x000000011653dc40+0x00000000000000fc]
+v  ~StubRoutines::call_stub
+j  androidx.cardview.widget.CardView.$$robo$$androidx_cardview_widget_CardView$__constructor__(Landroid/content/Context;Landroid/util/AttributeSet;I)V+36
+J 7078 c1 java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;I)V java.base@10.0.2 (20 bytes) @ 0x000000011715fa6c [0x000000011715f680+0x00000000000003ec]
+j  java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;I)V+45 java.base@10.0.2
+J 7338 c1 java.lang.invoke.LambdaForm$MH.reinvoke(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;I)V java.base@10.0.2 (29 bytes) @ 0x0000000117268324 [0x0000000117267e80+0x00000000000004a4]
+j  java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;I)V+82 java.base@10.0.2
+J 6625 c1 java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;ILjava/lang/Object;)V java.base@10.0.2 (23 bytes) @ 0x0000000116ff11d4 [0x0000000116ff0e00+0x00000000000003d4]
+j  androidx.cardview.widget.CardView.<init>(Landroid/content/Context;Landroid/util/AttributeSet;I)V+15
+j  androidx.cardview.widget.CardView.<init>(Landroid/content/Context;Landroid/util/AttributeSet;)V+6
+v  ~StubRoutines::call_stub
+J 3750  jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Ljava/lang/reflect/Constructor;[Ljava/lang/Object;)Ljava/lang/Object; java.base@10.0.2 (0 bytes) @ 0x000000011dc17aa3 [0x000000011dc17a40+0x0000000000000063]
+J 3749 c1 jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance([Ljava/lang/Object;)Ljava/lang/Object; java.base@10.0.2 (89 bytes) @ 0x0000000116b5deec [0x0000000116b5db40+0x00000000000003ac]
+J 2084 c1 jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance([Ljava/lang/Object;)Ljava/lang/Object; java.base@10.0.2 (9 bytes) @ 0x0000000116916de4 [0x0000000116916ce0+0x0000000000000104]
+J 2067 c1 java.lang.reflect.Constructor.newInstance([Ljava/lang/Object;)Ljava/lang/Object; java.base@10.0.2 (76 bytes) @ 0x0000000116904e0c [0x0000000116904ba0+0x000000000000026c]
+j  android.view.LayoutInflater.$$robo$$android_view_LayoutInflater$createView(Ljava/lang/String;Ljava/lang/String;Landroid/util/AttributeSet;)Landroid/view/View;+346
+J 6988 c1 java.lang.invoke.DirectMethodHandle$Holder.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; java.base@10.0.2 (20 bytes) @ 0x000000011711076c [0x0000000117110380+0x00000000000003ec]
+J 6808 c1 java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; java.base@10.0.2 (83 bytes) @ 0x0000000117040d34 [0x00000001170409a0+0x0000000000000394]
+J 7208 c1 java.lang.invoke.DelegatingMethodHandle$Holder.delegate(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; java.base@10.0.2 (23 bytes) @ 0x00000001171caa0c [0x00000001171ca600+0x000000000000040c]
+J 5394 c1 java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; java.base@10.0.2 (109 bytes) @ 0x0000000116d2f944 [0x0000000116d2ef80+0x00000000000009c4]
+J 5393 c1 java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; java.base@10.0.2 (23 bytes) @ 0x0000000116d2e9b4 [0x0000000116d2e500+0x00000000000004b4]
+j  android.view.LayoutInflater.createView(Ljava/lang/String;Ljava/lang/String;Landroid/util/AttributeSet;)Landroid/view/View;+4
+j  android.view.LayoutInflater.$$robo$$android_view_LayoutInflater$createViewFromTag(Landroid/view/View;Ljava/lang/String;Landroid/content/Context;Landroid/util/AttributeSet;Z)Landroid/view/View;+218
+j  java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;I)Ljava/lang/Object;+20 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;I)Ljava/lang/Object;+49 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.delegate(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;I)Ljava/lang/Object;+23 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;I)Ljava/lang/Object;+90 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;+23 java.base@10.0.2
+j  android.view.LayoutInflater.createViewFromTag(Landroid/view/View;Ljava/lang/String;Landroid/content/Context;Landroid/util/AttributeSet;Z)Landroid/view/View;+8
+j  android.view.LayoutInflater.$$robo$$android_view_LayoutInflater$createViewFromTag(Landroid/view/View;Ljava/lang/String;Landroid/content/Context;Landroid/util/AttributeSet;)Landroid/view/View;+7
+J 7184 c1 java.lang.invoke.DirectMethodHandle$Holder.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; java.base@10.0.2 (22 bytes) @ 0x00000001171b32dc [0x00000001171b2f00+0x00000000000003dc]
+J 7183 c1 java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; java.base@10.0.2 (87 bytes) @ 0x00000001171b2434 [0x00000001171b2020+0x0000000000000414]
+j  java.lang.invoke.DelegatingMethodHandle$Holder.delegate(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;+21 java.base@10.0.2
+J 7182 c1 java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; java.base@10.0.2 (115 bytes) @ 0x00000001171b13dc [0x00000001171b0a00+0x00000000000009dc]
+J 7181 c1 java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; java.base@10.0.2 (25 bytes) @ 0x00000001171b043c [0x00000001171aff80+0x00000000000004bc]
+j  android.view.LayoutInflater.createViewFromTag(Landroid/view/View;Ljava/lang/String;Landroid/content/Context;Landroid/util/AttributeSet;)Landroid/view/View;+6
+j  android.view.LayoutInflater.$$robo$$android_view_LayoutInflater$inflate(Lorg/xmlpull/v1/XmlPullParser;Landroid/view/ViewGroup;Z)Landroid/view/View;+169
+j  java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;I)Ljava/lang/Object;+16 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;I)Ljava/lang/Object;+45 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.reinvoke(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;I)Ljava/lang/Object;+25 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;I)Ljava/lang/Object;+82 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;+19 java.base@10.0.2
+j  android.view.LayoutInflater.inflate(Lorg/xmlpull/v1/XmlPullParser;Landroid/view/ViewGroup;Z)Landroid/view/View;+4
+j  android.view.LayoutInflater.$$robo$$android_view_LayoutInflater$inflate(ILandroid/view/ViewGroup;Z)Landroid/view/View;+22
+j  java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;ILjava/lang/Object;I)Ljava/lang/Object;+16 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;ILjava/lang/Object;I)Ljava/lang/Object;+45 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.reinvoke(Ljava/lang/Object;Ljava/lang/Object;ILjava/lang/Object;I)Ljava/lang/Object;+25 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;ILjava/lang/Object;I)Ljava/lang/Object;+82 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;ILjava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;+19 java.base@10.0.2
+j  android.view.LayoutInflater.inflate(ILandroid/view/ViewGroup;Z)Landroid/view/View;+4
+j  com.example.wwr.RouteScreenAdapter.onCreateViewHolder(Landroid/view/ViewGroup;I)Lcom/example/wwr/RouteScreenAdapter$RouteScreenViewHolder;+11
+j  com.example.wwr.RouteScreenAdapter.onCreateViewHolder(Landroid/view/ViewGroup;I)Landroidx/recyclerview/widget/RecyclerView$ViewHolder;+3
+j  androidx.recyclerview.widget.RecyclerView$Adapter.$$robo$$androidx_recyclerview_widget_RecyclerView_Adapter$createViewHolder(Landroid/view/ViewGroup;I)Landroidx/recyclerview/widget/RecyclerView$ViewHolder;+8
+J 6428 c1 java.lang.invoke.DirectMethodHandle$Holder.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;I)Ljava/lang/Object; java.base@10.0.2 (18 bytes) @ 0x0000000116f6436c [0x0000000116f63f80+0x00000000000003ec]
+J 5344 c1 java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;I)Ljava/lang/Object; java.base@10.0.2 (79 bytes) @ 0x0000000116d0041c [0x0000000116d00020+0x00000000000003fc]
+J 6364 c1 java.lang.invoke.LambdaForm$MH.reinvoke(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;I)Ljava/lang/Object; java.base@10.0.2 (27 bytes) @ 0x0000000116f4e714 [0x0000000116f4e280+0x0000000000000494]
+J 5000 c1 java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;I)Ljava/lang/Object; java.base@10.0.2 (103 bytes) @ 0x0000000116501994 [0x00000001165016c0+0x00000000000002d4]
+J 4999 c1 java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object; java.base@10.0.2 (21 bytes) @ 0x00000001164dc07c [0x00000001164dbfe0+0x000000000000009c]
+j  androidx.recyclerview.widget.RecyclerView$Adapter.createViewHolder(Landroid/view/ViewGroup;I)Landroidx/recyclerview/widget/RecyclerView$ViewHolder;+3
+j  androidx.recyclerview.widget.RecyclerView$Recycler.$$robo$$androidx_recyclerview_widget_RecyclerView_Recycler$tryGetViewHolderForPositionByDeadline(IZJ)Landroidx/recyclerview/widget/RecyclerView$ViewHolder;+604
+j  java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;IIJ)Ljava/lang/Object;+16 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;IIJ)Ljava/lang/Object;+45 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.reinvoke(Ljava/lang/Object;Ljava/lang/Object;IIJ)Ljava/lang/Object;+25 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;IIJ)Ljava/lang/Object;+82 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;IIJLjava/lang/Object;)Ljava/lang/Object;+19 java.base@10.0.2
+j  androidx.recyclerview.widget.RecyclerView$Recycler.tryGetViewHolderForPositionByDeadline(IZJ)Landroidx/recyclerview/widget/RecyclerView$ViewHolder;+4
+j  androidx.recyclerview.widget.RecyclerView$Recycler.$$robo$$androidx_recyclerview_widget_RecyclerView_Recycler$getViewForPosition(IZ)Landroid/view/View;+6
+J 5343 c1 java.lang.invoke.DirectMethodHandle$Holder.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;II)Ljava/lang/Object; java.base@10.0.2 (18 bytes) @ 0x0000000116cfc19c [0x0000000116cfbe00+0x000000000000039c]
+J 5306 c1 java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;II)Ljava/lang/Object; java.base@10.0.2 (79 bytes) @ 0x0000000116ce8bbc [0x0000000116ce8820+0x000000000000039c]
+j  java.lang.invoke.LambdaForm$MH.reinvoke(Ljava/lang/Object;Ljava/lang/Object;II)Ljava/lang/Object;+23 java.base@10.0.2
+J 5039 c1 java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;II)Ljava/lang/Object; java.base@10.0.2 (103 bytes) @ 0x0000000116516b94 [0x00000001165168c0+0x00000000000002d4]
+J 5038 c1 java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;IILjava/lang/Object;)Ljava/lang/Object; java.base@10.0.2 (21 bytes) @ 0x00000001164f2c7c [0x00000001164f2be0+0x000000000000009c]
+j  androidx.recyclerview.widget.RecyclerView$Recycler.getViewForPosition(IZ)Landroid/view/View;+3
+j  androidx.recyclerview.widget.RecyclerView$Recycler.$$robo$$androidx_recyclerview_widget_RecyclerView_Recycler$getViewForPosition(I)Landroid/view/View;+3
+J 6739 c1 java.lang.invoke.DirectMethodHandle$Holder.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;I)Ljava/lang/Object; java.base@10.0.2 (15 bytes) @ 0x00000001170316c4 [0x0000000117031460+0x0000000000000264]
+J 3555 c1 java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;I)Ljava/lang/Object; java.base@10.0.2 (75 bytes) @ 0x0000000116b0f354 [0x0000000116b0f280+0x00000000000000d4]
+J 3888 c1 java.lang.invoke.LambdaForm$MH.reinvoke(Ljava/lang/Object;Ljava/lang/Object;I)Ljava/lang/Object; java.base@10.0.2 (24 bytes) @ 0x0000000116b82104 [0x0000000116b82060+0x00000000000000a4]
+J 3554 c1 java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;I)Ljava/lang/Object; java.base@10.0.2 (98 bytes) @ 0x0000000116b0e974 [0x0000000116b0e6c0+0x00000000000002b4]
+J 3553 c1 java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object; java.base@10.0.2 (18 bytes) @ 0x0000000116b0e1f4 [0x0000000116b0e160+0x0000000000000094]
+j  androidx.recyclerview.widget.RecyclerView$Recycler.getViewForPosition(I)Landroid/view/View;+2
+j  androidx.recyclerview.widget.LinearLayoutManager$LayoutState.$$robo$$androidx_recyclerview_widget_LinearLayoutManager_LayoutState$next(Landroidx/recyclerview/widget/RecyclerView$Recycler;)Landroid/view/View;+17
+J 6457 c1 java.lang.invoke.DirectMethodHandle$Holder.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; java.base@10.0.2 (15 bytes) @ 0x0000000116f6bb7c [0x0000000116f6b960+0x000000000000021c]
+J 3980 c1 java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; java.base@10.0.2 (75 bytes) @ 0x0000000116ba10d4 [0x0000000116ba1000+0x00000000000000d4]
+J 4577 c1 java.lang.invoke.LambdaForm$MH.reinvoke(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; java.base@10.0.2 (24 bytes) @ 0x0000000116c19684 [0x0000000116c195e0+0x00000000000000a4]
+J 3558 c1 java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; java.base@10.0.2 (98 bytes) @ 0x0000000116b101f4 [0x0000000116b0ff40+0x00000000000002b4]
+J 3557 c1 java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; java.base@10.0.2 (18 bytes) @ 0x0000000116b0fa74 [0x0000000116b0f9e0+0x0000000000000094]
+j  androidx.recyclerview.widget.LinearLayoutManager$LayoutState.next(Landroidx/recyclerview/widget/RecyclerView$Recycler;)Landroid/view/View;+2
+j  androidx.recyclerview.widget.LinearLayoutManager.$$robo$$androidx_recyclerview_widget_LinearLayoutManager$layoutChunk(Landroidx/recyclerview/widget/RecyclerView$Recycler;Landroidx/recyclerview/widget/RecyclerView$State;Landroidx/recyclerview/widget/LinearLayoutManager$LayoutState;Landroidx/recyclerview/widget/LinearLayoutManager$LayoutChunkResult;)V+2
+j  java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V+18 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V+47 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.reinvoke(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V+27 java.base@10.0.2
+J 7336 c1 java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (115 bytes) @ 0x000000011726615c [0x0000000117265780+0x00000000000009dc]
+J 7335 c1 java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (25 bytes) @ 0x000000011726523c [0x0000000117264d80+0x00000000000004bc]
+j  androidx.recyclerview.widget.LinearLayoutManager.layoutChunk(Landroidx/recyclerview/widget/RecyclerView$Recycler;Landroidx/recyclerview/widget/RecyclerView$State;Landroidx/recyclerview/widget/LinearLayoutManager$LayoutState;Landroidx/recyclerview/widget/LinearLayoutManager$LayoutChunkResult;)V+6
+j  androidx.recyclerview.widget.LinearLayoutManager.$$robo$$androidx_recyclerview_widget_LinearLayoutManager$fill(Landroidx/recyclerview/widget/RecyclerView$Recycler;Landroidx/recyclerview/widget/LinearLayoutManager$LayoutState;Landroidx/recyclerview/widget/RecyclerView$State;Z)I+89
+j  java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;I)I+18 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;I)I+47 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.reinvoke(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;I)I+27 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;I)I+86 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;ILjava/lang/Object;)I+21 java.base@10.0.2
+j  androidx.recyclerview.widget.LinearLayoutManager.fill(Landroidx/recyclerview/widget/RecyclerView$Recycler;Landroidx/recyclerview/widget/LinearLayoutManager$LayoutState;Landroidx/recyclerview/widget/RecyclerView$State;Z)I+6
+j  androidx.recyclerview.widget.LinearLayoutManager.$$robo$$androidx_recyclerview_widget_LinearLayoutManager$onLayoutChildren(Landroidx/recyclerview/widget/RecyclerView$Recycler;Landroidx/recyclerview/widget/RecyclerView$State;)V+685
+J 5740 c1 java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (18 bytes) @ 0x0000000116e15cec [0x0000000116e15900+0x00000000000003ec]
+J 5715 c1 java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (79 bytes) @ 0x0000000116def11c [0x0000000116deed20+0x00000000000003fc]
+J 4473 c1 java.lang.invoke.LambdaForm$MH.reinvoke(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (27 bytes) @ 0x0000000116c03d94 [0x0000000116c03ce0+0x00000000000000b4]
+J 5714 c1 java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (103 bytes) @ 0x0000000116ded924 [0x0000000116decf80+0x00000000000009a4]
+J 5713 c1 java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (21 bytes) @ 0x0000000116deca24 [0x0000000116dec580+0x00000000000004a4]
+j  androidx.recyclerview.widget.LinearLayoutManager.onLayoutChildren(Landroidx/recyclerview/widget/RecyclerView$Recycler;Landroidx/recyclerview/widget/RecyclerView$State;)V+3
+j  androidx.recyclerview.widget.RecyclerView.$$robo$$androidx_recyclerview_widget_RecyclerView$dispatchLayoutStep2()V+66
+J 6313 c2 java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (14 bytes) @ 0x000000011df254f0 [0x000000011df254c0+0x0000000000000030]
+J 6365 c2 java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (71 bytes) @ 0x000000011df2b8b4 [0x000000011df2b860+0x0000000000000054]
+J 5717 c1 java.lang.invoke.LambdaForm$MH.reinvoke(Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (23 bytes) @ 0x0000000116dee89c [0x0000000116dee480+0x000000000000041c]
+J 6370 c2 java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (93 bytes) @ 0x000000011df2bfa0 [0x000000011df2bee0+0x00000000000000c0]
+J 6369 c2 java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (17 bytes) @ 0x000000011df2b474 [0x000000011df2b440+0x0000000000000034]
+j  androidx.recyclerview.widget.RecyclerView.dispatchLayoutStep2()V+1
+j  androidx.recyclerview.widget.RecyclerView.$$robo$$androidx_recyclerview_widget_RecyclerView$dispatchLayout()V+66
+J 6313 c2 java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (14 bytes) @ 0x000000011df254f0 [0x000000011df254c0+0x0000000000000030]
+J 6365 c2 java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (71 bytes) @ 0x000000011df2b8b4 [0x000000011df2b860+0x0000000000000054]
+J 5717 c1 java.lang.invoke.LambdaForm$MH.reinvoke(Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (23 bytes) @ 0x0000000116dee89c [0x0000000116dee480+0x000000000000041c]
+J 6370 c2 java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (93 bytes) @ 0x000000011df2bfa0 [0x000000011df2bee0+0x00000000000000c0]
+J 6369 c2 java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (17 bytes) @ 0x000000011df2b474 [0x000000011df2b440+0x0000000000000034]
+j  androidx.recyclerview.widget.RecyclerView.dispatchLayout()V+1
+j  androidx.recyclerview.widget.RecyclerView.$$robo$$androidx_recyclerview_widget_RecyclerView$onLayout(ZIIII)V+6
+j  java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;IIIII)V+20 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;IIIII)V+49 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.reinvoke(Ljava/lang/Object;Ljava/lang/Object;IIIII)V+29 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;IIIII)V+90 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;IIIIILjava/lang/Object;)V+23 java.base@10.0.2
+j  androidx.recyclerview.widget.RecyclerView.onLayout(ZIIII)V+8
+j  android.view.View.$$robo$$android_view_View$layout(IIII)V+117
+J 6050 c1 java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (22 bytes) @ 0x0000000116ece1cc [0x0000000116ecdf60+0x000000000000026c]
+J 5995 c1 java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (87 bytes) @ 0x0000000116eb3494 [0x0000000116eb31a0+0x00000000000002f4]
+J 6011 c1 java.lang.invoke.LambdaForm$MH.delegate(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (25 bytes) @ 0x0000000116eb78ac [0x0000000116eb7500+0x00000000000003ac]
+J 5994 c1 java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (115 bytes) @ 0x0000000116eac394 [0x0000000116eabb80+0x0000000000000814]
+J 5993 c1 java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;IIIILjava/lang/Object;)V java.base@10.0.2 (25 bytes) @ 0x0000000116eab64c [0x0000000116eab300+0x000000000000034c]
+j  android.view.View.layout(IIII)V+6
+j  android.view.ViewGroup.$$robo$$android_view_ViewGroup$layout(IIII)V+45
+J 6050 c1 java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (22 bytes) @ 0x0000000116ece1cc [0x0000000116ecdf60+0x000000000000026c]
+J 5995 c1 java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (87 bytes) @ 0x0000000116eb3494 [0x0000000116eb31a0+0x00000000000002f4]
+J 6011 c1 java.lang.invoke.LambdaForm$MH.delegate(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (25 bytes) @ 0x0000000116eb78ac [0x0000000116eb7500+0x00000000000003ac]
+J 5994 c1 java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (115 bytes) @ 0x0000000116eac394 [0x0000000116eabb80+0x0000000000000814]
+J 5993 c1 java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;IIIILjava/lang/Object;)V java.base@10.0.2 (25 bytes) @ 0x0000000116eab64c [0x0000000116eab300+0x000000000000034c]
+j  android.view.ViewGroup.layout(IIII)V+6
+j  android.widget.RelativeLayout.$$robo$$android_widget_RelativeLayout$onLayout(ZIIII)V+66
+j  java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;IIIII)V+20 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;IIIII)V+49 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.reinvoke(Ljava/lang/Object;Ljava/lang/Object;IIIII)V+29 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;IIIII)V+90 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;IIIIILjava/lang/Object;)V+23 java.base@10.0.2
+j  android.widget.RelativeLayout.onLayout(ZIIII)V+8
+j  android.view.View.$$robo$$android_view_View$layout(IIII)V+117
+J 6050 c1 java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (22 bytes) @ 0x0000000116ece1cc [0x0000000116ecdf60+0x000000000000026c]
+J 5995 c1 java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (87 bytes) @ 0x0000000116eb3494 [0x0000000116eb31a0+0x00000000000002f4]
+J 6011 c1 java.lang.invoke.LambdaForm$MH.delegate(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (25 bytes) @ 0x0000000116eb78ac [0x0000000116eb7500+0x00000000000003ac]
+J 5994 c1 java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (115 bytes) @ 0x0000000116eac394 [0x0000000116eabb80+0x0000000000000814]
+J 5993 c1 java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;IIIILjava/lang/Object;)V java.base@10.0.2 (25 bytes) @ 0x0000000116eab64c [0x0000000116eab300+0x000000000000034c]
+j  android.view.View.layout(IIII)V+6
+j  android.view.ViewGroup.$$robo$$android_view_ViewGroup$layout(IIII)V+45
+J 6050 c1 java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (22 bytes) @ 0x0000000116ece1cc [0x0000000116ecdf60+0x000000000000026c]
+J 5995 c1 java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (87 bytes) @ 0x0000000116eb3494 [0x0000000116eb31a0+0x00000000000002f4]
+J 6011 c1 java.lang.invoke.LambdaForm$MH.delegate(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (25 bytes) @ 0x0000000116eb78ac [0x0000000116eb7500+0x00000000000003ac]
+J 5994 c1 java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (115 bytes) @ 0x0000000116eac394 [0x0000000116eabb80+0x0000000000000814]
+J 5993 c1 java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;IIIILjava/lang/Object;)V java.base@10.0.2 (25 bytes) @ 0x0000000116eab64c [0x0000000116eab300+0x000000000000034c]
+j  android.view.ViewGroup.layout(IIII)V+6
+j  android.widget.FrameLayout.$$robo$$android_widget_FrameLayout$layoutChildren(IIIIZ)V+349
+j  java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;IIIII)V+20 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;IIIII)V+49 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.delegate(Ljava/lang/Object;Ljava/lang/Object;IIIII)V+23 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;IIIII)V+90 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;IIIIILjava/lang/Object;)V+23 java.base@10.0.2
+j  android.widget.FrameLayout.layoutChildren(IIIIZ)V+8
+j  android.widget.FrameLayout.$$robo$$android_widget_FrameLayout$onLayout(ZIIII)V+8
+j  java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;IIIII)V+20 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;IIIII)V+49 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.delegate(Ljava/lang/Object;Ljava/lang/Object;IIIII)V+23 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;IIIII)V+90 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;IIIIILjava/lang/Object;)V+23 java.base@10.0.2
+j  android.widget.FrameLayout.onLayout(ZIIII)V+8
+j  android.view.View.$$robo$$android_view_View$layout(IIII)V+117
+J 6050 c1 java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (22 bytes) @ 0x0000000116ece1cc [0x0000000116ecdf60+0x000000000000026c]
+J 5995 c1 java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (87 bytes) @ 0x0000000116eb3494 [0x0000000116eb31a0+0x00000000000002f4]
+J 6011 c1 java.lang.invoke.LambdaForm$MH.delegate(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (25 bytes) @ 0x0000000116eb78ac [0x0000000116eb7500+0x00000000000003ac]
+J 5994 c1 java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (115 bytes) @ 0x0000000116eac394 [0x0000000116eabb80+0x0000000000000814]
+J 5993 c1 java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;IIIILjava/lang/Object;)V java.base@10.0.2 (25 bytes) @ 0x0000000116eab64c [0x0000000116eab300+0x000000000000034c]
+j  android.view.View.layout(IIII)V+6
+j  android.view.ViewGroup.$$robo$$android_view_ViewGroup$layout(IIII)V+45
+J 6050 c1 java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (22 bytes) @ 0x0000000116ece1cc [0x0000000116ecdf60+0x000000000000026c]
+J 5995 c1 java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (87 bytes) @ 0x0000000116eb3494 [0x0000000116eb31a0+0x00000000000002f4]
+J 6011 c1 java.lang.invoke.LambdaForm$MH.delegate(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (25 bytes) @ 0x0000000116eb78ac [0x0000000116eb7500+0x00000000000003ac]
+J 5994 c1 java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (115 bytes) @ 0x0000000116eac394 [0x0000000116eabb80+0x0000000000000814]
+J 5993 c1 java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;IIIILjava/lang/Object;)V java.base@10.0.2 (25 bytes) @ 0x0000000116eab64c [0x0000000116eab300+0x000000000000034c]
+j  android.view.ViewGroup.layout(IIII)V+6
+j  androidx.appcompat.widget.ActionBarOverlayLayout.$$robo$$androidx_appcompat_widget_ActionBarOverlayLayout$onLayout(ZIIII)V+128
+j  java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;IIIII)V+20 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;IIIII)V+49 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.reinvoke(Ljava/lang/Object;Ljava/lang/Object;IIIII)V+29 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;IIIII)V+90 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;IIIIILjava/lang/Object;)V+23 java.base@10.0.2
+j  androidx.appcompat.widget.ActionBarOverlayLayout.onLayout(ZIIII)V+8
+j  android.view.View.$$robo$$android_view_View$layout(IIII)V+117
+J 6050 c1 java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (22 bytes) @ 0x0000000116ece1cc [0x0000000116ecdf60+0x000000000000026c]
+J 5995 c1 java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (87 bytes) @ 0x0000000116eb3494 [0x0000000116eb31a0+0x00000000000002f4]
+J 6011 c1 java.lang.invoke.LambdaForm$MH.delegate(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (25 bytes) @ 0x0000000116eb78ac [0x0000000116eb7500+0x00000000000003ac]
+J 5994 c1 java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (115 bytes) @ 0x0000000116eac394 [0x0000000116eabb80+0x0000000000000814]
+J 5993 c1 java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;IIIILjava/lang/Object;)V java.base@10.0.2 (25 bytes) @ 0x0000000116eab64c [0x0000000116eab300+0x000000000000034c]
+j  android.view.View.layout(IIII)V+6
+j  android.view.ViewGroup.$$robo$$android_view_ViewGroup$layout(IIII)V+45
+J 6050 c1 java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (22 bytes) @ 0x0000000116ece1cc [0x0000000116ecdf60+0x000000000000026c]
+J 5995 c1 java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (87 bytes) @ 0x0000000116eb3494 [0x0000000116eb31a0+0x00000000000002f4]
+J 6011 c1 java.lang.invoke.LambdaForm$MH.delegate(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (25 bytes) @ 0x0000000116eb78ac [0x0000000116eb7500+0x00000000000003ac]
+J 5994 c1 java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (115 bytes) @ 0x0000000116eac394 [0x0000000116eabb80+0x0000000000000814]
+J 5993 c1 java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;IIIILjava/lang/Object;)V java.base@10.0.2 (25 bytes) @ 0x0000000116eab64c [0x0000000116eab300+0x000000000000034c]
+j  android.view.ViewGroup.layout(IIII)V+6
+j  android.widget.FrameLayout.$$robo$$android_widget_FrameLayout$layoutChildren(IIIIZ)V+349
+j  java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;IIIII)V+20 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;IIIII)V+49 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.delegate(Ljava/lang/Object;Ljava/lang/Object;IIIII)V+23 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;IIIII)V+90 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;IIIIILjava/lang/Object;)V+23 java.base@10.0.2
+j  android.widget.FrameLayout.layoutChildren(IIIIZ)V+8
+j  android.widget.FrameLayout.$$robo$$android_widget_FrameLayout$onLayout(ZIIII)V+8
+j  java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;IIIII)V+20 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;IIIII)V+49 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.delegate(Ljava/lang/Object;Ljava/lang/Object;IIIII)V+23 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;IIIII)V+90 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;IIIIILjava/lang/Object;)V+23 java.base@10.0.2
+j  android.widget.FrameLayout.onLayout(ZIIII)V+8
+j  android.view.View.$$robo$$android_view_View$layout(IIII)V+117
+J 6050 c1 java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (22 bytes) @ 0x0000000116ece1cc [0x0000000116ecdf60+0x000000000000026c]
+J 5995 c1 java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (87 bytes) @ 0x0000000116eb3494 [0x0000000116eb31a0+0x00000000000002f4]
+J 6011 c1 java.lang.invoke.LambdaForm$MH.delegate(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (25 bytes) @ 0x0000000116eb78ac [0x0000000116eb7500+0x00000000000003ac]
+J 5994 c1 java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (115 bytes) @ 0x0000000116eac394 [0x0000000116eabb80+0x0000000000000814]
+J 5993 c1 java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;IIIILjava/lang/Object;)V java.base@10.0.2 (25 bytes) @ 0x0000000116eab64c [0x0000000116eab300+0x000000000000034c]
+j  android.view.View.layout(IIII)V+6
+j  android.view.ViewGroup.$$robo$$android_view_ViewGroup$layout(IIII)V+45
+J 6050 c1 java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (22 bytes) @ 0x0000000116ece1cc [0x0000000116ecdf60+0x000000000000026c]
+J 5995 c1 java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (87 bytes) @ 0x0000000116eb3494 [0x0000000116eb31a0+0x00000000000002f4]
+J 6011 c1 java.lang.invoke.LambdaForm$MH.delegate(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (25 bytes) @ 0x0000000116eb78ac [0x0000000116eb7500+0x00000000000003ac]
+J 5994 c1 java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (115 bytes) @ 0x0000000116eac394 [0x0000000116eabb80+0x0000000000000814]
+J 5993 c1 java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;IIIILjava/lang/Object;)V java.base@10.0.2 (25 bytes) @ 0x0000000116eab64c [0x0000000116eab300+0x000000000000034c]
+j  android.view.ViewGroup.layout(IIII)V+6
+j  android.widget.LinearLayout.$$robo$$android_widget_LinearLayout$setChildFrame(Landroid/view/View;IIII)V+11
+j  java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;IIII)V+20 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;IIII)V+49 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.reinvoke(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;IIII)V+29 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;IIII)V+90 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;Ljava/lang/Object;IIIILjava/lang/Object;)V+23 java.base@10.0.2
+j  android.widget.LinearLayout.setChildFrame(Landroid/view/View;IIII)V+8
+j  android.widget.LinearLayout.$$robo$$android_widget_LinearLayout$layoutVertical(IIII)V+379
+J 6050 c1 java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (22 bytes) @ 0x0000000116ece1cc [0x0000000116ecdf60+0x000000000000026c]
+J 5995 c1 java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (87 bytes) @ 0x0000000116eb3494 [0x0000000116eb31a0+0x00000000000002f4]
+J 6531 c1 java.lang.invoke.LambdaForm$MH.reinvoke(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (31 bytes) @ 0x0000000116fa74bc [0x0000000116fa7080+0x000000000000043c]
+J 5994 c1 java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (115 bytes) @ 0x0000000116eac394 [0x0000000116eabb80+0x0000000000000814]
+J 5993 c1 java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;IIIILjava/lang/Object;)V java.base@10.0.2 (25 bytes) @ 0x0000000116eab64c [0x0000000116eab300+0x000000000000034c]
+j  android.widget.LinearLayout.layoutVertical(IIII)V+6
+j  android.widget.LinearLayout.$$robo$$android_widget_LinearLayout$onLayout(ZIIII)V+15
+j  java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;IIIII)V+20 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;IIIII)V+49 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.reinvoke(Ljava/lang/Object;Ljava/lang/Object;IIIII)V+29 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;IIIII)V+90 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;IIIIILjava/lang/Object;)V+23 java.base@10.0.2
+j  android.widget.LinearLayout.onLayout(ZIIII)V+8
+j  android.view.View.$$robo$$android_view_View$layout(IIII)V+117
+J 6050 c1 java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (22 bytes) @ 0x0000000116ece1cc [0x0000000116ecdf60+0x000000000000026c]
+J 5995 c1 java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (87 bytes) @ 0x0000000116eb3494 [0x0000000116eb31a0+0x00000000000002f4]
+J 6011 c1 java.lang.invoke.LambdaForm$MH.delegate(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (25 bytes) @ 0x0000000116eb78ac [0x0000000116eb7500+0x00000000000003ac]
+J 5994 c1 java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (115 bytes) @ 0x0000000116eac394 [0x0000000116eabb80+0x0000000000000814]
+J 5993 c1 java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;IIIILjava/lang/Object;)V java.base@10.0.2 (25 bytes) @ 0x0000000116eab64c [0x0000000116eab300+0x000000000000034c]
+j  android.view.View.layout(IIII)V+6
+j  android.view.ViewGroup.$$robo$$android_view_ViewGroup$layout(IIII)V+45
+J 6050 c1 java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (22 bytes) @ 0x0000000116ece1cc [0x0000000116ecdf60+0x000000000000026c]
+J 5995 c1 java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (87 bytes) @ 0x0000000116eb3494 [0x0000000116eb31a0+0x00000000000002f4]
+J 6011 c1 java.lang.invoke.LambdaForm$MH.delegate(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (25 bytes) @ 0x0000000116eb78ac [0x0000000116eb7500+0x00000000000003ac]
+J 5994 c1 java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (115 bytes) @ 0x0000000116eac394 [0x0000000116eabb80+0x0000000000000814]
+J 5993 c1 java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;IIIILjava/lang/Object;)V java.base@10.0.2 (25 bytes) @ 0x0000000116eab64c [0x0000000116eab300+0x000000000000034c]
+j  android.view.ViewGroup.layout(IIII)V+6
+j  android.widget.FrameLayout.$$robo$$android_widget_FrameLayout$layoutChildren(IIIIZ)V+349
+j  java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;IIIII)V+20 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;IIIII)V+49 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.delegate(Ljava/lang/Object;Ljava/lang/Object;IIIII)V+23 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;IIIII)V+90 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;IIIIILjava/lang/Object;)V+23 java.base@10.0.2
+j  android.widget.FrameLayout.layoutChildren(IIIIZ)V+8
+j  android.widget.FrameLayout.$$robo$$android_widget_FrameLayout$onLayout(ZIIII)V+8
+j  java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;IIIII)V+20 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;IIIII)V+49 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.delegate(Ljava/lang/Object;Ljava/lang/Object;IIIII)V+23 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;IIIII)V+90 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;IIIIILjava/lang/Object;)V+23 java.base@10.0.2
+j  android.widget.FrameLayout.onLayout(ZIIII)V+8
+j  com.android.internal.policy.DecorView.$$robo$$com_android_internal_policy_DecorView$onLayout(ZIIII)V+8
+j  java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;IIIII)V+20 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;IIIII)V+49 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.reinvoke(Ljava/lang/Object;Ljava/lang/Object;IIIII)V+29 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;IIIII)V+90 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;IIIIILjava/lang/Object;)V+23 java.base@10.0.2
+j  com.android.internal.policy.DecorView.onLayout(ZIIII)V+8
+j  android.view.View.$$robo$$android_view_View$layout(IIII)V+117
+J 6050 c1 java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (22 bytes) @ 0x0000000116ece1cc [0x0000000116ecdf60+0x000000000000026c]
+J 5995 c1 java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (87 bytes) @ 0x0000000116eb3494 [0x0000000116eb31a0+0x00000000000002f4]
+J 6011 c1 java.lang.invoke.LambdaForm$MH.delegate(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (25 bytes) @ 0x0000000116eb78ac [0x0000000116eb7500+0x00000000000003ac]
+J 5994 c1 java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (115 bytes) @ 0x0000000116eac394 [0x0000000116eabb80+0x0000000000000814]
+J 5993 c1 java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;IIIILjava/lang/Object;)V java.base@10.0.2 (25 bytes) @ 0x0000000116eab64c [0x0000000116eab300+0x000000000000034c]
+j  android.view.View.layout(IIII)V+6
+j  android.view.ViewGroup.$$robo$$android_view_ViewGroup$layout(IIII)V+45
+J 6050 c1 java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (22 bytes) @ 0x0000000116ece1cc [0x0000000116ecdf60+0x000000000000026c]
+J 5995 c1 java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (87 bytes) @ 0x0000000116eb3494 [0x0000000116eb31a0+0x00000000000002f4]
+J 6011 c1 java.lang.invoke.LambdaForm$MH.delegate(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (25 bytes) @ 0x0000000116eb78ac [0x0000000116eb7500+0x00000000000003ac]
+J 5994 c1 java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;IIII)V java.base@10.0.2 (115 bytes) @ 0x0000000116eac394 [0x0000000116eabb80+0x0000000000000814]
+J 5993 c1 java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;IIIILjava/lang/Object;)V java.base@10.0.2 (25 bytes) @ 0x0000000116eab64c [0x0000000116eab300+0x000000000000034c]
+j  android.view.ViewGroup.layout(IIII)V+6
+j  android.view.ViewRootImpl.$$robo$$android_view_ViewRootImpl$performLayout(Landroid/view/WindowManager$LayoutParams;II)V+50
+J 6681 c1 java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;II)V java.base@10.0.2 (20 bytes) @ 0x000000011701dfec [0x000000011701dc00+0x00000000000003ec]
+J 6674 c1 java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;II)V java.base@10.0.2 (83 bytes) @ 0x000000011701c92c [0x000000011701c520+0x000000000000040c]
+J 6430 c1 java.lang.invoke.LambdaForm$MH.reinvoke(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;II)V java.base@10.0.2 (29 bytes) @ 0x0000000116f6ab24 [0x0000000116f6a680+0x00000000000004a4]
+J 6673 c1 java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;II)V java.base@10.0.2 (109 bytes) @ 0x000000011701b9bc [0x000000011701b000+0x00000000000009bc]
+J 6672 c1 java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;Ljava/lang/Object;IILjava/lang/Object;)V java.base@10.0.2 (23 bytes) @ 0x000000011701aab4 [0x000000011701a600+0x00000000000004b4]
+j  android.view.ViewRootImpl.performLayout(Landroid/view/WindowManager$LayoutParams;II)V+4
+j  android.view.ViewRootImpl.$$robo$$android_view_ViewRootImpl$performTraversals()V+3274
+J 6313 c2 java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (14 bytes) @ 0x000000011df254f0 [0x000000011df254c0+0x0000000000000030]
+J 6365 c2 java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (71 bytes) @ 0x000000011df2b8b4 [0x000000011df2b860+0x0000000000000054]
+J 5717 c1 java.lang.invoke.LambdaForm$MH.reinvoke(Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (23 bytes) @ 0x0000000116dee89c [0x0000000116dee480+0x000000000000041c]
+J 6370 c2 java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (93 bytes) @ 0x000000011df2bfa0 [0x000000011df2bee0+0x00000000000000c0]
+J 6369 c2 java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (17 bytes) @ 0x000000011df2b474 [0x000000011df2b440+0x0000000000000034]
+j  android.view.ViewRootImpl.performTraversals()V+1
+j  android.view.ViewRootImpl.$$robo$$android_view_ViewRootImpl$doTraversal()V+43
+J 6313 c2 java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (14 bytes) @ 0x000000011df254f0 [0x000000011df254c0+0x0000000000000030]
+J 6365 c2 java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (71 bytes) @ 0x000000011df2b8b4 [0x000000011df2b860+0x0000000000000054]
+J 5717 c1 java.lang.invoke.LambdaForm$MH.reinvoke(Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (23 bytes) @ 0x0000000116dee89c [0x0000000116dee480+0x000000000000041c]
+J 6370 c2 java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (93 bytes) @ 0x000000011df2bfa0 [0x000000011df2bee0+0x00000000000000c0]
+J 6369 c2 java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (17 bytes) @ 0x000000011df2b474 [0x000000011df2b440+0x0000000000000034]
+j  android.view.ViewRootImpl.doTraversal()V+1
+j  android.view.ViewRootImpl$TraversalRunnable.$$robo$$android_view_ViewRootImpl_TraversalRunnable$run()V+4
+J 6313 c2 java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (14 bytes) @ 0x000000011df254f0 [0x000000011df254c0+0x0000000000000030]
+J 6365 c2 java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (71 bytes) @ 0x000000011df2b8b4 [0x000000011df2b860+0x0000000000000054]
+J 5717 c1 java.lang.invoke.LambdaForm$MH.reinvoke(Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (23 bytes) @ 0x0000000116dee89c [0x0000000116dee480+0x000000000000041c]
+J 6370 c2 java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (93 bytes) @ 0x000000011df2bfa0 [0x000000011df2bee0+0x00000000000000c0]
+J 6369 c2 java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (17 bytes) @ 0x000000011df2b474 [0x000000011df2b440+0x0000000000000034]
+j  android.view.ViewRootImpl$TraversalRunnable.run()V+1
+j  android.os.Handler.$$robo$$android_os_Handler$handleCallback(Landroid/os/Message;)V+4
+J 6368 c1 java.lang.invoke.DirectMethodHandle$Holder.invokeStatic(Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (14 bytes) @ 0x0000000116f55814 [0x0000000116f55480+0x0000000000000394]
+J 6365 c2 java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (71 bytes) @ 0x000000011df2b8b4 [0x000000011df2b860+0x0000000000000054]
+J 6604 c2 java.lang.invoke.DelegatingMethodHandle$Holder.delegate(Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (17 bytes) @ 0x000000011df4fe6c [0x000000011df4fe40+0x000000000000002c]
+J 6370 c2 java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (93 bytes) @ 0x000000011df2bfa0 [0x000000011df2bee0+0x00000000000000c0]
+J 6369 c2 java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (17 bytes) @ 0x000000011df2b474 [0x000000011df2b440+0x0000000000000034]
+j  android.os.Handler.handleCallback(Landroid/os/Message;)V+1
+j  android.os.Handler.$$robo$$android_os_Handler$dispatchMessage(Landroid/os/Message;)V+8
+J 6459 c1 java.lang.invoke.DirectMethodHandle$Holder.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (15 bytes) @ 0x0000000116f6c3e4 [0x0000000116f6c000+0x00000000000003e4]
+J 6434 c1 java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (75 bytes) @ 0x0000000116f66e84 [0x0000000116f66ba0+0x00000000000002e4]
+J 6427 c2 java.lang.invoke.DelegatingMethodHandle$Holder.delegate(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (18 bytes) @ 0x000000011df33588 [0x000000011df33540+0x0000000000000048]
+J 6436 c1 java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (98 bytes) @ 0x0000000116f687bc [0x0000000116f68000+0x00000000000007bc]
+J 6435 c1 java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (18 bytes) @ 0x0000000116f67b04 [0x0000000116f67800+0x0000000000000304]
+j  android.os.Handler.dispatchMessage(Landroid/os/Message;)V+2
+j  org.robolectric.shadows.ShadowLegacyMessageQueue.dispatchMessage(Landroid/os/Message;)V+35
+j  org.robolectric.shadows.ShadowLegacyMessageQueue.access$200(Landroid/os/Message;)V+1
+j  org.robolectric.shadows.ShadowLegacyMessageQueue$1.run()V+112
+j  org.robolectric.util.Scheduler.runOrQueueRunnable(Ljava/lang/Runnable;J)V+33
+j  org.robolectric.util.Scheduler.postDelayed(Ljava/lang/Runnable;JLjava/util/concurrent/TimeUnit;)V+79
+j  org.robolectric.util.Scheduler.postDelayed(Ljava/lang/Runnable;J)V+6
+j  org.robolectric.shadows.ShadowLegacyMessageQueue.enqueueMessage(Landroid/os/Message;J)Z+103
+j  java.lang.invoke.LambdaForm$DMH.invokeVirtual(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;J)I+14 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.invoke(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;J)I+37 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;J)I+43 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.delegate(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;J)I+17 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;J)I+78 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;Ljava/lang/Object;JLjava/lang/Object;)I+18 java.base@10.0.2
+j  android.os.MessageQueue.enqueueMessage(Landroid/os/Message;J)Z+3
+j  android.os.Handler.$$robo$$android_os_Handler$enqueueMessage(Landroid/os/MessageQueue;Landroid/os/Message;J)Z+20
+j  java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;J)I+16 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;J)I+45 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.delegate(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;J)I+19 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;J)I+82 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;JLjava/lang/Object;)I+19 java.base@10.0.2
+j  android.os.Handler.enqueueMessage(Landroid/os/MessageQueue;Landroid/os/Message;J)Z+4
+j  android.os.Handler.$$robo$$android_os_Handler$sendMessageAtTime(Landroid/os/Message;J)Z+61
+j  java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;J)I+14 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;J)I+43 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.delegate(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;J)I+17 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;J)I+78 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;Ljava/lang/Object;JLjava/lang/Object;)I+18 java.base@10.0.2
+j  android.os.Handler.sendMessageAtTime(Landroid/os/Message;J)Z+3
+j  android.os.Handler.$$robo$$android_os_Handler$sendMessageDelayed(Landroid/os/Message;J)Z+15
+j  java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;J)I+14 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;J)I+43 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.delegate(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;J)I+17 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;J)I+78 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;Ljava/lang/Object;JLjava/lang/Object;)I+18 java.base@10.0.2
+j  android.os.Handler.sendMessageDelayed(Landroid/os/Message;J)Z+3
+j  android.os.Handler.$$robo$$android_os_Handler$postDelayed(Ljava/lang/Runnable;J)Z+6
+j  java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;J)I+14 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;J)I+43 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.reinvoke(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;J)I+23 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;J)I+78 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;Ljava/lang/Object;JLjava/lang/Object;)I+18 java.base@10.0.2
+j  android.os.Handler.postDelayed(Ljava/lang/Runnable;J)Z+3
+j  org.robolectric.shadows.ShadowLegacyChoreographer.postCallbackDelayed(ILjava/lang/Runnable;Ljava/lang/Object;J)V+7
+j  org.robolectric.shadows.ShadowLegacyChoreographer.postCallback(ILjava/lang/Runnable;Ljava/lang/Object;)V+8
+j  java.lang.invoke.LambdaForm$DMH.invokeVirtual(Ljava/lang/Object;Ljava/lang/Object;ILjava/lang/Object;Ljava/lang/Object;)V+16 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.invoke(Ljava/lang/Object;Ljava/lang/Object;ILjava/lang/Object;Ljava/lang/Object;)V+39 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;ILjava/lang/Object;Ljava/lang/Object;)V+45 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.reinvoke(Ljava/lang/Object;Ljava/lang/Object;ILjava/lang/Object;Ljava/lang/Object;)V+25 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;ILjava/lang/Object;Ljava/lang/Object;)V+82 java.base@10.0.2
+j  java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;ILjava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V+19 java.base@10.0.2
+j  android.view.Choreographer.postCallback(ILjava/lang/Runnable;Ljava/lang/Object;)V+4
+j  android.view.ViewRootImpl.$$robo$$android_view_ViewRootImpl$scheduleTraversals()V+39
+J 6313 c2 java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (14 bytes) @ 0x000000011df254f0 [0x000000011df254c0+0x0000000000000030]
+J 6365 c2 java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (71 bytes) @ 0x000000011df2b8b4 [0x000000011df2b860+0x0000000000000054]
+J 5717 c1 java.lang.invoke.LambdaForm$MH.reinvoke(Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (23 bytes) @ 0x0000000116dee89c [0x0000000116dee480+0x000000000000041c]
+J 6370 c2 java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (93 bytes) @ 0x000000011df2bfa0 [0x000000011df2bee0+0x00000000000000c0]
+J 6369 c2 java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (17 bytes) @ 0x000000011df2b474 [0x000000011df2b440+0x0000000000000034]
+j  android.view.ViewRootImpl.scheduleTraversals()V+1
+j  android.view.ViewRootImpl.$$robo$$android_view_ViewRootImpl$requestLayout()V+17
+J 6313 c2 java.lang.invoke.LambdaForm$DMH.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (14 bytes) @ 0x000000011df254f0 [0x000000011df254c0+0x0000000000000030]
+J 6365 c2 java.lang.invoke.LambdaForm$MH.guardWithCatch(Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (71 bytes) @ 0x000000011df2b8b4 [0x000000011df2b860+0x0000000000000054]
+J 5717 c1 java.lang.invoke.LambdaForm$MH.reinvoke(Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (23 bytes) @ 0x0000000116dee89c [0x0000000116dee480+0x000000000000041c]
+J 6370 c2 java.lang.invoke.LambdaForm$MH.guard(Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (93 bytes) @ 0x000000011df2bfa0 [0x000000011df2bee0+0x00000000000000c0]
+J 6369 c2 java.lang.invoke.LambdaForm$MH.linkToCallSite(Ljava/lang/Object;Ljava/lang/Object;)V java.base@10.0.2 (17 bytes) @ 0x000000011df2b474 [0x000000011df2b440+0x0000000000000034]
+j  android.view.ViewRootImpl.requestLayout()V+1
+j  android.view.View.$$robo$$android_view_View$requestLayout()V+111
+
+[error occurred during error reporting (printing Java stack), id 0xb]
+
+
+siginfo: si_signo: 11 (SIGSEGV), si_code: 1 (SEGV_MAPERR), si_addr: 0x0000000000000068
+
+Register to memory mapping:
+
+RAX={method} {0x000000012e7d9830} 'setCardBackground' '(Landroid/graphics/drawable/Drawable;)V' in 'androidx/cardview/widget/CardView$1'
+RBX=0x0000000000000004 is an unknown value
+RCX=0x0000000000000004 is an unknown value
+RDX=0x00000007a92279a8 is an oop
+[J 
+{0x00000007a92279a8} - klass: {type array long}
+ - length: 32
+RSP=0x0000700006e95330 is pointing into the stack for thread: 0x00007fcfbd216800
+RBP=0x0000700006e95330 is pointing into the stack for thread: 0x00007fcfbd216800
+RSI=0x000000012e7e006b is pointing into metadata
+RDI=0x0000000000000000 is an unknown value
+R8 =0x0000000115f38000 is an unknown value
+R9 =0x0000000000000034 is an unknown value
+R10=0x0000000000000034 is an unknown value
+R11=0x00007fcfbd216805 is an unknown value
+R12=0x00000001095a8051: UseCompressedClassPointers+0 in /Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home/lib/server/libjvm.dylib at 0x0000000108c00000
+R13=0x0000000000000000 is an unknown value
+R14={method} {0x000000012e7e41b0} 'requestLayout' NULL in 
+[error occurred during error reporting (printing register info), id 0xb]
+
+Registers:
+RAX=0x000000012e7d9830, RBX=0x0000000000000004, RCX=0x0000000000000004, RDX=0x00000007a92279a8
+RSP=0x0000700006e95330, RBP=0x0000700006e95330, RSI=0x000000012e7e006b, RDI=0x0000000000000000
+R8 =0x0000000115f38000, R9 =0x0000000000000034, R10=0x0000000000000034, R11=0x00007fcfbd216805
+R12=0x00000001095a8051, R13=0x0000000000000000, R14=0x000000012e7e41b0, R15=0x00000007a9227918
+RIP=0x00000001090efca0, EFLAGS=0x0000000000010202, ERR=0x0000000000000004
+  TRAPNO=0x000000000000000e
+
+Top of Stack: (sp=0x0000700006e95330)
+0x0000700006e95330:   0000700006e96740 0000000108fdd31a
+0x0000700006e95340:   67452c11a046007d 00007fcfbd216a70
+0x0000700006e95350:   0000700006e96720 000000010904c492
+0x0000700006e95360:   0000700006e96780 00007fcfbb711340
+0x0000700006e95370:   0000000116e77990 000000011df2b290
+0x0000700006e95380:   0000040006e969d8 00007fcfbd216800
+0x0000700006e95390:   00007fcfbd216801 00007fcfbd216801
+0x0000700006e953a0:   0000000000000084 0000700006ea5c30
+0x0000700006e953b0:   0000000115f41fcd 0000000115f40790
+0x0000700006e953c0:   0000000700000000 0000700006ea5c90
+0x0000700006e953d0:   0000700006ea5c30 0000700006ea5d68
+0x0000700006e953e0:   0000000115f41f43 0000000115f40790
+0x0000700006e953f0:   0000000700000000 0000700006ea5db8
+0x0000700006e95400:   0000700006ea5d68 000000011df2b540
+0x0000700006e95410:   00007fcf0000000b 000000011df2b290
+0x0000700006e95420:   0000000000000000 0000700006ea5d68
+0x0000700006e95430:   0000000115f41f43 0000000115f40790
+0x0000700006e95440:   0000000700000000 0000700006ea5db8
+0x0000700006e95450:   0000700006ea5d68 0000000108e37924
+0x0000700006e95460:   0000700006ea8c20 0000700006e955c8
+0x0000700006e95470:   0000700006e954b0 0000000108f10950
+0x0000700006e95480:   0000000115f41f88 0000700006e95578
+0x0000700006e95490:   0000700006e955c8 0000000000000000
+0x0000700006e954a0:   00000001284731f8 000000000000000b
+0x0000700006e954b0:   0000700006e954d0 0000000109365d73
+0x0000700006e954c0:   0000000000000400 00000000000000bf
+0x0000700006e954d0:   0000700006e968e0 0000000108fdd447
+0x0000700006e954e0:   00007fcfbb62c0c9 000000008d6ea82b
+0x0000700006e954f0:   000070002be8b560 0000000109310ed4
+0x0000700006e95500:   000000000001cf30 00007fcfbb711340
+0x0000700006e95510:   0000000028b56ff8 0000000116b87b10
+0x0000700006e95520:   000004002dcee870 00007fcfbd216800 
+
+Instructions: (pc=0x00000001090efca0)
+0x00000001090efc80:   53 50 48 89 fb 48 8b bb 90 00 00 00 e8 a9 b3 d2
+0x00000001090efc90:   ff 48 89 43 68 48 83 c4 08 5b 5d c3 55 48 89 e5
+0x00000001090efca0:   48 8b 4f 68 31 c0 48 85 c9 74 03 48 8b 01 5d c3
+0x00000001090efcb0:   55 48 89 e5 b0 01 83 bf 9c 00 00 00 00 78 10 48 
+
+
+---------------  P R O C E S S  ---------------
+
+Threads class SMR info:
+_java_thread_list=0x00007fcfbd9b27c0, length=16, elements={
+0x00007fcfbd000800, 0x00007fcfbe02b800, 0x00007fcfbe02c800, 0x00007fcfbe01f800,
+0x00007fcfbe02e800, 0x00007fcfbc008800, 0x00007fcfbe801000, 0x00007fcfbe02f000,
+0x00007fcfbf000000, 0x00007fcfbb8a4800, 0x00007fcfbc056800, 0x00007fcfbc097800,
+0x00007fcfbb94f800, 0x00007fcfbbb5b800, 0x00007fcfbd216800, 0x00007fcfc03bf800
+}
+
+Java Threads: ( => current thread )
+  0x00007fcfbd000800 JavaThread "main" [_thread_blocked, id=10499, stack(0x0000700004837000,0x0000700004937000)]
+  0x00007fcfbe02b800 JavaThread "Reference Handler" daemon [_thread_blocked, id=22275, stack(0x0000700005e79000,0x0000700005f79000)]
+  0x00007fcfbe02c800 JavaThread "Finalizer" daemon [_thread_blocked, id=42499, stack(0x0000700005f7c000,0x000070000607c000)]
+  0x00007fcfbe01f800 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=41219, stack(0x0000700006185000,0x0000700006285000)]
+  0x00007fcfbe02e800 JavaThread "C2 CompilerThread0" daemon [_thread_in_native, id=40963, stack(0x0000700006288000,0x0000700006388000)]
+  0x00007fcfbc008800 JavaThread "C2 CompilerThread1" daemon [_thread_in_native, id=40707, stack(0x000070000638b000,0x000070000648b000)]
+  0x00007fcfbe801000 JavaThread "C2 CompilerThread2" daemon [_thread_blocked, id=40195, stack(0x000070000648e000,0x000070000658e000)]
+  0x00007fcfbe02f000 JavaThread "C1 CompilerThread3" daemon [_thread_blocked, id=39939, stack(0x0000700006591000,0x0000700006691000)]
+  0x00007fcfbf000000 JavaThread "Sweeper thread" daemon [_thread_blocked, id=27139, stack(0x0000700006694000,0x0000700006794000)]
+  0x00007fcfbb8a4800 JavaThread "Service Thread" daemon [_thread_blocked, id=39171, stack(0x0000700006797000,0x0000700006897000)]
+  0x00007fcfbc056800 JavaThread "Common-Cleaner" daemon [_thread_blocked, id=38915, stack(0x000070000689a000,0x000070000699a000)]
+  0x00007fcfbc097800 JavaThread "Test worker" [_thread_blocked, id=29187, stack(0x0000700006aa0000,0x0000700006ba0000)]
+  0x00007fcfbb94f800 JavaThread "/0:0:0:0:0:0:0:1:59017 to /0:0:0:0:0:0:0:1:59016 workers Thread 2" [_thread_blocked, id=38147, stack(0x0000700006ba3000,0x0000700006ca3000)]
+  0x00007fcfbbb5b800 JavaThread "/0:0:0:0:0:0:0:1:59017 to /0:0:0:0:0:0:0:1:59016 workers Thread 3" [_thread_in_native, id=37635, stack(0x0000700006ca6000,0x0000700006da6000)]
+=>0x00007fcfbd216800 JavaThread "SDK 28 Main Thread" [_thread_in_vm, id=37123, stack(0x0000700006da9000,0x0000700006ea9000)]
+  0x00007fcfc03bf800 JavaThread "Java2D Disposer" daemon [_thread_blocked, id=30215, stack(0x0000700006eac000,0x0000700006fac000)]
+
+Other Threads:
+  0x00007fcfbe021800 VMThread "VM Thread" [stack: 0x0000700005d76000,0x0000700005e76000] [id=21763]
+  0x00007fcfbc057800 WatcherThread [stack: 0x000070000699d000,0x0000700006a9d000] [id=28675]
+  0x00007fcfbe005800 GCTaskThread "GC Thread#0" [stack: 0x000070000493a000,0x0000700004a3a000] [id=21507]
+  0x00007fcfbb804800 GCTaskThread "GC Thread#1" [stack: 0x0000700004a3d000,0x0000700004b3d000] [id=11011]
+  0x00007fcfbe006800 GCTaskThread "GC Thread#2" [stack: 0x0000700004b40000,0x0000700004c40000] [id=11523]
+  0x00007fcfbc00a000 GCTaskThread "GC Thread#3" [stack: 0x0000700004c43000,0x0000700004d43000] [id=12035]
+  0x00007fcfbb805800 GCTaskThread "GC Thread#4" [stack: 0x0000700004d46000,0x0000700004e46000] [id=20739]
+  0x00007fcfbb806000 GCTaskThread "GC Thread#5" [stack: 0x0000700004e49000,0x0000700004f49000] [id=20227]
+  0x00007fcfbb807000 GCTaskThread "GC Thread#6" [stack: 0x0000700004f4c000,0x000070000504c000] [id=19971]
+  0x00007fcfbb807800 GCTaskThread "GC Thread#7" [stack: 0x000070000504f000,0x000070000514f000] [id=12547]
+  0x00007fcfbb81b000 ConcurrentGCThread "G1 Main Marker" [stack: 0x0000700005152000,0x0000700005252000] [id=13059]
+  0x00007fcfbb81c000 ConcurrentGCThread "G1 Conc#0" [stack: 0x0000700005255000,0x0000700005355000] [id=19203]
+  0x00007fcfbb81c800 ConcurrentGCThread "G1 Conc#1" [stack: 0x0000700005358000,0x0000700005458000] [id=14083]
+  0x00007fcfbb85d800 ConcurrentGCThread "G1 Refine#0" [stack: 0x000070000545b000,0x000070000555b000] [id=14339]
+  0x00007fcfbc00a800 ConcurrentGCThread "G1 Refine#1" [stack: 0x000070000555e000,0x000070000565e000] [id=18435]
+  0x00007fcfbc00b800 ConcurrentGCThread "G1 Refine#2" [stack: 0x0000700005661000,0x0000700005761000] [id=14595]
+  0x00007fcfbe800000 ConcurrentGCThread "G1 Refine#3" [stack: 0x0000700005764000,0x0000700005864000] [id=17923]
+  0x00007fcfbb85e000 ConcurrentGCThread "G1 Refine#4" [stack: 0x0000700005867000,0x0000700005967000] [id=17667]
+  0x00007fcfbb85f000 ConcurrentGCThread "G1 Refine#5" [stack: 0x000070000596a000,0x0000700005a6a000] [id=15363]
+  0x00007fcfbd001800 ConcurrentGCThread "G1 Refine#6" [stack: 0x0000700005a6d000,0x0000700005b6d000] [id=17155]
+  0x00007fcfbb85f800 ConcurrentGCThread "G1 Refine#7" [stack: 0x0000700005b70000,0x0000700005c70000] [id=16131]
+  0x00007fcfbb860800 ConcurrentGCThread "G1 Young RemSet Sampling" [stack: 0x0000700005c73000,0x0000700005d73000] [id=16643]
+
+Threads with active compile tasks:
+C2 CompilerThread07226       4       org.objectweb.asm.tree.MethodNode::accept (874 bytes)
+C2 CompilerThread16878       4       org.objectweb.asm.ClassReader::readCode (5089 bytes)
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap address: 0x00000007a0000000, size: 512 MB, Compressed Oops mode: Zero based, Oop shift amount: 3
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 3
+Compressed class space size: 1073741824 Address: 0x00000007c0000000
+
+Heap:
+ garbage-first heap   total 162816K, used 107587K [0x00000007a0000000, 0x00000007c0000000)
+  region size 1024K, 16 young (16384K), 3 survivors (3072K)
+ Metaspace       used 72304K, capacity 77627K, committed 78032K, reserved 1116160K
+  class space    used 8191K, capacity 10940K, committed 11008K, reserved 1048576K
+Heap Regions: E=young(eden), S=young(survivor), O=old, HS=humongous(starts), HC=humongous(continues), CS=collection set, F=free, A=archive, TS=gc time stamp, AC=allocation context, TAMS=top-at-mark-start (previous, next)
+|   0|0x00000007a0000000, 0x00000007a0100000, 0x00000007a0100000|100%|HS|  |TS  0|AC  0|TAMS 0x00000007a0100000, 0x00000007a0100000|
+|   1|0x00000007a0100000, 0x00000007a0200000, 0x00000007a0200000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a0200000, 0x00000007a0200000|
+|   2|0x00000007a0200000, 0x00000007a0300000, 0x00000007a0300000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a0300000, 0x00000007a0300000|
+|   3|0x00000007a0300000, 0x00000007a0400000, 0x00000007a0400000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a0400000, 0x00000007a0400000|
+|   4|0x00000007a0400000, 0x00000007a0500000, 0x00000007a0500000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a0500000, 0x00000007a0500000|
+|   5|0x00000007a0500000, 0x00000007a0600000, 0x00000007a0600000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a0600000, 0x00000007a0600000|
+|   6|0x00000007a0600000, 0x00000007a0700000, 0x00000007a0700000|100%|HS|  |TS  0|AC  0|TAMS 0x00000007a0700000, 0x00000007a0700000|
+|   7|0x00000007a0700000, 0x00000007a0800000, 0x00000007a0800000|100%|HC|  |TS  0|AC  0|TAMS 0x00000007a0800000, 0x00000007a0800000|
+|   8|0x00000007a0800000, 0x00000007a0900000, 0x00000007a0900000|100%|HC|  |TS  0|AC  0|TAMS 0x00000007a0900000, 0x00000007a0900000|
+|   9|0x00000007a0900000, 0x00000007a0a00000, 0x00000007a0a00000|100%|HC|  |TS  0|AC  0|TAMS 0x00000007a0a00000, 0x00000007a0a00000|
+|  10|0x00000007a0a00000, 0x00000007a0b00000, 0x00000007a0b00000|100%|HC|  |TS  0|AC  0|TAMS 0x00000007a0b00000, 0x00000007a0b00000|
+|  11|0x00000007a0b00000, 0x00000007a0c00000, 0x00000007a0c00000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a0c00000, 0x00000007a0c00000|
+|  12|0x00000007a0c00000, 0x00000007a0d00000, 0x00000007a0d00000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a0d00000, 0x00000007a0d00000|
+|  13|0x00000007a0d00000, 0x00000007a0e00000, 0x00000007a0e00000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a0e00000, 0x00000007a0e00000|
+|  14|0x00000007a0e00000, 0x00000007a0f00000, 0x00000007a0f00000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a0f00000, 0x00000007a0f00000|
+|  15|0x00000007a0f00000, 0x00000007a1000000, 0x00000007a1000000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a1000000, 0x00000007a1000000|
+|  16|0x00000007a1000000, 0x00000007a1100000, 0x00000007a1100000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a1100000, 0x00000007a1100000|
+|  17|0x00000007a1100000, 0x00000007a1200000, 0x00000007a1200000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a1200000, 0x00000007a1200000|
+|  18|0x00000007a1200000, 0x00000007a1300000, 0x00000007a1300000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a1300000, 0x00000007a1300000|
+|  19|0x00000007a1300000, 0x00000007a1400000, 0x00000007a1400000|100%|HS|  |TS  0|AC  0|TAMS 0x00000007a1400000, 0x00000007a1400000|
+|  20|0x00000007a1400000, 0x00000007a1500000, 0x00000007a1500000|100%|HC|  |TS  0|AC  0|TAMS 0x00000007a1500000, 0x00000007a1500000|
+|  21|0x00000007a1500000, 0x00000007a1600000, 0x00000007a1600000|100%|HC|  |TS  0|AC  0|TAMS 0x00000007a1600000, 0x00000007a1600000|
+|  22|0x00000007a1600000, 0x00000007a1700000, 0x00000007a1700000|100%|HC|  |TS  0|AC  0|TAMS 0x00000007a1700000, 0x00000007a1700000|
+|  23|0x00000007a1700000, 0x00000007a1800000, 0x00000007a1800000|100%|HC|  |TS  0|AC  0|TAMS 0x00000007a1800000, 0x00000007a1800000|
+|  24|0x00000007a1800000, 0x00000007a1900000, 0x00000007a1900000|100%|HC|  |TS  0|AC  0|TAMS 0x00000007a1900000, 0x00000007a1900000|
+|  25|0x00000007a1900000, 0x00000007a1a00000, 0x00000007a1a00000|100%|HC|  |TS  0|AC  0|TAMS 0x00000007a1a00000, 0x00000007a1a00000|
+|  26|0x00000007a1a00000, 0x00000007a1b00000, 0x00000007a1b00000|100%|HC|  |TS  0|AC  0|TAMS 0x00000007a1b00000, 0x00000007a1b00000|
+|  27|0x00000007a1b00000, 0x00000007a1c00000, 0x00000007a1c00000|100%|HC|  |TS  0|AC  0|TAMS 0x00000007a1c00000, 0x00000007a1c00000|
+|  28|0x00000007a1c00000, 0x00000007a1d00000, 0x00000007a1d00000|100%|HC|  |TS  0|AC  0|TAMS 0x00000007a1d00000, 0x00000007a1d00000|
+|  29|0x00000007a1d00000, 0x00000007a1e00000, 0x00000007a1e00000|100%|HC|  |TS  0|AC  0|TAMS 0x00000007a1e00000, 0x00000007a1e00000|
+|  30|0x00000007a1e00000, 0x00000007a1f00000, 0x00000007a1f00000|100%|HC|  |TS  0|AC  0|TAMS 0x00000007a1f00000, 0x00000007a1f00000|
+|  31|0x00000007a1f00000, 0x00000007a2000000, 0x00000007a2000000|100%|HC|  |TS  0|AC  0|TAMS 0x00000007a2000000, 0x00000007a2000000|
+|  32|0x00000007a2000000, 0x00000007a2100000, 0x00000007a2100000|100%|HC|  |TS  0|AC  0|TAMS 0x00000007a2100000, 0x00000007a2100000|
+|  33|0x00000007a2100000, 0x00000007a2200000, 0x00000007a2200000|100%|HC|  |TS  0|AC  0|TAMS 0x00000007a2200000, 0x00000007a2200000|
+|  34|0x00000007a2200000, 0x00000007a2300000, 0x00000007a2300000|100%|HC|  |TS  0|AC  0|TAMS 0x00000007a2300000, 0x00000007a2300000|
+|  35|0x00000007a2300000, 0x00000007a2400000, 0x00000007a2400000|100%|HC|  |TS  0|AC  0|TAMS 0x00000007a2400000, 0x00000007a2400000|
+|  36|0x00000007a2400000, 0x00000007a2500000, 0x00000007a2500000|100%|HC|  |TS  0|AC  0|TAMS 0x00000007a2500000, 0x00000007a2500000|
+|  37|0x00000007a2500000, 0x00000007a2600000, 0x00000007a2600000|100%|HC|  |TS  0|AC  0|TAMS 0x00000007a2600000, 0x00000007a2600000|
+|  38|0x00000007a2600000, 0x00000007a2700000, 0x00000007a2700000|100%|HC|  |TS  0|AC  0|TAMS 0x00000007a2700000, 0x00000007a2700000|
+|  39|0x00000007a2700000, 0x00000007a2800000, 0x00000007a2800000|100%|HC|  |TS  0|AC  0|TAMS 0x00000007a2800000, 0x00000007a2800000|
+|  40|0x00000007a2800000, 0x00000007a2900000, 0x00000007a2900000|100%|HC|  |TS  0|AC  0|TAMS 0x00000007a2900000, 0x00000007a2900000|
+|  41|0x00000007a2900000, 0x00000007a2a00000, 0x00000007a2a00000|100%|HC|  |TS  0|AC  0|TAMS 0x00000007a2a00000, 0x00000007a2a00000|
+|  42|0x00000007a2a00000, 0x00000007a2b00000, 0x00000007a2b00000|100%|HC|  |TS  0|AC  0|TAMS 0x00000007a2b00000, 0x00000007a2b00000|
+|  43|0x00000007a2b00000, 0x00000007a2c00000, 0x00000007a2c00000|100%|HC|  |TS  0|AC  0|TAMS 0x00000007a2c00000, 0x00000007a2c00000|
+|  44|0x00000007a2c00000, 0x00000007a2d00000, 0x00000007a2d00000|100%|HC|  |TS  0|AC  0|TAMS 0x00000007a2d00000, 0x00000007a2d00000|
+|  45|0x00000007a2d00000, 0x00000007a2e00000, 0x00000007a2e00000|100%|HC|  |TS  0|AC  0|TAMS 0x00000007a2e00000, 0x00000007a2e00000|
+|  46|0x00000007a2e00000, 0x00000007a2f00000, 0x00000007a2f00000|100%|HC|  |TS  0|AC  0|TAMS 0x00000007a2f00000, 0x00000007a2f00000|
+|  47|0x00000007a2f00000, 0x00000007a3000000, 0x00000007a3000000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a3000000, 0x00000007a3000000|
+|  48|0x00000007a3000000, 0x00000007a3100000, 0x00000007a3100000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a3100000, 0x00000007a3100000|
+|  49|0x00000007a3100000, 0x00000007a3200000, 0x00000007a3200000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a3200000, 0x00000007a3200000|
+|  50|0x00000007a3200000, 0x00000007a3300000, 0x00000007a3300000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a3300000, 0x00000007a3300000|
+|  51|0x00000007a3300000, 0x00000007a3400000, 0x00000007a3400000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a3400000, 0x00000007a3400000|
+|  52|0x00000007a3400000, 0x00000007a3500000, 0x00000007a3500000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a3500000, 0x00000007a3500000|
+|  53|0x00000007a3500000, 0x00000007a3600000, 0x00000007a3600000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a3600000, 0x00000007a3600000|
+|  54|0x00000007a3600000, 0x00000007a3700000, 0x00000007a3700000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a3700000, 0x00000007a3700000|
+|  55|0x00000007a3700000, 0x00000007a3800000, 0x00000007a3800000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a3800000, 0x00000007a3800000|
+|  56|0x00000007a3800000, 0x00000007a3900000, 0x00000007a3900000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a3900000, 0x00000007a3900000|
+|  57|0x00000007a3900000, 0x00000007a3a00000, 0x00000007a3a00000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a3a00000, 0x00000007a3a00000|
+|  58|0x00000007a3a00000, 0x00000007a3b00000, 0x00000007a3b00000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a3b00000, 0x00000007a3b00000|
+|  59|0x00000007a3b00000, 0x00000007a3c00000, 0x00000007a3c00000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a3c00000, 0x00000007a3c00000|
+|  60|0x00000007a3c00000, 0x00000007a3d00000, 0x00000007a3d00000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a3d00000, 0x00000007a3d00000|
+|  61|0x00000007a3d00000, 0x00000007a3e00000, 0x00000007a3e00000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a3e00000, 0x00000007a3e00000|
+|  62|0x00000007a3e00000, 0x00000007a3f00000, 0x00000007a3f00000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a3f00000, 0x00000007a3f00000|
+|  63|0x00000007a3f00000, 0x00000007a4000000, 0x00000007a4000000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a4000000, 0x00000007a4000000|
+|  64|0x00000007a4000000, 0x00000007a4100000, 0x00000007a4100000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a4100000, 0x00000007a4100000|
+|  65|0x00000007a4100000, 0x00000007a4200000, 0x00000007a4200000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a4200000, 0x00000007a4200000|
+|  66|0x00000007a4200000, 0x00000007a4300000, 0x00000007a4300000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a4300000, 0x00000007a4300000|
+|  67|0x00000007a4300000, 0x00000007a4400000, 0x00000007a4400000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a4400000, 0x00000007a4400000|
+|  68|0x00000007a4400000, 0x00000007a4500000, 0x00000007a4500000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a4500000, 0x00000007a4500000|
+|  69|0x00000007a4500000, 0x00000007a4600000, 0x00000007a4600000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a4600000, 0x00000007a4600000|
+|  70|0x00000007a4600000, 0x00000007a4700000, 0x00000007a4700000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a4700000, 0x00000007a4700000|
+|  71|0x00000007a4700000, 0x00000007a4800000, 0x00000007a4800000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a4800000, 0x00000007a4800000|
+|  72|0x00000007a4800000, 0x00000007a4900000, 0x00000007a4900000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a4900000, 0x00000007a4900000|
+|  73|0x00000007a4900000, 0x00000007a4a00000, 0x00000007a4a00000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a4a00000, 0x00000007a4a00000|
+|  74|0x00000007a4a00000, 0x00000007a4b00000, 0x00000007a4b00000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a4b00000, 0x00000007a4b00000|
+|  75|0x00000007a4b00000, 0x00000007a4c00000, 0x00000007a4c00000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a4c00000, 0x00000007a4c00000|
+|  76|0x00000007a4c00000, 0x00000007a4d00000, 0x00000007a4d00000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a4d00000, 0x00000007a4d00000|
+|  77|0x00000007a4d00000, 0x00000007a4e00000, 0x00000007a4e00000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a4e00000, 0x00000007a4e00000|
+|  78|0x00000007a4e00000, 0x00000007a4f00000, 0x00000007a4f00000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a4f00000, 0x00000007a4f00000|
+|  79|0x00000007a4f00000, 0x00000007a5000000, 0x00000007a5000000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a5000000, 0x00000007a5000000|
+|  80|0x00000007a5000000, 0x00000007a5100000, 0x00000007a5100000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a5100000, 0x00000007a5100000|
+|  81|0x00000007a5100000, 0x00000007a5200000, 0x00000007a5200000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a5200000, 0x00000007a5200000|
+|  82|0x00000007a5200000, 0x00000007a5300000, 0x00000007a5300000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a5300000, 0x00000007a5300000|
+|  83|0x00000007a5300000, 0x00000007a5400000, 0x00000007a5400000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a5400000, 0x00000007a5400000|
+|  84|0x00000007a5400000, 0x00000007a5500000, 0x00000007a5500000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a5500000, 0x00000007a5500000|
+|  85|0x00000007a5500000, 0x00000007a5600000, 0x00000007a5600000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a5600000, 0x00000007a5600000|
+|  86|0x00000007a5600000, 0x00000007a5700000, 0x00000007a5700000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a5700000, 0x00000007a5700000|
+|  87|0x00000007a5700000, 0x00000007a5800000, 0x00000007a5800000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a5800000, 0x00000007a5800000|
+|  88|0x00000007a5800000, 0x00000007a5900000, 0x00000007a5900000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a5900000, 0x00000007a5900000|
+|  89|0x00000007a5900000, 0x00000007a5a00000, 0x00000007a5a00000|100%| O|  |TS  0|AC  0|TAMS 0x00000007a5a00000, 0x00000007a5a00000|
+|  90|0x00000007a5a00000, 0x00000007a5ae2200, 0x00000007a5b00000| 88%| O|  |TS  0|AC  0|TAMS 0x00000007a5ae2200, 0x00000007a5ae2200|
+|  91|0x00000007a5b00000, 0x00000007a5b00000, 0x00000007a5c00000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a5b00000, 0x00000007a5b00000|
+|  92|0x00000007a5c00000, 0x00000007a5c00000, 0x00000007a5d00000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a5c00000, 0x00000007a5c00000|
+|  93|0x00000007a5d00000, 0x00000007a5d00000, 0x00000007a5e00000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a5d00000, 0x00000007a5d00000|
+|  94|0x00000007a5e00000, 0x00000007a5e00000, 0x00000007a5f00000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a5e00000, 0x00000007a5e00000|
+|  95|0x00000007a5f00000, 0x00000007a5f00000, 0x00000007a6000000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a5f00000, 0x00000007a5f00000|
+|  96|0x00000007a6000000, 0x00000007a6000000, 0x00000007a6100000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a6000000, 0x00000007a6000000|
+|  97|0x00000007a6100000, 0x00000007a6100000, 0x00000007a6200000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a6100000, 0x00000007a6100000|
+|  98|0x00000007a6200000, 0x00000007a6200000, 0x00000007a6300000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a6200000, 0x00000007a6200000|
+|  99|0x00000007a6300000, 0x00000007a6300000, 0x00000007a6400000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a6300000, 0x00000007a6300000|
+| 100|0x00000007a6400000, 0x00000007a6400000, 0x00000007a6500000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a6400000, 0x00000007a6400000|
+| 101|0x00000007a6500000, 0x00000007a6500000, 0x00000007a6600000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a6500000, 0x00000007a6500000|
+| 102|0x00000007a6600000, 0x00000007a6600000, 0x00000007a6700000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a6600000, 0x00000007a6600000|
+| 103|0x00000007a6700000, 0x00000007a6700000, 0x00000007a6800000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a6700000, 0x00000007a6700000|
+| 104|0x00000007a6800000, 0x00000007a6800000, 0x00000007a6900000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a6800000, 0x00000007a6800000|
+| 105|0x00000007a6900000, 0x00000007a6900000, 0x00000007a6a00000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a6900000, 0x00000007a6900000|
+| 106|0x00000007a6a00000, 0x00000007a6a00000, 0x00000007a6b00000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a6a00000, 0x00000007a6a00000|
+| 107|0x00000007a6b00000, 0x00000007a6b00000, 0x00000007a6c00000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a6b00000, 0x00000007a6b00000|
+| 108|0x00000007a6c00000, 0x00000007a6c00000, 0x00000007a6d00000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a6c00000, 0x00000007a6c00000|
+| 109|0x00000007a6d00000, 0x00000007a6d00000, 0x00000007a6e00000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a6d00000, 0x00000007a6d00000|
+| 110|0x00000007a6e00000, 0x00000007a6e2ebe0, 0x00000007a6f00000| 18%| S|CS|TS  0|AC  0|TAMS 0x00000007a6e00000, 0x00000007a6e00000|
+| 111|0x00000007a6f00000, 0x00000007a7000000, 0x00000007a7000000|100%| S|CS|TS  0|AC  0|TAMS 0x00000007a6f00000, 0x00000007a6f00000|
+| 112|0x00000007a7000000, 0x00000007a7000000, 0x00000007a7100000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a7000000, 0x00000007a7000000|
+| 113|0x00000007a7100000, 0x00000007a7100000, 0x00000007a7200000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a7100000, 0x00000007a7100000|
+| 114|0x00000007a7200000, 0x00000007a7200000, 0x00000007a7300000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a7200000, 0x00000007a7200000|
+| 115|0x00000007a7300000, 0x00000007a7400000, 0x00000007a7400000|100%| S|CS|TS  0|AC  0|TAMS 0x00000007a7300000, 0x00000007a7300000|
+| 116|0x00000007a7400000, 0x00000007a7400000, 0x00000007a7500000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a7400000, 0x00000007a7400000|
+| 117|0x00000007a7500000, 0x00000007a7500000, 0x00000007a7600000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a7500000, 0x00000007a7500000|
+| 118|0x00000007a7600000, 0x00000007a7600000, 0x00000007a7700000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a7600000, 0x00000007a7600000|
+| 119|0x00000007a7700000, 0x00000007a7700000, 0x00000007a7800000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a7700000, 0x00000007a7700000|
+| 120|0x00000007a7800000, 0x00000007a7800000, 0x00000007a7900000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a7800000, 0x00000007a7800000|
+| 121|0x00000007a7900000, 0x00000007a7900000, 0x00000007a7a00000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a7900000, 0x00000007a7900000|
+| 122|0x00000007a7a00000, 0x00000007a7a00000, 0x00000007a7b00000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a7a00000, 0x00000007a7a00000|
+| 123|0x00000007a7b00000, 0x00000007a7b00000, 0x00000007a7c00000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a7b00000, 0x00000007a7b00000|
+| 124|0x00000007a7c00000, 0x00000007a7c00000, 0x00000007a7d00000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a7c00000, 0x00000007a7c00000|
+| 125|0x00000007a7d00000, 0x00000007a7d00000, 0x00000007a7e00000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a7d00000, 0x00000007a7d00000|
+| 126|0x00000007a7e00000, 0x00000007a7e00000, 0x00000007a7f00000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a7e00000, 0x00000007a7e00000|
+| 127|0x00000007a7f00000, 0x00000007a7f00000, 0x00000007a8000000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a7f00000, 0x00000007a7f00000|
+| 128|0x00000007a8000000, 0x00000007a8000000, 0x00000007a8100000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a8000000, 0x00000007a8000000|
+| 129|0x00000007a8100000, 0x00000007a8100000, 0x00000007a8200000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a8100000, 0x00000007a8100000|
+| 130|0x00000007a8200000, 0x00000007a8200000, 0x00000007a8300000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a8200000, 0x00000007a8200000|
+| 131|0x00000007a8300000, 0x00000007a8300000, 0x00000007a8400000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a8300000, 0x00000007a8300000|
+| 132|0x00000007a8400000, 0x00000007a8400000, 0x00000007a8500000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a8400000, 0x00000007a8400000|
+| 133|0x00000007a8500000, 0x00000007a8500000, 0x00000007a8600000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a8500000, 0x00000007a8500000|
+| 134|0x00000007a8600000, 0x00000007a8600000, 0x00000007a8700000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a8600000, 0x00000007a8600000|
+| 135|0x00000007a8700000, 0x00000007a8700000, 0x00000007a8800000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a8700000, 0x00000007a8700000|
+| 136|0x00000007a8800000, 0x00000007a8800000, 0x00000007a8900000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a8800000, 0x00000007a8800000|
+| 137|0x00000007a8900000, 0x00000007a8900000, 0x00000007a8a00000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a8900000, 0x00000007a8900000|
+| 138|0x00000007a8a00000, 0x00000007a8a00000, 0x00000007a8b00000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a8a00000, 0x00000007a8a00000|
+| 139|0x00000007a8b00000, 0x00000007a8b00000, 0x00000007a8c00000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a8b00000, 0x00000007a8b00000|
+| 140|0x00000007a8c00000, 0x00000007a8c00000, 0x00000007a8d00000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a8c00000, 0x00000007a8c00000|
+| 141|0x00000007a8d00000, 0x00000007a8d00000, 0x00000007a8e00000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a8d00000, 0x00000007a8d00000|
+| 142|0x00000007a8e00000, 0x00000007a8e00000, 0x00000007a8f00000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a8e00000, 0x00000007a8e00000|
+| 143|0x00000007a8f00000, 0x00000007a8f00000, 0x00000007a9000000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a8f00000, 0x00000007a8f00000|
+| 144|0x00000007a9000000, 0x00000007a9000000, 0x00000007a9100000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a9000000, 0x00000007a9000000|
+| 145|0x00000007a9100000, 0x00000007a9100000, 0x00000007a9200000|  0%| F|  |TS  0|AC  0|TAMS 0x00000007a9100000, 0x00000007a9100000|
+| 146|0x00000007a9200000, 0x00000007a9280800, 0x00000007a9300000| 50%| E|  |TS  0|AC  0|TAMS 0x00000007a9200000, 0x00000007a9200000|
+| 147|0x00000007a9300000, 0x00000007a9400000, 0x00000007a9400000|100%| E|CS|TS  0|AC  0|TAMS 0x00000007a9300000, 0x00000007a9300000|
+| 148|0x00000007a9400000, 0x00000007a9500000, 0x00000007a9500000|100%| E|CS|TS  0|AC  0|TAMS 0x00000007a9400000, 0x00000007a9400000|
+| 149|0x00000007a9500000, 0x00000007a9600000, 0x00000007a9600000|100%| E|CS|TS  0|AC  0|TAMS 0x00000007a9500000, 0x00000007a9500000|
+| 150|0x00000007a9600000, 0x00000007a9700000, 0x00000007a9700000|100%| E|CS|TS  0|AC  0|TAMS 0x00000007a9600000, 0x00000007a9600000|
+| 151|0x00000007a9700000, 0x00000007a9800000, 0x00000007a9800000|100%| E|CS|TS  0|AC  0|TAMS 0x00000007a9700000, 0x00000007a9700000|
+| 152|0x00000007a9800000, 0x00000007a9900000, 0x00000007a9900000|100%| E|CS|TS  0|AC  0|TAMS 0x00000007a9800000, 0x00000007a9800000|
+| 153|0x00000007a9900000, 0x00000007a9a00000, 0x00000007a9a00000|100%| E|CS|TS  0|AC  0|TAMS 0x00000007a9900000, 0x00000007a9900000|
+| 154|0x00000007a9a00000, 0x00000007a9b00000, 0x00000007a9b00000|100%| E|CS|TS  0|AC  0|TAMS 0x00000007a9a00000, 0x00000007a9a00000|
+| 155|0x00000007a9b00000, 0x00000007a9c00000, 0x00000007a9c00000|100%| E|CS|TS  0|AC  0|TAMS 0x00000007a9b00000, 0x00000007a9b00000|
+| 156|0x00000007a9c00000, 0x00000007a9d00000, 0x00000007a9d00000|100%| E|CS|TS  0|AC  0|TAMS 0x00000007a9c00000, 0x00000007a9c00000|
+| 157|0x00000007a9d00000, 0x00000007a9e00000, 0x00000007a9e00000|100%| E|CS|TS  0|AC  0|TAMS 0x00000007a9d00000, 0x00000007a9d00000|
+| 158|0x00000007a9e00000, 0x00000007a9f00000, 0x00000007a9f00000|100%| E|CS|TS  0|AC  0|TAMS 0x00000007a9e00000, 0x00000007a9e00000|
+
+Card table byte_map: [0x0000000115808000,0x0000000115908000] byte_map_base: 0x0000000111b08000
+
+Marking Bits (Prev, Next): (CMBitMap*) 0x00007fcfbb81a860, (CMBitMap*) 0x00007fcfbb81a898
+ Prev Bits: [0x0000000124f38000, 0x0000000125738000)
+ Next Bits: [0x0000000125738000, 0x0000000125f38000)
+
+Polling page: 0x0000000107bfe000
+
+CodeHeap 'non-profiled nmethods': size=120032Kb used=5957Kb max_used=5957Kb free=114074Kb
+ bounds [0x000000011da00000, 0x000000011dfe0000, 0x0000000124f38000]
+CodeHeap 'profiled nmethods': size=120028Kb used=14003Kb max_used=14003Kb free=106024Kb
+ bounds [0x00000001164c9000, 0x0000000117279000, 0x000000011da00000]
+CodeHeap 'non-nmethods': size=5700Kb used=1961Kb max_used=2002Kb free=3738Kb
+ bounds [0x0000000115f38000, 0x00000001161a8000, 0x00000001164c9000]
+ total_blobs=10625 nmethods=7215 adapters=1595
+ compilation: enabled
+
+Compilation events (10 events):
+Event: 8.511 Thread 0x00007fcfbe02f000 7346 %     3       jdk.internal.org.objectweb.asm.AnnotationWriter::getSize @ 4 (28 bytes)
+Event: 8.512 Thread 0x00007fcfbe02f000 nmethod 7346% 0x0000000117276310 code [0x00000001172764e0, 0x0000000117276730]
+Event: 8.514 Thread 0x00007fcfbe02f000 7349   !   3       java.util.zip.ZipFile::getMetaInfEntryNames (106 bytes)
+Event: 8.515 Thread 0x00007fcfbe02f000 nmethod 7349 0x0000000117276810 code [0x0000000117276a40, 0x0000000117277398]
+Event: 8.516 Thread 0x00007fcfbe801000 nmethod 7261 0x000000011dfcd990 code [0x000000011dfcdb60, 0x000000011dfce178]
+Event: 8.516 Thread 0x00007fcfbe801000 7262       4       org.robolectric.res.android.ResTable_config::langsAreEquivalent (59 bytes)
+Event: 8.518 Thread 0x00007fcfbe801000 nmethod 7262 0x000000011dfce690 code [0x000000011dfce840, 0x000000011dfce9d8]
+Event: 8.518 Thread 0x00007fcfbe801000 7268       4       java.lang.reflect.Modifier::isPublic (12 bytes)
+Event: 8.519 Thread 0x00007fcfbe801000 nmethod 7268 0x000000011dfceb90 code [0x000000011dfced20, 0x000000011dfced58]
+Event: 8.519 Thread 0x00007fcfbe801000 7276       4       jdk.internal.ref.PhantomCleanable::<init> (49 bytes)
+
+GC Heap History (10 events):
+Event: 7.948 GC heap before
+{Heap before GC invocations=51 (full 0):
+ garbage-first heap   total 147456K, used 125894K [0x00000007a0000000, 0x00000007c0000000)
+  region size 1024K, 42 young (43008K), 5 survivors (5120K)
+ Metaspace       used 70474K, capacity 75606K, committed 75984K, reserved 1114112K
+  class space    used 8003K, capacity 10703K, committed 10752K, reserved 1048576K
+}
+Event: 7.957 GC heap after
+{Heap after GC invocations=52 (full 0):
+ garbage-first heap   total 162816K, used 88675K [0x00000007a0000000, 0x00000007c0000000)
+  region size 1024K, 3 young (3072K), 3 survivors (3072K)
+ Metaspace       used 70474K, capacity 75606K, committed 75984K, reserved 1114112K
+  class space    used 8003K, capacity 10703K, committed 10752K, reserved 1048576K
+}
+Event: 8.074 GC heap before
+{Heap before GC invocations=53 (full 0):
+ garbage-first heap   total 162816K, used 133731K [0x00000007a0000000, 0x00000007c0000000)
+  region size 1024K, 47 young (48128K), 3 survivors (3072K)
+ Metaspace       used 70745K, capacity 75955K, committed 76240K, reserved 1114112K
+  class space    used 8023K, capacity 10745K, committed 10752K, reserved 1048576K
+}
+Event: 8.080 GC heap after
+{Heap after GC invocations=54 (full 0):
+ garbage-first heap   total 162816K, used 91282K [0x00000007a0000000, 0x00000007c0000000)
+  region size 1024K, 6 young (6144K), 6 survivors (6144K)
+ Metaspace       used 70745K, capacity 75955K, committed 76240K, reserved 1114112K
+  class space    used 8023K, capacity 10745K, committed 10752K, reserved 1048576K
+}
+Event: 8.211 GC heap before
+{Heap before GC invocations=54 (full 0):
+ garbage-first heap   total 162816K, used 135314K [0x00000007a0000000, 0x00000007c0000000)
+  region size 1024K, 49 young (50176K), 6 survivors (6144K)
+ Metaspace       used 71162K, capacity 76432K, committed 76624K, reserved 1116160K
+  class space    used 8068K, capacity 10807K, committed 10880K, reserved 1048576K
+}
+Event: 8.219 GC heap after
+{Heap after GC invocations=55 (full 0):
+ garbage-first heap   total 162816K, used 93581K [0x00000007a0000000, 0x00000007c0000000)
+  region size 1024K, 6 young (6144K), 6 survivors (6144K)
+ Metaspace       used 71162K, capacity 76432K, committed 76624K, reserved 1116160K
+  class space    used 8068K, capacity 10807K, committed 10880K, reserved 1048576K
+}
+Event: 8.323 GC heap before
+{Heap before GC invocations=56 (full 0):
+ garbage-first heap   total 162816K, used 136589K [0x00000007a0000000, 0x00000007c0000000)
+  region size 1024K, 48 young (49152K), 6 survivors (6144K)
+ Metaspace       used 71658K, capacity 76923K, committed 77136K, reserved 1116160K
+  class space    used 8110K, capacity 10839K, committed 10880K, reserved 1048576K
+}
+Event: 8.329 GC heap after
+{Heap after GC invocations=57 (full 0):
+ garbage-first heap   total 162816K, used 94891K [0x00000007a0000000, 0x00000007c0000000)
+  region size 1024K, 4 young (4096K), 4 survivors (4096K)
+ Metaspace       used 71658K, capacity 76923K, committed 77136K, reserved 1116160K
+  class space    used 8110K, capacity 10839K, committed 10880K, reserved 1048576K
+}
+Event: 8.440 GC heap before
+{Heap before GC invocations=57 (full 0):
+ garbage-first heap   total 162816K, used 137899K [0x00000007a0000000, 0x00000007c0000000)
+  region size 1024K, 46 young (47104K), 4 survivors (4096K)
+ Metaspace       used 72211K, capacity 77535K, committed 77776K, reserved 1116160K
+  class space    used 8149K, capacity 10881K, committed 11008K, reserved 1048576K
+}
+Event: 8.447 GC heap after
+{Heap after GC invocations=58 (full 0):
+ garbage-first heap   total 162816K, used 95299K [0x00000007a0000000, 0x00000007c0000000)
+  region size 1024K, 3 young (3072K), 3 survivors (3072K)
+ Metaspace       used 72211K, capacity 77535K, committed 77776K, reserved 1116160K
+  class space    used 8149K, capacity 10881K, committed 11008K, reserved 1048576K
+}
+
+Deoptimization events (10 events):
+Event: 7.974 Thread 0x00007fcfbd216800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x000000011de7ab60 method=org.robolectric.res.android.ResXMLParser.getAttributeNameResID(I)I @ 18 c2
+Event: 8.031 Thread 0x00007fcfbd216800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x000000011df9a9ec method=org.robolectric.res.android.CppAssetManager2$Theme.GetAttribute(ILorg/robolectric/res/android/Ref;Lorg/robolectric/res/android/Ref;)Lorg/robolectric/res/android/ApkAssetsCoo
+Event: 8.051 Thread 0x00007fcfbd216800 Uncommon trap: reason=speculate_class_check action=maybe_recompile pc=0x000000011df2a390 method=java.lang.invoke.DirectMethodHandle.internalMemberName(Ljava/lang/Object;)Ljava/lang/Object; @ 1 c2
+Event: 8.109 Thread 0x00007fcfbd216800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x000000011dc223d8 method=java.lang.Character.codePointAt(Ljava/lang/CharSequence;I)I @ 2 c2
+Event: 8.140 Thread 0x00007fcfbd216800 Uncommon trap: reason=bimorphic_or_optimized_type_check action=maybe_recompile pc=0x000000011df89b54 method=java.io.FilterInputStream.read([BII)I @ 7 c2
+Event: 8.153 Thread 0x00007fcfbd216800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x000000011df993e8 method=org.robolectric.res.android.ResTable_config.match(Lorg/robolectric/res/android/ResTable_config;)Z @ 531 c2
+Event: 8.251 Thread 0x00007fcfbd216800 Uncommon trap: reason=speculate_class_check action=maybe_recompile pc=0x000000011df2a390 method=java.lang.invoke.DirectMethodHandle.internalMemberName(Ljava/lang/Object;)Ljava/lang/Object; @ 1 c2
+Event: 8.457 Thread 0x00007fcfbd216800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x000000011dc223d8 method=java.lang.Character.codePointAt(Ljava/lang/CharSequence;I)I @ 2 c2
+Event: 8.459 Thread 0x00007fcfbd216800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x000000011dc223d8 method=java.lang.Character.codePointAt(Ljava/lang/CharSequence;I)I @ 2 c2
+Event: 8.460 Thread 0x00007fcfbd216800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x000000011dc223d8 method=java.lang.Character.codePointAt(Ljava/lang/CharSequence;I)I @ 2 c2
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (10 events):
+Event: 8.458 Thread 0x00007fcfbd216800 Exception <a 'java/lang/NoSuchMethodError'{0x00000007a9d3fc88}: java.lang.invoke.Invokers$Holder.exactInvoker(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;II)I> (0x00000007a9d3fc88) thrown at [/scratch/mesos/sl
+Event: 8.459 Thread 0x00007fcfbd216800 Exception <a 'java/lang/NoSuchMethodError'{0x00000007a9d43cd8}: java.lang.invoke.DelegatingMethodHandle$Holder.delegate(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;II)I> (0x00000007a9d43cd8) thrown at [/scratc
+Event: 8.474 Thread 0x00007fcfbd216800 Exception <a 'java/lang/NoSuchMethodError'{0x00000007a9c818f8}: java.lang.invoke.Invokers$Holder.exactInvoker(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;I)I> (0x00000007a9c818f8) thrown at [
+Event: 8.474 Thread 0x00007fcfbd216800 Exception <a 'java/lang/NoSuchMethodError'{0x00000007a9c85ce8}: java.lang.invoke.DelegatingMethodHandle$Holder.delegate(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;I)I> (0x00000007a9c85ce8) t
+Event: 8.484 Thread 0x00007fcfbd216800 Exception <a 'java/lang/NoSuchMethodError'{0x00000007a9ba8388}: java.lang.invoke.DelegatingMethodHandle$Holder.delegate(Ljava/lang/Object;Ljava/lang/Object;IIJ)V> (0x00000007a9ba8388) thrown at [/scratch/mesos/slaves/9190d864-6621-4810-ba08-d8d8c75ba674-S
+Event: 8.484 Thread 0x00007fcfbd216800 Exception <a 'java/lang/NoSuchMethodError'{0x00000007a9bac7e8}: java.lang.invoke.DelegatingMethodHandle$Holder.delegate(Ljava/lang/Object;Ljava/lang/Object;JLjava/lang/Object;I)J> (0x00000007a9bac7e8) thrown at [/scratch/mesos/slaves/9190d864-6621-4810-ba
+Event: 8.497 Thread 0x00007fcfbd216800 Exception <a 'java/lang/NoSuchMethodError'{0x00000007a958e8a0}: java.lang.invoke.DirectMethodHandle$Holder.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;I)J> (0x00000007a958e8a0) thrown at [/scratch/mesos/slaves/9190d864-6621-4810-ba08-d8d8c75ba674-S3
+Event: 8.498 Thread 0x00007fcfbd216800 Exception <a 'java/lang/NoSuchMethodError'{0x00000007a959da00}: java.lang.invoke.Invokers$Holder.exactInvoker(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;I)J> (0x00000007a959da00) thrown at [/scratch/mesos/slaves/9190d864-6621-4810-ba08-d8d8c75b
+Event: 8.498 Thread 0x00007fcfbd216800 Exception <a 'java/lang/NoSuchMethodError'{0x00000007a95a1bd0}: java.lang.invoke.DelegatingMethodHandle$Holder.delegate(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;I)J> (0x00000007a95a1bd0) thrown at [/scratch/mesos/slaves/9190d864-6621-4810-ba0
+Event: 8.510 Thread 0x00007fcfbd216800 Exception <a 'java/lang/NoSuchMethodError'{0x00000007a95bada0}: java.lang.invoke.DirectMethodHandle$Holder.invokeSpecial(Ljava/lang/Object;Ljava/lang/Object;IIJ)Ljava/lang/Object;> (0x00000007a95bada0) thrown at [/scratch/mesos/slaves/9190d864-6621-4810-b
+
+Events (10 events):
+Event: 8.524 loading class androidx/cardview/widget/CardView$1
+Event: 8.524 loading class androidx/cardview/widget/CardView$1 done
+Event: 8.525 loading class androidx/cardview/widget/CardView$1
+Event: 8.525 loading class androidx/cardview/widget/CardView$1 done
+Event: 8.525 loading class androidx/cardview/widget/CardView
+Event: 8.525 loading class androidx/cardview/widget/CardView done
+Event: 8.525 loading class androidx/cardview/widget/CardView$1
+Event: 8.525 loading class androidx/cardview/widget/CardView$1 done
+Event: 8.525 loading class androidx/cardview/R$styleable
+Event: 8.525 loading class androidx/cardview/R$styleable done
+
+
+Dynamic libraries:
+0x00007fff2da38000 	/System/Library/Frameworks/Cocoa.framework/Versions/A/Cocoa
+0x00007fff3b006000 	/System/Library/Frameworks/Security.framework/Versions/A/Security
+0x00007fff2c9c2000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices
+0x00007fff65433000 	/usr/lib/libz.1.dylib
+0x00007fff62f02000 	/usr/lib/libSystem.B.dylib
+0x00007fff2e9af000 	/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation
+0x00007fff31074000 	/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation
+0x00007fff64d57000 	/usr/lib/libobjc.A.dylib
+0x00007fff2bbb7000 	/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit
+0x00007fff2e4bb000 	/System/Library/Frameworks/CoreData.framework/Versions/A/CoreData
+0x00007fff5f7aa000 	/System/Library/PrivateFrameworks/UIFoundation.framework/Versions/A/UIFoundation
+0x00007fff59f86000 	/System/Library/PrivateFrameworks/RemoteViewServices.framework/Versions/A/RemoteViewServices
+0x00007fff6223d000 	/System/Library/PrivateFrameworks/XCTTargetBootstrap.framework/Versions/A/XCTTargetBootstrap
+0x00007fff2e89e000 	/System/Library/Frameworks/CoreDisplay.framework/Versions/A/CoreDisplay
+0x00007fff33dec000 	/System/Library/Frameworks/Metal.framework/Versions/A/Metal
+0x00007fff4838c000 	/System/Library/PrivateFrameworks/DesktopServicesPriv.framework/Versions/A/DesktopServicesPriv
+0x00007fff64038000 	/usr/lib/liblangid.dylib
+0x00007fff474d8000 	/System/Library/PrivateFrameworks/CoreSVG.framework/Versions/A/CoreSVG
+0x00007fff5cd4d000 	/System/Library/PrivateFrameworks/SkyLight.framework/Versions/A/SkyLight
+0x00007fff2ee31000 	/System/Library/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics
+0x00007fff2a756000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Accelerate
+0x00007fff65324000 	/usr/lib/libxml2.2.dylib
+0x00007fff530b0000 	/System/Library/PrivateFrameworks/IconServices.framework/Versions/A/IconServices
+0x00007fff31859000 	/System/Library/Frameworks/IOSurface.framework/Versions/A/IOSurface
+0x00007fff62a3a000 	/usr/lib/libDiagnosticMessagesClient.dylib
+0x00007fff48205000 	/System/Library/PrivateFrameworks/DFRFoundation.framework/Versions/A/DFRFoundation
+0x00007fff63dc6000 	/usr/lib/libicucore.A.dylib
+0x00007fff2ccf4000 	/System/Library/Frameworks/AudioToolbox.framework/Versions/A/AudioToolbox
+0x00007fff2cdd6000 	/System/Library/Frameworks/AudioUnit.framework/Versions/A/AudioUnit
+0x00007fff63103000 	/usr/lib/libauto.dylib
+0x00007fff48286000 	/System/Library/PrivateFrameworks/DataDetectorsCore.framework/Versions/A/DataDetectorsCore
+0x00007fff2d558000 	/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HIToolbox.framework/Versions/A/HIToolbox
+0x00007fff3a237000 	/System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore
+0x00007fff2d897000 	/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/SpeechRecognition.framework/Versions/A/SpeechRecognition
+0x00007fff47b8b000 	/System/Library/PrivateFrameworks/CoreUI.framework/Versions/A/CoreUI
+0x00007fff2df21000 	/System/Library/Frameworks/CoreAudio.framework/Versions/A/CoreAudio
+0x00007fff30d3c000 	/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration
+0x00007fff550c5000 	/System/Library/PrivateFrameworks/MultitouchSupport.framework/Versions/A/MultitouchSupport
+0x00007fff63c8c000 	/usr/lib/libenergytrace.dylib
+0x00007fff317b4000 	/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit
+0x00007fff2fd9f000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/CoreServices
+0x00007fff571d2000 	/System/Library/PrivateFrameworks/PerformanceAnalysis.framework/Versions/A/PerformanceAnalysis
+0x00007fff3926d000 	/System/Library/Frameworks/OpenGL.framework/Versions/A/OpenGL
+0x00007fff2da46000 	/System/Library/Frameworks/ColorSync.framework/Versions/A/ColorSync
+0x00007fff2f4b8000 	/System/Library/Frameworks/CoreImage.framework/Versions/A/CoreImage
+0x00007fff30815000 	/System/Library/Frameworks/CoreText.framework/Versions/A/CoreText
+0x00007fff318df000 	/System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO
+0x00007fff631e8000 	/usr/lib/libc++.1.dylib
+0x00007fff63264000 	/usr/lib/libcompression.dylib
+0x00007fff62d7c000 	/usr/lib/libMobileGestalt.dylib
+0x00007fff5e88c000 	/System/Library/PrivateFrameworks/TextureIO.framework/Versions/A/TextureIO
+0x00007fff63069000 	/usr/lib/libate.dylib
+0x00007fff532b9000 	/System/Library/PrivateFrameworks/InternationalSupport.framework/Versions/A/InternationalSupport
+0x00007fff65ea9000 	/usr/lib/system/libcache.dylib
+0x00007fff65eaf000 	/usr/lib/system/libcommonCrypto.dylib
+0x00007fff65ebb000 	/usr/lib/system/libcompiler_rt.dylib
+0x00007fff65ec3000 	/usr/lib/system/libcopyfile.dylib
+0x00007fff65ecd000 	/usr/lib/system/libcorecrypto.dylib
+0x00007fff6607b000 	/usr/lib/system/libdispatch.dylib
+0x00007fff660bd000 	/usr/lib/system/libdyld.dylib
+0x00007fff660f3000 	/usr/lib/system/libkeymgr.dylib
+0x00007fff66101000 	/usr/lib/system/liblaunch.dylib
+0x00007fff66102000 	/usr/lib/system/libmacho.dylib
+0x00007fff66108000 	/usr/lib/system/libquarantine.dylib
+0x00007fff6610b000 	/usr/lib/system/libremovefile.dylib
+0x00007fff6610d000 	/usr/lib/system/libsystem_asl.dylib
+0x00007fff66125000 	/usr/lib/system/libsystem_blocks.dylib
+0x00007fff66126000 	/usr/lib/system/libsystem_c.dylib
+0x00007fff661ae000 	/usr/lib/system/libsystem_configuration.dylib
+0x00007fff661b2000 	/usr/lib/system/libsystem_coreservices.dylib
+0x00007fff661b6000 	/usr/lib/system/libsystem_darwin.dylib
+0x00007fff661bf000 	/usr/lib/system/libsystem_dnssd.dylib
+0x00007fff661c7000 	/usr/lib/system/libsystem_featureflags.dylib
+0x00007fff661c9000 	/usr/lib/system/libsystem_info.dylib
+0x00007fff66244000 	/usr/lib/system/libsystem_m.dylib
+0x00007fff6628c000 	/usr/lib/system/libsystem_malloc.dylib
+0x00007fff662b4000 	/usr/lib/system/libsystem_networkextension.dylib
+0x00007fff662c2000 	/usr/lib/system/libsystem_notify.dylib
+0x00007fff662e1000 	/usr/lib/system/libsystem_sandbox.dylib
+0x00007fff662e6000 	/usr/lib/system/libsystem_secinit.dylib
+0x00007fff66217000 	/usr/lib/system/libsystem_kernel.dylib
+0x00007fff662cc000 	/usr/lib/system/libsystem_platform.dylib
+0x00007fff662d6000 	/usr/lib/system/libsystem_pthread.dylib
+0x00007fff662e9000 	/usr/lib/system/libsystem_symptoms.dylib
+0x00007fff662f1000 	/usr/lib/system/libsystem_trace.dylib
+0x00007fff66309000 	/usr/lib/system/libunwind.dylib
+0x00007fff6630f000 	/usr/lib/system/libxpc.dylib
+0x00007fff6323c000 	/usr/lib/libc++abi.dylib
+0x00007fff6403a000 	/usr/lib/liblzma.5.dylib
+0x00007fff63cb4000 	/usr/lib/libfakelink.dylib
+0x00007fff62ff6000 	/usr/lib/libarchive.2.dylib
+0x00007fff3c1a8000 	/System/Library/Frameworks/SystemConfiguration.framework/Versions/A/SystemConfiguration
+0x00007fff6296b000 	/usr/lib/libCRFSuite.dylib
+0x00007fff2d14c000 	/System/Library/Frameworks/CFNetwork.framework/Versions/A/CFNetwork
+0x00007fff631ca000 	/usr/lib/libbsm.0.dylib
+0x00007fff660f4000 	/usr/lib/system/libkxld.dylib
+0x00007fff41cbc000 	/System/Library/PrivateFrameworks/AppleFSCompression.framework/Versions/A/AppleFSCompression
+0x00007fff6354b000 	/usr/lib/libcoretls.dylib
+0x00007fff63562000 	/usr/lib/libcoretls_cfhelpers.dylib
+0x00007fff64d9b000 	/usr/lib/libpam.2.dylib
+0x00007fff64ece000 	/usr/lib/libsqlite3.dylib
+0x00007fff65311000 	/usr/lib/libxar.1.dylib
+0x00007fff631db000 	/usr/lib/libbz2.1.0.dylib
+0x00007fff63cd5000 	/usr/lib/libiconv.2.dylib
+0x00007fff63251000 	/usr/lib/libcharset.1.dylib
+0x00007fff64842000 	/usr/lib/libnetwork.dylib
+0x00007fff64da2000 	/usr/lib/libpcap.A.dylib
+0x00007fff62fab000 	/usr/lib/libapple_nghttp2.dylib
+0x00007fff30156000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/FSEvents.framework/Versions/A/FSEvents
+0x00007fff2fe26000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/CarbonCore.framework/Versions/A/CarbonCore
+0x00007fff30399000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/Metadata.framework/Versions/A/Metadata
+0x00007fff30432000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/OSServices.framework/Versions/A/OSServices
+0x00007fff30460000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/SearchKit.framework/Versions/A/SearchKit
+0x00007fff2fda0000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/AE.framework/Versions/A/AE
+0x00007fff3015f000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/LaunchServices
+0x00007fff30108000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/DictionaryServices.framework/Versions/A/DictionaryServices
+0x00007fff304c8000 	/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/SharedFileList.framework/Versions/A/SharedFileList
+0x00007fff350c1000 	/System/Library/Frameworks/NetFS.framework/Versions/A/NetFS
+0x00007fff555f5000 	/System/Library/PrivateFrameworks/NetAuth.framework/Versions/A/NetAuth
+0x00007fff62608000 	/System/Library/PrivateFrameworks/login.framework/Versions/A/Frameworks/loginsupport.framework/Versions/A/loginsupport
+0x00007fff5e387000 	/System/Library/PrivateFrameworks/TCC.framework/Versions/A/TCC
+0x00007fff468a7000 	/System/Library/PrivateFrameworks/CoreNLP.framework/Versions/A/CoreNLP
+0x00007fff54af5000 	/System/Library/PrivateFrameworks/MetadataUtilities.framework/Versions/A/MetadataUtilities
+0x00007fff64112000 	/usr/lib/libmecabra.dylib
+0x00007fff6406a000 	/usr/lib/libmecab.dylib
+0x00007fff63cc5000 	/usr/lib/libgermantok.dylib
+0x00007fff62f92000 	/usr/lib/libThaiTokenizer.dylib
+0x00007fff629a3000 	/usr/lib/libChineseTokenizer.dylib
+0x00007fff2a76e000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vImage.framework/Versions/A/vImage
+0x00007fff2ba11000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/vecLib
+0x00007fff2b955000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libvMisc.dylib
+0x00007fff2b77b000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libvDSP.dylib
+0x00007fff2adda000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBLAS.dylib
+0x00007fff2b335000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libLAPACK.dylib
+0x00007fff2b6db000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libLinearAlgebra.dylib
+0x00007fff2b768000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libSparseBLAS.dylib
+0x00007fff2b6f1000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libQuadrature.dylib
+0x00007fff2b044000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBNNS.dylib
+0x00007fff2b6f7000 	/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libSparse.dylib
+0x00007fff53678000 	/System/Library/PrivateFrameworks/LanguageModeling.framework/Versions/A/LanguageModeling
+0x00007fff46243000 	/System/Library/PrivateFrameworks/CoreEmoji.framework/Versions/A/CoreEmoji
+0x00007fff53796000 	/System/Library/PrivateFrameworks/LinguisticData.framework/Versions/A/LinguisticData
+0x00007fff53747000 	/System/Library/PrivateFrameworks/Lexicon.framework/Versions/A/Lexicon
+0x00007fff63252000 	/usr/lib/libcmph.dylib
+0x00007fff37c93000 	/System/Library/Frameworks/OpenDirectory.framework/Versions/A/Frameworks/CFOpenDirectory.framework/Versions/A/CFOpenDirectory
+0x00007fff37cb0000 	/System/Library/Frameworks/OpenDirectory.framework/Versions/A/OpenDirectory
+0x00007fff3ff7d000 	/System/Library/PrivateFrameworks/APFS.framework/Versions/A/APFS
+0x00007fff3b359000 	/System/Library/Frameworks/SecurityFoundation.framework/Versions/A/SecurityFoundation
+0x00007fff6530d000 	/usr/lib/libutil.dylib
+0x00007fff47530000 	/System/Library/PrivateFrameworks/CoreServicesStore.framework/Versions/A/CoreServicesStore
+0x00007fff3b411000 	/System/Library/Frameworks/ServiceManagement.framework/Versions/A/ServiceManagement
+0x00007fff43473000 	/System/Library/PrivateFrameworks/BackgroundTaskManagement.framework/Versions/A/BackgroundTaskManagement
+0x00007fff6540a000 	/usr/lib/libxslt.1.dylib
+0x00007fff42321000 	/System/Library/PrivateFrameworks/AppleSystemInfo.framework/Versions/A/AppleSystemInfo
+0x00007fff31afc000 	/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libJPEG.dylib
+0x00007fff31dbb000 	/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libTIFF.dylib
+0x00007fff31d9e000 	/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libPng.dylib
+0x00007fff31a3d000 	/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libGIF.dylib
+0x00007fff31a41000 	/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libJP2.dylib
+0x00007fff31db9000 	/System/Library/Frameworks/ImageIO.framework/Versions/A/Resources/libRadiance.dylib
+0x00007fff63c8d000 	/usr/lib/libexpat.1.dylib
+0x00007fff41e17000 	/System/Library/PrivateFrameworks/AppleJPEG.framework/Versions/A/AppleJPEG
+0x00007fff4a7aa000 	/System/Library/PrivateFrameworks/FontServices.framework/libFontParser.dylib
+0x00007fff6165f000 	/System/Library/PrivateFrameworks/WatchdogClient.framework/Versions/A/WatchdogClient
+0x00007fff52d05000 	/System/Library/PrivateFrameworks/IOAccelerator.framework/Versions/A/IOAccelerator
+0x00007fff3417a000 	/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/MetalPerformanceShaders
+0x00007fff4f4f8000 	/System/Library/PrivateFrameworks/GPUWrangler.framework/Versions/A/GPUWrangler
+0x00007fff52d10000 	/System/Library/PrivateFrameworks/IOPresentment.framework/Versions/A/IOPresentment
+0x00007fff48218000 	/System/Library/PrivateFrameworks/DSExternalDisplay.framework/Versions/A/DSExternalDisplay
+0x00007fff38619000 	/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libCoreFSCache.dylib
+0x00007fff33ecc000 	/System/Library/Frameworks/MetalPerformanceShaders.framework/Frameworks/MPSCore.framework/Versions/A/MPSCore
+0x00007fff33f09000 	/System/Library/Frameworks/MetalPerformanceShaders.framework/Frameworks/MPSImage.framework/Versions/A/MPSImage
+0x00007fff33fcb000 	/System/Library/Frameworks/MetalPerformanceShaders.framework/Frameworks/MPSNeuralNetwork.framework/Versions/A/MPSNeuralNetwork
+0x00007fff33f90000 	/System/Library/Frameworks/MetalPerformanceShaders.framework/Frameworks/MPSMatrix.framework/Versions/A/MPSMatrix
+0x00007fff3412b000 	/System/Library/Frameworks/MetalPerformanceShaders.framework/Frameworks/MPSRayIntersector.framework/Versions/A/MPSRayIntersector
+0x00007fff33fb5000 	/System/Library/Frameworks/MetalPerformanceShaders.framework/Frameworks/MPSNDArray.framework/Versions/A/MPSNDArray
+0x00007fff54b42000 	/System/Library/PrivateFrameworks/MetalTools.framework/Versions/A/MetalTools
+0x00007fff41142000 	/System/Library/PrivateFrameworks/AggregateDictionary.framework/Versions/A/AggregateDictionary
+0x00007fff45ccd000 	/System/Library/PrivateFrameworks/CoreAnalytics.framework/Versions/A/CoreAnalytics
+0x00007fff4223f000 	/System/Library/PrivateFrameworks/AppleSauce.framework/Versions/A/AppleSauce
+0x00007fff62c5f000 	/usr/lib/libIOReport.dylib
+0x00007fff309ca000 	/System/Library/Frameworks/CoreVideo.framework/Versions/A/CoreVideo
+0x00007fff50966000 	/System/Library/PrivateFrameworks/GraphVisualizer.framework/Versions/A/GraphVisualizer
+0x00007fff49d2b000 	/System/Library/PrivateFrameworks/FaceCore.framework/Versions/A/FaceCore
+0x00007fff37c3a000 	/System/Library/Frameworks/OpenCL.framework/Versions/A/OpenCL
+0x00007fff62a81000 	/usr/lib/libFosl_dynamic.dylib
+0x00007fff55ff0000 	/System/Library/PrivateFrameworks/OTSVG.framework/Versions/A/OTSVG
+0x00007fff2cac7000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/Resources/libFontRegistry.dylib
+0x00007fff4a97b000 	/System/Library/PrivateFrameworks/FontServices.framework/libhvf.dylib
+0x00007fff38624000 	/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGFXShared.dylib
+0x00007fff38801000 	/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGLU.dylib
+0x00007fff3862d000 	/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib
+0x00007fff38638000 	/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGLImage.dylib
+0x00007fff38616000 	/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libCVMSPluginSupport.dylib
+0x00007fff3861f000 	/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libCoreVMClient.dylib
+0x00007fff646e4000 	/usr/lib/libncurses.5.4.dylib
+0x00007fff2c9c3000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/ATS
+0x00007fff2cb90000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ColorSyncLegacy.framework/Versions/A/ColorSyncLegacy
+0x00007fff2cc2f000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/HIServices.framework/Versions/A/HIServices
+0x00007fff2cc86000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/LangAnalysis.framework/Versions/A/LangAnalysis
+0x00007fff2cc95000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/PrintCore.framework/Versions/A/PrintCore
+0x00007fff2ccdb000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/QD.framework/Versions/A/QD
+0x00007fff2cce6000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/SpeechSynthesis.framework/Versions/A/SpeechSynthesis
+0x00007fff2cb60000 	/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATSUI.framework/Versions/A/ATSUI
+0x00007fff63b21000 	/usr/lib/libcups.2.dylib
+0x00007fff33229000 	/System/Library/Frameworks/Kerberos.framework/Versions/A/Kerberos
+0x00007fff314a9000 	/System/Library/Frameworks/GSS.framework/Versions/A/GSS
+0x00007fff64e5a000 	/usr/lib/libresolv.9.dylib
+0x00007fff50b07000 	/System/Library/PrivateFrameworks/Heimdal.framework/Versions/A/Heimdal
+0x00007fff3323c000 	/System/Library/Frameworks/Kerberos.framework/Versions/A/Libraries/libHeimdalProxy.dylib
+0x00007fff63ccb000 	/usr/lib/libheimdal-asn1.dylib
+0x00007fff45173000 	/System/Library/PrivateFrameworks/CommonAuth.framework/Versions/A/CommonAuth
+0x00007fff423be000 	/System/Library/PrivateFrameworks/AssertionServices.framework/Versions/A/AssertionServices
+0x00007fff42f61000 	/System/Library/PrivateFrameworks/AudioToolboxCore.framework/Versions/A/AudioToolboxCore
+0x00007fff622b9000 	/System/Library/PrivateFrameworks/caulk.framework/Versions/A/caulk
+0x00007fff4351f000 	/System/Library/PrivateFrameworks/BaseBoard.framework/Versions/A/BaseBoard
+0x00007fff5a115000 	/System/Library/PrivateFrameworks/RunningBoardServices.framework/Versions/A/RunningBoardServices
+0x00007fff571de000 	/System/Library/PrivateFrameworks/PersistentConnection.framework/Versions/A/PersistentConnection
+0x00007fff59b64000 	/System/Library/PrivateFrameworks/ProtocolBuffer.framework/Versions/A/ProtocolBuffer
+0x00007fff45198000 	/System/Library/PrivateFrameworks/CommonUtilities.framework/Versions/A/CommonUtilities
+0x00007fff436a2000 	/System/Library/PrivateFrameworks/Bom.framework/Versions/A/Bom
+0x00007fff6292e000 	/usr/lib/libAudioToolboxUtility.dylib
+0x00007fff4347d000 	/System/Library/PrivateFrameworks/Backup.framework/Versions/A/Backup
+0x00007fff47f88000 	/System/Library/PrivateFrameworks/CrashReporterSupport.framework/Versions/A/CrashReporterSupport
+0x00007fff5bc11000 	/System/Library/PrivateFrameworks/Sharing.framework/Versions/A/Sharing
+0x00007fff41b62000 	/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Apple80211
+0x00007fff4319f000 	/System/Library/PrivateFrameworks/AuthKit.framework/Versions/A/AuthKit
+0x00007fff47cb8000 	/System/Library/PrivateFrameworks/CoreUtils.framework/Versions/A/CoreUtils
+0x00007fff30a0f000 	/System/Library/Frameworks/CoreWLAN.framework/Versions/A/CoreWLAN
+0x00007fff31635000 	/System/Library/Frameworks/IOBluetooth.framework/Versions/A/IOBluetooth
+0x00007fff54e40000 	/System/Library/PrivateFrameworks/MobileKeyBag.framework/Versions/A/MobileKeyBag
+0x00007fff46d83000 	/System/Library/PrivateFrameworks/CorePhoneNumbers.framework/Versions/A/CorePhoneNumbers
+0x00007fff41dca000 	/System/Library/PrivateFrameworks/AppleIDAuthSupport.framework/Versions/A/AppleIDAuthSupport
+0x00007fff350ce000 	/System/Library/Frameworks/Network.framework/Versions/A/Network
+0x00007fff53500000 	/System/Library/PrivateFrameworks/KeychainCircle.framework/Versions/A/KeychainCircle
+0x00007fff2e483000 	/System/Library/Frameworks/CoreBluetooth.framework/Versions/A/CoreBluetooth
+0x00007fff5d88d000 	/System/Library/PrivateFrameworks/SpeechRecognitionCore.framework/Versions/A/SpeechRecognitionCore
+0x0000000108c00000 	/Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home/lib/server/libjvm.dylib
+0x00007fff651df000 	/usr/lib/libstdc++.6.dylib
+0x0000000107bd9000 	/Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home/lib/libverify.dylib
+0x00000001099a0000 	/Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home/lib/libjava.dylib
+0x0000000109a1c000 	/Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home/lib/libzip.dylib
+0x0000000109a24000 	/Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home/lib/libjimage.dylib
+0x000000012a7ec000 	/Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home/lib/libnio.dylib
+0x000000012a7fc000 	/Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home/lib/libnet.dylib
+0x000000012b0b0000 	/Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home/lib/libsunec.dylib
+0x000000012b3b2000 	/Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home/lib/libawt.dylib
+0x000000012ba68000 	/Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home/lib/libmlib_image.dylib
+0x00007fff33212000 	/System/Library/Frameworks/JavaVM.framework/Versions/A/Frameworks/JavaNativeFoundation.framework/Versions/A/JavaNativeFoundation
+0x00007fff3321b000 	/System/Library/Frameworks/JavaVM.framework/Versions/A/Frameworks/JavaRuntimeSupport.framework/Versions/A/JavaRuntimeSupport
+0x00007fff33224000 	/System/Library/Frameworks/JavaVM.framework/Versions/A/JavaVM
+0x00007fff53363000 	/System/Library/PrivateFrameworks/JavaLaunching.framework/Versions/A/JavaLaunching
+0x00007fff2d553000 	/System/Library/Frameworks/Carbon.framework/Versions/A/Carbon
+0x00007fff47a6c000 	/System/Library/PrivateFrameworks/CoreSymbolication.framework/Versions/A/CoreSymbolication
+0x00007fff2d554000 	/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/CommonPanels.framework/Versions/A/CommonPanels
+0x00007fff2d84d000 	/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/Help.framework/Versions/A/Help
+0x00007fff2d851000 	/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/ImageCapture.framework/Versions/A/ImageCapture
+0x00007fff2d858000 	/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/OpenScripting.framework/Versions/A/OpenScripting
+0x00007fff2d857000 	/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/Ink.framework/Versions/A/Ink
+0x00007fff2d893000 	/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/Print.framework/Versions/A/Print
+0x00007fff2d894000 	/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/SecurityHI.framework/Versions/A/SecurityHI
+0x00007fff4834d000 	/System/Library/PrivateFrameworks/DebugSymbols.framework/Versions/A/DebugSymbols
+0x000000012bfc7000 	/Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home/lib/libawt_lwawt.dylib
+0x000000012ad98000 	/Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home/lib/libosxapp.dylib
+0x00007fff30f17000 	/System/Library/Frameworks/ExceptionHandling.framework/Versions/A/ExceptionHandling
+
+
+VM Arguments:
+jvm_args: -Djava.awt.headless=true -Dorg.gradle.native=false -Xmx512m -Dfile.encoding=UTF-8 -Duser.country=US -Duser.language=en -Duser.variant -ea 
+java_command: worker.org.gradle.process.internal.worker.GradleWorkerMain 'Gradle Test Executor 11'
+java_class_path (initial): /Users/al/.gradle/caches/5.4.1/workerMain/gradle-worker.jar:/Users/al/AndroidStudioProjects/team-project-team28/app/build/intermediates/unit_test_config_directory/debugUnitTest/out:/Users/al/AndroidStudioProjects/team-project-team28/app/build/intermediates/javac/debugUnitTest/classes:/Users/al/AndroidStudioProjects/team-project-team28/app/build/intermediates/sourceFolderJavaResources/test/debug:/Users/al/.gradle/caches/transforms-2/files-2.1/aa844cb8f6194597ebb597f45fbbd551/jetified-navigation-ui-2.0.0-runtime.jar:/Users/al/.gradle/caches/transforms-2/files-2.1/061eca60a0d1222b53274efc7ccb43d4/material-1.0.0-runtime.jar:/Users/al/.gradle/caches/transforms-2/files-2.1/c747446e8ed1104be64b11fcf8bc0997/appcompat-1.0.2-runtime.jar:/Users/al/.gradle/caches/transforms-2/files-2.1/78a540a3a1ea9165f6f35f2d12a789ab/constraintlayout-1.1.3-runtime.jar:/Users/al/.gradle/caches/transforms-2/files-2.1/8d25714171624c4ff522978226467383/play-services-fitness-18.0.0-runtime.jar:/Users/al/.gradle/caches/transforms-2/files-2.1/3fda5d172d1a3c3f1cc25b76e4355b53/play-services-auth-17.0.0-runtime.jar:/Users/al/.gradle/caches/transforms-2/files-2.1/384ab5846a6c7260551d8132b5b9e61a/jetified-firebase-auth-17.0.0-runtime.jar:/Users/al/.gradle/caches/transforms-2/files-2.1/0dc686a760e36491255cb7e05b632085/navigation-fragment-2.0.0-runtime.jar:/Users/al/.gradle/caches/transforms-2/files-2.1/fc89c87ee75c18ce80cbf2ef30af725a/jetified-firebase-firestore-21.4.0-runtime.jar:/Users/al/.gradle/caches/transforms-2/files-2.1/d4164f3370a64b650552dba85c7f3b40/grpc-android-1.21.0-runtime.jar:/Users/al/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-okhttp/1.21.0/f51c169b2a6173a1adfece8788ddc3345f6fa0e6/grpc-okhttp-1.21.0.jar:/Users/al/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-core/1.21.0/578244433f69fbd2a8b5183c528088cc269c9417/grpc-core-1.21.0.jar:/Users/al/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.8.2/3edcfe49d2c6053a70a2a47e4e1c2f94998a49cf/gson-2.8
+Launcher Type: SUN_STANDARD
+
+Logging:
+Log output configuration:
+#0: stdout all=warning uptime,level,tags
+#1: stderr all=off uptime,level,tags
+
+Environment Variables:
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin
+SHELL=/bin/zsh
+DISPLAY=/private/tmp/com.apple.launchd.V4f7kSB8Mk/org.macosforge.xquartz:0
+
+Signal Handlers:
+SIGSEGV: [libjvm.dylib+0x79ac14], sa_mask[0]=11111111011111110111111111111111, sa_flags=SA_ONSTACK|SA_RESTART|SA_SIGINFO
+SIGBUS: [libjvm.dylib+0x79ac14], sa_mask[0]=11111111011111110111111111111111, sa_flags=SA_RESTART|SA_SIGINFO
+SIGFPE: [libjvm.dylib+0x79ac14], sa_mask[0]=11111111011111110111111111111111, sa_flags=SA_RESTART|SA_SIGINFO
+SIGPIPE: [libjvm.dylib+0x635960], sa_mask[0]=11111111011111110111111111111111, sa_flags=SA_RESTART|SA_SIGINFO
+SIGXFSZ: [libjvm.dylib+0x635960], sa_mask[0]=11111111011111110111111111111111, sa_flags=SA_RESTART|SA_SIGINFO
+SIGILL: [libjvm.dylib+0x79ac14], sa_mask[0]=11111111011111110111111111111111, sa_flags=SA_RESTART|SA_SIGINFO
+SIGUSR2: [libjvm.dylib+0x6361f0], sa_mask[0]=00100000000000000000000000000000, sa_flags=SA_RESTART|SA_SIGINFO
+SIGHUP: [libjvm.dylib+0x6349db], sa_mask[0]=11111111011111110111111111111111, sa_flags=SA_RESTART|SA_SIGINFO
+SIGINT: [libjvm.dylib+0x6349db], sa_mask[0]=11111111011111110111111111111111, sa_flags=SA_RESTART|SA_SIGINFO
+SIGTERM: [libjvm.dylib+0x6349db], sa_mask[0]=11111111011111110111111111111111, sa_flags=SA_RESTART|SA_SIGINFO
+SIGQUIT: [libjvm.dylib+0x6349db], sa_mask[0]=11111111011111110111111111111111, sa_flags=SA_RESTART|SA_SIGINFO
+
+
+---------------  S Y S T E M  ---------------
+
+OS:uname:Darwin 19.3.0 Darwin Kernel Version 19.3.0: Thu Jan  9 20:58:23 PST 2020; root:xnu-6153.81.5~1/RELEASE_X86_64 x86_64
+rlimit: STACK 8192k, CORE 0k, NPROC 1392, NOFILE 10240, AS infinity, DATA infinity, FSIZE infinity
+load average:3.09 2.35 1.87
+
+CPU:total 8 (initial active 8) (4 cores per cpu, 2 threads per core) family 6 model 142 stepping 10, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, avx2, aes, clmul, erms, 3dnowpref, lzcnt, ht, tsc, tscinvbit, bmi1, bmi2, adx, fma
+
+Memory: 4k page, physical 8388608k(103076k free)
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (10.0.2+13) for bsd-amd64 JRE (10.0.2+13), built on Jun 28 2018 00:49:51 by "mach5one" with gcc 4.2.1 Compatible Apple LLVM 6.1.0 (clang-602.0.49)
+
+END.
