@@ -4,5 +4,5 @@
 # Location of the SDK. This is only used by Gradle.
 # For customization when using a Version Control System, please read the
 # header note.
-#Tue Mar 03 14:29:29 PST 2020
-sdk.dir=/Users/Tim/Library/Android/sdk
+#Sat Feb 15 20:45:53 PST 2020
+sdk.dir=/Users/al/Library/Android/sdk
