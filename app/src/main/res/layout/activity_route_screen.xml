@@ -20,16 +20,26 @@
         android:id="@+id/backToMainMenuButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Go Back To Main Menu" />
+        android:text="Go Back To Main Menu"
+        android:textSize="10sp" />
 
     <Button
         android:id="@+id/addRouteButton"
-        android:text="Add Route"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="175dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        />
+        android:layout_marginTop="0dp"
+        android:layout_toRightOf="@id/uploadRouteButton"
+        android:text="Add Route"
+        android:textSize="10sp" />
+
+    <Button
+        android:id="@+id/uploadRouteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/backToMainMenuButton"
+        android:text="Upload Route"
+        android:textSize="10sp" />
 
 </RelativeLayout>
