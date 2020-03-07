@@ -21,9 +21,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -128,14 +125,14 @@ public class RouteScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
-                Map<String, Object> user = new HashMap<>();
-                user.put("team", routeList);
+                Map<String, Object> routes = new HashMap<>();
+                routes.put("routes", routeList);
 
                 SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
-                String userName = sharedPreferences.getString("userName", "");
+                String userName = sharedPreferences.getString("userName", "test");
 
-                db.collection("routes").document(userName)
-                        .set(user)
+                db.collection("appUsers").document(userName)
+                        .update(routes)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
@@ -147,17 +144,29 @@ public class RouteScreen extends AppCompatActivity {
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Log.w(TAG, "Error writing document", e);
-                                Toast.makeText(getApplicationContext(), "Upload failed!",
-                                        Toast.LENGTH_SHORT).show();
+                                db.collection("appUsers").document(userName)
+                                        .set(routes)
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Log.d(TAG, "DocumentSnapshot successfully written!");
+                                                Toast.makeText(getApplicationContext(), "Routes successfully uploaded!",
+                                                        Toast.LENGTH_SHORT).show();
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Log.w(TAG, "Error writing document", e);
+                                            }
+                                        });
                             }
                         });
-
             }
         });
     }
 
-    public static void addToRouteList(String routeName, String startingLocation, long totalSteps,
+    public static void addToRouteList(String userName, String userEmail, String routeName, String startingLocation, long totalSteps,
                                       double totalMiles, long totalSeconds, String flatOrHilly,
                                       String loopOrOut, String streetOrTrail, String surface,
                                       String difficulty, String note, boolean isFavorite) {
@@ -165,7 +174,7 @@ public class RouteScreen extends AppCompatActivity {
         if (isFavorite) {
             image = R.drawable.ic_stars_black_24dp;
         }
-        routeList.add(new Route(routeName, startingLocation, totalSteps, totalMiles,
+        routeList.add(new Route(userName, userEmail, routeName, startingLocation, totalSteps, totalMiles,
                 totalSeconds, flatOrHilly, loopOrOut, streetOrTrail, surface, difficulty,
                 note, isFavorite, image));
         routeAdapter.notifyDataSetChanged();

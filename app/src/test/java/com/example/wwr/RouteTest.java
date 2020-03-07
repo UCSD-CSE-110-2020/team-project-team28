@@ -11,7 +11,7 @@ import static junit.framework.TestCase.assertEquals;
 public class RouteTest {
     @Test
     public void testRoute() {
-        Route home = new Route("Home", "CA", 100, 5.5, 10,
+        Route home = new Route("Tim", "A", "Home", "CA", 100, 5.5, 10,
                 "flat", "hilly", "trail", "even", "hard",
                 "Gotta go home", true, 0);
         assertEquals(home.getName(), "Home");

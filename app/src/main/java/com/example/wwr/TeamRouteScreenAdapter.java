@@ -74,6 +74,7 @@ public class TeamRouteScreenAdapter extends RecyclerView.Adapter<TeamRouteScreen
 
         holder.image.setImageResource(currentRoute.getImage());
         holder.routeName.setText(currentRoute.getName());
+        holder.teamMemberName.setText(currentRoute.getUserName());
         holder.startingPoint.setText("Starting Location: " + currentRoute.getStartLocation());
         holder.totalTime.setText("Total Time: " + currentRoute.getTotalSeconds() + "s");
         holder.totalSteps.setText("Total Steps: " + currentRoute.getSteps() + " steps");

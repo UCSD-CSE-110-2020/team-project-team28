@@ -1,11 +1,14 @@
 package com.example.wwr;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.widget.Button;
 
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+
+import com.google.firebase.FirebaseApp;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,6 +24,7 @@ public class AddTeamMemberTest {
     @Before
     public void setUp() {
         intent = new Intent(ApplicationProvider.getApplicationContext(), TeamPageScreen.class);
+        FirebaseApp.initializeApp(ApplicationProvider.getApplicationContext());
     }
 
     @Test
@@ -35,14 +39,14 @@ public class AddTeamMemberTest {
 
             assertEquals(TeamPageScreen.routeList.size(), 0);
             TeamPageScreen.routeList.add(
-                    new Route("Tim Jang", "w1jang@ucsd.edu", 100, 5.5, 10,
+                    new Route("Tim Jang", "w1jang@ucsd.edu", "Home", "Street", 100, 5.5, 10,
                     "flat", "hilly", "trail", "even", "hard",
                     "Gotta go home", true, 0));
             addMemberButton.performClick();
 
             assertEquals(TeamPageScreen.routeList.size(), 1);
-            assertEquals(TeamPageScreen.routeList.get(TeamPageScreen.routeList.size() - 1).getName(), "Tim Jang");
-            assertEquals(TeamPageScreen.routeList.get(TeamPageScreen.routeList.size() - 1).getStartLocation(), "w1jang@ucsd.edu");
+            assertEquals(TeamPageScreen.routeList.get(TeamPageScreen.routeList.size() - 1).getUserName(), "Tim Jang");
+            assertEquals(TeamPageScreen.routeList.get(TeamPageScreen.routeList.size() - 1).getUserEmail(), "w1jang@ucsd.edu");
 
             backToMainScreenButton.performClick();
         });
