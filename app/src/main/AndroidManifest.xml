@@ -10,15 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <service android:name="MyFirebaseMessagingService">
+        <service android:name=".MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
         <activity
             android:name=".AddMemberActivity"
             android:label="@string/title_activity_add_member"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".TeamPageScreen" />
         <activity android:name=".TeamRouteScreen" />
         <activity android:name=".LogInActivity">
@@ -38,11 +39,13 @@
             android:name=".WalkScreenActivity"
             android:label="@string/title_activity_walk_screen"
             android:theme="@style/AppTheme.NoActionBar" />
-
-
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".TeamRequestActivity"
+            android:label="TeamRequestActivity"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
