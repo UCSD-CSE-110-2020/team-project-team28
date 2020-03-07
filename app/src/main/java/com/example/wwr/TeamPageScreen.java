@@ -92,19 +92,6 @@ public class TeamPageScreen extends AppCompatActivity {
                 TeamPageScreen.super.onBackPressed();
             }
         });
-
-        Button addMember = findViewById(R.id.addMemberButton);
-        addMember.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startAddMember();
-            }
-        });
-    }
-
-    public void startAddMember() {
-        Intent intent = new Intent(this, AddMemberActivity.class);
-        startActivity(intent);
     }
 
     public void uploadUserInformation() {
