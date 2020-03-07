@@ -135,7 +135,7 @@ public class AddMemberActivity extends AppCompatActivity {
 
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 // Change the condition to specific user via email from the field
-                                if (document.get("email").equals(email_str)) {
+                                if (document.get("email") != null && document.get("email").equals(email_str)) {
                                     sendMessage((String) document.get("token"));
 
                                     return;

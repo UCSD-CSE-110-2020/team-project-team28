@@ -46,7 +46,8 @@ public class TeamPageScreen extends AppCompatActivity {
     public void loadTeamUsers() {
         routeList = new ArrayList<>();
         SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
-        String userName = sharedPreferences.getString("userName", "Test");
+        String userName = sharedPreferences.getString("userName", "Te" +
+                "st");
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("appUsers")
@@ -56,7 +57,7 @@ public class TeamPageScreen extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                if (!document.getId().equals(userName) && !hasTeamMember(document.getId())) {
+                                if (!document.getId().equals(userName) && !hasTeamMember(document.getId()) && document.get("email") !=null) {
                                     routeList.add(new Route((String) document.getId(), (String) document.get("email"), "",
                                             "", 0, 0, 0, "", "",
                                             "", "", "", "", false, 0));
@@ -108,6 +109,7 @@ public class TeamPageScreen extends AppCompatActivity {
     }
 
     public void uploadUserInformation() {
+        //addEmailToFirebase();
         addTokenToFirebase();
         addEmailToFirebase();
     }
@@ -144,7 +146,8 @@ public class TeamPageScreen extends AppCompatActivity {
 
     public void addToken(String token) {
         SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
-        String userName = sharedPreferences.getString("userName", "");
+        String userName = sharedPreferences.getString("userName", "FirebaseTests");
+
 
         Map<String, Object> userToken = new HashMap<>();
         userToken.put("token", token);

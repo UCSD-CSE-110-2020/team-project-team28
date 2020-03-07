@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.wwr.fitness.FitnessService;
 import com.example.wwr.fitness.FitnessServiceFactory;
@@ -13,6 +15,7 @@ import com.example.wwr.fitness.GoogleFitAdapter;
 
 public class LogInActivity extends AppCompatActivity {
     private String fitnessServiceKey = "GOOGLE_FIT";
+    private static final String TAG = "LogInActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +24,19 @@ public class LogInActivity extends AppCompatActivity {
         if (getIntent().getStringExtra("previousActivity") != null &&
                 getIntent().getStringExtra("previousActivity").equals("Route Detail")) {
             launchMainActivity(true);
+        }
+
+        if (getIntent().getExtras() != null) {
+            /*Bundle bundle = getIntent().getExtras();
+            for (String key : bundle.keySet()){
+                Toast.makeText(getApplicationContext(), bundle.get(key) + "", Toast.LENGTH_SHORT).show();
+            }*/
+            for (String key : getIntent().getExtras().keySet()) {
+                String value = getIntent().getExtras().getString(key);
+                Toast.makeText(getApplicationContext(), "Key: " + key + " Value: " + value, Toast.LENGTH_LONG).show();
+                Log.d(TAG, "Key: " + key + " Value: " + value);
+            }
+            launchMainActivity((false));
         }
 
         setContentView(R.layout.activity_log_in);

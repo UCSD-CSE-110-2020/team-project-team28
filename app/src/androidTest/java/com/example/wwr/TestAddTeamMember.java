@@ -94,6 +94,17 @@ public class TestAddTeamMember {
                         isDisplayed()));
         appCompatEditText4.perform(replaceText("5"), closeSoftKeyboard());
 
+        //new
+        ViewInteraction appCompatEditText11 = onView(
+                allOf(withId(R.id.enter_email),
+                        isDisplayed()));
+        appCompatEditText11.perform(replaceText("testEmail"), closeSoftKeyboard());
+
+        ViewInteraction appCompatEditText14 = onView(
+                allOf(withId(R.id.enter_name),
+                        isDisplayed()));
+        appCompatEditText14.perform(replaceText("FirebaseTest"), closeSoftKeyboard());
+
         ViewInteraction appCompatButton2 = onView(
                 allOf(withId(R.id.enter_button), withText("CONFIRM"),
                         isDisplayed()));
