@@ -1,8 +1,10 @@
 package com.example.wwr;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -12,6 +14,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class AskHeight_Activity extends AppCompatActivity {
     private EditText feet;
@@ -19,6 +29,7 @@ public class AskHeight_Activity extends AppCompatActivity {
     private EditText enterName;
     private EditText enterEmail;
     private Button enter;
+    private static final String TAG = "Upload User";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +67,10 @@ public class AskHeight_Activity extends AppCompatActivity {
                 editor2.putString("userEmail", userEmail);
                 editor2.apply();
 
+
                 Log.d("saveHeight", "Height has been saved.");
                 finish();
+
             }
         });
     }

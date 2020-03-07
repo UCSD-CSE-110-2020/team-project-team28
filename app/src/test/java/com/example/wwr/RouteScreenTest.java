@@ -30,13 +30,13 @@ public class RouteScreenTest {
             assertEquals(RouteScreen.currentPosition, 0);
             addButton.performClick();
 
-            RouteScreen.addToRouteList("Home", "California", 100,
+            RouteScreen.addToRouteList("int", "a", "Home", "California", 100,
                     10, 99, "flat", "loop",
                     "street", "even", "hard", "Wow", false);
             assertEquals(RouteScreen.routeList.size(), 1);
             assertEquals(RouteScreen.routeList.get(RouteScreen.currentPosition).getName(), "Home");
 
-            RouteScreen.addToRouteList("CSE 110", "California", 100,
+            RouteScreen.addToRouteList("int", "a", "CSE 110", "California", 100,
                     10, 99, "flat", "loop",
                     "street", "even", "hard", "Wow", false);
             assertEquals(RouteScreen.routeList.size(), 2);

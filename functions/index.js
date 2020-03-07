@@ -31,7 +31,7 @@ exports.sendChatNotifications = functions.firestore
          topic: context.params.chatId
        };
 
-       return admin.messaging().send(message)
+       return admin.messaging().sendToDevice(document.token, message)
          .then((response) => {
            // Response is a message ID string.
            console.log('Successfully sent message:', response);

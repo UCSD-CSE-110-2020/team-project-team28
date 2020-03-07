@@ -65,8 +65,8 @@ public class TeamPageScreenAdapter extends RecyclerView.Adapter<TeamPageScreenAd
         // Current Team
         final Route currentRoute = routeList.get(position); // final
         holder.teamMemberInitial.setImageResource(currentRoute.getImage());
-        holder.memberName.setText(currentRoute.getName());
-        holder.memberEmail.setText(currentRoute.getStartLocation());
+        holder.memberName.setText(currentRoute.getUserName());
+        holder.memberEmail.setText(currentRoute.getUserEmail());
     }
 
     @Override

@@ -28,7 +28,7 @@ public class DisplayRouteInformationTest {
     public void testDisplayRouteInformation() {
         ActivityScenario<RouteDetail> scenario = ActivityScenario.launch(intent);
         scenario.onActivity(activity -> {
-            Route route = new Route("Test", "Village", 1000,
+            Route route = new Route("a", "b", "Test", "Village", 1000,
                     12.0, 2, "flat", "loop",
                     "street", "trail", "hard", "Not great",
                     true, 0);
