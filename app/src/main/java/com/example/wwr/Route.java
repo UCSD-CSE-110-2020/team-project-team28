@@ -1,6 +1,8 @@
 package com.example.wwr;
 
 public class Route {
+    private String userName;
+    private String userEmail;
     private String name;
     private String startLocation;
     private long totalSteps;
@@ -15,9 +17,11 @@ public class Route {
     private boolean isFavorite;
     private int image;
 
-    Route (String name, String startLocation, long totalSteps, double totalMiles, long totalSeconds,
+    Route (String userName, String userEmail, String name, String startLocation, long totalSteps, double totalMiles, long totalSeconds,
            String flatOrHilly, String loopOrOut, String streetOrTrail, String surface,
            String difficulty, String note, boolean isFavorite, int image) {
+        this.userName = userName;
+        this.userEmail = userEmail;
         this.name = name;
         this.startLocation = startLocation;
         this.totalSteps = totalSteps;
@@ -45,6 +49,10 @@ public class Route {
     public void updateMiles(double miles) {
         this.totalMiles = miles;
     }
+
+    public String getUserName() { return this.userName; }
+
+    public String getUserEmail() { return this.userEmail; }
 
     public String getName() {
         return this.name;

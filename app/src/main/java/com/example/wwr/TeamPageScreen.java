@@ -1,47 +1,82 @@
 package com.example.wwr;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.common.reflect.TypeToken;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.google.gson.Gson;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class TeamPageScreen extends AppCompatActivity {
-
     public static RecyclerView routeScreenView;
     public static RecyclerView.Adapter routeAdapter;
     public static RecyclerView.LayoutManager routeLayoutManager;
     public static ArrayList<Route> routeList;
 
-    public void loadData() {
-        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = sharedPreferences.getString("route list", null);
-        Type type = new TypeToken<ArrayList<Route>>() {}.getType();
-        routeList = gson.fromJson(json, type);
-        Log.d("loadRouteList", "Route list has been loaded");
+    private static final String TAG = "TeamPageScreen";
 
-        if (routeList == null) {
-            routeList = new ArrayList<>();
-        }
+    public void loadTeamUsers() {
+        routeList = new ArrayList<>();
+        SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        String userName = sharedPreferences.getString("userName", "Test");
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("appUsers")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                if (!document.getId().equals(userName) && !hasTeamMember(document.getId())) {
+                                    routeList.add(new Route((String) document.getId(), (String) document.get("email"), "",
+                                            "", 0, 0, 0, "", "",
+                                            "", "", "", "", false, 0));
+                                        routeAdapter.notifyDataSetChanged();
+                                }
+                            }
+                        } else {
+                            Log.w(TAG, "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+        Log.d("loadRouteList", "Route list has been loaded");
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_team_page);
-        routeList = new ArrayList<>();
-//        loadData();
+        uploadUserInformation();
+        loadTeamUsers();
 
         routeScreenView = findViewById(R.id.teamPage);
         routeScreenView.setHasFixedSize(true);
@@ -57,6 +92,133 @@ public class TeamPageScreen extends AppCompatActivity {
                 TeamPageScreen.super.onBackPressed();
             }
         });
+
+        Button addMember = findViewById(R.id.addMemberButton);
+        addMember.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startAddMember();
+            }
+        });
     }
 
+    public void startAddMember(){
+        Intent intent = new Intent(this, AddMemberActivity.class);
+        startActivity(intent);
+    }
+
+    public void uploadUserInformation() {
+        addTokenToFirebase();
+        addEmailToFirebase();
+    }
+
+
+    public boolean hasTeamMember(String userName) {
+        for (Route route: routeList) {
+            if (route.getUserName().equals(userName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void addTokenToFirebase() {
+        // Get user token
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "getInstanceId failed", task.getException());
+                            return;
+                        }
+
+                        // Get new Instance ID token
+                        String token = task.getResult().getToken();
+                        // Log and toast
+                        Log.d(TAG, token);
+                        addToken(token);
+                    }
+                });
+    }
+
+    public void addToken(String token) {
+        SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        String userName = sharedPreferences.getString("userName", "");
+
+        Map<String, Object> userToken = new HashMap<>();
+        userToken.put("token", token);
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("appUsers").document(userName)
+                .update(userToken)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        db.collection("appUsers").document(userName)
+                                .set(userToken)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Log.d(TAG, "DocumentSnapshot successfully created!");
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.w(TAG, "Error writing document", e);
+                                        Toast.makeText(getApplicationContext(), "Upload failed!",
+                                                Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                    }
+                });
+    }
+
+
+    public void addEmailToFirebase() {
+        SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        String userName = sharedPreferences.getString("userName", "Test");
+        String userEmail = sharedPreferences.getString("userEmail", "Test");
+
+        Map<String, Object> email = new HashMap<>();
+        email.put("email", userEmail);
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("appUsers").document(userName)
+                .update(email)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        db.collection("appUsers").document(userName)
+                                .set(email)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Log.d(TAG, "DocumentSnapshot successfully created!");
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.w(TAG, "Error writing document", e);
+                                        Toast.makeText(getApplicationContext(), "Upload failed!",
+                                                Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                    }
+                });
+    }
 }

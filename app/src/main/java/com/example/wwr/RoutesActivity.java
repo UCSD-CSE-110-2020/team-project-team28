@@ -75,8 +75,6 @@ public class RoutesActivity extends AppCompatActivity {
         startLocation = (EditText) findViewById(R.id.startLocationName);
         notes = (EditText) findViewById(R.id.routeNotes);
 
-
-
         // now save values
         SharedPreferences userPref = getSharedPreferences("shared preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = userPref.edit();
@@ -112,9 +110,13 @@ public class RoutesActivity extends AppCompatActivity {
         String strMiles = new DecimalFormat("#.##").format(miles);
         Double formattedMiles = Double.valueOf(strMiles);
 
+        SharedPreferences sharedPreferences2 = getSharedPreferences("prefs", MODE_PRIVATE);
+        String userName = sharedPreferences2.getString("userName", "");
+        String userEmail = sharedPreferences2.getString("userEmail", "");
+
         // check to make sure user added a name to the route before saving
         if (!routeName.getText().toString().equals(EMPTY_STRING) ) {
-            RouteScreen.addToRouteList(routeName.getText().toString(),
+            RouteScreen.addToRouteList(userName, userEmail, routeName.getText().toString(),
                     startLocation.getText().toString(), totalSteps, formattedMiles, seconds, flatOrHilly,
                     loopOrOut, streetOrTrail, surface, difficulty,
                     notes.getText().toString(), false);

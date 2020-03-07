@@ -12,12 +12,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.wwr.fitness.FitnessService;
 import com.example.wwr.fitness.FitnessServiceFactory;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
@@ -39,6 +42,22 @@ public class MainActivity extends AppCompatActivity {
     public static int inches;
     private UserInfo user;
     DistanceCalculator walkingDistanceMiles = new WalkingDistanceMiles();
+
+
+    //new
+    public static final String CHAT_MESSAGE_SERVICE_EXTRA = "CHAT_MESSAGE_SERVICE";
+
+    private static final String FIRESTORE_CHAT_SERVICE = "FIRESTORE_CHAT_SERVICE";
+
+    String COLLECTION_KEY = "chats";
+    String CHAT_ID = "chat1";
+    String DOCUMENT_KEY = "chat1";
+    String MESSAGES_KEY = "messages";
+    String FROM_KEY = "from";
+    String TEXT_KEY = "text";
+    String TIMESTAMP_KEY = "timestamp";
+
+    CollectionReference chat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,12 +83,20 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
+        chat = FirebaseFirestore.getInstance()
+                .collection(COLLECTION_KEY)
+                .document(DOCUMENT_KEY)
+                .collection(MESSAGES_KEY);
+
+        subscribeToNotificationsTopic();
+
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         String fitnessServiceKey = getIntent().getStringExtra(FITNESS_SERVICE_KEY);
-        fitnessService = FitnessServiceFactory.create(fitnessServiceKey, this);
+        fitnessService = MyApplication.getFitnessServiceFactory().create(fitnessServiceKey, this);
         fitnessService.setup();
         fitnessService.updateStepCount();
         GoogleFitSingleton.setFitnessService(fitnessService);
@@ -227,8 +254,18 @@ public class MainActivity extends AppCompatActivity {
         fitnessService.updateStepCount();
     }
 
-    public void setCount(long stepCount) {
-        TextView t = findViewById(R.id.daily_steps_num);
-        t.setText(String.valueOf(stepCount));
+    private void subscribeToNotificationsTopic() {
+        FirebaseMessaging.getInstance().subscribeToTopic(CHAT_ID)
+                .addOnCompleteListener(task -> {
+                            String msg = "Subscribed to notifications";
+                            if (!task.isSuccessful()) {
+                                msg = "Subscribe to notifications failed";
+                            }
+                            Log.d(TAG, msg);
+                            Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+
+                        }
+                );
     }
+
 }

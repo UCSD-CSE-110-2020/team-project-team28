@@ -34,11 +34,11 @@ public class AddTeammateRouteUnitTest {
             assertNotNull(button);
             assertEquals(activity.routeList.size(), 0);
             TeamRouteScreen.routeList.add(
-                    new Route("Tim Jang", "w1jang@ucsd.edu", 100, 5.5, 10,
+                    new Route("Tim Jang", "w1jang@ucsd.edu", "a", "a", 100, 5.5, 10,
                             "flat", "hilly", "trail", "even", "hard",
                             "Gotta go home", true, 0));
             assertEquals(activity.routeList.size(), 1);
-            assertEquals(activity.routeList.get(0).getName(), "Tim Jang");
+            assertEquals(activity.routeList.get(0).getUserName(), "Tim Jang");
             button.performClick();
         });
 
