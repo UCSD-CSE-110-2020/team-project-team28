@@ -27,9 +27,10 @@ public class LogInActivity extends AppCompatActivity {
         }
 
         if (getIntent().getExtras() != null && getIntent().getExtras().get("mtype").equals("TeamInvite")){
+            String inviteFrom = getIntent().getExtras().get("mfrom").toString();
             String team = getIntent().getExtras().get("mteam").toString();
-            goToInvitePage(team);
-            //Toast.makeText(getApplicationContext(),getIntent().getExtras().get("mteam").toString(),Toast.LENGTH_LONG).show();
+            goToInvitePage(team, inviteFrom);
+            //Toast.makeText(getApplicationContext(),getIntent().getExtras().get("mfrom").toString(),Toast.LENGTH_LONG).show();
         }else if (getIntent().getExtras() != null && getIntent().getExtras().get("mtype").equals("TeamWalk")){
             switchToTeamRouteScreen();
         }
@@ -61,9 +62,10 @@ public class LogInActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void goToInvitePage(String teamName) {
+    public void goToInvitePage(String teamName, String inviteFrom) {
         Intent intent = new Intent(this, InviteScreenActivity.class);
         intent.putExtra("TEAM", teamName);
+        intent.putExtra("FROM", inviteFrom);
         startActivity(intent);
     }
     public void switchToTeamRouteScreen() {
