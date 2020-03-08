@@ -94,5 +94,16 @@ public class Route {
 
     public void setFavorite(boolean favorite) {
         this.isFavorite = favorite;
+        if (favorite) {
+            this.image =  R.drawable.ic_stars_black_24dp;
+        }
+        else {
+            this.image = 0;
+        }
     }
+
+    public boolean getFavorite() {
+        return this.isFavorite;
+    }
+
 }
