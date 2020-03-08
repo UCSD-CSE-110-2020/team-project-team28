@@ -46,8 +46,12 @@ public class TeamPageScreen extends AppCompatActivity {
     public void loadTeamUsers() {
         routeList = new ArrayList<>();
         SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
-        String userName = sharedPreferences.getString("userName", "Te" +
-                "st");
+        String userName = sharedPreferences.getString("userName", "Test");
+        String teamName = sharedPreferences.getString("teamName", "");
+        Log.d("team name", teamName);
+
+
+
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("appUsers")
@@ -57,12 +61,13 @@ public class TeamPageScreen extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                if (!document.getId().equals(userName) && !hasTeamMember(document.getId()) && document.get("email") !=null) {
-                                    routeList.add(new Route((String) document.getId(), (String) document.get("email"), "",
-                                            "", 0, 0, 0, "", "",
-                                            "", "", "", "", false, 0));
+                                if (document.get("team") != null &&  document.get("email") != null && document.get("team").toString().equals(teamName))
+                                    if (!document.getId().equals(userName) && !hasTeamMember(document.getId())) {
+                                        routeList.add(new Route((String) document.getId(), (String) document.get("email"), "",
+                                                "", 0, 0, 0, "", "",
+                                                "", "", "", "", false, 0));
                                         routeAdapter.notifyDataSetChanged();
-                                }
+                                    }
                             }
                         } else {
                             Log.w(TAG, "Error getting documents.", task.getException());

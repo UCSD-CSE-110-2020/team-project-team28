@@ -26,21 +26,10 @@ public class LogInActivity extends AppCompatActivity {
             launchMainActivity(true);
         }
 
-        /*if (getIntent().getExtras() != null) {
-            Bundle bundle = getIntent().getExtras();
-            for (String key : bundle.keySet()){
-                Toast.makeText(getApplicationContext(), bundle.get(key) + "", Toast.LENGTH_SHORT).show();
-            }
-            for (String key : getIntent().getExtras().keySet()) {
-                String value = getIntent().getExtras().getString(key);
-                Toast.makeText(getApplicationContext(), "Key: " + key + " Value: " + value, Toast.LENGTH_LONG).show();
-                Log.d(TAG, "Key: " + key + " Value: " + value);
-            }
-            launchMainActivity((false));
-        }*/
-
         if (getIntent().getExtras() != null && getIntent().getExtras().get("mtype").equals("TeamInvite")){
-            goToTeamPage();
+            String team = getIntent().getExtras().get("mteam").toString();
+            goToInvitePage(team);
+            //Toast.makeText(getApplicationContext(),getIntent().getExtras().get("mteam").toString(),Toast.LENGTH_LONG).show();
         }else if (getIntent().getExtras() != null && getIntent().getExtras().get("mtype").equals("TeamWalk")){
             switchToTeamRouteScreen();
         }
@@ -72,8 +61,9 @@ public class LogInActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void goToTeamPage() {
-        Intent intent = new Intent(this, TeamPageScreen.class);
+    public void goToInvitePage(String teamName) {
+        Intent intent = new Intent(this, InviteScreenActivity.class);
+        intent.putExtra("TEAM", teamName);
         startActivity(intent);
     }
     public void switchToTeamRouteScreen() {

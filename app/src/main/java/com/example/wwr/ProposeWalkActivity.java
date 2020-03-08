@@ -71,6 +71,7 @@ public class ProposeWalkActivity extends AppCompatActivity {
         newMessage.put(TEXT_KEY, "invite to team walk from " + userName);
         //newMessage.put("token", token);
         newMessage.put("mtype", "TeamWalk");
+        newMessage.put("mteam", "team name");
         //Toast.makeText(getApplicationContext(), token, Toast.LENGTH_LONG).show();
 
         chat.add(newMessage).addOnSuccessListener(result -> {

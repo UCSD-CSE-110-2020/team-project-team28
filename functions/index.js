@@ -31,7 +31,9 @@ exports.sendChatNotifications = functions.firestore
          //topic: context.params.chatId
          //data.<"mtype"> = document.mtype
          data: {
-            mtype: document.mtype
+            mtype: document.mtype,
+            mfrom: document.from,
+            mteam: document.mteam
          }
        };
 
@@ -66,7 +68,9 @@ exports.sendProposeWalkNotifications = functions.firestore
             },
          topic: context.params.chatId,
          data: {
-            mtype: document.mtype
+            mtype: document.mtype,
+            mfrom: document.from,
+            mteam: document.mteam
          }
           };
 
