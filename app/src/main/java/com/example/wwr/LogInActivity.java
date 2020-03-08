@@ -26,17 +26,21 @@ public class LogInActivity extends AppCompatActivity {
             launchMainActivity(true);
         }
 
-        if (getIntent().getExtras() != null) {
-            /*Bundle bundle = getIntent().getExtras();
+        /*if (getIntent().getExtras() != null) {
+            Bundle bundle = getIntent().getExtras();
             for (String key : bundle.keySet()){
                 Toast.makeText(getApplicationContext(), bundle.get(key) + "", Toast.LENGTH_SHORT).show();
-            }*/
+            }
             for (String key : getIntent().getExtras().keySet()) {
                 String value = getIntent().getExtras().getString(key);
                 Toast.makeText(getApplicationContext(), "Key: " + key + " Value: " + value, Toast.LENGTH_LONG).show();
                 Log.d(TAG, "Key: " + key + " Value: " + value);
             }
             launchMainActivity((false));
+        }*/
+
+        if (getIntent().getExtras() != null && getIntent().getExtras().get("mtype").equals("TeamInvite")){
+            goToTeamPage();
         }
 
         setContentView(R.layout.activity_log_in);
@@ -63,6 +67,11 @@ public class LogInActivity extends AppCompatActivity {
         if (startPreviousWalk) {
             intent.putExtra("previousActivity", "Route Detail");
         }
+        startActivity(intent);
+    }
+
+    public void goToTeamPage() {
+        Intent intent = new Intent(this, TeamPageScreen.class);
         startActivity(intent);
     }
 

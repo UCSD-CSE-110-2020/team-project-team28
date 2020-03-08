@@ -110,6 +110,7 @@ public class AddMemberActivity extends AppCompatActivity {
         newMessage.put(FROM_KEY, userName);
         newMessage.put(TEXT_KEY, from + userName);
         newMessage.put("token", token);
+        newMessage.put("mtype", "TeamInvite");
         Toast.makeText(getApplicationContext(), token, Toast.LENGTH_LONG).show();
 
         chat.add(newMessage).addOnSuccessListener(result -> {
