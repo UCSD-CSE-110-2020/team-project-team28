@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
     String TIMESTAMP_KEY = "timestamp";
 
     CollectionReference chat;
+    CollectionReference walk;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +91,13 @@ public class MainActivity extends AppCompatActivity {
                 .document(DOCUMENT_KEY)
                 .collection(MESSAGES_KEY);
 
+        walk = FirebaseFirestore.getInstance()
+                .collection("notifications")
+                .document("proposed")
+                .collection("team_walk");
+
         subscribeToNotificationsTopic();
+        subscribeToNotificationsTopic2();
 
 
         setContentView(R.layout.activity_main);
@@ -135,6 +142,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button proposeWalkButton = (Button) findViewById(R.id.propose_walk_button);
+        proposeWalkButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                proposeWalkActivity();
+            }
+        });
+
         Button startButton = (Button) findViewById(R.id.start_button);
         startButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -161,6 +176,11 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor =prefs.edit();
         editor.putBoolean("firstStart",false);
         editor.apply();
+    }
+
+    public void proposeWalkActivity(){
+        Intent intent= new Intent(this, ProposeWalkActivity.class);
+        startActivity(intent);
     }
 
     public void walkActivity() {
@@ -260,6 +280,20 @@ public class MainActivity extends AppCompatActivity {
         FirebaseMessaging.getInstance().subscribeToTopic(CHAT_ID)
                 .addOnCompleteListener(task -> {
                             String msg = "Subscribed to notifications";
+                            if (!task.isSuccessful()) {
+                                msg = "Subscribe to notifications failed";
+                            }
+                            Log.d(TAG, msg);
+                            Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+
+                        }
+                );
+    }
+
+    private void subscribeToNotificationsTopic2() {
+        FirebaseMessaging.getInstance().subscribeToTopic("proposed")
+                .addOnCompleteListener(task -> {
+                            String msg = "Subscribed to notifications for team walk";
                             if (!task.isSuccessful()) {
                                 msg = "Subscribe to notifications failed";
                             }

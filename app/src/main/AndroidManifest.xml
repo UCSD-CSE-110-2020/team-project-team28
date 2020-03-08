@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <activity android:name=".ProposeWalkActivity"
+            android:label="@string/title_activity_propose_walk"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <service android:name="MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

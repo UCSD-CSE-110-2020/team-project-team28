@@ -51,8 +51,8 @@ exports.sendChatNotifications = functions.firestore
    });
 
 
-   exports.sendProposeWalkNotifications = functions.firestore
-      .document('chats/{chatId}/messages/{messageId}')
+exports.sendProposeWalkNotifications = functions.firestore
+      .document('notifications/{chatId}/team_walk/{messageId}')
       .onCreate((snap, context) => {
         // Get an object with the current document value.
         // If the document does not exist, it has been deleted.
@@ -64,6 +64,7 @@ exports.sendChatNotifications = functions.firestore
               title: document.from + ' proposed a walk',
               body: document.text
             },
+         topic: context.params.chatId,
          data: {
             mtype: document.mtype
          }
