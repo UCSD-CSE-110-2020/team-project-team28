@@ -68,7 +68,7 @@ public class ProposeWalkActivity extends AppCompatActivity {
 
         Map<String, String> newMessage = new HashMap<>();
         newMessage.put(FROM_KEY, userName);
-        newMessage.put(TEXT_KEY, "invite to team walk");
+        newMessage.put(TEXT_KEY, "invite to team walk from " + userName);
         //newMessage.put("token", token);
         newMessage.put("mtype", "TeamWalk");
         //Toast.makeText(getApplicationContext(), token, Toast.LENGTH_LONG).show();
