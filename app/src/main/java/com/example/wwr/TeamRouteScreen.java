@@ -99,6 +99,15 @@ public class TeamRouteScreen extends AppCompatActivity {
                 TeamRouteScreen.super.onBackPressed();
             }
         });
+
+        Button currentProposedWalk = findViewById(R.id.current_proposed_walk_button);
+        currentProposedWalk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ProposedWalkDetails.class);
+                startActivity(intent);
+            }
+        });
     }
 
 }
