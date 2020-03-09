@@ -40,8 +40,10 @@ public class RouteDetail extends AppCompatActivity {
         note = (TextView) findViewById(R.id.route_detail_note);
 
 
-        name.setText(getIntent().getStringExtra("routeName"));
-        startLocation.setText(getIntent().getStringExtra("startLocation"));
+        String routeName = getIntent().getStringExtra("routeName");
+        String startingLocation = getIntent().getStringExtra("startLocation");
+        name.setText(routeName);
+        startLocation.setText(startingLocation);
         timeTaken.setText(getIntent().getStringExtra("timeTaken"));
         steps.setText(getIntent().getStringExtra("steps"));
         distance.setText(getIntent().getStringExtra("distance"));
@@ -61,6 +63,7 @@ public class RouteDetail extends AppCompatActivity {
             }
         });
 
+        // May not work
         CheckBox favoriteBtn = (CheckBox) findViewById(R.id.favorite_btn);
         favoriteBtn.setChecked(RouteScreen.routeList.get(RouteScreen.currentPosition).getFavorite());
         favoriteBtn.setOnClickListener(new View.OnClickListener() {
@@ -71,6 +74,20 @@ public class RouteDetail extends AppCompatActivity {
                 RouteScreen.routeAdapter.notifyDataSetChanged();
             }
         });
+
+        Button proposeWalk = findViewById(R.id.route_info_propose_button);
+        proposeWalk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View view) {
+                Intent intent = new Intent(getApplicationContext(), ProposeWalkActivity.class);
+                String routeName = getIntent().getStringExtra("routeName");
+                String startingLocation = getIntent().getStringExtra("startLocation");
+                intent.putExtra("route name", routeName);
+                intent.putExtra("starting location", startingLocation);
+                startActivity(intent);
+            }
+        });
+
     }
 
     public void saveData() {

@@ -9,10 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".TeamRouteDetail"></activity>
         <activity
             android:name=".InviteScreenActivity"
             android:label="@string/title_activity_invite_screen"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ProposeWalkActivity"
             android:label="@string/title_activity_propose_walk"

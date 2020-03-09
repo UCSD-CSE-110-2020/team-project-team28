@@ -4,16 +4,21 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.HashMap;
@@ -31,6 +36,11 @@ public class ProposeWalkActivity extends AppCompatActivity {
     String TEXT_KEY = "text";
     String TIMESTAMP_KEY = "timestamp";
 
+    String routeName;
+    String startingLocation;
+    String information;
+    String date;
+    String time;
     CollectionReference chat;
     String email_str;
 
@@ -46,13 +56,24 @@ public class ProposeWalkActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        Button proposeWalk = findViewById(R.id.propose_walk_propose_button);
+        proposeWalk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               sendMessage();
+                addWalkToFirebase();
+                sendMessage();
             }
         });
+
+        // Get route name and starting location
+        routeName = getIntent().getStringExtra("route name");
+        startingLocation = getIntent().getStringExtra("starting location");
+        information = routeName + "\n" + startingLocation;
+
+
+
+        TextView routeDetail = findViewById(R.id.proposed_walk_details);
+        routeDetail.setText(information);
     }
 
     // Send a message to a specific user using a token.
@@ -79,6 +100,54 @@ public class ProposeWalkActivity extends AppCompatActivity {
         }).addOnFailureListener(error -> {
             Log.e(TAG, error.getLocalizedMessage());
         });
+    }
+
+    public void addWalkToFirebase() {
+        SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        String userName = sharedPreferences.getString("userName", "Test");
+        TextView proposedTime = findViewById(R.id.propose_walk_time);
+        time = proposedTime.getText().toString();
+        TextView proposedDate = findViewById(R.id.propose_walk_date);
+        date = proposedDate.getText().toString();
+
+        Map<String, Object> walkInfo = new HashMap<>();
+        walkInfo.put("Route", routeName);
+        walkInfo.put("StartingLocation", startingLocation);
+        walkInfo.put("Date", date);
+        walkInfo.put("Time", time);
+        walkInfo.put("Owner", userName);
+
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("team").document("proposedWalk")
+                .update(walkInfo)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        db.collection("team").document("proposedWalk")
+                                .set(walkInfo)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Log.d(TAG, "DocumentSnapshot successfully created!");
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.w(TAG, "Error writing document", e);
+                                        Toast.makeText(getApplicationContext(), "Upload failed!",
+                                                Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                    }
+                });
     }
 
 }

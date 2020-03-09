@@ -4,16 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RouteDetail">
+    tools:context=".TeamRouteDetail">
 
     <LinearLayout
         android:orientation="vertical"
-        android:id="@+id/route_information_page"
+        android:id="@+id/team_route_information_page"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/route_detail_title"
+            android:id="@+id/team_route_user_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Team User Name:" />
+
+        <TextView
+            android:id="@+id/team_route_detail_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Route Name:" />
@@ -21,61 +27,56 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Start Location:"
-            android:id="@+id/route_detail_start_location"
-            android:layout_below="@id/route_detail_title"
+            android:id="@+id/team_route_detail_start_location"
+            android:layout_below="@id/team_route_detail_title"
             />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Time Taken:"
-            android:id="@+id/route_detail_time_taken"
-            android:layout_below="@id/route_detail_start_location"
+            android:id="@+id/team_route_detail_time_taken"
+            android:layout_below="@id/team_route_detail_start_location"
             />
         <TextView
-            android:id="@+id/route_detail_steps"
+            android:id="@+id/team_route_detail_steps"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/route_detail_time_taken"
+            android:layout_below="@id/team_route_detail_time_taken"
             android:text="Steps:" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Distance:"
-            android:id="@+id/route_detail_distance"
-            android:layout_below="@id/route_detail_steps" />
+            android:id="@+id/team_route_detail_distance"
+            android:layout_below="@id/team_route_detail_steps" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Features:"
-            android:id="@+id/route_detail_features"
-            android:layout_below="@id/route_detail_distance" />
+            android:id="@+id/team_route_detail_features"
+            android:layout_below="@id/team_route_detail_distance" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Note"
-            android:id="@+id/route_detail_note"
-            android:layout_below="@id/route_detail_features" />
-
-        <CheckBox
-            android:id="@+id/favorite_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Favorite" />
+            android:id="@+id/team_route_detail_note"
+            android:layout_below="@id/team_route_detail_features" />
 
         <Button
-            android:id="@+id/route_info_start_button"
+            android:id="@+id/team_route_info_start_button"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:text="Start" />
 
         <Button
-            android:id="@+id/route_info_propose_button"
+            android:id="@+id/team_route_info_propose_button"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:text="Propose Walk" />
+
 
     </LinearLayout>
 

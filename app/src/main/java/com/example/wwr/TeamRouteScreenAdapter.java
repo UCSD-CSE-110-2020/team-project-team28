@@ -62,8 +62,9 @@ public class TeamRouteScreenAdapter extends RecyclerView.Adapter<TeamRouteScreen
         public void onClick(View v) {
             int position = getAdapterPosition();
             Route currentRoute = routeList.get(position);
-            Intent intent = new Intent(this.context, RouteDetail.class);
+            Intent intent = new Intent(this.context, TeamRouteDetail.class);
 
+            // Fix later for team information
             intent.putExtra("routeName", "Route Name: " + currentRoute.getName());
             intent.putExtra("startLocation", "Start Location: " + currentRoute.getStartLocation());
             intent.putExtra("timeTaken", "Seconds Taken: " + (currentRoute.getTotalSeconds()));
