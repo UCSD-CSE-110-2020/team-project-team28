@@ -130,6 +130,7 @@ public class AddMemberActivity extends AppCompatActivity {
 
         chat.add(newMessage).addOnSuccessListener(result -> {
             //messageView.setText("");
+            // this is where the notification shit will be i think
         }).addOnFailureListener(error -> {
             Log.e(TAG, error.getLocalizedMessage());
         });

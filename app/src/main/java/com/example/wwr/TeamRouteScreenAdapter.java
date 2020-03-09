@@ -73,7 +73,6 @@ public class TeamRouteScreenAdapter extends RecyclerView.Adapter<TeamRouteScreen
                     + "\n" + currentRoute.getLoopOrOut() + "\n" + currentRoute.getStreetOrTrail() +
                     "\n" + currentRoute.getSurface() + "\n" + currentRoute.getDifficulty());
             intent.putExtra("note", "Notes: " + currentRoute.getNote());
-          //  intent.putExtra("teamRoute", true);
 
             SharedPreferences sp = context.getSharedPreferences("prefs", MODE_PRIVATE);
             SharedPreferences.Editor editor = sp.edit();

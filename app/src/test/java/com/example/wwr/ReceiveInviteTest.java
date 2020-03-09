@@ -50,7 +50,8 @@ public class ReceiveInviteTest {
 
     }
 
-    @Test public void testChat() {
+    @Test
+    public void testChat() {
         MessageService messageService = Mockito.mock(MessageService.class);
         MessageFactory messageFactory = Mockito.mock(MessageFactory.class);
 
