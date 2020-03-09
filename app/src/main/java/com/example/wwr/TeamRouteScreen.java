@@ -41,6 +41,7 @@ public class TeamRouteScreen extends AppCompatActivity {
     public void loadTeamRoutes() {
         routeList = new ArrayList<>();
 
+        // Load routes of the team members.
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("appUsers")
                 .get()
@@ -73,8 +74,6 @@ public class TeamRouteScreen extends AppCompatActivity {
                         }
                     }
                 });
-
-
         Log.d("loadRouteList", "Route list has been loaded");
         Toast.makeText(getApplicationContext(), "Team Routes Loaded!", Toast.LENGTH_LONG).show();
 

@@ -50,9 +50,7 @@ public class TeamPageScreen extends AppCompatActivity {
         String teamName = sharedPreferences.getString("teamName", "");
         Log.d("team name", teamName);
 
-
-
-
+        // Get team members
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("appUsers")
                 .get()

@@ -66,7 +66,6 @@ public class TeamPageScreenAdapter extends RecyclerView.Adapter<TeamPageScreenAd
 
     @Override
     public void onBindViewHolder(@NonNull TeamPageScreenViewHolder holder, int position) {
-// Current Team
         final Route currentRoute = routeList.get(position); // final
 
         Random rnd = new Random();
