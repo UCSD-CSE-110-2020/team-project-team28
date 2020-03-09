@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.wwr.fitness.FitnessService;
 import com.example.wwr.fitness.FitnessServiceFactory;
@@ -13,6 +15,7 @@ import com.example.wwr.fitness.GoogleFitAdapter;
 
 public class LogInActivity extends AppCompatActivity {
     private String fitnessServiceKey = "GOOGLE_FIT";
+    private static final String TAG = "LogInActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +24,15 @@ public class LogInActivity extends AppCompatActivity {
         if (getIntent().getStringExtra("previousActivity") != null &&
                 getIntent().getStringExtra("previousActivity").equals("Route Detail")) {
             launchMainActivity(true);
+        }
+        else if (getIntent().getExtras() != null && getIntent().getExtras().get("mtype") != null &&
+                getIntent().getExtras().get("mtype").equals("TeamInvite")){
+            String inviteFrom = getIntent().getExtras().get("mfrom").toString();
+            String team = getIntent().getExtras().get("mteam").toString();
+            goToInvitePage(team, inviteFrom);
+        }else if (getIntent().getExtras() != null && getIntent().getExtras().get("mtype") != null &&
+                getIntent().getExtras().get("mtype").equals("TeamWalk")){
+            switchToTeamRouteScreen();
         }
 
         setContentView(R.layout.activity_log_in);
@@ -47,6 +59,17 @@ public class LogInActivity extends AppCompatActivity {
         if (startPreviousWalk) {
             intent.putExtra("previousActivity", "Route Detail");
         }
+        startActivity(intent);
+    }
+
+    public void goToInvitePage(String teamName, String inviteFrom) {
+        Intent intent = new Intent(this, InviteScreenActivity.class);
+        intent.putExtra("TEAM", teamName);
+        intent.putExtra("FROM", inviteFrom);
+        startActivity(intent);
+    }
+    public void switchToTeamRouteScreen() {
+        Intent intent = new Intent(this, TeamRouteScreen.class);
         startActivity(intent);
     }
 

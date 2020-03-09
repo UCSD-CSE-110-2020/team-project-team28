@@ -2,14 +2,20 @@ package com.example.wwr;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.Checkable;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wwr.fitness.FitnessService;
+import com.google.gson.Gson;
+
+import static com.example.wwr.RouteScreen.currentPosition;
 
 public class RouteDetail extends AppCompatActivity {
     TextView name;
@@ -19,6 +25,7 @@ public class RouteDetail extends AppCompatActivity {
     TextView distance;
     TextView features;
     TextView note;
+    CheckBox isFavorite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +39,7 @@ public class RouteDetail extends AppCompatActivity {
         features = (TextView) findViewById(R.id.route_detail_features);
         note = (TextView) findViewById(R.id.route_detail_note);
 
+
         name.setText(getIntent().getStringExtra("routeName"));
         startLocation.setText(getIntent().getStringExtra("startLocation"));
         timeTaken.setText(getIntent().getStringExtra("timeTaken"));
@@ -39,6 +47,7 @@ public class RouteDetail extends AppCompatActivity {
         distance.setText(getIntent().getStringExtra("distance"));
         features.setText(getIntent().getStringExtra("features"));
         note.setText(getIntent().getStringExtra("note"));
+
 
         Button startFromExistingRoute = (Button) findViewById(R.id.route_info_start_button);
         startFromExistingRoute.setOnClickListener(new View.OnClickListener() {
@@ -51,5 +60,27 @@ public class RouteDetail extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        CheckBox favoriteBtn = (CheckBox) findViewById(R.id.favorite_btn);
+        favoriteBtn.setChecked(RouteScreen.routeList.get(RouteScreen.currentPosition).getFavorite());
+        favoriteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RouteScreen.routeList.get(RouteScreen.currentPosition).setFavorite( (favoriteBtn.isChecked()) );
+                saveData();
+                RouteScreen.routeAdapter.notifyDataSetChanged();
+            }
+        });
     }
+
+    public void saveData() {
+        SharedPreferences userPref = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = userPref.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(RouteScreen.routeList);
+        editor.putString("route list", json);
+        editor.apply();
+        Log.d("loadRouteList", "Route list has been saved");
+    }
+
 }

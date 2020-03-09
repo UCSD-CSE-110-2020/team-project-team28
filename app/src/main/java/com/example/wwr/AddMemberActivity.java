@@ -50,6 +50,7 @@ public class AddMemberActivity extends AppCompatActivity {
 
     CollectionReference chat;
     String email_str;
+    String team_str;
 
     //String TAG = AddMemberActivity.class.getSimpleName();
 
@@ -74,12 +75,25 @@ public class AddMemberActivity extends AppCompatActivity {
                 .collection(MESSAGES_KEY);
 
         EditText email = findViewById(R.id.teamEmail);
+        EditText team = findViewById(R.id.teamName);
+        SharedPreferences sp = getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        String teamName_str = sp.getString("teamName", "Team Name");
+        team.setText(teamName_str);
 
         Button enter = findViewById(R.id.addMember);
         enter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 email_str = email.getText().toString();
+                team_str = team.getText().toString();
+
+                //String teamName_str = sp.getString("teamName", "");
+                //if (teamName_str.equals("")) {
+                    CreateATeam(team_str);
+                    Log.d("create team", "creating a new team");
+                //}
+
+                Log.d("no create team", "not creating a new team");
                 sendToken();
             }
         });
@@ -110,10 +124,13 @@ public class AddMemberActivity extends AppCompatActivity {
         newMessage.put(FROM_KEY, userName);
         newMessage.put(TEXT_KEY, from + userName);
         newMessage.put("token", token);
+        newMessage.put("mtype", "TeamInvite");
+        newMessage.put("mteam",team_str);
         Toast.makeText(getApplicationContext(), token, Toast.LENGTH_LONG).show();
 
         chat.add(newMessage).addOnSuccessListener(result -> {
             //messageView.setText("");
+            // this is where the notification shit will be i think
         }).addOnFailureListener(error -> {
             Log.e(TAG, error.getLocalizedMessage());
         });
@@ -135,7 +152,7 @@ public class AddMemberActivity extends AppCompatActivity {
 
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 // Change the condition to specific user via email from the field
-                                if (document.get("email").equals(email_str)) {
+                                if (document.get("email") != null && document.get("email").equals(email_str)) {
                                     sendMessage((String) document.get("token"));
 
                                     return;
@@ -148,4 +165,49 @@ public class AddMemberActivity extends AppCompatActivity {
                 });
         }
 
+    public void CreateATeam(String teamName) {
+        Toast.makeText(getApplicationContext(), "in create a team", Toast.LENGTH_LONG).show();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        Map<String, Object> team = new HashMap<>();
+        team.put("team", teamName);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        String userName = sharedPreferences.getString("userName", "test");
+        SharedPreferences.Editor edit = sharedPreferences.edit();
+        edit.putString("teamName", teamName);
+        edit.apply();
+
+        db.collection("appUsers").document(userName)
+                .update(team)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                        Toast.makeText(getApplicationContext(), "Created a team!",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        db.collection("appUsers").document(userName)
+                                .set(team)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                                        Toast.makeText(getApplicationContext(), "Created a team!",
+                                                Toast.LENGTH_SHORT).show();
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.w(TAG, "Error writing document", e);
+                                    }
+                                });
+                    }
+                });
+    }
 }
+

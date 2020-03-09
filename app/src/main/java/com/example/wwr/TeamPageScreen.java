@@ -47,7 +47,10 @@ public class TeamPageScreen extends AppCompatActivity {
         routeList = new ArrayList<>();
         SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
         String userName = sharedPreferences.getString("userName", "Test");
+        String teamName = sharedPreferences.getString("teamName", "");
+        Log.d("team name", teamName);
 
+        // Get team members
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("appUsers")
                 .get()
@@ -56,12 +59,13 @@ public class TeamPageScreen extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                if (!document.getId().equals(userName) && !hasTeamMember(document.getId())) {
-                                    routeList.add(new Route((String) document.getId(), (String) document.get("email"), "",
-                                            "", 0, 0, 0, "", "",
-                                            "", "", "", "", false, 0));
+                                if (document.get("team") != null &&  document.get("email") != null && document.get("team").toString().equals(teamName))
+                                    if (!document.getId().equals(userName) && !hasTeamMember(document.getId())) {
+                                        routeList.add(new Route((String) document.getId(), (String) document.get("email"), "",
+                                                "", 0, 0, 0, "", "",
+                                                "", "", "", "", false, 0));
                                         routeAdapter.notifyDataSetChanged();
-                                }
+                                    }
                             }
                         } else {
                             Log.w(TAG, "Error getting documents.", task.getException());
@@ -108,6 +112,7 @@ public class TeamPageScreen extends AppCompatActivity {
     }
 
     public void uploadUserInformation() {
+        //addEmailToFirebase();
         addTokenToFirebase();
         addEmailToFirebase();
     }
@@ -144,7 +149,8 @@ public class TeamPageScreen extends AppCompatActivity {
 
     public void addToken(String token) {
         SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
-        String userName = sharedPreferences.getString("userName", "");
+        String userName = sharedPreferences.getString("userName", "FirebaseTests");
+
 
         Map<String, Object> userToken = new HashMap<>();
         userToken.put("token", token);

@@ -24,6 +24,7 @@
             android:id="@+id/route_detail_start_location"
             android:layout_below="@id/route_detail_title"
             />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -55,6 +56,12 @@
             android:text="Note"
             android:id="@+id/route_detail_note"
             android:layout_below="@id/route_detail_features" />
+
+        <CheckBox
+            android:id="@+id/favorite_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Favorite" />
 
         <Button
             android:id="@+id/route_info_start_button"

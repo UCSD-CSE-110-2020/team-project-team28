@@ -69,6 +69,9 @@ public class AskHeight_Activity extends AppCompatActivity {
 
 
                 Log.d("saveHeight", "Height has been saved.");
+
+
+
                 finish();
 
             }
@@ -93,4 +96,6 @@ public class AskHeight_Activity extends AppCompatActivity {
         public void afterTextChanged(Editable s) {
         }
     };
+
+
 }
