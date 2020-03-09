@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         if (getIntent().getStringExtra("previousActivity") != null &&
                 getIntent().getStringExtra("previousActivity").equals("Route Detail")) {
             String fitnessServiceKey = getIntent().getStringExtra(FITNESS_SERVICE_KEY);
-            fitnessService = FitnessServiceFactory.create(fitnessServiceKey, this);
+            fitnessService = MyApplication.getFitnessServiceFactory().create(fitnessServiceKey, this);
             fitnessService.setup();
             fitnessService.updateStepCount();
             GoogleFitSingleton.setFitnessService(fitnessService);

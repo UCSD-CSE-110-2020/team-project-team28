@@ -24,13 +24,12 @@ public class LogInActivity extends AppCompatActivity {
         if (getIntent().getStringExtra("previousActivity") != null &&
                 getIntent().getStringExtra("previousActivity").equals("Route Detail")) {
             launchMainActivity(true);
-        }
-
-        if (getIntent().getExtras() != null && getIntent().getExtras().get("mtype").equals("TeamInvite")){
+        } else if (getIntent().getExtras() != null && getIntent().getExtras().get("mtype") != null &&
+                getIntent().getExtras().get("mtype").equals("TeamInvite")){
             String team = getIntent().getExtras().get("mteam").toString();
             goToInvitePage(team);
-            //Toast.makeText(getApplicationContext(),getIntent().getExtras().get("mteam").toString(),Toast.LENGTH_LONG).show();
-        }else if (getIntent().getExtras() != null && getIntent().getExtras().get("mtype").equals("TeamWalk")){
+        } else if (getIntent().getExtras() != null && getIntent().getExtras().get("mtype") != null &&
+                getIntent().getExtras().get("mtype").equals("TeamWalk")){
             switchToTeamRouteScreen();
         }
 
