@@ -125,7 +125,10 @@ public class ProposeWalkActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Log.d(TAG, "DocumentSnapshot successfully written!");
+                        // delete previous walk status
+                        db.collection("team").document("status").delete();
                     }
+
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -136,6 +139,8 @@ public class ProposeWalkActivity extends AppCompatActivity {
                                     @Override
                                     public void onSuccess(Void aVoid) {
                                         Log.d(TAG, "DocumentSnapshot successfully created!");
+                                        // delete previous walk status
+                                        db.collection("team").document("status").delete();
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener() {
@@ -146,6 +151,7 @@ public class ProposeWalkActivity extends AppCompatActivity {
                                                 Toast.LENGTH_SHORT).show();
                                     }
                                 });
+
                     }
                 });
     }
