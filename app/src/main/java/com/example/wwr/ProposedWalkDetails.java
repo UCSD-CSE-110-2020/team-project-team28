@@ -37,11 +37,12 @@ public class ProposedWalkDetails extends AppCompatActivity {
     String teamStatus_str = "";
     String walkDetails_str = "";
     String owner_str;
+    String owner_token;
     Button editWalk;
-    String COLLECTION_KEY = "notifications";
+    String COLLECTION_KEY = "chats";
     String CHAT_ID = "chat1";
-    String DOCUMENT_KEY = "proposed";
-    String MESSAGES_KEY = "team_walk";
+    String DOCUMENT_KEY = "chat1";
+    String MESSAGES_KEY = "messages";
     String FROM_KEY = "from";
     String TEXT_KEY = "text";
     String TIMESTAMP_KEY = "timestamp";
@@ -182,6 +183,7 @@ public class ProposedWalkDetails extends AppCompatActivity {
                                         TextView details = findViewById(R.id.proposed_walk_details);
                                         details.setText(walkDetails_str);
                                         owner_str =document.get("Owner").toString();
+                                        getOwnerToken();
                                         if (owner_str.equals(userName)){
                                             editWalk.setVisibility(View.VISIBLE);
                                         }
@@ -196,16 +198,37 @@ public class ProposedWalkDetails extends AppCompatActivity {
 
     }
 
+    private void getOwnerToken(){
+        SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        String userName = sharedPreferences.getString("userName", "Test");
+        String teamName = sharedPreferences.getString("teamName", "");
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection(teamName)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            if (document.getId().equals("Members")) {
+                                owner_token = document.get(owner_str).toString();
+                            }
+                        }
+                    }
+                });
+    }
+
     private void sendMessage(String message) {
 
         // Load userName
         SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
         String userName = sharedPreferences.getString("userName", "test");
 
+
+
         Map<String, String> newMessage = new HashMap<>();
         newMessage.put(FROM_KEY, userName);
         newMessage.put(TEXT_KEY, userName + message);
-        //newMessage.put("token", token);
+        newMessage.put("token", owner_token);
         newMessage.put("mtype", "TeamWalk");
         newMessage.put("mteam", "team name");
         //Toast.makeText(getApplicationContext(), token, Toast.LENGTH_LONG).show();

@@ -33,10 +33,10 @@ public class ProposeWalkActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
     String from = "You have an invite to join a team from ";
-    String COLLECTION_KEY = "notifications";
+    String COLLECTION_KEY = "chats";
     String CHAT_ID = "chat1";
-    String DOCUMENT_KEY = "proposed";
-    String MESSAGES_KEY = "team_walk";
+    String DOCUMENT_KEY = "chat1";
+    String MESSAGES_KEY = "messages";
     String FROM_KEY = "from";
     String TEXT_KEY = "text";
     String TIMESTAMP_KEY = "timestamp";
@@ -68,7 +68,7 @@ public class ProposeWalkActivity extends AppCompatActivity {
             public void onClick(View view) {
                 status = "Proposed";
                 addWalkToFirebase();
-                sendMessage(" proposed a team walk!");
+                sendMessageToTeam(" proposed a team walk!");
             }
         });
 
@@ -78,7 +78,7 @@ public class ProposeWalkActivity extends AppCompatActivity {
             public void onClick(View v) {
                 status = "Canceled";
                 addWalkToFirebase();
-                sendMessage(" canceled the team walk.");
+                sendMessageToTeam(" canceled the team walk.");
             }
         });
 
@@ -96,7 +96,7 @@ public class ProposeWalkActivity extends AppCompatActivity {
             public void onClick(View v) {
                 status = "Scheduled";
                 addWalkToFirebase();
-                sendMessage(" scheduled the team walk!");
+                sendMessageToTeam(" scheduled the team walk!");
             }
         });
 
@@ -116,8 +116,34 @@ public class ProposeWalkActivity extends AppCompatActivity {
         //routeDetail.setText(information);
     }
 
+
+    //send a message to the entire team
+    private void sendMessageToTeam(String message){
+        SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        String userName = sharedPreferences.getString("userName", "Test");
+        String teamName = sharedPreferences.getString("teamName", "");
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+
+        db.collection(teamName)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            if (document.getId().equals("Members")) {
+                                for (Map.Entry<String, Object> entry : document.getData().entrySet()){
+                                    sendMessage(message, entry.getValue().toString());
+                                }
+                            }
+                        }
+                    }
+                });
+    }
+
+
     // Send a message to a specific user using a token.
-    private void sendMessage(String message) {
+    private void sendMessage(String message, String token) {
         if (from == null || from.isEmpty()) {
             Toast.makeText(this, "Enter your name", Toast.LENGTH_SHORT).show();
             return;
@@ -130,7 +156,7 @@ public class ProposeWalkActivity extends AppCompatActivity {
         Map<String, String> newMessage = new HashMap<>();
         newMessage.put(FROM_KEY, userName);
         newMessage.put(TEXT_KEY, userName + message);
-        //newMessage.put("token", token);
+        newMessage.put("token", token);
         newMessage.put("mtype", "TeamWalk");
         newMessage.put("mteam", "team name");
         //Toast.makeText(getApplicationContext(), token, Toast.LENGTH_LONG).show();
