@@ -112,7 +112,6 @@ public class TeamPageScreen extends AppCompatActivity {
     }
 
     public void uploadUserInformation() {
-        //addEmailToFirebase();
         addTokenToFirebase();
         addEmailToFirebase();
     }

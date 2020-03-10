@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -54,8 +55,9 @@ public class TeamPageScreenAdapter extends RecyclerView.Adapter<TeamPageScreenAd
         public void onClick(View v) {
             int position = getAdapterPosition();
             Route currentRoute = routeList.get(position);
-            Intent intent = new Intent(this.context, RouteDetail.class);
+            Intent intent = new Intent(this.context, TeamRouteDetail.class);
 
+            intent.putExtra("teamUserName", "Team User Name: " + currentRoute.getUserName());
             intent.putExtra("routeName", "Route Name: " + currentRoute.getName());
             intent.putExtra("startLocation", "Start Location: " + currentRoute.getStartLocation());
             intent.putExtra("timeTaken", "Seconds Taken: " + (currentRoute.getTotalSeconds()));

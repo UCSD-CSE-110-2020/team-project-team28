@@ -10,7 +10,10 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 public class TeamRouteDetail extends AppCompatActivity {
+    TextView userName;
     TextView name;
     TextView startLocation;
     TextView timeTaken;
@@ -23,6 +26,7 @@ public class TeamRouteDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_team_route_detail);
+        userName = (TextView) findViewById(R.id.team_route_user_name);
         name = (TextView) findViewById(R.id.team_route_detail_title);
         startLocation = (TextView) findViewById(R.id.team_route_detail_start_location);
         timeTaken = (TextView) findViewById(R.id.team_route_detail_time_taken);
@@ -31,9 +35,9 @@ public class TeamRouteDetail extends AppCompatActivity {
         features = (TextView) findViewById(R.id.team_route_detail_features);
         note = (TextView) findViewById(R.id.team_route_detail_note);
 
-
         String routeName = getIntent().getStringExtra("routeName");
         String startingLocation = getIntent().getStringExtra("startLocation");
+        userName.setText(getIntent().getStringExtra("teamUserName"));
         name.setText(routeName);
         startLocation.setText(startingLocation);
         timeTaken.setText(getIntent().getStringExtra("timeTaken"));
