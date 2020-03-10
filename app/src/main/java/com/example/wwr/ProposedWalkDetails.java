@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -37,13 +38,24 @@ public class ProposedWalkDetails extends AppCompatActivity {
     String walkDetails_str = "";
     String owner_str;
     Button editWalk;
+    String COLLECTION_KEY = "notifications";
+    String CHAT_ID = "chat1";
+    String DOCUMENT_KEY = "proposed";
+    String MESSAGES_KEY = "team_walk";
+    String FROM_KEY = "from";
+    String TEXT_KEY = "text";
+    String TIMESTAMP_KEY = "timestamp";
+    CollectionReference chat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_proposed_walk_details);
         loadTeamRoute();
-
+        chat = FirebaseFirestore.getInstance()
+                .collection(COLLECTION_KEY)
+                .document(DOCUMENT_KEY)
+                .collection(MESSAGES_KEY);
 
         statusGroup = findViewById(R.id.groupStatus);
 
@@ -53,8 +65,11 @@ public class ProposedWalkDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 RadioButton checked = findViewById(statusGroup.getCheckedRadioButtonId());
-                status = checked.getText().toString();
-                addUserStatusToFirebase();
+                if (checked != null) {
+                    status = checked.getText().toString();
+                    addUserStatusToFirebase();
+                    sendMessage(" updated their status to " + status);
+                }
                 finish();
             }
         });
@@ -154,7 +169,7 @@ public class ProposedWalkDetails extends AppCompatActivity {
                                     } else if (document.getId().equals("proposedWalk")){
                                         walkDetails_str = document.get("Route").toString() + "\n" + document.get("StartingLocation").toString() +
                                                 "\n" + "Owner: " + document.get("Owner").toString() + "\n" + "Date: " + document.get("Date").toString() +
-                                        "\n" + "Time: " + document.get("Time").toString();
+                                        "\n" + "Time: " + document.get("Time").toString() + "\n" + "Status: " + document.get("Status").toString();
                                         Log.d(TAG, walkDetails_str);
                                         //display route details
                                         TextView details = findViewById(R.id.proposed_walk_details);
@@ -172,5 +187,26 @@ public class ProposedWalkDetails extends AppCompatActivity {
                 });
 
 
+    }
+
+    private void sendMessage(String message) {
+
+        // Load userName
+        SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        String userName = sharedPreferences.getString("userName", "test");
+
+        Map<String, String> newMessage = new HashMap<>();
+        newMessage.put(FROM_KEY, userName);
+        newMessage.put(TEXT_KEY, userName + message);
+        //newMessage.put("token", token);
+        newMessage.put("mtype", "TeamWalk");
+        newMessage.put("mteam", "team name");
+        //Toast.makeText(getApplicationContext(), token, Toast.LENGTH_LONG).show();
+
+        chat.add(newMessage).addOnSuccessListener(result -> {
+            //messageView.setText("");
+        }).addOnFailureListener(error -> {
+            Log.e(TAG, error.getLocalizedMessage());
+        });
     }
 }

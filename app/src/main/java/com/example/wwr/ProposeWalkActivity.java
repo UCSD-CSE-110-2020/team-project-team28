@@ -46,6 +46,7 @@ public class ProposeWalkActivity extends AppCompatActivity {
     String information;
     String date;
     String time;
+    String status;
     CollectionReference chat;
     String email_str;
 
@@ -65,8 +66,37 @@ public class ProposeWalkActivity extends AppCompatActivity {
         proposeWalk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                status = "Proposed";
                 addWalkToFirebase();
-                sendMessage();
+                sendMessage(" proposed a team walk!");
+            }
+        });
+
+        Button cancelWalk = findViewById(R.id.propose_walk_cancel_button);
+        cancelWalk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                status = "Canceled";
+                addWalkToFirebase();
+                sendMessage(" canceled the team walk.");
+            }
+        });
+
+        Button exitButton = findViewById(R.id.propose_walk_exit_button);
+        exitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        Button scheduleWalk = findViewById(R.id.propose_walk_schedule_button);
+        scheduleWalk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                status = "Scheduled";
+                addWalkToFirebase();
+                sendMessage(" scheduled the team walk!");
             }
         });
 
@@ -87,7 +117,7 @@ public class ProposeWalkActivity extends AppCompatActivity {
     }
 
     // Send a message to a specific user using a token.
-    private void sendMessage() {
+    private void sendMessage(String message) {
         if (from == null || from.isEmpty()) {
             Toast.makeText(this, "Enter your name", Toast.LENGTH_SHORT).show();
             return;
@@ -99,7 +129,7 @@ public class ProposeWalkActivity extends AppCompatActivity {
 
         Map<String, String> newMessage = new HashMap<>();
         newMessage.put(FROM_KEY, userName);
-        newMessage.put(TEXT_KEY, "invite to team walk from " + userName);
+        newMessage.put(TEXT_KEY, userName + message);
         //newMessage.put("token", token);
         newMessage.put("mtype", "TeamWalk");
         newMessage.put("mteam", "team name");
@@ -126,6 +156,7 @@ public class ProposeWalkActivity extends AppCompatActivity {
         walkInfo.put("Date", date);
         walkInfo.put("Time", time);
         walkInfo.put("Owner", userName);
+        walkInfo.put("Status", status);
 
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -136,7 +167,9 @@ public class ProposeWalkActivity extends AppCompatActivity {
                     public void onSuccess(Void aVoid) {
                         Log.d(TAG, "DocumentSnapshot successfully written!");
                         // delete previous walk status
-                        db.collection("team").document("status").delete();
+                        if (status.equals("Proposed")){
+                            db.collection("team").document("status").delete();
+                        }
                     }
 
                 })

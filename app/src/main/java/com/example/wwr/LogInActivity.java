@@ -32,7 +32,7 @@ public class LogInActivity extends AppCompatActivity {
             goToInvitePage(team, inviteFrom);
         }else if (getIntent().getExtras() != null && getIntent().getExtras().get("mtype") != null &&
                 getIntent().getExtras().get("mtype").equals("TeamWalk")){
-            switchToTeamRouteScreen();
+            switchToProposedRouteScreen();
         }
 
         setContentView(R.layout.activity_log_in);
@@ -68,8 +68,8 @@ public class LogInActivity extends AppCompatActivity {
         intent.putExtra("FROM", inviteFrom);
         startActivity(intent);
     }
-    public void switchToTeamRouteScreen() {
-        Intent intent = new Intent(this, TeamRouteScreen.class);
+    public void switchToProposedRouteScreen() {
+        Intent intent = new Intent(this, ProposedWalkDetails.class);
         startActivity(intent);
     }
 
