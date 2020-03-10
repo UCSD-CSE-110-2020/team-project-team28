@@ -4,12 +4,16 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +25,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -66,14 +71,19 @@ public class ProposeWalkActivity extends AppCompatActivity {
         });
 
         // Get route name and starting location
-        routeName = getIntent().getStringExtra("route name");
-        startingLocation = getIntent().getStringExtra("starting location");
-        information = routeName + "\n" + startingLocation;
+        if (getIntent().getStringExtra("route name") != null && getIntent().getStringExtra("starting location")!=null) {
+            routeName = getIntent().getStringExtra("route name");
+            startingLocation = getIntent().getStringExtra("starting location");
+            information = routeName + "\n" + startingLocation;
+            TextView routeDetail = findViewById(R.id.proposed_walk_details);
+            routeDetail.setText(information);
+        } else {
+            loadRouteInfo();
+        }
+        //Log.d(TAG, information);
 
-
-
-        TextView routeDetail = findViewById(R.id.proposed_walk_details);
-        routeDetail.setText(information);
+       // TextView routeDetail = findViewById(R.id.proposed_walk_details);
+        //routeDetail.setText(information);
     }
 
     // Send a message to a specific user using a token.
@@ -152,6 +162,37 @@ public class ProposeWalkActivity extends AppCompatActivity {
                                     }
                                 });
 
+                    }
+                });
+    }
+
+    public void loadRouteInfo() {
+        SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        String userName = sharedPreferences.getString("userName", "Test");
+        String teamName = sharedPreferences.getString("teamName", "");
+        Log.d("team name", teamName);
+
+        // Get team members
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("team")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                               if (document.getId().equals("proposedWalk")){
+                                    routeName = document.get("Route").toString();
+                                    startingLocation = document.get("StartingLocation").toString();
+                                   information = routeName + "\n" + startingLocation;
+                                   Log.d("route loaded", routeName);
+                                   TextView routeDetail = findViewById(R.id.proposed_walk_details);
+                                   routeDetail.setText(information);
+                                }
+                            }
+                        } else {
+                            Log.w(TAG, "Error getting documents.", task.getException());
+                        }
                     }
                 });
     }

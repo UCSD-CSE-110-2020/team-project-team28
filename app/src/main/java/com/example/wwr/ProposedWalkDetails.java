@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,6 +35,8 @@ public class ProposedWalkDetails extends AppCompatActivity {
     ArrayList<String> teamStatus;
     String teamStatus_str = "";
     String walkDetails_str = "";
+    String owner_str;
+    Button editWalk;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +59,33 @@ public class ProposedWalkDetails extends AppCompatActivity {
             }
         });
 
+        editWalk = findViewById(R.id.edit_proposed_walk_button);
+        editWalk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToProposeWalkActivity();
+            }
+        });
+
+        SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        String userName = sharedPreferences.getString("userName", "Test");
+
+        /*if (owner_str.equals(userName)){
+            editWalk.setVisibility(View.VISIBLE);
+            editWalk.setClickable(true);
+
+        }*/
+
+
 
 
     }
+
+    public void switchToProposeWalkActivity() {
+        Intent intent = new Intent(this, ProposeWalkActivity.class);
+        startActivity(intent);
+    }
+
 
 
     public void addUserStatusToFirebase() {
@@ -125,13 +152,17 @@ public class ProposedWalkDetails extends AppCompatActivity {
                                         team_status.setText(teamStatus_str);
 
                                     } else if (document.getId().equals("proposedWalk")){
-                                        walkDetails_str = document.get("Route").toString() + "\n" + document.get("StartingLocation") +
-                                                "\n" + "Owner: " + document.get("Owner").toString() + "\n" + "Date: " + document.get("Date") +
-                                        "\n" + "Time: " + document.get("Time");
+                                        walkDetails_str = document.get("Route").toString() + "\n" + document.get("StartingLocation").toString() +
+                                                "\n" + "Owner: " + document.get("Owner").toString() + "\n" + "Date: " + document.get("Date").toString() +
+                                        "\n" + "Time: " + document.get("Time").toString();
                                         Log.d(TAG, walkDetails_str);
                                         //display route details
                                         TextView details = findViewById(R.id.proposed_walk_details);
                                         details.setText(walkDetails_str);
+                                        owner_str =document.get("Owner").toString();
+                                        if (owner_str.equals(userName)){
+                                            editWalk.setVisibility(View.VISIBLE);
+                                        }
                                     }
                             }
                         } else {
@@ -139,10 +170,6 @@ public class ProposedWalkDetails extends AppCompatActivity {
                         }
                     }
                 });
-
-
-
-        //String route_str = db.collection("team").document("proposedWalk").;
 
 
     }
