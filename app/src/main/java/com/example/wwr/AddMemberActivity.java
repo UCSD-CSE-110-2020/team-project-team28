@@ -173,7 +173,7 @@ public class AddMemberActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
         String userName = sharedPreferences.getString("userName", "test");
-        String userEmail = sharedPreferences.getString("userEmail", "test");
+        String userToken = sharedPreferences.getString("userToken", "test");
         SharedPreferences.Editor edit = sharedPreferences.edit();
         edit.putString("teamName", teamName);
         edit.apply();
@@ -213,7 +213,7 @@ public class AddMemberActivity extends AppCompatActivity {
 
         //new
         Map<String, Object> user = new HashMap<>();
-        user.put(userName, userEmail);
+        user.put(userName, userToken);
         db.collection(teamName).document("Members")
                 .update(user)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {

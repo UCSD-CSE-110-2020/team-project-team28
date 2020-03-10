@@ -150,6 +150,9 @@ public class TeamPageScreen extends AppCompatActivity {
     public void addToken(String token) {
         SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
         String userName = sharedPreferences.getString("userName", "FirebaseTests");
+        SharedPreferences.Editor edit = sharedPreferences.edit();
+        edit.putString("userToken", token);
+        edit.apply();
 
 
         Map<String, Object> userToken = new HashMap<>();
