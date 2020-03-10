@@ -52,6 +52,25 @@ public class TeamPageScreenAdapter extends RecyclerView.Adapter<TeamPageScreenAd
 
         @Override
         public void onClick(View v) {
+            int position = getAdapterPosition();
+            Route currentRoute = routeList.get(position);
+            Intent intent = new Intent(this.context, RouteDetail.class);
+
+            intent.putExtra("routeName", "Route Name: " + currentRoute.getName());
+            intent.putExtra("startLocation", "Start Location: " + currentRoute.getStartLocation());
+            intent.putExtra("timeTaken", "Seconds Taken: " + (currentRoute.getTotalSeconds()));
+            intent.putExtra("steps", "Steps: " + (currentRoute.getSteps()));
+            intent.putExtra("distance", "Distance: " + (currentRoute.getTotalMiles()));
+            intent.putExtra("features", "Features: \n" + currentRoute.getFlatOrHilly()
+                    + "\n" + currentRoute.getLoopOrOut() + "\n" + currentRoute.getStreetOrTrail() +
+                    "\n" + currentRoute.getSurface() + "\n" + currentRoute.getDifficulty());
+            intent.putExtra("note", "Notes: " + currentRoute.getNote());
+
+            SharedPreferences sp = context.getSharedPreferences("prefs", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sp.edit();
+            editor.putString("currPos", String.valueOf(position));
+
+            this.context.startActivity(intent);
         }
     }
 
