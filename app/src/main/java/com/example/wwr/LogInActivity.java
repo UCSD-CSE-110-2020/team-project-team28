@@ -33,6 +33,9 @@ public class LogInActivity extends AppCompatActivity {
         }else if (getIntent().getExtras() != null && getIntent().getExtras().get("mtype") != null &&
                 getIntent().getExtras().get("mtype").equals("TeamWalk")){
             switchToProposedRouteScreen();
+        }else if(getIntent().getExtras() != null && getIntent().getExtras().get("mtype") != null &&
+                getIntent().getExtras().get("mtype").equals("TeamResponse")){
+            switchToTeamPage();
         }
 
         setContentView(R.layout.activity_log_in);
@@ -72,6 +75,12 @@ public class LogInActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ProposedWalkDetails.class);
         startActivity(intent);
     }
+
+    public void switchToTeamPage() {
+        Intent intent = new Intent(this, TeamPageScreen.class);
+        startActivity(intent);
+    }
+
 
     public void setFitnessServiceKey(String fitnessServiceKey) {
         this.fitnessServiceKey = fitnessServiceKey;

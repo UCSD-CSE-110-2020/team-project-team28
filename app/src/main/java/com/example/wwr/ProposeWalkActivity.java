@@ -149,6 +149,7 @@ public class ProposeWalkActivity extends AppCompatActivity {
         time = proposedTime.getText().toString();
         TextView proposedDate = findViewById(R.id.propose_walk_date);
         date = proposedDate.getText().toString();
+        String teamName = sharedPreferences.getString("teamName", "");
 
         Map<String, Object> walkInfo = new HashMap<>();
         walkInfo.put("Route", routeName);
@@ -160,7 +161,7 @@ public class ProposeWalkActivity extends AppCompatActivity {
 
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("team").document("proposedWalk")
+        db.collection(teamName).document("proposedWalk")
                 .update(walkInfo)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -176,14 +177,14 @@ public class ProposeWalkActivity extends AppCompatActivity {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        db.collection("team").document("proposedWalk")
+                        db.collection(teamName).document("proposedWalk")
                                 .set(walkInfo)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
                                         Log.d(TAG, "DocumentSnapshot successfully created!");
                                         // delete previous walk status
-                                        db.collection("team").document("status").delete();
+                                        db.collection(teamName).document("status").delete();
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener() {
@@ -207,7 +208,7 @@ public class ProposeWalkActivity extends AppCompatActivity {
 
         // Get team members
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("team")
+        db.collection(teamName)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

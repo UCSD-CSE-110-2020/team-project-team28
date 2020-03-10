@@ -106,12 +106,13 @@ public class ProposedWalkDetails extends AppCompatActivity {
     public void addUserStatusToFirebase() {
         SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
         String userName = sharedPreferences.getString("userName", "Test");
+        String teamName = sharedPreferences.getString("teamName", "");
 
         Map<String, Object> users = new HashMap<>();
         users.put(userName, status);
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("team").document("status")
+        db.collection(teamName).document("status")
                 .update(users)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -122,7 +123,7 @@ public class ProposedWalkDetails extends AppCompatActivity {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        db.collection("team").document("status")
+                        db.collection(teamName).document("status")
                                 .set(users)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
@@ -151,7 +152,7 @@ public class ProposedWalkDetails extends AppCompatActivity {
 
         // Get team members
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("team")
+        db.collection(teamName)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
