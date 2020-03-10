@@ -22,4 +22,11 @@
         android:layout_height="wrap_content"
         android:text="Go Back To Main Menu" />
 
+    <Button
+        android:id="@+id/current_proposed_walk_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/backToMainMenuButtonFromTeam"
+        android:text="Current Proposed Walk" />
+
 </RelativeLayout>

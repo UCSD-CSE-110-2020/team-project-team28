@@ -173,6 +173,7 @@ public class AddMemberActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
         String userName = sharedPreferences.getString("userName", "test");
+        String userToken = sharedPreferences.getString("userToken", "test");
         SharedPreferences.Editor edit = sharedPreferences.edit();
         edit.putString("teamName", teamName);
         edit.apply();
@@ -206,6 +207,42 @@ public class AddMemberActivity extends AppCompatActivity {
                                         Log.w(TAG, "Error writing document", e);
                                     }
                                 });
+                    }
+                });
+
+
+        //new
+        Map<String, Object> user = new HashMap<>();
+        user.put(userName, userToken);
+        db.collection(teamName).document("Members")
+                .update(user)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                    }
+
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        db.collection(teamName).document("Members")
+                                .set(user)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Log.d(TAG, "DocumentSnapshot successfully created!");
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.w(TAG, "Error writing document", e);
+                                        Toast.makeText(getApplicationContext(), "Upload failed!",
+                                                Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
                     }
                 });
     }

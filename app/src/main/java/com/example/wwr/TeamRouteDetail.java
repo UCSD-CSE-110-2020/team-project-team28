@@ -1,23 +1,19 @@
 package com.example.wwr;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.Checkable;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.wwr.fitness.FitnessService;
-import com.google.gson.Gson;
+import org.w3c.dom.Text;
 
-import static com.example.wwr.RouteScreen.currentPosition;
-
-public class RouteDetail extends AppCompatActivity {
+public class TeamRouteDetail extends AppCompatActivity {
+    TextView userName;
     TextView name;
     TextView startLocation;
     TextView timeTaken;
@@ -25,23 +21,23 @@ public class RouteDetail extends AppCompatActivity {
     TextView distance;
     TextView features;
     TextView note;
-    CheckBox isFavorite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_route_detail);
-        name = (TextView) findViewById(R.id.route_detail_title);
-        startLocation = (TextView) findViewById(R.id.route_detail_start_location);
-        timeTaken = (TextView) findViewById(R.id.route_detail_time_taken);
-        steps = (TextView) findViewById(R.id.route_detail_steps);
-        distance = (TextView) findViewById(R.id.route_detail_distance);
-        features = (TextView) findViewById(R.id.route_detail_features);
-        note = (TextView) findViewById(R.id.route_detail_note);
-
+        setContentView(R.layout.activity_team_route_detail);
+        userName = (TextView) findViewById(R.id.team_route_user_name);
+        name = (TextView) findViewById(R.id.team_route_detail_title);
+        startLocation = (TextView) findViewById(R.id.team_route_detail_start_location);
+        timeTaken = (TextView) findViewById(R.id.team_route_detail_time_taken);
+        steps = (TextView) findViewById(R.id.team_route_detail_steps);
+        distance = (TextView) findViewById(R.id.team_route_detail_distance);
+        features = (TextView) findViewById(R.id.team_route_detail_features);
+        note = (TextView) findViewById(R.id.team_route_detail_note);
 
         String routeName = getIntent().getStringExtra("routeName");
         String startingLocation = getIntent().getStringExtra("startLocation");
+        userName.setText(getIntent().getStringExtra("team"));
         name.setText(routeName);
         startLocation.setText(startingLocation);
         timeTaken.setText(getIntent().getStringExtra("timeTaken"));
@@ -50,8 +46,7 @@ public class RouteDetail extends AppCompatActivity {
         features.setText(getIntent().getStringExtra("features"));
         note.setText(getIntent().getStringExtra("note"));
 
-
-        Button startFromExistingRoute = (Button) findViewById(R.id.route_info_start_button);
+        Button startFromExistingRoute = (Button) findViewById(R.id.team_route_info_start_button);
         startFromExistingRoute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,22 +58,10 @@ public class RouteDetail extends AppCompatActivity {
             }
         });
 
-        // May not work
-        CheckBox favoriteBtn = (CheckBox) findViewById(R.id.favorite_btn);
-        favoriteBtn.setChecked(RouteScreen.routeList.get(RouteScreen.currentPosition).getFavorite());
-        favoriteBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                RouteScreen.routeList.get(RouteScreen.currentPosition).setFavorite( (favoriteBtn.isChecked()) );
-                saveData();
-                RouteScreen.routeAdapter.notifyDataSetChanged();
-            }
-        });
-
-        Button proposeWalk = findViewById(R.id.route_info_propose_button);
+        Button proposeWalk = findViewById(R.id.team_route_info_propose_button);
         proposeWalk.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick (View view) {
+            public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), ProposeWalkActivity.class);
                 String routeName = getIntent().getStringExtra("routeName");
                 String startingLocation = getIntent().getStringExtra("startLocation");
@@ -89,15 +72,4 @@ public class RouteDetail extends AppCompatActivity {
         });
 
     }
-
-    public void saveData() {
-        SharedPreferences userPref = getSharedPreferences("shared preferences", MODE_PRIVATE);
-        SharedPreferences.Editor editor = userPref.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(RouteScreen.routeList);
-        editor.putString("route list", json);
-        editor.apply();
-        Log.d("loadRouteList", "Route list has been saved");
-    }
-
 }

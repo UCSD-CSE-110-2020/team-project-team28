@@ -51,8 +51,9 @@ public class TeamRouteScreen extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
                             String userName = sharedPreferences.getString("userName", "");
+                            String teamName = sharedPreferences.getString("teamName", "");
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                if (!document.getId().equals(userName)) {
+                                if (!document.getId().equals(userName) && document.get("team") != null && document.get("team").equals(teamName)) {
                                     ArrayList<Map<String, String>> routes = (ArrayList<Map<String, String>>) document.get("routes");
                                     if (routes != null) {
                                         for (Map<String, String> route : routes) {
@@ -97,6 +98,15 @@ public class TeamRouteScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 TeamRouteScreen.super.onBackPressed();
+            }
+        });
+
+        Button currentProposedWalk = findViewById(R.id.current_proposed_walk_button);
+        currentProposedWalk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ProposedWalkDetails.class);
+                startActivity(intent);
             }
         });
     }
