@@ -51,7 +51,16 @@ public class ProposedWalkDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_proposed_walk_details);
-        loadTeamRoute();
+
+        SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        String userName = sharedPreferences.getString("userName", "Test");
+        String teamName = sharedPreferences.getString("teamName", "");
+
+
+        if (teamName != ""){
+            loadTeamRoute();
+        }
+
         chat = FirebaseFirestore.getInstance()
                 .collection(COLLECTION_KEY)
                 .document(DOCUMENT_KEY)
@@ -81,9 +90,6 @@ public class ProposedWalkDetails extends AppCompatActivity {
                 switchToProposeWalkActivity();
             }
         });
-
-        SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
-        String userName = sharedPreferences.getString("userName", "Test");
 
         /*if (owner_str.equals(userName)){
             editWalk.setVisibility(View.VISIBLE);
