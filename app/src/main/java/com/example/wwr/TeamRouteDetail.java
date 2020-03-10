@@ -37,7 +37,7 @@ public class TeamRouteDetail extends AppCompatActivity {
 
         String routeName = getIntent().getStringExtra("routeName");
         String startingLocation = getIntent().getStringExtra("startLocation");
-        userName.setText(getIntent().getStringExtra("teamUserName"));
+        userName.setText(getIntent().getStringExtra("team"));
         name.setText(routeName);
         startLocation.setText(startingLocation);
         timeTaken.setText(getIntent().getStringExtra("timeTaken"));

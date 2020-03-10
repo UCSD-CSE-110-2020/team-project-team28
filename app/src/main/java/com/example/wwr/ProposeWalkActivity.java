@@ -195,7 +195,7 @@ public class ProposeWalkActivity extends AppCompatActivity {
                         Log.d(TAG, "DocumentSnapshot successfully written!");
                         // delete previous walk status
                         if (status.equals("Proposed")){
-                            db.collection("team").document("status").delete();
+                            db.collection(teamName).document("status").delete();
                         }
                     }
 
