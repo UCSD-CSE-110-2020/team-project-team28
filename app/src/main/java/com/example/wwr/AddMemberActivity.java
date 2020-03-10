@@ -41,28 +41,14 @@ public class AddMemberActivity extends AppCompatActivity {
 
     String from = "You have an invite to join a team from ";
     String COLLECTION_KEY = "chats";
-    String CHAT_ID = "chat1";
     String DOCUMENT_KEY = "chat1";
     String MESSAGES_KEY = "messages";
     String FROM_KEY = "from";
     String TEXT_KEY = "text";
-    String TIMESTAMP_KEY = "timestamp";
 
     CollectionReference chat;
     String email_str;
     String team_str;
-
-    //String TAG = AddMemberActivity.class.getSimpleName();
-
-    //String COLLECTION_KEY = "chats";
-    //String DOCUMENT_KEY = "chats1";
-    //String MESSAGES_KEY = "messages";
-    //String FROM_KEY = "from";
-    //String TEXT_KEY = "text";
-    //String TIMESTAMP_KEY = "timestamp";
-
-    //CollectionReference chat;
-    //String from;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,8 +75,8 @@ public class AddMemberActivity extends AppCompatActivity {
 
                 //String teamName_str = sp.getString("teamName", "");
                 //if (teamName_str.equals("")) {
-                    CreateATeam(team_str);
-                    Log.d("create team", "creating a new team");
+                CreateATeam(team_str);
+                Log.d("create team", "creating a new team");
                 //}
 
                 Log.d("no create team", "not creating a new team");
@@ -136,6 +122,7 @@ public class AddMemberActivity extends AppCompatActivity {
         });
     }
 
+    // Send message to the specific user using a token.
     private void sendToken() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         // Get the email of the user to send the notification to.
@@ -163,8 +150,9 @@ public class AddMemberActivity extends AppCompatActivity {
                         }
                     }
                 });
-        }
+    }
 
+    // Add a user to the specified team name.
     public void CreateATeam(String teamName) {
         Toast.makeText(getApplicationContext(), "in create a team", Toast.LENGTH_LONG).show();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -210,8 +198,6 @@ public class AddMemberActivity extends AppCompatActivity {
                     }
                 });
 
-
-        //new
         Map<String, Object> user = new HashMap<>();
         user.put(userName, userToken);
         db.collection(teamName).document("Members")
