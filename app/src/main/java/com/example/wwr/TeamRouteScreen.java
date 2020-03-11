@@ -40,7 +40,6 @@ public class TeamRouteScreen extends AppCompatActivity {
 
     public void loadTeamRoutes() {
         routeList = new ArrayList<>();
-
         // Load routes of the team members.
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("appUsers")
@@ -68,6 +67,7 @@ public class TeamRouteScreen extends AppCompatActivity {
                                         }
                                     }
                                 }
+                                saveData();
                                 routeAdapter.notifyDataSetChanged();
                             }
                         } else {
@@ -76,7 +76,7 @@ public class TeamRouteScreen extends AppCompatActivity {
                     }
                 });
         Log.d("loadRouteList", "Route list has been loaded");
-        Toast.makeText(getApplicationContext(), "Team Routes Loaded!", Toast.LENGTH_LONG).show();
+       // Toast.makeText(getApplicationContext(), "Team Routes Loaded!", Toast.LENGTH_LONG).show();
 
     }
 
@@ -110,5 +110,16 @@ public class TeamRouteScreen extends AppCompatActivity {
             }
         });
     }
+
+    public void saveData() {
+        SharedPreferences userPref = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = userPref.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(routeList);
+        editor.putString("team route list", json);
+        editor.apply();
+        Log.d("loadRouteList", "Route list has been saved");
+    }
+
 
 }

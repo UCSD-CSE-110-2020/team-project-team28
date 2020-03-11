@@ -24,11 +24,11 @@ public class RouteScreenAdapter extends RecyclerView.Adapter<RouteScreenAdapter.
     public RouteScreenAdapter(ArrayList<Route> routeList, Context context) {
         this.routeList = routeList;
         this.context = context;
-
     }
 
     public static class RouteScreenViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener  {
         public ImageView image;
+        public TextView memberName;
         public TextView routeName;
         public TextView startingPoint;
         public TextView totalTime;
@@ -45,6 +45,7 @@ public class RouteScreenAdapter extends RecyclerView.Adapter<RouteScreenAdapter.
 
             view.setOnClickListener(this);
             image = view.findViewById(R.id.favorite);
+            memberName = view.findViewById(R.id.route_screen_member_name);
             routeName = view.findViewById(R.id.route_name);
             startingPoint = view.findViewById(R.id.startingPoint);
             totalTime = view.findViewById(R.id.totalTime);
@@ -59,6 +60,7 @@ public class RouteScreenAdapter extends RecyclerView.Adapter<RouteScreenAdapter.
             Route currentRoute = routeList.get(position);
             Intent intent = new Intent(this.context, RouteDetail.class);
 
+            intent.putExtra("memberName", "Team Member Name: " + currentRoute.getUserName());
             intent.putExtra("routeName", "Route Name: " + currentRoute.getName());
             intent.putExtra("startLocation", "Start Location: " + currentRoute.getStartLocation());
             intent.putExtra("timeTaken", "Seconds Taken: " + (currentRoute.getTotalSeconds()));
@@ -68,6 +70,7 @@ public class RouteScreenAdapter extends RecyclerView.Adapter<RouteScreenAdapter.
                     + "\n" + currentRoute.getLoopOrOut() + "\n" + currentRoute.getStreetOrTrail() +
                     "\n" + currentRoute.getSurface() + "\n" + currentRoute.getDifficulty());
             intent.putExtra("note", "Notes: " + currentRoute.getNote());
+            intent.putExtra("position", position);
 
             SharedPreferences sp = context.getSharedPreferences("prefs", MODE_PRIVATE);
             SharedPreferences.Editor editor = sp.edit();
@@ -91,6 +94,7 @@ public class RouteScreenAdapter extends RecyclerView.Adapter<RouteScreenAdapter.
         final Route currentRoute = routeList.get(position); // final
 
         holder.image.setImageResource(currentRoute.getImage());
+        holder.memberName.setText(currentRoute.getUserName());
         holder.routeName.setText(currentRoute.getName());
         holder.startingPoint.setText("Starting Location: " + currentRoute.getStartLocation());
         holder.totalTime.setText("Total Time: " + currentRoute.getTotalSeconds() + "s");
