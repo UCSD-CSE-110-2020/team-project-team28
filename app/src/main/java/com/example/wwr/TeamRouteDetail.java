@@ -46,18 +46,6 @@ public class TeamRouteDetail extends AppCompatActivity {
         features.setText(getIntent().getStringExtra("features"));
         note.setText(getIntent().getStringExtra("note"));
 
-        Button startFromExistingRoute = (Button) findViewById(R.id.team_route_info_start_button);
-        startFromExistingRoute.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), LogInActivity.class);
-                intent.putExtra("route name", getIntent().getStringExtra("routeName"));
-                intent.putExtra("previousActivity", "Route Detail");
-                Log.d("restartWalk", "Restart existing walk.");
-                startActivity(intent);
-            }
-        });
-
         Button proposeWalk = findViewById(R.id.team_route_info_propose_button);
         proposeWalk.setOnClickListener(new View.OnClickListener() {
             @Override
