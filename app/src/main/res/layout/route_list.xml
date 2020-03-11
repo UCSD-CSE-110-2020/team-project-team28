@@ -12,22 +12,21 @@
         android:layout_margin="4dp">
 
         <ImageView
+            android:id="@+id/favorite"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:padding="2dp"
-            android:id="@+id/favorite" />
+            android:padding="2dp" />
 
         <TextView
             android:id="@+id/route_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Line1"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/black"
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/favorite"
-            />
+            android:text="Line1"
+            android:textColor="@android:color/black"
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/startingPoint"
@@ -36,11 +35,11 @@
             android:layout_below="@id/route_name"
             android:layout_marginStart="8dp"
             android:layout_marginTop="0dp"
+            android:layout_toEndOf="@+id/favorite"
             android:text="Line1"
             android:textColor="@android:color/holo_blue_dark"
             android:textSize="15sp"
-            android:textStyle="bold"
-            android:layout_toEndOf="@+id/favorite"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/totalTime"
@@ -49,37 +48,45 @@
             android:layout_below="@id/startingPoint"
             android:layout_marginStart="8dp"
             android:layout_marginTop="0dp"
+            android:layout_toEndOf="@+id/favorite"
             android:text="Line2"
             android:textColor="@android:color/holo_orange_dark"
             android:textSize="15sp"
-            android:textStyle="bold"
-            android:layout_toEndOf="@+id/favorite"/>
+            android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/totalSteps"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/totalTime"
             android:layout_marginStart="8dp"
+            android:layout_toEndOf="@+id/favorite"
             android:text="Line3"
             android:textColor="@android:color/holo_red_light"
             android:textSize="15sp"
-            android:textStyle="bold"
-            android:id="@+id/totalSteps"
-            android:layout_toEndOf="@+id/favorite"
-            />
+            android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/totalDistance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/totalSteps"
             android:layout_marginStart="8dp"
+            android:layout_toEndOf="@+id/favorite"
             android:text="Line4"
             android:textColor="@android:color/holo_green_light"
             android:textSize="15sp"
-            android:textStyle="bold"
-            android:id="@+id/totalDistance"
-            android:layout_toEndOf="@+id/favorite"
-            />
+            android:textStyle="bold" />
+
+        <CheckedTextView
+            android:id="@+id/checkedRouteEe"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:checkMark="@drawable/check"
+            android:checked="true"
+            android:gravity="center" />
+
+
 
     </RelativeLayout>
 

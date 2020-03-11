@@ -6,8 +6,10 @@ import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,11 +22,9 @@ public class RouteScreenAdapter extends RecyclerView.Adapter<RouteScreenAdapter.
     private ArrayList<Route> routeList;
     Context context;
 
-
     public RouteScreenAdapter(ArrayList<Route> routeList, Context context) {
         this.routeList = routeList;
         this.context = context;
-
     }
 
     public static class RouteScreenViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener  {
@@ -34,11 +34,15 @@ public class RouteScreenAdapter extends RecyclerView.Adapter<RouteScreenAdapter.
         public TextView totalTime;
         public TextView totalSteps;
         public TextView totalDistance;
+        public CheckedTextView checkedRoute;
+        public int position;
 
         ArrayList<Route> routeList;
         Context context;
 
+
         public RouteScreenViewHolder(View view, Context context, ArrayList<Route> routeList) {
+
             super(view);
             this.routeList = routeList;
             this.context = context;
@@ -50,7 +54,7 @@ public class RouteScreenAdapter extends RecyclerView.Adapter<RouteScreenAdapter.
             totalTime = view.findViewById(R.id.totalTime);
             totalSteps = view.findViewById(R.id.totalSteps);
             totalDistance = view.findViewById(R.id.totalDistance);
-
+            checkedRoute = view.findViewById(R.id.checkedRouteEe);
         }
 
         @Override
@@ -75,13 +79,14 @@ public class RouteScreenAdapter extends RecyclerView.Adapter<RouteScreenAdapter.
 
             this.context.startActivity(intent);
         }
-    }
+    } // end class
 
     @NonNull
     @Override
     public RouteScreenViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate
                 (R.layout.route_list, parent, false);
+
         RouteScreenViewHolder viewHolder = new RouteScreenViewHolder(view, context, routeList);
         return viewHolder;
     }
@@ -96,6 +101,13 @@ public class RouteScreenAdapter extends RecyclerView.Adapter<RouteScreenAdapter.
         holder.totalTime.setText("Total Time: " + currentRoute.getTotalSeconds() + "s");
         holder.totalSteps.setText("Total Steps: " + currentRoute.getSteps() + " steps");
         holder.totalDistance.setText("Total Distance: " + currentRoute.getTotalMiles() + " miles");
+
+        if (currentRoute.hasWalked()) {
+            holder.checkedRoute.setCheckMarkDrawable(R.drawable.check);
+            holder.checkedRoute.setVisibility(View.VISIBLE);
+        } else {
+            holder.checkedRoute.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override

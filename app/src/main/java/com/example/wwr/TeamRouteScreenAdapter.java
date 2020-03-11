@@ -4,32 +4,49 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Random;
 
 import static android.content.Context.MODE_PRIVATE;
 
 public class TeamRouteScreenAdapter extends RecyclerView.Adapter<TeamRouteScreenAdapter.TeamRouteScreenViewHolder> {
     private ArrayList<Route> routeList;
+    Hashtable<String, String> teamRoutes;
+    ArrayList<Route> myRouteList;
+
     Context context;
 
 
-    public TeamRouteScreenAdapter(ArrayList<Route> routeList, Context context) {
+    public TeamRouteScreenAdapter(ArrayList<Route> routeList,
+                                  Context context,
+                                  ArrayList<Route> myRouteList) {
         this.routeList = routeList;
         this.context = context;
+        this.teamRoutes = teamRoutes;
+        this.myRouteList = myRouteList;
 
     }
+
+
 
     public static class TeamRouteScreenViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener  {
         public ImageView image;
@@ -39,6 +56,7 @@ public class TeamRouteScreenAdapter extends RecyclerView.Adapter<TeamRouteScreen
         public TextView totalTime;
         public TextView totalSteps;
         public TextView totalDistance;
+        public CheckedTextView checkedRoute;
 
         ArrayList<Route> routeList;
         Context context;
@@ -56,6 +74,7 @@ public class TeamRouteScreenAdapter extends RecyclerView.Adapter<TeamRouteScreen
             totalTime = view.findViewById(R.id.team_totalTime);
             totalSteps = view.findViewById(R.id.team_totalSteps);
             totalDistance = view.findViewById(R.id.team_totalDistance);
+            checkedRoute = view.findViewById(R.id.team_checkedRoute);
         }
 
         @Override
@@ -80,6 +99,7 @@ public class TeamRouteScreenAdapter extends RecyclerView.Adapter<TeamRouteScreen
             editor.putString("currPos", String.valueOf(position));
 
             this.context.startActivity(intent);
+
         }
     }
 
@@ -110,6 +130,15 @@ public class TeamRouteScreenAdapter extends RecyclerView.Adapter<TeamRouteScreen
         holder.totalTime.setText("Total Time: " + currentRoute.getTotalSeconds() + "s");
         holder.totalSteps.setText("Total Steps: " + currentRoute.getSteps() + " steps");
         holder.totalDistance.setText("Total Distance: " + currentRoute.getTotalMiles() + " miles");
+        holder.checkedRoute.setCheckMarkDrawable(R.drawable.check);
+        holder.checkedRoute.setVisibility(View.INVISIBLE);
+
+        for (Route route : myRouteList) {
+            if (route.getName().equals(currentRoute.getName()) && route.hasWalked()) {
+                holder.checkedRoute.setVisibility(View.VISIBLE);
+                break;
+            }
+        }
     }
 
     @Override

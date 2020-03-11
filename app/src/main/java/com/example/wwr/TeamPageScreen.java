@@ -63,7 +63,7 @@ public class TeamPageScreen extends AppCompatActivity {
                                     if (!document.getId().equals(userName) && !hasTeamMember(document.getId())) {
                                         routeList.add(new Route((String) document.getId(), (String) document.get("email"), "",
                                                 "", 0, 0, 0, "", "",
-                                                "", "", "", "", false, 0));
+                                                "", "", "", "", false, 0, true));
                                         routeAdapter.notifyDataSetChanged();
                                     }
                             }

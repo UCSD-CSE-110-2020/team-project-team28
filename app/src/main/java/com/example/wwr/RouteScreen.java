@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckedTextView;
 import android.widget.Toast;
 
 import com.example.wwr.fitness.FitnessService;
@@ -37,6 +38,7 @@ public class RouteScreen extends AppCompatActivity {
     public static RecyclerView.Adapter routeAdapter;
     public static RecyclerView.LayoutManager routeLayoutManager;
     public static ArrayList<Route> routeList;
+    public static CheckedTextView checkedRoute;
     public String TAG = "Upload to firestore";
 
     public void loadData() {
@@ -59,12 +61,18 @@ public class RouteScreen extends AppCompatActivity {
         setContentView(R.layout.activity_route_screen);
         loadData();
 
+
+        SharedPreferences sp = getSharedPreferences("prefs", MODE_PRIVATE);
+        String currPos = sp.getString("currPos", "0");
+        currentPosition = Integer.parseInt(currPos);
+
         routeScreenView = findViewById(R.id.routeScreen);
         routeScreenView.setHasFixedSize(true);
         routeLayoutManager = new LinearLayoutManager(this);
         routeAdapter = new RouteScreenAdapter(routeList, this);
         routeScreenView.setLayoutManager(routeLayoutManager);
         routeScreenView.setAdapter(routeAdapter);
+        checkedRoute = findViewById(R.id.team_checkedRoute);
 
         // if the route doesn't exist yet
         if (getIntent().getBooleanExtra("goToDetail", false)) {
@@ -74,15 +82,18 @@ public class RouteScreen extends AppCompatActivity {
             startActivity(intent);
         }
 
-        SharedPreferences sp = getSharedPreferences("prefs", MODE_PRIVATE);
-        String currPos = sp.getString("currPos", "0");
-
-        // this gets called when we have a walk on an existing route
-        currentPosition = Integer.parseInt(currPos);
-
+        // this gets called when we walk on an existing route
         if (getIntent().getBooleanExtra("updateRoute", false)) {
 
             if (currentPosition < routeList.size()) {
+                routeList.get(currentPosition).setWalked();
+                Toast.makeText(this, "Manually updated, should be checked",
+                Toast.LENGTH_SHORT).show();
+                if (routeList.get(currentPosition).hasWalked()) {
+                    Toast.makeText(this, routeList.get(currentPosition).getName() + "",
+                            Toast.LENGTH_SHORT).show();
+
+                }
 
                 // get the last walk's time, smiles, and distance
                 int seconds = (int)user.getLastIntentionalTime();
@@ -109,6 +120,7 @@ public class RouteScreen extends AppCompatActivity {
             }
         });
 
+        // add a manual route
         Button addRouteButton = (Button) findViewById(R.id.addRouteButton);
         addRouteButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -169,14 +181,14 @@ public class RouteScreen extends AppCompatActivity {
     public static void addToRouteList(String userName, String userEmail, String routeName, String startingLocation, long totalSteps,
                                       double totalMiles, long totalSeconds, String flatOrHilly,
                                       String loopOrOut, String streetOrTrail, String surface,
-                                      String difficulty, String note, boolean isFavorite) {
+                                      String difficulty, String note, boolean isFavorite, boolean manuallyAdded) {
         int image = 0;
         if (isFavorite) {
             image = R.drawable.ic_stars_black_24dp;
         }
         routeList.add(new Route(userName, userEmail, routeName, startingLocation, totalSteps, totalMiles,
                 totalSeconds, flatOrHilly, loopOrOut, streetOrTrail, surface, difficulty,
-                note, isFavorite, image));
+                note, isFavorite, image, manuallyAdded));
         routeAdapter.notifyDataSetChanged();
         Log.d("notifyList", "Notify list that the data has been updated.");
     }

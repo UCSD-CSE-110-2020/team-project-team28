@@ -29,6 +29,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Map;
 
 public class TeamRouteScreen extends AppCompatActivity {
@@ -36,10 +37,13 @@ public class TeamRouteScreen extends AppCompatActivity {
     public static RecyclerView.Adapter routeAdapter;
     public static RecyclerView.LayoutManager routeLayoutManager;
     public static ArrayList<Route> routeList;
+    public static ArrayList<Route> myRouteList;
+
     public String TAG = "TeamRouteScreen";
 
     public void loadTeamRoutes() {
         routeList = new ArrayList<>();
+
 
         // Load routes of the team members.
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -62,7 +66,7 @@ public class TeamRouteScreen extends AppCompatActivity {
                                             routeList.add(new Route(route.get("userName"), route.get("userEmail"), route.get("name"), route.get("startLocation"),
                                                     Long.parseLong(steps), Double.parseDouble(totalMiles), Long.parseLong(totalSeconds),
                                                     route.get("flatOrHilly"), route.get("loopOrOut"), route.get("streetOrTrail"),
-                                                    route.get("surface"), route.get("difficulty"), route.get("note"), false, 0));
+                                                    route.get("surface"), route.get("difficulty"), route.get("note"), false, 0, true));
 
                                         }
                                     }
@@ -76,7 +80,21 @@ public class TeamRouteScreen extends AppCompatActivity {
                 });
         Log.d("loadRouteList", "Route list has been loaded");
         Toast.makeText(getApplicationContext(), "Team Routes Loaded!", Toast.LENGTH_LONG).show();
+        this.loadMyRouteData();
 
+    }
+
+    public void loadMyRouteData() {
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("route list", null);
+        Type type = new TypeToken<ArrayList<Route>>() {}.getType();
+        myRouteList = gson.fromJson(json, type);
+        Log.d("loadRouteList", "Route list has been loaded");
+
+        if (myRouteList == null) {
+            myRouteList = new ArrayList<>();
+        }
     }
 
     @Override
@@ -88,7 +106,7 @@ public class TeamRouteScreen extends AppCompatActivity {
         routeScreenView = findViewById(R.id.teamRouteScreen);
         routeScreenView.setHasFixedSize(true);
         routeLayoutManager = new LinearLayoutManager(this);
-        routeAdapter = new TeamRouteScreenAdapter(routeList, this);
+        routeAdapter = new  TeamRouteScreenAdapter(routeList, this, myRouteList);
         routeScreenView.setLayoutManager(routeLayoutManager);
         routeScreenView.setAdapter(routeAdapter);
 
