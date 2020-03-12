@@ -36,7 +36,7 @@ public class AddTeammateRouteUnitTest {
             TeamRouteScreen.routeList.add(
                     new Route("Tim Jang", "w1jang@ucsd.edu", "a", "a", 100, 5.5, 10,
                             "flat", "hilly", "trail", "even", "hard",
-                            "Gotta go home", true, 0));
+                            "Gotta go home", true, 0, false));
             assertEquals(activity.routeList.size(), 1);
             assertEquals(activity.routeList.get(0).getUserName(), "Tim Jang");
             button.performClick();

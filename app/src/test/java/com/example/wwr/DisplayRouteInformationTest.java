@@ -31,7 +31,7 @@ public class DisplayRouteInformationTest {
             Route route = new Route("a", "b", "Test", "Village", 1000,
                     12.0, 2, "flat", "loop",
                     "street", "trail", "hard", "Not great",
-                    true, 0);
+                    true, 0, false);
 
             Button startRoute = activity.findViewById(R.id.route_info_start_button);
             TextView routeName = activity.findViewById(R.id.route_detail_title);

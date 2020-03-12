@@ -58,8 +58,6 @@ public class ReceiveInviteTest {
         Mockito.when(messageFactory.createFirebaseFirestoreChatService(anyString(), anyString(), anyString(), anyString(), anyString(), anyString()))
                 .thenReturn(messageService);
 
-        //MyApplication.setChatServiceFactory(chatServiceFactory);
-        MyApplication.setMessageFactory(messageFactory);
 
 
        // ActivityScenario.launch(MainActivity.class);

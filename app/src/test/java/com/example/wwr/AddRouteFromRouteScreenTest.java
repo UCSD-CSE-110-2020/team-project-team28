@@ -30,7 +30,7 @@ public class AddRouteFromRouteScreenTest {
             assertEquals(RouteScreen.currentPosition, 0);
             RouteScreen.addToRouteList("Home", "Tim", "All star", "California", 100,
                     100, 9, "flat", "loop",
-                    "street", "even", "hard", "Wow", false);
+                    "street", "even", "hard", "Wow", false, false);
             addButton.performClick();
             assertEquals(RouteScreen.routeList.size(), 1);
             assertEquals(RouteScreen.routeList.get(RouteScreen.currentPosition).getName(), "All star");

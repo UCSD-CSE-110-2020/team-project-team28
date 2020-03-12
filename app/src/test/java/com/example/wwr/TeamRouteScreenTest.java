@@ -31,7 +31,7 @@ public class TeamRouteScreenTest {
             assertEquals(TeamRouteScreen.routeList.size(), 0);
             TeamRouteScreen.routeList.add(new Route("Home", "Tim", "CSE", "CA", 10, 10.0,
                             10, "flat", "loop", "street", "surface",
-                            "hard", "", true, 0));
+                            "hard", "", true, 0, false));
             assertEquals(TeamRouteScreen.routeList.size(), 1);
             assertEquals(TeamRouteScreen.routeList.get(TeamRouteScreen.routeList.size() - 1).getName(), "CSE");
         });
