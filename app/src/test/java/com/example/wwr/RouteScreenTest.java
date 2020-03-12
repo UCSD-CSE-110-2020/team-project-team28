@@ -32,13 +32,13 @@ public class RouteScreenTest {
 
             RouteScreen.addToRouteList("int", "a", "Home", "California", 100,
                     10, 99, "flat", "loop",
-                    "street", "even", "hard", "Wow", false);
+                    "street", "even", "hard", "Wow", false, false);
             assertEquals(RouteScreen.routeList.size(), 1);
             assertEquals(RouteScreen.routeList.get(RouteScreen.currentPosition).getName(), "Home");
 
             RouteScreen.addToRouteList("int", "a", "CSE 110", "California", 100,
                     10, 99, "flat", "loop",
-                    "street", "even", "hard", "Wow", false);
+                    "street", "even", "hard", "Wow", false, false);
             assertEquals(RouteScreen.routeList.size(), 2);
             assertEquals(RouteScreen.routeList.get(RouteScreen.routeList.size() - 1).getName(), "CSE 110");
         });

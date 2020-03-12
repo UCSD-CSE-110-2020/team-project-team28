@@ -46,7 +46,7 @@ public class FirebaseFirestoreAdapter implements MessageService {
                         return;
                     }
 
-                    if (newChatSnapShot != null && !newChatSnapShot.isEmpty()) {
+                    if (newChatSnapShot != null && !newChatSnapShot .isEmpty()) {
                         List<DocumentChange> documentChanges = newChatSnapShot.getDocumentChanges();
 
                         List<Message> newMessages = documentChanges.stream()

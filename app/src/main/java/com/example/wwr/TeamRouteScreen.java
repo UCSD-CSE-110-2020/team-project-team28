@@ -62,10 +62,24 @@ public class TeamRouteScreen extends AppCompatActivity {
                                             String steps = String.valueOf(route.get("steps"));
                                             String totalMiles = String.valueOf(route.get("totalMiles"));
                                             String totalSeconds = String.valueOf(route.get("totalSeconds"));
-                                            routeList.add(new Route(route.get("userName"), route.get("userEmail"), route.get("name"), route.get("startLocation"),
-                                                    Long.parseLong(steps), Double.parseDouble(totalMiles), Long.parseLong(totalSeconds),
-                                                    route.get("flatOrHilly"), route.get("loopOrOut"), route.get("streetOrTrail"),
-                                                    route.get("surface"), route.get("difficulty"), route.get("note"), false, 0, true));
+                                            if (route.get("userName") != null && !route.get("userName").equals(userName)) {
+                                                Route newRoute = new Route(route.get("userName"), route.get("userEmail"), route.get("name"), route.get("startLocation"),
+                                                        Long.parseLong(steps), Double.parseDouble(totalMiles), Long.parseLong(totalSeconds),
+                                                        route.get("flatOrHilly"), route.get("loopOrOut"), route.get("streetOrTrail"),
+                                                        route.get("surface"), route.get("difficulty"), route.get("note"), false, 0, true);
+
+                                                boolean isDuplicate = false;
+                                                for (Route addedRoutes : routeList) {
+                                                    if (addedRoutes.getUserName().equals(newRoute.getUserName()) && addedRoutes.getStartLocation().equals(newRoute.getStartLocation())
+                                                            && addedRoutes.getName().equals(newRoute.getName()) && addedRoutes.getStartLocation().equals(newRoute.getStartLocation())) {
+                                                        isDuplicate = true;
+                                                        break;
+                                                    }
+                                                }
+                                                if (!isDuplicate) {
+                                                    routeList.add(newRoute);
+                                                }
+                                            }
                                         }
                                     }
                                 }
