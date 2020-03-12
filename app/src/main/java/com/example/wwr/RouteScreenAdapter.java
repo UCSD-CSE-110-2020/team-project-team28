@@ -36,7 +36,6 @@ public class RouteScreenAdapter extends RecyclerView.Adapter<RouteScreenAdapter.
         public TextView totalSteps;
         public TextView totalDistance;
         public CheckedTextView checkedRoute;
-        public int position;
 
         ArrayList<Route> routeList;
         Context context;

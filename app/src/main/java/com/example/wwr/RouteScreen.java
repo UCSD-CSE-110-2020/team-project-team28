@@ -76,9 +76,6 @@ public class RouteScreen extends AppCompatActivity {
         setContentView(R.layout.activity_route_screen);
         loadData();
 
-
-
-
         routeScreenView = findViewById(R.id.routeScreen);
         routeScreenView.setHasFixedSize(true);
         routeLayoutManager = new LinearLayoutManager(this);
@@ -102,6 +99,7 @@ public class RouteScreen extends AppCompatActivity {
         // this gets called when we walk on an existing route
         if (getIntent().getBooleanExtra("updateRoute", false)) {
             if (currentPosition < routeList.size()) {
+                routeList.get(currentPosition).setWalked();
                 // get the last walk's time, smiles, and distance
                 int seconds = (int) user.getLastIntentionalTime();
                 long currSteps = user.getLastIntentSteps();
