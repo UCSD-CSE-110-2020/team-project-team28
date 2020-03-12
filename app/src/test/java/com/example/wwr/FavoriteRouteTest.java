@@ -41,7 +41,7 @@ public class FavoriteRouteTest {
 
             RouteScreen.addToRouteList("Wonsuk", "w1jang@ucsd.edu", "Home", "California", 100,
                     10, 99, "flat", "loop",
-                    "street", "even", "hard", "Wow", false);
+                    "street", "even", "hard", "Wow", false, false);
             assertEquals(RouteScreen.routeList.size(), 1);
             assertEquals(RouteScreen.routeList.get(RouteScreen.currentPosition).getName(), "Home");
 

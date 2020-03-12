@@ -41,7 +41,7 @@ public class AddTeamMemberTest {
             TeamPageScreen.routeList.add(
                     new Route("Tim Jang", "w1jang@ucsd.edu", "Home", "Street", 100, 5.5, 10,
                     "flat", "hilly", "trail", "even", "hard",
-                    "Gotta go home", true, 0));
+                    "Gotta go home", true, 0, false));
             addMemberButton.performClick();
 
             assertEquals(TeamPageScreen.routeList.size(), 1);

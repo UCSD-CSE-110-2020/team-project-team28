@@ -17,6 +17,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.wwr.chat.ChatService;
+import com.example.wwr.chat.FirebaseFirestoreAdapter;
 import com.example.wwr.fitness.FitnessService;
 import com.example.wwr.fitness.FitnessServiceFactory;
 import com.google.firebase.FirebaseApp;
@@ -30,6 +32,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,19 +48,14 @@ public class MainActivity extends AppCompatActivity {
     private UserInfo user;
     DistanceCalculator walkingDistanceMiles = new WalkingDistanceMiles();
 
-
     //new
     public static final String CHAT_MESSAGE_SERVICE_EXTRA = "CHAT_MESSAGE_SERVICE";
-
     private static final String FIRESTORE_CHAT_SERVICE = "FIRESTORE_CHAT_SERVICE";
 
     String COLLECTION_KEY = "chats";
     String CHAT_ID = "chat1";
     String DOCUMENT_KEY = "chat1";
     String MESSAGES_KEY = "messages";
-    String FROM_KEY = "from";
-    String TEXT_KEY = "text";
-    String TIMESTAMP_KEY = "timestamp";
 
     CollectionReference chat;
     CollectionReference walk;
@@ -303,6 +301,5 @@ public class MainActivity extends AppCompatActivity {
                         }
                 );
     }
-
 
 }

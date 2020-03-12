@@ -1,7 +1,6 @@
 package com.example.wwr.messaging;
 
 import android.util.Log;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,3 +30,6 @@ public class MessageFactory {
         return f;
     }
 }
+
+
+
