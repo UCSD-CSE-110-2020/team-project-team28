@@ -110,21 +110,11 @@ public class RoutePreviousStatsTest {
 
         ViewInteraction textView = onView(
                 allOf(withId(R.id.totalTime), withText("Total Time: 0s"),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.FrameLayout.class),
-                                        0),
-                                3),
                         isDisplayed()));
         textView.check(matches(isDisplayed()));
 
         ViewInteraction textView2 = onView(
                 allOf(withId(R.id.totalSteps), withText("Total Steps: 0 steps"),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.FrameLayout.class),
-                                        0),
-                                4),
                         isDisplayed()));
         textView2.check(matches(isDisplayed()));
     }
