@@ -99,6 +99,8 @@ public class RouteScreen extends AppCompatActivity {
         // this gets called when we walk on an existing route
         if (getIntent().getBooleanExtra("updateRoute", false)) {
             if (currentPosition < routeList.size()) {
+
+                // set the route as walked
                 routeList.get(currentPosition).setWalked();
                 // get the last walk's time, smiles, and distance
                 int seconds = (int) user.getLastIntentionalTime();

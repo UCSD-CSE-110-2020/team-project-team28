@@ -107,6 +107,7 @@ public class RouteScreenAdapter extends RecyclerView.Adapter<RouteScreenAdapter.
         holder.totalSteps.setText("Total Steps: " + currentRoute.getSteps() + " steps");
         holder.totalDistance.setText("Total Distance: " + currentRoute.getTotalMiles() + " miles");
 
+        // set check mark if route has been walked
         if (currentRoute.hasWalked()) {
             holder.checkedRoute.setCheckMarkDrawable(R.drawable.check);
             holder.checkedRoute.setVisibility(View.VISIBLE);
