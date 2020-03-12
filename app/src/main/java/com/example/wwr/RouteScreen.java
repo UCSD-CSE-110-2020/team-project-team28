@@ -62,9 +62,7 @@ public class RouteScreen extends AppCompatActivity {
         loadData();
 
 
-        SharedPreferences sp = getSharedPreferences("prefs", MODE_PRIVATE);
-        String currPos = sp.getString("currPos", "0");
-        currentPosition = Integer.parseInt(currPos);
+
 
         routeScreenView = findViewById(R.id.routeScreen);
         routeScreenView.setHasFixedSize(true);
@@ -82,18 +80,22 @@ public class RouteScreen extends AppCompatActivity {
             startActivity(intent);
         }
 
+        SharedPreferences sp = getSharedPreferences("prefs", MODE_PRIVATE);
+        String currPos = sp.getString("currPos", "0");
+        currentPosition = Integer.parseInt(currPos);
+
         // this gets called when we walk on an existing route
         if (getIntent().getBooleanExtra("updateRoute", false)) {
 
             if (currentPosition < routeList.size()) {
                 routeList.get(currentPosition).setWalked();
-                Toast.makeText(this, "Manually updated, should be checked",
-                Toast.LENGTH_SHORT).show();
-                if (routeList.get(currentPosition).hasWalked()) {
-                    Toast.makeText(this, routeList.get(currentPosition).getName() + "",
-                            Toast.LENGTH_SHORT).show();
-
-                }
+//                Toast.makeText(this, "Manually updated, should be checked",
+//                Toast.LENGTH_SHORT).show();
+//                if (routeList.get(currentPosition).hasWalked()) {
+//                    Toast.makeText(this, routeList.get(currentPosition).getName() + "",
+//                            Toast.LENGTH_SHORT).show();
+//
+//                }
 
                 // get the last walk's time, smiles, and distance
                 int seconds = (int)user.getLastIntentionalTime();

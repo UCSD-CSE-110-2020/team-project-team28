@@ -65,11 +65,12 @@ public class RouteDetail extends AppCompatActivity {
 
         // May not work
         CheckBox favoriteBtn = (CheckBox) findViewById(R.id.favorite_btn);
+        int position = getIntent().getIntExtra("position", 0);
         favoriteBtn.setChecked(RouteScreen.routeList.get(RouteScreen.currentPosition).getFavorite());
         favoriteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                RouteScreen.routeList.get(RouteScreen.currentPosition).setFavorite( (favoriteBtn.isChecked()) );
+                RouteScreen.routeList.get(position).setFavorite( (favoriteBtn.isChecked()) );
                 saveData();
                 RouteScreen.routeAdapter.notifyDataSetChanged();
             }

@@ -76,6 +76,7 @@ public class RouteScreenAdapter extends RecyclerView.Adapter<RouteScreenAdapter.
             SharedPreferences sp = context.getSharedPreferences("prefs", MODE_PRIVATE);
             SharedPreferences.Editor editor = sp.edit();
             editor.putString("currPos", String.valueOf(position));
+            editor.apply();
 
             this.context.startActivity(intent);
         }

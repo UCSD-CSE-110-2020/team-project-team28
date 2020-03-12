@@ -67,7 +67,6 @@ public class TeamRouteScreen extends AppCompatActivity {
                                                     Long.parseLong(steps), Double.parseDouble(totalMiles), Long.parseLong(totalSeconds),
                                                     route.get("flatOrHilly"), route.get("loopOrOut"), route.get("streetOrTrail"),
                                                     route.get("surface"), route.get("difficulty"), route.get("note"), false, 0, true));
-
                                         }
                                     }
                                 }
