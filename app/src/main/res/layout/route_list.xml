@@ -18,6 +18,19 @@
             android:padding="2dp" />
 
         <TextView
+            android:id="@+id/route_screen_member_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/route_name"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="0dp"
+            android:text="Team Member Name"
+            android:textColor="@android:color/holo_purple"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_toEndOf="@+id/favorite"/>
+
+        <TextView
             android:id="@+id/route_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -32,7 +45,7 @@
             android:id="@+id/startingPoint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/route_name"
+            android:layout_below="@+id/route_screen_member_name"
             android:layout_marginStart="8dp"
             android:layout_marginTop="0dp"
             android:layout_toEndOf="@+id/favorite"

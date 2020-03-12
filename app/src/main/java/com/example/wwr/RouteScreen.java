@@ -20,12 +20,17 @@ import android.widget.Toast;
 import com.example.wwr.fitness.FitnessService;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -52,6 +57,16 @@ public class RouteScreen extends AppCompatActivity {
         if (routeList == null) {
             routeList = new ArrayList<>();
         }
+
+        // Load team Routes
+        json = sharedPreferences.getString("team route list", null);
+        ArrayList<Route> teamRoute = gson.fromJson(json, type);
+
+        if (teamRoute != null) {
+            // Add team routes
+            addTeamRoute(teamRoute);
+        }
+
     }
 
     @Override
@@ -86,19 +101,9 @@ public class RouteScreen extends AppCompatActivity {
 
         // this gets called when we walk on an existing route
         if (getIntent().getBooleanExtra("updateRoute", false)) {
-
             if (currentPosition < routeList.size()) {
-                routeList.get(currentPosition).setWalked();
-//                Toast.makeText(this, "Manually updated, should be checked",
-//                Toast.LENGTH_SHORT).show();
-//                if (routeList.get(currentPosition).hasWalked()) {
-//                    Toast.makeText(this, routeList.get(currentPosition).getName() + "",
-//                            Toast.LENGTH_SHORT).show();
-//
-//                }
-
                 // get the last walk's time, smiles, and distance
-                int seconds = (int)user.getLastIntentionalTime();
+                int seconds = (int) user.getLastIntentionalTime();
                 long currSteps = user.getLastIntentSteps();
                 double miles = user.getLastIntentMiles();
 
@@ -195,7 +200,6 @@ public class RouteScreen extends AppCompatActivity {
         Log.d("notifyList", "Notify list that the data has been updated.");
     }
 
-
     public void saveData() {
         SharedPreferences userPref = getSharedPreferences("shared preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = userPref.edit();
@@ -206,4 +210,20 @@ public class RouteScreen extends AppCompatActivity {
         Log.d("loadRouteList", "Route list has been saved");
     }
 
+    public void addTeamRoute(ArrayList<Route> teamRouteList) {
+        for (Route teamRoute: teamRouteList) {
+            boolean isDuplicate = false;
+            for (Route myRoute: routeList) {
+                if (myRoute.getUserName().equals(teamRoute.getUserName()) && myRoute.getName().equals(teamRoute.getName())
+                        && myRoute.getStartLocation().equals(teamRoute.getStartLocation())) {
+                    isDuplicate = true;
+                    break;
+                }
+            }
+            if (!isDuplicate) {
+                routeList.add(teamRoute);
+            }
+        }
+    }
 }
+
