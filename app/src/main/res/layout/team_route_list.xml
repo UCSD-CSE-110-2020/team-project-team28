@@ -96,6 +96,14 @@
             android:layout_toEndOf="@+id/team_favorite"
             />
 
+        <CheckedTextView
+            android:id="@+id/team_checkedRoute"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:checkMark="@drawable/check"
+            android:checked="true"
+            android:gravity="center" />
+
     </RelativeLayout>
 
 

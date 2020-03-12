@@ -16,10 +16,11 @@ public class Route {
     private String note;
     private boolean isFavorite;
     private int image;
+    private boolean walkedYet;
 
     Route (String userName, String userEmail, String name, String startLocation, long totalSteps, double totalMiles, long totalSeconds,
            String flatOrHilly, String loopOrOut, String streetOrTrail, String surface,
-           String difficulty, String note, boolean isFavorite, int image) {
+           String difficulty, String note, boolean isFavorite, int image, boolean manuallyAdded) {
         this.userName = userName;
         this.userEmail = userEmail;
         this.name = name;
@@ -36,6 +37,11 @@ public class Route {
         this.note = note;
         this.isFavorite = isFavorite;
         this.image = image;
+        if (manuallyAdded) {
+            this.walkedYet = false;
+        } else {
+            this.walkedYet = true;
+        }
     }
 
     public void updateSteps(long steps) {
@@ -106,4 +112,11 @@ public class Route {
         return this.isFavorite;
     }
 
+    public void setWalked() {
+        this.walkedYet = true;
+    }
+
+    public boolean hasWalked() {
+        return this.walkedYet;
+    }
 }

@@ -4,18 +4,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.content.SharedPreferences;
+import android.widget.Toast;
+
 import com.google.gson.Gson;
 import java.text.DecimalFormat;
 
 public class RoutesActivity extends AppCompatActivity {
     private final String EMPTY_STRING = "";
     private UserInfo user;
+    public CheckedTextView checkedRoute;
+    private boolean manuallyAdded;
 
     RadioGroup flatGroup, loopGroup, streetGroup, surfaceGroup, difficultyGroup;
     RadioButton flatButton, loopButton, streetButton, surfaceButton, difficultyButton;
@@ -27,6 +33,9 @@ public class RoutesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         user = new UserInfo(this);
         setContentView(R.layout.activity_routes);
+
+        Toast.makeText(getApplicationContext(), "IN ROUTES ACTIVITY",
+                Toast.LENGTH_SHORT).show();
 
         // Initialize all group variables.
         flatGroup = findViewById(R.id.groupFlat);
@@ -102,9 +111,14 @@ public class RoutesActivity extends AppCompatActivity {
         long totalSteps = user.getLastIntentSteps();
         long seconds = user.getLastIntentionalTime();
 
+        // the case of when you're manually adding the route
         if (getIntent().getBooleanExtra("addNewRoute", false)) {
             totalSteps = 0;
+            manuallyAdded = true;
+        } else {
+            manuallyAdded = false;
         }
+
 
         double miles = user.getLastIntentMiles();
         String strMiles = new DecimalFormat("#.##").format(miles);
@@ -116,15 +130,22 @@ public class RoutesActivity extends AppCompatActivity {
 
         // check to make sure user added a name to the route before saving
         if (!routeName.getText().toString().equals(EMPTY_STRING) ) {
-            RouteScreen.addToRouteList(userName, userEmail, routeName.getText().toString(),
-                    startLocation.getText().toString(), totalSteps, formattedMiles, seconds, flatOrHilly,
-                    loopOrOut, streetOrTrail, surface, difficulty,
-                    notes.getText().toString(), false);
-
+            if (manuallyAdded) {
+                RouteScreen.addToRouteList(userName, userEmail, routeName.getText().toString(),
+                        startLocation.getText().toString(), totalSteps, formattedMiles, seconds, flatOrHilly,
+                        loopOrOut, streetOrTrail, surface, difficulty,
+                        notes.getText().toString(), false, manuallyAdded);
+            } else {
+                RouteScreen.addToRouteList(userName, userEmail, routeName.getText().toString(),
+                        startLocation.getText().toString(), totalSteps, formattedMiles, seconds, flatOrHilly,
+                        loopOrOut, streetOrTrail, surface, difficulty,
+                        notes.getText().toString(), false, manuallyAdded);
+            }
             String json = gson.toJson(RouteScreen.routeList);
             editor.putString("route list", json);
             editor.apply();
             Log.d("createdNewRouteList", "New route has been added");
+
         }
         finish();
     }
