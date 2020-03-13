@@ -56,9 +56,13 @@ public class MainActivity extends AppCompatActivity {
     String CHAT_ID = "chat1";
     String DOCUMENT_KEY = "chat1";
     String MESSAGES_KEY = "messages";
+    String FROM_KEY = "from";
+    String TEXT_KEY = "text";
+    String TIMESTAMP_KEY = "timestamp";
 
     CollectionReference chat;
     CollectionReference walk;
+    ChatService notifications;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,18 +88,54 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-        chat = FirebaseFirestore.getInstance()
+        /*chat = FirebaseFirestore.getInstance()
                 .collection(COLLECTION_KEY)
                 .document(DOCUMENT_KEY)
-                .collection(MESSAGES_KEY);
+                .collection(MESSAGES_KEY);*/
+        //new
+        /*if (getIntent().hasExtra(CHAT_MESSAGE_SERVICE_EXTRA)) {
+            MyApplication.getChatServiceFactory().put(FIRESTORE_CHAT_SERVICE, (chatId ->
+                    new FirebaseFirestoreAdapter(COLLECTION_KEY, CHAT_ID, MESSAGES_KEY, FROM_KEY, TEXT_KEY, TIMESTAMP_KEY)));
 
-        walk = FirebaseFirestore.getInstance()
+            String chatServiceKey = getIntent().getStringExtra(CHAT_MESSAGE_SERVICE_EXTRA);
+            if (chatServiceKey == null) {
+                chatServiceKey = FIRESTORE_CHAT_SERVICE;
+            }
+            notifications = MyApplication.getChatServiceFactory().create(chatServiceKey, CHAT_ID);
+        } else {
+
+            notifications = MyApplication
+                    .getChatServiceFactory()
+                    .createFirebaseFirestoreChatService(COLLECTION_KEY, CHAT_ID, MESSAGES_KEY, FROM_KEY, TEXT_KEY, TIMESTAMP_KEY);
+
+        }
+        // end
+
+        /*walk = FirebaseFirestore.getInstance()
                 .collection("notifications")
                 .document("proposed")
-                .collection("team_walk");
+                .collection("team_walk");*/
+
+        // new
+        if (getIntent().hasExtra(CHAT_MESSAGE_SERVICE_EXTRA)) {
+            MyApplication.getChatServiceFactory().put(FIRESTORE_CHAT_SERVICE, (chatId ->
+                    new FirebaseFirestoreAdapter(COLLECTION_KEY, CHAT_ID, MESSAGES_KEY, FROM_KEY, TEXT_KEY, TIMESTAMP_KEY)));
+
+            String chatServiceKey = getIntent().getStringExtra(CHAT_MESSAGE_SERVICE_EXTRA);
+            if (chatServiceKey == null) {
+                chatServiceKey = FIRESTORE_CHAT_SERVICE;
+            }
+            notifications = MyApplication.getChatServiceFactory().create(chatServiceKey, CHAT_ID);
+        } else {
+
+            notifications = MyApplication
+                    .getChatServiceFactory()
+                    .createFirebaseFirestoreChatService(COLLECTION_KEY, CHAT_ID, MESSAGES_KEY, FROM_KEY, TEXT_KEY, TIMESTAMP_KEY);
+
+        }
 
         subscribeToNotificationsTopic();
-        subscribeToNotificationsTopic2();
+        //subscribeToNotificationsTopic2();
 
 
         setContentView(R.layout.activity_main);

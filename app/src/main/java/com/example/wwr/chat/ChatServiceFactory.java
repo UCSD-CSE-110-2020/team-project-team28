@@ -24,4 +24,8 @@ public class ChatServiceFactory {
     public interface Blueprint {
         ChatService create(String chatId);
     }
+
+    public ChatService createFirebaseFirestoreChatService(String collectionKey, String chatId, String messagesKey, String fromKey, String textKey, String timeStampKey) {
+        return new FirebaseFirestoreAdapter(collectionKey, chatId, messagesKey, fromKey, textKey, timeStampKey);
+    }
 }
