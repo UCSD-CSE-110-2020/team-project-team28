@@ -11,6 +11,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -29,12 +31,13 @@ public class TeamRouteScreenTest {
         ActivityScenario<TeamRouteScreen> scenario = ActivityScenario.launch(intent);
         scenario.onActivity(activity -> {
             assertNotNull(TeamRouteScreen.routeList);
-            assertEquals(TeamRouteScreen.routeList.size(), 0);
-            TeamRouteScreen.routeList.add(new Route("Home", "Tim", "CSE", "CA", 10, 10.0,
+            ArrayList<Route> route = TeamRouteScreen.routeList;
+            assertEquals(route.size(), 0);
+            route.add(new Route("Home", "Tim", "CSE", "CA", 10, 10.0,
                             10, "flat", "loop", "street", "surface",
                             "hard", "", true, 0, false));
-            assertEquals(TeamRouteScreen.routeList.size(), 1);
-            assertEquals(TeamRouteScreen.routeList.get(TeamRouteScreen.routeList.size() - 1).getName(), "CSE");
+            assertEquals(route.size(), 1);
+            assertEquals(route.get(route.size() - 1).getName(), "CSE");
         });
     }
 }
