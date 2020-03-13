@@ -114,7 +114,11 @@ public class TeamRouteScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_team_route_screen);
-        loadTeamRoutes();
+        if (!getIntent().getStringExtra("TEST").equals("TEST")) {
+            loadTeamRoutes();
+        } else {
+            routeList = new ArrayList<>();
+        }
 
         routeScreenView = findViewById(R.id.teamRouteScreen);
         routeScreenView.setHasFixedSize(true);
