@@ -42,9 +42,10 @@ public class TeamPageScreen extends AppCompatActivity {
     public static ArrayList<Route> routeList;
 
     private static final String TAG = "TeamPageScreen";
+    public static final String CHAT_MESSAGE_SERVICE_EXTRA = "CHAT_MESSAGE_SERVICE";
 
     public void loadTeamUsers() {
-        routeList = new ArrayList<>();
+        addTestMembers();
         SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
         String userName = sharedPreferences.getString("userName", "Test");
         String teamName = sharedPreferences.getString("teamName", "");
@@ -80,6 +81,7 @@ public class TeamPageScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_team_page);
         uploadUserInformation();
+        routeList = new ArrayList<>();
         loadTeamUsers();
 
         routeScreenView = findViewById(R.id.teamPage);
@@ -104,10 +106,15 @@ public class TeamPageScreen extends AppCompatActivity {
                 startAddMember();
             }
         });
+
     }
 
     public void startAddMember(){
         Intent intent = new Intent(this, AddMemberActivity.class);
+        //new
+        if (getIntent().hasExtra(CHAT_MESSAGE_SERVICE_EXTRA)) {
+            intent.putExtra(MainActivity.CHAT_MESSAGE_SERVICE_EXTRA, getIntent().getStringExtra(CHAT_MESSAGE_SERVICE_EXTRA));
+        }
         startActivity(intent);
     }
 
@@ -229,4 +236,24 @@ public class TeamPageScreen extends AppCompatActivity {
                     }
                 });
     }
+
+    private void addTestMembers(){
+        Gson gson = new Gson();
+        SharedPreferences tprefs = getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        String storedHashMapString = tprefs.getString("team_members", "");
+        String hi = tprefs.getString("hi", "");
+        java.lang.reflect.Type type = new TypeToken<HashMap<String, String>>(){}.getType();
+        HashMap<String, String> testHashMap2 = gson.fromJson(storedHashMapString, type);
+
+        if (testHashMap2 == null || testHashMap2.isEmpty()){
+            return;
+        }
+        for(Map.Entry<String,String> entry: testHashMap2.entrySet()){
+            routeList.add(new Route((String) entry.getKey(), entry.getValue(), "",
+                    "", 0, 0, 0, "", "",
+                    "", "", "", "", false, 0, true));
+        }
+    }
+
+
 }

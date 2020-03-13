@@ -97,8 +97,14 @@ public class LogInActivity extends AppCompatActivity {
     }
 
     public void launchMainActivity(boolean startPreviousWalk) {
+
         Intent intent = new Intent(this, MainActivity.class);
+
         intent.putExtra(MainActivity.FITNESS_SERVICE_KEY, fitnessServiceKey);
+        //new
+        if (getIntent().hasExtra(CHAT_MESSAGE_SERVICE_EXTRA)) {
+            intent.putExtra(MainActivity.CHAT_MESSAGE_SERVICE_EXTRA, getIntent().getStringExtra(CHAT_MESSAGE_SERVICE_EXTRA));
+        }
         if (startPreviousWalk) {
             intent.putExtra("previousActivity", "Route Detail");
         }
@@ -109,15 +115,18 @@ public class LogInActivity extends AppCompatActivity {
         Intent intent = new Intent(this, InviteScreenActivity.class);
         intent.putExtra("TEAM", teamName);
         intent.putExtra("FROM", inviteFrom);
+        //intent.putExtra(MainActivity.CHAT_MESSAGE_SERVICE_EXTRA,CHAT_MESSAGE_SERVICE_EXTRA);
         startActivity(intent);
     }
     public void switchToProposedRouteScreen() {
         Intent intent = new Intent(this, ProposedWalkDetails.class);
+        //intent.putExtra(MainActivity.CHAT_MESSAGE_SERVICE_EXTRA,CHAT_MESSAGE_SERVICE_EXTRA);
         startActivity(intent);
     }
 
     public void switchToTeamPage() {
         Intent intent = new Intent(this, TeamPageScreen.class);
+        intent.putExtra(TeamPageScreen.CHAT_MESSAGE_SERVICE_EXTRA,CHAT_MESSAGE_SERVICE_EXTRA);
         startActivity(intent);
     }
 

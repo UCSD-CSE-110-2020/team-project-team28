@@ -134,8 +134,14 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+        /*notifications = MyApplication
+                .getChatServiceFactory()
+                .createFirebaseFirestoreChatService(COLLECTION_KEY, CHAT_ID, MESSAGES_KEY, FROM_KEY, TEXT_KEY, TIMESTAMP_KEY);*/
+
+
         subscribeToNotificationsTopic();
         //subscribeToNotificationsTopic2();
+        initMessageUpdateListener();
 
 
         setContentView(R.layout.activity_main);
@@ -239,6 +245,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void goToTeamPage() {
         Intent intent = new Intent(this, TeamPageScreen.class);
+        //new
+        if (getIntent().hasExtra(CHAT_MESSAGE_SERVICE_EXTRA)) {
+            intent.putExtra(TeamPageScreen.CHAT_MESSAGE_SERVICE_EXTRA, getIntent().getStringExtra(CHAT_MESSAGE_SERVICE_EXTRA));
+        }
         startActivity(intent);
     }
 
@@ -340,6 +350,12 @@ public class MainActivity extends AppCompatActivity {
 
                         }
                 );
+    }
+
+    private void initMessageUpdateListener() {
+        notifications.subscribeToMessages(messages -> messages.forEach(message -> {
+
+        }));
     }
 
 }

@@ -15,6 +15,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.wwr.chat.ChatService;
+import com.example.wwr.chat.FirebaseFirestoreAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -47,6 +49,10 @@ public class ProposedWalkDetails extends AppCompatActivity {
     String TEXT_KEY = "text";
     String TIMESTAMP_KEY = "timestamp";
     CollectionReference chat;
+    ChatService notifications;
+    public static final String CHAT_MESSAGE_SERVICE_EXTRA = "CHAT_MESSAGE_SERVICE";
+    private static final String FIRESTORE_CHAT_SERVICE = "FIRESTORE_CHAT_SERVICE";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,11 +70,28 @@ public class ProposedWalkDetails extends AppCompatActivity {
 
         if (getIntent().getStringExtra("TEST") != null) {
             chat = null;
+            notifications = null;
         } else {
-            chat = FirebaseFirestore.getInstance()
+            /*chat = FirebaseFirestore.getInstance()
                     .collection(COLLECTION_KEY)
                     .document(DOCUMENT_KEY)
-                    .collection(MESSAGES_KEY);
+                    .collection(MESSAGES_KEY);*/
+            if (getIntent().hasExtra(CHAT_MESSAGE_SERVICE_EXTRA)) {
+                MyApplication.getChatServiceFactory().put(FIRESTORE_CHAT_SERVICE, (chatId ->
+                        new FirebaseFirestoreAdapter(COLLECTION_KEY, CHAT_ID, MESSAGES_KEY, FROM_KEY, TEXT_KEY, TIMESTAMP_KEY)));
+
+                String chatServiceKey = getIntent().getStringExtra(CHAT_MESSAGE_SERVICE_EXTRA);
+                if (chatServiceKey == null) {
+                    chatServiceKey = FIRESTORE_CHAT_SERVICE;
+                }
+                notifications = MyApplication.getChatServiceFactory().create(chatServiceKey, CHAT_ID);
+            } else {
+
+                notifications = MyApplication
+                        .getChatServiceFactory()
+                        .createFirebaseFirestoreChatService(COLLECTION_KEY, CHAT_ID, MESSAGES_KEY, FROM_KEY, TEXT_KEY, TIMESTAMP_KEY);
+
+            }
         }
 
         statusGroup = findViewById(R.id.groupStatus);
@@ -224,10 +247,13 @@ public class ProposedWalkDetails extends AppCompatActivity {
         newMessage.put("mteam", "team name");
         //Toast.makeText(getApplicationContext(), token, Toast.LENGTH_LONG).show();
 
-        chat.add(newMessage).addOnSuccessListener(result -> {
+        /*chat.add(newMessage).addOnSuccessListener(result -> {
             //messageView.setText("");
         }).addOnFailureListener(error -> {
             Log.e(TAG, error.getLocalizedMessage());
+        });*/
+        notifications.addMessage(newMessage).addOnSuccessListener(result -> {
+            Log.d(TAG, "message success: " + newMessage);
         });
     }
 }

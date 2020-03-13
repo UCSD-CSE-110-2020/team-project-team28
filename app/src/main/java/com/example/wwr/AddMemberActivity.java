@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import com.example.wwr.chat.ChatService;
+import com.example.wwr.chat.FirebaseFirestoreAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -38,6 +40,7 @@ import java.util.Map;
 
 public class AddMemberActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
+    public static final String CHAT_MESSAGE_SERVICE_EXTRA = "CHAT_MESSAGE_SERVICE";
 
     String from = "You have an invite to join a team from ";
     String COLLECTION_KEY = "chats";
@@ -50,15 +53,41 @@ public class AddMemberActivity extends AppCompatActivity {
     String email_str;
     String team_str;
 
+    private static final String FIRESTORE_CHAT_SERVICE = "FIRESTORE_CHAT_SERVICE";
+
+    String CHAT_ID = "chat1";
+
+    String TIMESTAMP_KEY = "timestamp";
+
+    CollectionReference walk;
+    ChatService notifications;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_member);
 
-        chat = FirebaseFirestore.getInstance()
+        /*chat = FirebaseFirestore.getInstance()
                 .collection(COLLECTION_KEY)
                 .document(DOCUMENT_KEY)
-                .collection(MESSAGES_KEY);
+                .collection(MESSAGES_KEY);*/
+
+        if (getIntent().hasExtra(CHAT_MESSAGE_SERVICE_EXTRA)) {
+            MyApplication.getChatServiceFactory().put(FIRESTORE_CHAT_SERVICE, (chatId ->
+                    new FirebaseFirestoreAdapter(COLLECTION_KEY, CHAT_ID, MESSAGES_KEY, FROM_KEY, TEXT_KEY, TIMESTAMP_KEY)));
+
+            String chatServiceKey = getIntent().getStringExtra(CHAT_MESSAGE_SERVICE_EXTRA);
+            if (chatServiceKey == null) {
+                chatServiceKey = FIRESTORE_CHAT_SERVICE;
+            }
+            notifications = MyApplication.getChatServiceFactory().create(chatServiceKey, CHAT_ID);
+        } else {
+
+            notifications = MyApplication
+                    .getChatServiceFactory()
+                    .createFirebaseFirestoreChatService(COLLECTION_KEY, CHAT_ID, MESSAGES_KEY, FROM_KEY, TEXT_KEY, TIMESTAMP_KEY);
+
+        }
 
         EditText email = findViewById(R.id.teamEmail);
         EditText team = findViewById(R.id.teamName);
@@ -114,12 +143,17 @@ public class AddMemberActivity extends AppCompatActivity {
         newMessage.put("mteam",team_str);
         Toast.makeText(getApplicationContext(), token, Toast.LENGTH_LONG).show();
 
-        chat.add(newMessage).addOnSuccessListener(result -> {
+        /*chat.add(newMessage).addOnSuccessListener(result -> {
             //messageView.setText("");
             // this is where the notification shit will be i think
         }).addOnFailureListener(error -> {
             Log.e(TAG, error.getLocalizedMessage());
+        });*/
+        notifications.addMessage(newMessage).addOnSuccessListener(result -> {
+            Log.d(TAG, "message success: " + newMessage);
         });
+
+
     }
 
     // Send message to the specific user using a token.
