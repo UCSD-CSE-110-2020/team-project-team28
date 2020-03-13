@@ -21,7 +21,6 @@ public class RouteDetail extends AppCompatActivity {
     TextView distance;
     TextView features;
     TextView note;
-    CheckBox isFavorite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

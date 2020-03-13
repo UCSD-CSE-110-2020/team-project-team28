@@ -28,7 +28,6 @@ public class TeamRouteScreenTest {
 
     @Test
     public void testTeamRouteScreen(){
-
             /*
         ActivityScenario<TeamRouteScreen> scenario = ActivityScenario.launch(intent);
         scenario.onActivity(activity -> {

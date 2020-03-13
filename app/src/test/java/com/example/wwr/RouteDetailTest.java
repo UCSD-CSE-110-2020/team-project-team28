@@ -23,7 +23,6 @@ public class RouteDetailTest {
     @Test
     public void testRouteDetail(){
         ActivityScenario<RouteDetail> scenario = ActivityScenario.launch(intent);
-
         scenario.onActivity(activity -> {
             Button startRoute = activity.findViewById(R.id.route_info_start_button);
             TextView routeName = activity.findViewById(R.id.route_detail_title);
