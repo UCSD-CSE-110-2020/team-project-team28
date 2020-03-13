@@ -43,6 +43,9 @@ public class TeamRouteScreen extends AppCompatActivity {
 
     public void loadTeamRoutes() {
         routeList = new ArrayList<>();
+        if (getIntent().getStringExtra("TEST") != null && getIntent().getStringExtra("TEST").equals("TEST")) {
+            return;
+        }
         // Load routes of the team members.
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("appUsers")
@@ -114,11 +117,7 @@ public class TeamRouteScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_team_route_screen);
-        if (!getIntent().getStringExtra("TEST").equals("TEST")) {
-            loadTeamRoutes();
-        } else {
-            routeList = new ArrayList<>();
-        }
+        loadTeamRoutes();
 
         routeScreenView = findViewById(R.id.teamRouteScreen);
         routeScreenView.setHasFixedSize(true);
