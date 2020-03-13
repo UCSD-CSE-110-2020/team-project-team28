@@ -1,9 +1,9 @@
 package com.example.wwr;
 
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
@@ -19,7 +19,6 @@ import com.example.wwr.fitness.FitnessServiceFactory;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
-import org.hamcrest.core.IsInstanceOf;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -30,8 +29,6 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
-import static androidx.test.espresso.action.ViewActions.swipeDown;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
@@ -41,13 +38,14 @@ import static org.hamcrest.Matchers.is;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class AddRouteTest2 {
+public class ProposeWalkTest {
     private static final String TEST_SERVICE = "TEST_SERVICE";
+
     @Rule
     public ActivityTestRule<LogInActivity> mActivityTestRule = new ActivityTestRule<>(LogInActivity.class);
 
     @Before
-    public void start(){
+    public void start() {
         Activity activity = mActivityTestRule.getActivity();
         SharedPreferences prefs = activity.getSharedPreferences("shared preferences", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
@@ -55,13 +53,13 @@ public class AddRouteTest2 {
         editor.apply();
 
         prefs = activity.getSharedPreferences("prefs", Context.MODE_PRIVATE);
-        editor = prefs.edit();
+        editor =prefs.edit();
         editor.clear();
         editor.apply();
     }
 
     @Test
-    public void addRouteTest2() {
+    public void proposeWalkTest() {
         FitnessServiceFactory.put(TEST_SERVICE, new FitnessServiceFactory.BluePrint() {
             @Override
             public FitnessService create(MainActivity stepCountActivity) {
@@ -71,54 +69,72 @@ public class AddRouteTest2 {
 
         mActivityTestRule.getActivity().setFitnessServiceKey(TEST_SERVICE);
 
-        ViewInteraction appCompatButton100 = onView(
-                allOf(withId(R.id.startWWRButton),
-                        isDisplayed()));
-        appCompatButton100.perform(click());
-
-       ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.feet_input),
-                        isDisplayed()));
-        appCompatEditText.perform(replaceText("5"), closeSoftKeyboard());
-
-        ViewInteraction appCompatEditText2 = onView(
-                allOf(withId(R.id.feet_input), withText("5"),
-                        isDisplayed()));
-        appCompatEditText2.perform(click());
-
-        ViewInteraction appCompatEditText5 = onView(
-                allOf(withId(R.id.inches_input),
-                        isDisplayed()));
-        appCompatEditText5.perform(replaceText("10"), closeSoftKeyboard());
-
         ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.enter_button), withText("CONFIRM"),
+                allOf(withId(R.id.startWWRButton), withText("Start wwr!"),
                         isDisplayed()));
         appCompatButton.perform(click());
 
+        ViewInteraction appCompatEditText = onView(
+                allOf(withId(R.id.enter_name),
+                        isDisplayed()));
+        appCompatEditText.perform(replaceText("wons"), closeSoftKeyboard());
+
+        ViewInteraction appCompatEditText2 = onView(
+                allOf(withId(R.id.enter_email),
+                        isDisplayed()));
+        appCompatEditText2.perform(replaceText("janf"), closeSoftKeyboard());
+
+        ViewInteraction appCompatEditText3 = onView(
+                allOf(withId(R.id.feet_input),
+                        isDisplayed()));
+        appCompatEditText3.perform(replaceText("5"), closeSoftKeyboard());
+
+        ViewInteraction appCompatEditText4 = onView(
+                allOf(withId(R.id.inches_input),
+                        isDisplayed()));
+        appCompatEditText4.perform(replaceText("4"), closeSoftKeyboard());
+
         ViewInteraction appCompatButton2 = onView(
-                allOf(withId(R.id.start_button), withText("START"),
+                allOf(withId(R.id.enter_button), withText("CONFIRM"),
                         isDisplayed()));
         appCompatButton2.perform(click());
 
         ViewInteraction appCompatButton3 = onView(
-                allOf(withId(R.id.end_button), withText("END WALK"),
+                allOf(withId(R.id.dailyActivityToRoutes), withText("MY ROUTES"),
                         isDisplayed()));
         appCompatButton3.perform(click());
 
-        ViewInteraction appCompatEditText6 = onView(
-                allOf(withId(R.id.routeNamePage),
-                        isDisplayed()));
-        appCompatEditText6.perform(replaceText("Walk"), closeSoftKeyboard());
-
-        ViewInteraction appCompatEditText7 = onView(
-                allOf(withId(R.id.startLocationName),
-                        isDisplayed()));
-        appCompatEditText7.perform(replaceText("Home"), closeSoftKeyboard());
-
         ViewInteraction appCompatButton4 = onView(
-                allOf(withId(R.id.button_ok), withText("OK")));
-        appCompatButton4.perform(scrollTo(), click());
+                allOf(withId(R.id.addRouteButton), withText("Add Route"),
+                        isDisplayed()));
+        appCompatButton4.perform(click());
+
+        ViewInteraction appCompatEditText5 = onView(
+                allOf(withId(R.id.routeNamePage),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.widget.ScrollView")),
+                                        0),
+                                2)));
+        appCompatEditText5.perform(scrollTo(), replaceText("1234"), closeSoftKeyboard());
+
+        ViewInteraction appCompatEditText6 = onView(
+                allOf(withId(R.id.startLocationName),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.widget.ScrollView")),
+                                        0),
+                                1)));
+        appCompatEditText6.perform(scrollTo(), replaceText("1234"), closeSoftKeyboard());
+
+        ViewInteraction appCompatButton5 = onView(
+                allOf(withId(R.id.button_ok), withText("OK"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.widget.ScrollView")),
+                                        0),
+                                9)));
+        appCompatButton5.perform(scrollTo(), click());
 
         ViewInteraction cardView = onView(
                 allOf(childAtPosition(
@@ -130,15 +146,34 @@ public class AddRouteTest2 {
                         isDisplayed()));
         cardView.perform(click());
 
-        ViewInteraction textView = onView(
-                allOf(withId(R.id.route_detail_title), withText("Route Name: Walk"),
+        ViewInteraction appCompatButton6 = onView(
+                allOf(withId(R.id.route_info_propose_button), withText("Propose Walk"),
                         isDisplayed()));
-        textView.check(matches(withText("Route Name: Walk")));
+        appCompatButton6.perform(click());
 
-        ViewInteraction textView2 = onView(
-                allOf(withId(R.id.route_detail_start_location), withText("Start Location: Home"),
+        ViewInteraction appCompatEditText7 = onView(
+                allOf(withId(R.id.propose_walk_time), withText("Propose Time"),
                         isDisplayed()));
-        textView2.check(matches(withText("Start Location: Home")));
+        appCompatEditText7.perform(replaceText("12:00"));
+
+        ViewInteraction appCompatEditText8 = onView(
+                allOf(withId(R.id.propose_walk_time), withText("12:00"),
+                        isDisplayed()));
+        appCompatEditText8.perform(closeSoftKeyboard());
+
+        ViewInteraction appCompatEditText9 = onView(
+                allOf(withId(R.id.propose_walk_date), withText("Propose Date"),
+                        isDisplayed()));
+        appCompatEditText9.perform(replaceText("1/1/19"));
+
+        ViewInteraction appCompatEditText10 = onView(
+                allOf(withId(R.id.propose_walk_date), withText("1/1/19"),
+                        isDisplayed()));
+        appCompatEditText10.perform(closeSoftKeyboard());
+
+        ViewInteraction appCompatButton7 = onView(
+                allOf(withId(R.id.propose_walk_propose_button), withText("Propose"),
+                        isDisplayed()));
     }
 
     private static Matcher<View> childAtPosition(
@@ -159,6 +194,7 @@ public class AddRouteTest2 {
             }
         };
     }
+
     private class TestFitnessService implements FitnessService {
         private static final String TAG = "[TestFitnessService]: ";
         private MainActivity stepCountActivity;

@@ -124,7 +124,6 @@ public class ProposeWalkActivity extends AppCompatActivity {
         String teamName = sharedPreferences.getString("teamName", "");
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-
         db.collection(teamName)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
