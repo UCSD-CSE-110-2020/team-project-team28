@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     public static long startSteps;
     public static long finalSteps;
     public static int inches;
-    private UserInfo user;
+    private IUser user;
     DistanceCalculator walkingDistanceMiles = new WalkingDistanceMiles();
 
     //new
