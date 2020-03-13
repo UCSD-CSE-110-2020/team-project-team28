@@ -62,10 +62,14 @@ public class ProposedWalkDetails extends AppCompatActivity {
             loadTeamRoute();
         }
 
-        chat = FirebaseFirestore.getInstance()
-                .collection(COLLECTION_KEY)
-                .document(DOCUMENT_KEY)
-                .collection(MESSAGES_KEY);
+        if (getIntent().getStringExtra("TEST") != null) {
+            chat = null;
+        } else {
+            chat = FirebaseFirestore.getInstance()
+                    .collection(COLLECTION_KEY)
+                    .document(DOCUMENT_KEY)
+                    .collection(MESSAGES_KEY);
+        }
 
         statusGroup = findViewById(R.id.groupStatus);
 
@@ -91,24 +95,12 @@ public class ProposedWalkDetails extends AppCompatActivity {
                 switchToProposeWalkActivity();
             }
         });
-
-        /*if (owner_str.equals(userName)){
-            editWalk.setVisibility(View.VISIBLE);
-            editWalk.setClickable(true);
-
-        }*/
-
-
-
-
     }
 
     public void switchToProposeWalkActivity() {
         Intent intent = new Intent(this, ProposeWalkActivity.class);
         startActivity(intent);
     }
-
-
 
     public void addUserStatusToFirebase() {
         SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
@@ -184,7 +176,7 @@ public class ProposedWalkDetails extends AppCompatActivity {
                                         details.setText(walkDetails_str);
                                         owner_str =document.get("Owner").toString();
                                         getOwnerToken();
-                                        if (owner_str.equals(userName)){
+                                        if (owner_str != null && owner_str.equals(userName)){
                                             editWalk.setVisibility(View.VISIBLE);
                                         }
                                     }
@@ -203,27 +195,26 @@ public class ProposedWalkDetails extends AppCompatActivity {
         String userName = sharedPreferences.getString("userName", "Test");
         String teamName = sharedPreferences.getString("teamName", "");
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection(teamName)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            if (document.getId().equals("Members")) {
-                                owner_token = document.get(owner_str).toString();
+        if (!teamName.equals("")) {
+            db.collection(teamName)
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                if (document.getId().equals("Members")) {
+                                    owner_token = document.get(owner_str).toString();
+                                }
                             }
                         }
-                    }
-                });
+                    });
+        }
     }
 
     private void sendMessage(String message) {
-
         // Load userName
         SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
         String userName = sharedPreferences.getString("userName", "test");
-
-
 
         Map<String, String> newMessage = new HashMap<>();
         newMessage.put(FROM_KEY, userName);

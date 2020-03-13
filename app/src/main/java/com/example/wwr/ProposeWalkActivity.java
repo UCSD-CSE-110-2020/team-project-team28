@@ -34,12 +34,10 @@ public class ProposeWalkActivity extends AppCompatActivity {
 
     String from = "You have an invite to join a team from ";
     String COLLECTION_KEY = "chats";
-    String CHAT_ID = "chat1";
     String DOCUMENT_KEY = "chat1";
     String MESSAGES_KEY = "messages";
     String FROM_KEY = "from";
     String TEXT_KEY = "text";
-    String TIMESTAMP_KEY = "timestamp";
 
     String routeName;
     String startingLocation;
@@ -48,7 +46,6 @@ public class ProposeWalkActivity extends AppCompatActivity {
     String time;
     String status;
     CollectionReference chat;
-    String email_str;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,12 +107,7 @@ public class ProposeWalkActivity extends AppCompatActivity {
         } else {
             loadRouteInfo();
         }
-        //Log.d(TAG, information);
-
-       // TextView routeDetail = findViewById(R.id.proposed_walk_details);
-        //routeDetail.setText(information);
     }
-
 
     //send a message to the entire team
     private void sendMessageToTeam(String message){
@@ -139,7 +131,6 @@ public class ProposeWalkActivity extends AppCompatActivity {
                     }
                 });
     }
-
 
     // Send a message to a specific user using a token.
     private void sendMessage(String message, String token) {
