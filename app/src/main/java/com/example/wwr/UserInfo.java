@@ -8,7 +8,7 @@ import android.widget.Toast;
 /*
  * Whole purpose of this class is to put all stats and methods of a user in one place
  */
-public class UserInfo {
+public class UserInfo implements IUser {
     Context context;
     private final double STRIDE_FACTOR = 0.413;
     private final double FEET_IN_MILE = 5280;
