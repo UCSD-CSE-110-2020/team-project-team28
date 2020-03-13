@@ -21,7 +21,6 @@ public class RouteDetail extends AppCompatActivity {
     TextView distance;
     TextView features;
     TextView note;
-    CheckBox isFavorite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +60,9 @@ public class RouteDetail extends AppCompatActivity {
 
         CheckBox favoriteBtn = (CheckBox) findViewById(R.id.favorite_btn);
         int position = getIntent().getIntExtra("position", 0);
-        favoriteBtn.setChecked(RouteScreen.routeList.get(position).getFavorite());
+        if (RouteScreen.routeList != null) {
+            favoriteBtn.setChecked(RouteScreen.routeList.get(position).getFavorite());
+        }
         favoriteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

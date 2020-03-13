@@ -24,8 +24,8 @@ public class AddTeammateRouteUnitTest {
     @Before
     public void setUp() {
         intent = new Intent(ApplicationProvider.getApplicationContext(), TeamRouteScreen.class);
+        intent.putExtra("TEST", "TEST");
     }
-
     @Test
     public void addTeammateRoute(){
         ActivityScenario<TeamRouteScreen> scenario = ActivityScenario.launch(intent);

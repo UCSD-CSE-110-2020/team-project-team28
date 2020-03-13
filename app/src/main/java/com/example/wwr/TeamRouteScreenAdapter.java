@@ -144,7 +144,11 @@ public class TeamRouteScreenAdapter extends RecyclerView.Adapter<TeamRouteScreen
 
     @Override
     public int getItemCount() {
-        return routeList.size();
+        if (routeList == null) {
+            return 0;
+        } else {
+            return routeList.size();
+        }
     }
 
 }

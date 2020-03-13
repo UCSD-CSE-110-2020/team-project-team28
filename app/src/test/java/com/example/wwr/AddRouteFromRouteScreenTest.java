@@ -17,6 +17,7 @@ public class AddRouteFromRouteScreenTest {
     @Before
     public void setUp() {
         intent = new Intent(ApplicationProvider.getApplicationContext(), RouteScreen.class);
+        intent.putExtra("TEST", "TEST");
     }
 
     @Test
