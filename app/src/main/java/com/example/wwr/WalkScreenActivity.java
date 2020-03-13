@@ -20,7 +20,7 @@ public class WalkScreenActivity extends AppCompatActivity {
     private String mockEndTime;
     private int mockTotalTime = 0;
     private boolean startPressed = false;
-    private UserInfo user;
+    private IUser user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
