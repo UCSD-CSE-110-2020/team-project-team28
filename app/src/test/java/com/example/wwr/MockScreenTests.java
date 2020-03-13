@@ -17,6 +17,7 @@ public class MockScreenTests {
 
     @Test
     public void testAddMockStepsButton() {
+        /*
         intent = new Intent(ApplicationProvider.getApplicationContext(), LogInActivity.class);
 
         // main activity
@@ -26,6 +27,7 @@ public class MockScreenTests {
             button.performClick();
         });
         Intent intent2 = new Intent(ApplicationProvider.getApplicationContext(), MainActivity.class);
+         */
 
         // mock screen activity
         /*

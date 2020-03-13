@@ -41,8 +41,6 @@ public class IndicateWalkedRouteTest {
         assertEquals(blacks_beach.getSteps(), 1000);
     }
 
-
-
     @Test
     public void testWalkIndicateBeforeAndAfter() {
         Route LaJollaShores = new Route("bigAl", "alwilley@ucsd.edu",
