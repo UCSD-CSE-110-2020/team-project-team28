@@ -1,5 +1,4 @@
 package com.example.wwr;
-
 import android.content.Intent;
 import android.widget.Button;
 import android.widget.TextView;
@@ -12,7 +11,7 @@ import org.junit.runner.RunWith;
 import static junit.framework.TestCase.assertNotNull;
 
 @RunWith(AndroidJUnit4.class)
-public class RouteDetailTest {
+public class ScheduleTeamWalkTest {
     private Intent intent;
 
     @Before
@@ -21,10 +20,10 @@ public class RouteDetailTest {
     }
 
     @Test
-    public void testRouteDetail(){
+    public void testScheduleTeamWalk() {
         ActivityScenario<RouteDetail> scenario = ActivityScenario.launch(intent);
+
         scenario.onActivity(activity -> {
-            Button startRoute = activity.findViewById(R.id.route_info_start_button);
             TextView routeName = activity.findViewById(R.id.route_detail_title);
             assertNotNull(routeName);
             TextView routeStartLocation = activity.findViewById(R.id.route_detail_start_location);
@@ -39,7 +38,10 @@ public class RouteDetailTest {
             assertNotNull(routeFeature);
             TextView routeNote = activity.findViewById(R.id.route_detail_note);
             assertNotNull(routeNote);
-            startRoute.performClick();
+            Button proposeWalkButton = activity.findViewById(R.id.route_info_propose_button);
+            assertNotNull(proposeWalkButton);
+            proposeWalkButton.performClick();
         });
+
     }
 }

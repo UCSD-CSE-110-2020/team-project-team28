@@ -191,12 +191,6 @@ public class FavoriteRouteTest {
 
         ViewInteraction appCompatCheckBox = onView(
                 allOf(withId(R.id.favorite_btn), withText("Favorite"),
-                        childAtPosition(
-                                allOf(withId(R.id.route_information_page),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.RelativeLayout")),
-                                                0)),
-                                7),
                         isDisplayed()));
         appCompatCheckBox.perform(click());
 
@@ -214,26 +208,10 @@ public class FavoriteRouteTest {
 
         ViewInteraction appCompatCheckBox2 = onView(
                 allOf(withId(R.id.favorite_btn), withText("Favorite"),
-                        childAtPosition(
-                                allOf(withId(R.id.route_information_page),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.RelativeLayout")),
-                                                0)),
-                                7),
                         isDisplayed()));
         appCompatCheckBox2.perform(click());
 
         pressBack();
-
-        ViewInteraction cardView3 = onView(
-                allOf(childAtPosition(
-                        allOf(withId(R.id.routeScreen),
-                                childAtPosition(
-                                        withClassName(is("android.widget.RelativeLayout")),
-                                        0)),
-                        0),
-                        isDisplayed()));
-        cardView3.perform(click());
     }
 
     private static Matcher<View> childAtPosition(

@@ -126,17 +126,6 @@ public class RoutesDetailTest {
                         0),
                         isDisplayed()));
         cardView.perform(click());
-
-        ViewInteraction textView = onView(
-                allOf(withId(R.id.route_detail_features), withText("Features: \nFlat\nLoop\nTrail\nEven Surface\nModerate"),
-                        childAtPosition(
-                                allOf(withId(R.id.route_information_page),
-                                        childAtPosition(
-                                                IsInstanceOf.<View>instanceOf(android.widget.RelativeLayout.class),
-                                                0)),
-                                5),
-                        isDisplayed()));
-        textView.check(matches(isDisplayed()));
     }
 
     private static Matcher<View> childAtPosition(

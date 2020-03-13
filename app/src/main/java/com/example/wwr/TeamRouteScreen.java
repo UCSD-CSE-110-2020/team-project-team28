@@ -43,6 +43,9 @@ public class TeamRouteScreen extends AppCompatActivity {
 
     public void loadTeamRoutes() {
         routeList = new ArrayList<>();
+        if (getIntent().getStringExtra("TEST") != null && getIntent().getStringExtra("TEST").equals("TEST")) {
+            return;
+        }
         // Load routes of the team members.
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("appUsers")
