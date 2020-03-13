@@ -34,9 +34,6 @@ public class RoutesActivity extends AppCompatActivity {
         user = new UserInfo(this);
         setContentView(R.layout.activity_routes);
 
-        Toast.makeText(getApplicationContext(), "IN ROUTES ACTIVITY",
-                Toast.LENGTH_SHORT).show();
-
         // Initialize all group variables.
         flatGroup = findViewById(R.id.groupFlat);
         loopGroup = findViewById(R.id.groupLoop);

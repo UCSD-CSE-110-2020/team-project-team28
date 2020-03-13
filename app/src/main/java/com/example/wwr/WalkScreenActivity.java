@@ -20,10 +20,9 @@ public class WalkScreenActivity extends AppCompatActivity {
     private String mockEndTime;
     private int mockTotalTime = 0;
     private boolean startPressed = false;
-    private UserInfo user;
-    //new
     public static final String CHAT_MESSAGE_SERVICE_EXTRA = "CHAT_MESSAGE_SERVICE";
     private static final String FIRESTORE_CHAT_SERVICE = "FIRESTORE_CHAT_SERVICE";
+    private IUser user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
