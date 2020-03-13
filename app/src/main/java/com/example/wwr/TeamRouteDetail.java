@@ -21,6 +21,8 @@ public class TeamRouteDetail extends AppCompatActivity {
     TextView distance;
     TextView features;
     TextView note;
+    public static final String CHAT_MESSAGE_SERVICE_EXTRA = "CHAT_MESSAGE_SERVICE";
+    private static final String FIRESTORE_CHAT_SERVICE = "FIRESTORE_CHAT_SERVICE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -224,22 +224,37 @@ public class MainActivity extends AppCompatActivity {
 
     public void proposeWalkActivity(){
         Intent intent= new Intent(this, ProposeWalkActivity.class);
+        if (getIntent().hasExtra(CHAT_MESSAGE_SERVICE_EXTRA)) {
+            intent.putExtra(ProposeWalkActivity.CHAT_MESSAGE_SERVICE_EXTRA, getIntent().getStringExtra(CHAT_MESSAGE_SERVICE_EXTRA));
+        }
         startActivity(intent);
     }
 
     public void walkActivity() {
         Intent intent = new Intent(getApplicationContext(), WalkScreenActivity.class);
+        //new
+        if (getIntent().hasExtra(CHAT_MESSAGE_SERVICE_EXTRA)) {
+            intent.putExtra(WalkScreenActivity.CHAT_MESSAGE_SERVICE_EXTRA, getIntent().getStringExtra(CHAT_MESSAGE_SERVICE_EXTRA));
+        }
         intent.putExtra("previousClass", "MainActivity");
         startActivity(intent);
     }
 
     public void switchToRouteScreen() {
         Intent intent = new Intent(this, RouteScreen.class);
+        //new
+        if (getIntent().hasExtra(CHAT_MESSAGE_SERVICE_EXTRA)) {
+            intent.putExtra(RouteScreen.CHAT_MESSAGE_SERVICE_EXTRA, getIntent().getStringExtra(CHAT_MESSAGE_SERVICE_EXTRA));
+        }
         startActivity(intent);
     }
 
     public void switchToTeamRouteScreen() {
         Intent intent = new Intent(this, TeamRouteScreen.class);
+        //new
+        if (getIntent().hasExtra(CHAT_MESSAGE_SERVICE_EXTRA)) {
+            intent.putExtra(TeamRouteScreen.CHAT_MESSAGE_SERVICE_EXTRA, getIntent().getStringExtra(CHAT_MESSAGE_SERVICE_EXTRA));
+        }
         startActivity(intent);
     }
 

@@ -17,7 +17,7 @@ public class MockScreenTests {
 
     @Test
     public void testAddMockStepsButton() {
-        intent = new Intent(ApplicationProvider.getApplicationContext(), LogInActivity.class);
+        /*intent = new Intent(ApplicationProvider.getApplicationContext(), LogInActivity.class);
 
         // main activity
         ActivityScenario<LogInActivity> scenario = ActivityScenario.launch(intent);
@@ -28,7 +28,7 @@ public class MockScreenTests {
         Intent intent2 = new Intent(ApplicationProvider.getApplicationContext(), MainActivity.class);
 
         // mock screen activity
-        /*
+
         ActivityScenario<MainActivity> scenario1 = ActivityScenario.launch(intent2);
         scenario1.onActivity(activity -> {
             TextView t = activity.findViewById(R.id.daily_steps_num);

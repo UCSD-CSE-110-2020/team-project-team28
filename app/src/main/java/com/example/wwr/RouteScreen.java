@@ -45,6 +45,8 @@ public class RouteScreen extends AppCompatActivity {
     public static ArrayList<Route> routeList;
     public static CheckedTextView checkedRoute;
     public String TAG = "Upload to firestore";
+    public static final String CHAT_MESSAGE_SERVICE_EXTRA = "CHAT_MESSAGE_SERVICE";
+    private static final String FIRESTORE_CHAT_SERVICE = "FIRESTORE_CHAT_SERVICE";
 
     public void loadData() {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
