@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 import static android.content.Context.MODE_PRIVATE;
 
+// An adapter for the view of the route screen so that they are displayed as a recycler view.
 public class RouteScreenAdapter extends RecyclerView.Adapter<RouteScreenAdapter.RouteScreenViewHolder> {
     private ArrayList<Route> routeList;
     Context context;
@@ -59,6 +60,7 @@ public class RouteScreenAdapter extends RecyclerView.Adapter<RouteScreenAdapter.
         }
 
         @Override
+        // Once we click a route, go to its details page.
         public void onClick(View v) {
             int position = getAdapterPosition();
             Route currentRoute = routeList.get(position);
@@ -83,7 +85,7 @@ public class RouteScreenAdapter extends RecyclerView.Adapter<RouteScreenAdapter.
 
             this.context.startActivity(intent);
         }
-    } // end class
+    }
 
     @NonNull
     @Override
@@ -120,5 +122,4 @@ public class RouteScreenAdapter extends RecyclerView.Adapter<RouteScreenAdapter.
     public int getItemCount() {
         return routeList.size();
     }
-
 }

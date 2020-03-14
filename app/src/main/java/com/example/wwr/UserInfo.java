@@ -6,7 +6,8 @@ import android.content.SharedPreferences;
 import android.widget.Toast;
 
 /*
- * Whole purpose of this class is to put all stats and methods of a user in one place
+ * Whole purpose of this class is to put all stats and methods of a user in one place. It implements
+ * the IUser interface and serves as a strategy for IUser, thus following the Strategy pattern.
  */
 public class UserInfo implements IUser {
     Context context;

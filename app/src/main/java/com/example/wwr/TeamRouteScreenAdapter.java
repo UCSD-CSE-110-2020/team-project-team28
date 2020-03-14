@@ -28,13 +28,12 @@ import java.util.Random;
 
 import static android.content.Context.MODE_PRIVATE;
 
+// An adapter class for team's routes so it can be displayed as a RecyclerView.
 public class TeamRouteScreenAdapter extends RecyclerView.Adapter<TeamRouteScreenAdapter.TeamRouteScreenViewHolder> {
     private ArrayList<Route> routeList;
     Hashtable<String, String> teamRoutes;
     ArrayList<Route> myRouteList;
-
     Context context;
-
 
     public TeamRouteScreenAdapter(ArrayList<Route> routeList,
                                   Context context,
@@ -43,10 +42,7 @@ public class TeamRouteScreenAdapter extends RecyclerView.Adapter<TeamRouteScreen
         this.context = context;
         this.teamRoutes = teamRoutes;
         this.myRouteList = myRouteList;
-
     }
-
-
 
     public static class TeamRouteScreenViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener  {
         public ImageView image;
@@ -98,9 +94,7 @@ public class TeamRouteScreenAdapter extends RecyclerView.Adapter<TeamRouteScreen
             SharedPreferences sp = context.getSharedPreferences("prefs", MODE_PRIVATE);
             SharedPreferences.Editor editor = sp.edit();
             editor.putString("currPos", String.valueOf(position));
-
             this.context.startActivity(intent);
-
         }
     }
 
@@ -117,13 +111,6 @@ public class TeamRouteScreenAdapter extends RecyclerView.Adapter<TeamRouteScreen
     public void onBindViewHolder(@NonNull TeamRouteScreenViewHolder holder, int position) {
         final Route currentRoute = routeList.get(position); // final
 
-        /*
-        Random rnd = new Random();
-        int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
-        TextDrawable drawable = TextDrawable.builder().buildRect(currentRoute.getUserName().charAt(0) + "", color);
-
-        holder.image.setImageDrawable(drawable);
-         */
         holder.image.setImageResource(0);
         holder.routeName.setText(currentRoute.getName());
         holder.teamMemberName.setText(currentRoute.getUserName());

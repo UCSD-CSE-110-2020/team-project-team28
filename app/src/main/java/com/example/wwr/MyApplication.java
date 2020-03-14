@@ -13,6 +13,7 @@ public class MyApplication extends Application {
 
     @Override
     public void onCreate() {
+        // Set chatServiceFactory and fitnessServiceFactory to be used in all the activities.
         super.onCreate();
         FirebaseApp.initializeApp(this);
         chatServiceFactory = new ChatServiceFactory();

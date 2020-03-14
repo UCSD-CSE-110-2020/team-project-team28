@@ -35,6 +35,7 @@ public class RouteDetail extends AppCompatActivity {
         note = (TextView) findViewById(R.id.route_detail_note);
         memberName = findViewById(R.id.route_detail_member_name);
 
+        // Fill information about the route clicked.
         String routeName = getIntent().getStringExtra("routeName");
         String startingLocation = getIntent().getStringExtra("startLocation");
         memberName.setText(getIntent().getStringExtra("memberName"));
@@ -58,6 +59,7 @@ public class RouteDetail extends AppCompatActivity {
             }
         });
 
+        // Checks whether the route is favorited and updates accordingly.
         CheckBox favoriteBtn = (CheckBox) findViewById(R.id.favorite_btn);
         int position = getIntent().getIntExtra("position", 0);
         if (RouteScreen.routeList != null) {
@@ -72,6 +74,7 @@ public class RouteDetail extends AppCompatActivity {
             }
         });
 
+        // Propose the walk to the team.
         Button proposeWalk = findViewById(R.id.route_info_propose_button);
         proposeWalk.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,6 +90,7 @@ public class RouteDetail extends AppCompatActivity {
 
     }
 
+    // Saved the routes so that the routes can be loaded even after the app is closed.
     public void saveData() {
         SharedPreferences userPref = getSharedPreferences("shared preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = userPref.edit();

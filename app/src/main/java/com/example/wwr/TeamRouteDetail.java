@@ -21,6 +21,7 @@ public class TeamRouteDetail extends AppCompatActivity {
     TextView distance;
     TextView features;
     TextView note;
+    public static final String CHAT_MESSAGE_SERVICE_EXTRA = "CHAT_MESSAGE_SERVICE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class TeamRouteDetail extends AppCompatActivity {
         features = (TextView) findViewById(R.id.team_route_detail_features);
         note = (TextView) findViewById(R.id.team_route_detail_note);
 
+        // Display the information of the team route.
         String routeName = getIntent().getStringExtra("routeName");
         String startingLocation = getIntent().getStringExtra("startLocation");
         userName.setText(getIntent().getStringExtra("team"));
@@ -46,6 +48,7 @@ public class TeamRouteDetail extends AppCompatActivity {
         features.setText(getIntent().getStringExtra("features"));
         note.setText(getIntent().getStringExtra("note"));
 
+        // Propose the walk from the team route.
         Button proposeWalk = findViewById(R.id.team_route_info_propose_button);
         proposeWalk.setOnClickListener(new View.OnClickListener() {
             @Override
