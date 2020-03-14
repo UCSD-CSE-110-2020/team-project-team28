@@ -43,7 +43,6 @@ public class ProposedWalkDetails extends AppCompatActivity {
     Button editWalk;
     String COLLECTION_KEY = "chats";
     String CHAT_ID = "chat1";
-    String DOCUMENT_KEY = "chat1";
     String MESSAGES_KEY = "messages";
     String FROM_KEY = "from";
     String TEXT_KEY = "text";
@@ -53,29 +52,24 @@ public class ProposedWalkDetails extends AppCompatActivity {
     public static final String CHAT_MESSAGE_SERVICE_EXTRA = "CHAT_MESSAGE_SERVICE";
     private static final String FIRESTORE_CHAT_SERVICE = "FIRESTORE_CHAT_SERVICE";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_proposed_walk_details);
 
         SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
-        String userName = sharedPreferences.getString("userName", "Test");
         String teamName = sharedPreferences.getString("teamName", "");
 
-
+        // If the teamName exists, load the team routes.
         if (teamName != ""){
             loadTeamRoute();
         }
 
+        // Initializes chat and notifications so that we can mock this class while testing.
         if (getIntent().getStringExtra("TEST") != null) {
             chat = null;
             notifications = null;
         } else {
-            /*chat = FirebaseFirestore.getInstance()
-                    .collection(COLLECTION_KEY)
-                    .document(DOCUMENT_KEY)
-                    .collection(MESSAGES_KEY);*/
             if (getIntent().hasExtra(CHAT_MESSAGE_SERVICE_EXTRA)) {
                 MyApplication.getChatServiceFactory().put(FIRESTORE_CHAT_SERVICE, (chatId ->
                         new FirebaseFirestoreAdapter(COLLECTION_KEY, CHAT_ID, MESSAGES_KEY, FROM_KEY, TEXT_KEY, TIMESTAMP_KEY)));
@@ -90,23 +84,24 @@ public class ProposedWalkDetails extends AppCompatActivity {
                 notifications = MyApplication
                         .getChatServiceFactory()
                         .createFirebaseFirestoreChatService(COLLECTION_KEY, CHAT_ID, MESSAGES_KEY, FROM_KEY, TEXT_KEY, TIMESTAMP_KEY);
-
             }
         }
 
+        // Find the radio group for the 3 options: accept, decline: bad time, decline: bad route.
         statusGroup = findViewById(R.id.groupStatus);
-
-
         Button exit = findViewById(R.id.proposed_walk_exit_button);
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Check which option was selected.
                 RadioButton checked = findViewById(statusGroup.getCheckedRadioButtonId());
+                // If an option was selected, send the appropriate message to the team members.
                 if (checked != null) {
                     status = checked.getText().toString();
                     addUserStatusToFirebase();
                     sendMessage(" updated their status to " + status);
                 }
+                // Exit the activity.
                 finish();
             }
         });
@@ -114,6 +109,7 @@ public class ProposedWalkDetails extends AppCompatActivity {
         editWalk = findViewById(R.id.edit_proposed_walk_button);
         editWalk.setOnClickListener(new View.OnClickListener() {
             @Override
+            // Switch to the propose walk activity.
             public void onClick(View v) {
                 switchToProposeWalkActivity();
             }
@@ -121,11 +117,13 @@ public class ProposedWalkDetails extends AppCompatActivity {
     }
 
     public void switchToProposeWalkActivity() {
+        // Go to proposed walk activity.
         Intent intent = new Intent(this, ProposeWalkActivity.class);
         startActivity(intent);
     }
 
     public void addUserStatusToFirebase() {
+        // Add user status to the firebase.
         SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
         String userName = sharedPreferences.getString("userName", "Test");
         String teamName = sharedPreferences.getString("teamName", "");
@@ -133,6 +131,7 @@ public class ProposedWalkDetails extends AppCompatActivity {
         Map<String, Object> users = new HashMap<>();
         users.put(userName, status);
 
+        // Update the status of the member on the proposed walk.
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection(teamName).document("status")
                 .update(users)
@@ -166,6 +165,7 @@ public class ProposedWalkDetails extends AppCompatActivity {
     }
 
     public void loadTeamRoute() {
+        // Load the status of the team members on the route.
         teamStatus = new ArrayList<>();
         SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
         String userName = sharedPreferences.getString("userName", "Test");
@@ -182,7 +182,7 @@ public class ProposedWalkDetails extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                     if (document.getId().equals("status")) {
-                                        //display team status
+                                        // Display team status.
                                         for (Map.Entry<String, Object> entry : document.getData().entrySet()){
                                             teamStatus_str += entry.getKey() + ":  " + entry.getValue() + "\n";
                                         }
@@ -194,7 +194,7 @@ public class ProposedWalkDetails extends AppCompatActivity {
                                                 "\n" + "Owner: " + document.get("Owner").toString() + "\n" + "Date: " + document.get("Date").toString() +
                                         "\n" + "Time: " + document.get("Time").toString() + "\n" + "Status: " + document.get("Status").toString();
                                         Log.d(TAG, walkDetails_str);
-                                        //display route details
+                                        // Display route details.
                                         TextView details = findViewById(R.id.proposed_walk_details);
                                         details.setText(walkDetails_str);
                                         owner_str =document.get("Owner").toString();
@@ -209,13 +209,11 @@ public class ProposedWalkDetails extends AppCompatActivity {
                         }
                     }
                 });
-
-
     }
 
-    private void getOwnerToken(){
+    private void getOwnerToken() {
+        // Get the specific token of the user.
         SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
-        String userName = sharedPreferences.getString("userName", "Test");
         String teamName = sharedPreferences.getString("teamName", "");
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         if (!teamName.equals("")) {
@@ -235,7 +233,7 @@ public class ProposedWalkDetails extends AppCompatActivity {
     }
 
     private void sendMessage(String message) {
-        // Load userName
+        // Send message to the speicific user with the specific status of the walk.
         SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
         String userName = sharedPreferences.getString("userName", "test");
 
@@ -245,13 +243,6 @@ public class ProposedWalkDetails extends AppCompatActivity {
         newMessage.put("token", owner_token);
         newMessage.put("mtype", "TeamWalk");
         newMessage.put("mteam", "team name");
-        //Toast.makeText(getApplicationContext(), token, Toast.LENGTH_LONG).show();
-
-        /*chat.add(newMessage).addOnSuccessListener(result -> {
-            //messageView.setText("");
-        }).addOnFailureListener(error -> {
-            Log.e(TAG, error.getLocalizedMessage());
-        });*/
         notifications.addMessage(newMessage).addOnSuccessListener(result -> {
             Log.d(TAG, "message success: " + newMessage);
         });

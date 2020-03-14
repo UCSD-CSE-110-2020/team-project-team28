@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         user = new UserInfo(this);
 
+        // If the previous activity was from a RouteDetail, then start an existing walk.
         if (getIntent().getStringExtra("previousActivity") != null &&
                 getIntent().getStringExtra("previousActivity").equals("Route Detail")) {
             String fitnessServiceKey = getIntent().getStringExtra(FITNESS_SERVICE_KEY);
@@ -76,51 +77,20 @@ public class MainActivity extends AppCompatActivity {
             fitnessService.setup();
             fitnessService.updateStepCount();
             GoogleFitSingleton.setFitnessService(fitnessService);
-
             try {
                 fitnessService.updateStepCount();
                 wait(1000);
             } catch (Exception e) {
             }
-
             Intent intent = new Intent(getApplicationContext(), WalkScreenActivity.class);
             intent.putExtra("previousScreen", "Route Detail");
             startActivity(intent);
         }
 
-        /*chat = FirebaseFirestore.getInstance()
-                .collection(COLLECTION_KEY)
-                .document(DOCUMENT_KEY)
-                .collection(MESSAGES_KEY);*/
-        //new
-        /*if (getIntent().hasExtra(CHAT_MESSAGE_SERVICE_EXTRA)) {
-            MyApplication.getChatServiceFactory().put(FIRESTORE_CHAT_SERVICE, (chatId ->
-                    new FirebaseFirestoreAdapter(COLLECTION_KEY, CHAT_ID, MESSAGES_KEY, FROM_KEY, TEXT_KEY, TIMESTAMP_KEY)));
-
-            String chatServiceKey = getIntent().getStringExtra(CHAT_MESSAGE_SERVICE_EXTRA);
-            if (chatServiceKey == null) {
-                chatServiceKey = FIRESTORE_CHAT_SERVICE;
-            }
-            notifications = MyApplication.getChatServiceFactory().create(chatServiceKey, CHAT_ID);
-        } else {
-
-            notifications = MyApplication
-                    .getChatServiceFactory()
-                    .createFirebaseFirestoreChatService(COLLECTION_KEY, CHAT_ID, MESSAGES_KEY, FROM_KEY, TEXT_KEY, TIMESTAMP_KEY);
-
-        }
-        // end
-
-        /*walk = FirebaseFirestore.getInstance()
-                .collection("notifications")
-                .document("proposed")
-                .collection("team_walk");*/
-
-        // new
+        // Used for mocking Firebase.
         if (getIntent().hasExtra(CHAT_MESSAGE_SERVICE_EXTRA)) {
             MyApplication.getChatServiceFactory().put(FIRESTORE_CHAT_SERVICE, (chatId ->
                     new FirebaseFirestoreAdapter(COLLECTION_KEY, CHAT_ID, MESSAGES_KEY, FROM_KEY, TEXT_KEY, TIMESTAMP_KEY)));
-
             String chatServiceKey = getIntent().getStringExtra(CHAT_MESSAGE_SERVICE_EXTRA);
             if (chatServiceKey == null) {
                 chatServiceKey = FIRESTORE_CHAT_SERVICE;
@@ -131,16 +101,10 @@ public class MainActivity extends AppCompatActivity {
             notifications = MyApplication
                     .getChatServiceFactory()
                     .createFirebaseFirestoreChatService(COLLECTION_KEY, CHAT_ID, MESSAGES_KEY, FROM_KEY, TEXT_KEY, TIMESTAMP_KEY);
-
         }
 
-        /*notifications = MyApplication
-                .getChatServiceFactory()
-                .createFirebaseFirestoreChatService(COLLECTION_KEY, CHAT_ID, MESSAGES_KEY, FROM_KEY, TEXT_KEY, TIMESTAMP_KEY);*/
-
-
+        // Subscribe to the notifications for sending messages to team members.
         subscribeToNotificationsTopic();
-        //subscribeToNotificationsTopic2();
         initMessageUpdateListener();
 
 
@@ -148,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // Set up the fitness service to be used for the Google Fit API.
         String fitnessServiceKey = getIntent().getStringExtra(FITNESS_SERVICE_KEY);
         fitnessService = MyApplication.getFitnessServiceFactory().create(fitnessServiceKey, this);
         fitnessService.setup();
@@ -157,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
         boolean firstStart = prefs.getBoolean("firstStart", true);
 
+        // On first launch of the app, launch the height page to input user information.
         if (firstStart) {
             Log.d("firstLogin", "Height input because of first installation of the app.");
             heightActivity();
@@ -165,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
         Button teamButton = findViewById(R.id.team_page_button);
         teamButton.setOnClickListener(new View.OnClickListener() {
             @Override
+            // Go to the team page.
             public void onClick(View view) {
                 goToTeamPage();
             }
@@ -173,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
         Button myRouteButton = (Button) findViewById(R.id.dailyActivityToRoutes);
         myRouteButton.setOnClickListener(new View.OnClickListener() {
             @Override
+            // Go to the route screen.
             public void onClick(View view) {
                 switchToRouteScreen();
             }
@@ -181,6 +149,7 @@ public class MainActivity extends AppCompatActivity {
         Button teamRouteButton = (Button) findViewById(R.id.teamRoutesButton);
         teamRouteButton.setOnClickListener(new View.OnClickListener() {
             @Override
+            // Go to the team route screen.
             public void onClick(View view) {
                 switchToTeamRouteScreen();
             }
@@ -189,6 +158,7 @@ public class MainActivity extends AppCompatActivity {
         Button proposeWalkButton = (Button) findViewById(R.id.propose_walk_button);
         proposeWalkButton.setOnClickListener(new View.OnClickListener() {
             @Override
+            // Go to the proposed walk activity.
             public void onClick(View v) {
                 proposeWalkActivity();
             }
@@ -197,6 +167,7 @@ public class MainActivity extends AppCompatActivity {
         Button startButton = (Button) findViewById(R.id.start_button);
         startButton.setOnClickListener(new View.OnClickListener(){
             @Override
+            // Start walking a new route.
             public void onClick(View view) {
                 try {
                     fitnessService.updateStepCount();
@@ -214,6 +185,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void heightActivity() {
+        // Go to the height page on first launch to write user information.
         Intent intent = new Intent(this,AskHeight_Activity.class);
         startActivity(intent);
         SharedPreferences prefs = getSharedPreferences("prefs",MODE_PRIVATE);
@@ -224,6 +196,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void proposeWalkActivity(){
         Intent intent= new Intent(this, ProposeWalkActivity.class);
+        // Go to the proposed walk screen and pass intents to distinguish testing and actually using the app.
         if (getIntent().hasExtra(CHAT_MESSAGE_SERVICE_EXTRA)) {
             intent.putExtra(ProposeWalkActivity.CHAT_MESSAGE_SERVICE_EXTRA, getIntent().getStringExtra(CHAT_MESSAGE_SERVICE_EXTRA));
         }
@@ -232,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void walkActivity() {
         Intent intent = new Intent(getApplicationContext(), WalkScreenActivity.class);
-        //new
+        // Go to the walk screen and pass intents to distinguish testing and actually using the app.
         if (getIntent().hasExtra(CHAT_MESSAGE_SERVICE_EXTRA)) {
             intent.putExtra(WalkScreenActivity.CHAT_MESSAGE_SERVICE_EXTRA, getIntent().getStringExtra(CHAT_MESSAGE_SERVICE_EXTRA));
         }
@@ -242,7 +215,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void switchToRouteScreen() {
         Intent intent = new Intent(this, RouteScreen.class);
-        //new
+        // Go to the route screen and pass intents to distinguish testing and actually using the app.
         if (getIntent().hasExtra(CHAT_MESSAGE_SERVICE_EXTRA)) {
             intent.putExtra(RouteScreen.CHAT_MESSAGE_SERVICE_EXTRA, getIntent().getStringExtra(CHAT_MESSAGE_SERVICE_EXTRA));
         }
@@ -251,7 +224,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void switchToTeamRouteScreen() {
         Intent intent = new Intent(this, TeamRouteScreen.class);
-        //new
+        // Go to the team route screen and pass intents to distinguish testing and actually using the app.
         if (getIntent().hasExtra(CHAT_MESSAGE_SERVICE_EXTRA)) {
             intent.putExtra(TeamRouteScreen.CHAT_MESSAGE_SERVICE_EXTRA, getIntent().getStringExtra(CHAT_MESSAGE_SERVICE_EXTRA));
         }
@@ -259,8 +232,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goToTeamPage() {
+        // Go to the team page and pass intents to distinguish testing and actually using the app.
         Intent intent = new Intent(this, TeamPageScreen.class);
-        //new
         if (getIntent().hasExtra(CHAT_MESSAGE_SERVICE_EXTRA)) {
             intent.putExtra(TeamPageScreen.CHAT_MESSAGE_SERVICE_EXTRA, getIntent().getStringExtra(CHAT_MESSAGE_SERVICE_EXTRA));
         }
@@ -269,6 +242,7 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onResume() {
         super.onResume();
+        // On resume, update the fields of the MainActivity to reflect last walk.
         try {
             fitnessService.updateStepCount();
 
@@ -335,11 +309,8 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void updateSteps() {
-        fitnessService.updateStepCount();
-    }
-
     private void subscribeToNotificationsTopic() {
+        // Subscribe to the notifications topic to get notifications for various activities.
         FirebaseMessaging.getInstance().subscribeToTopic(CHAT_ID)
                 .addOnCompleteListener(task -> {
                             String msg = "Subscribed to notifications";
@@ -353,23 +324,9 @@ public class MainActivity extends AppCompatActivity {
                 );
     }
 
-    private void subscribeToNotificationsTopic2() {
-        FirebaseMessaging.getInstance().subscribeToTopic("proposed")
-                .addOnCompleteListener(task -> {
-                            String msg = "Subscribed to notifications for team walk";
-                            if (!task.isSuccessful()) {
-                                msg = "Subscribe to notifications failed";
-                            }
-                            Log.d(TAG, msg);
-                            Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
-
-                        }
-                );
-    }
-
     private void initMessageUpdateListener() {
+        // Subscribe to notification messages.
         notifications.subscribeToMessages(messages -> messages.forEach(message -> {
-
         }));
     }
 

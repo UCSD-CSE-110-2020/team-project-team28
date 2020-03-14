@@ -18,6 +18,7 @@ public class Route {
     private int image;
     private boolean walkedYet;
 
+    // Contains the route class to be used in order to create routes and team routes.
     Route (String userName, String userEmail, String name, String startLocation, long totalSteps, double totalMiles, long totalSeconds,
            String flatOrHilly, String loopOrOut, String streetOrTrail, String surface,
            String difficulty, String note, boolean isFavorite, int image, boolean manuallyAdded) {

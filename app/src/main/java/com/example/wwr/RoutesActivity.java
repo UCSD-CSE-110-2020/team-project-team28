@@ -20,15 +20,12 @@ import java.text.DecimalFormat;
 public class RoutesActivity extends AppCompatActivity {
     private final String EMPTY_STRING = "";
     private UserInfo user;
-    public CheckedTextView checkedRoute;
     private boolean manuallyAdded;
     public static final String CHAT_MESSAGE_SERVICE_EXTRA = "CHAT_MESSAGE_SERVICE";
-    private static final String FIRESTORE_CHAT_SERVICE = "FIRESTORE_CHAT_SERVICE";
 
     RadioGroup flatGroup, loopGroup, streetGroup, surfaceGroup, difficultyGroup;
     RadioButton flatButton, loopButton, streetButton, surfaceButton, difficultyButton;
     EditText routeName, startLocation, notes;
-    DistanceCalculator walkingDistanceMiles = new WalkingDistanceMiles();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +48,7 @@ public class RoutesActivity extends AppCompatActivity {
         startLocation.setText(EMPTY_STRING);
         notes.setText(EMPTY_STRING);
 
+        // Create the route.
         Button ok_button = findViewById(R.id.button_ok);
         ok_button.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -58,8 +56,7 @@ public class RoutesActivity extends AppCompatActivity {
                 pressOK(view);
             }
         });
-
-    } // end onCreate()
+    }
 
     public void pressOK (View view) {
         // grab radio button selections
@@ -93,7 +90,7 @@ public class RoutesActivity extends AppCompatActivity {
         String surface = surfaceButton.getText().toString();
         String difficulty = difficultyButton.getText().toString();
 
-        // set info
+        // Save the information about the route.
         editor.putString("routeName", routeName.getText().toString());
         editor.putString("startLocation", startLocation.getText().toString());
         editor.putString("flatOrHilly", flatOrHilly);
@@ -104,7 +101,6 @@ public class RoutesActivity extends AppCompatActivity {
         editor.putString("notes", notes.getText().toString());
 
         editor.apply();
-
         Gson gson = new Gson();
 
         long totalSteps = user.getLastIntentSteps();
@@ -118,7 +114,6 @@ public class RoutesActivity extends AppCompatActivity {
             manuallyAdded = false;
         }
 
-
         double miles = user.getLastIntentMiles();
         String strMiles = new DecimalFormat("#.##").format(miles);
         Double formattedMiles = Double.valueOf(strMiles);
@@ -127,7 +122,7 @@ public class RoutesActivity extends AppCompatActivity {
         String userName = sharedPreferences2.getString("userName", "");
         String userEmail = sharedPreferences2.getString("userEmail", "");
 
-        // check to make sure user added a name to the route before saving
+        // Check to make sure user added a name to the route before saving and add the route to the routeList.
         if (!routeName.getText().toString().equals(EMPTY_STRING) ) {
             if (manuallyAdded) {
                 RouteScreen.addToRouteList(userName, userEmail, routeName.getText().toString(),
@@ -148,5 +143,4 @@ public class RoutesActivity extends AppCompatActivity {
         }
         finish();
     }
-
-} // end RoutesActivity
+}

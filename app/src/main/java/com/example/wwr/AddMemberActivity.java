@@ -67,11 +67,8 @@ public class AddMemberActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_member);
 
-        /*chat = FirebaseFirestore.getInstance()
-                .collection(COLLECTION_KEY)
-                .document(DOCUMENT_KEY)
-                .collection(MESSAGES_KEY);*/
-
+        /* Set notifications using firebase firestore adapters or real firebase depending on whether
+         * we are testing or not. */
         if (getIntent().hasExtra(CHAT_MESSAGE_SERVICE_EXTRA)) {
             MyApplication.getChatServiceFactory().put(FIRESTORE_CHAT_SERVICE, (chatId ->
                     new FirebaseFirestoreAdapter(COLLECTION_KEY, CHAT_ID, MESSAGES_KEY, FROM_KEY, TEXT_KEY, TIMESTAMP_KEY)));
@@ -82,7 +79,6 @@ public class AddMemberActivity extends AppCompatActivity {
             }
             notifications = MyApplication.getChatServiceFactory().create(chatServiceKey, CHAT_ID);
         } else {
-
             notifications = MyApplication
                     .getChatServiceFactory()
                     .createFirebaseFirestoreChatService(COLLECTION_KEY, CHAT_ID, MESSAGES_KEY, FROM_KEY, TEXT_KEY, TIMESTAMP_KEY);
@@ -101,14 +97,10 @@ public class AddMemberActivity extends AppCompatActivity {
             public void onClick(View view) {
                 email_str = email.getText().toString();
                 team_str = team.getText().toString();
-
-                //String teamName_str = sp.getString("teamName", "");
-                //if (teamName_str.equals("")) {
+                // Create the team.
                 CreateATeam(team_str);
                 Log.d("create team", "creating a new team");
-                //}
-
-                Log.d("no create team", "not creating a new team");
+                // Send the token.
                 sendToken();
             }
         });
@@ -117,7 +109,7 @@ public class AddMemberActivity extends AppCompatActivity {
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //sendMessage();
+                // Exit the screen.
                 finish();
             }
         });
@@ -131,29 +123,20 @@ public class AddMemberActivity extends AppCompatActivity {
             return;
         }
 
-        // Load userName
         SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
         String userName = sharedPreferences.getString("userName", "test");
 
+        // Save the token and the user name.
         Map<String, String> newMessage = new HashMap<>();
         newMessage.put(FROM_KEY, userName);
         newMessage.put(TEXT_KEY, from + userName);
         newMessage.put("token", token);
         newMessage.put("mtype", "TeamInvite");
         newMessage.put("mteam",team_str);
-        Toast.makeText(getApplicationContext(), token, Toast.LENGTH_LONG).show();
 
-        /*chat.add(newMessage).addOnSuccessListener(result -> {
-            //messageView.setText("");
-            // this is where the notification shit will be i think
-        }).addOnFailureListener(error -> {
-            Log.e(TAG, error.getLocalizedMessage());
-        });*/
         notifications.addMessage(newMessage).addOnSuccessListener(result -> {
             Log.d(TAG, "message success: " + newMessage);
         });
-
-
     }
 
     // Send message to the specific user using a token.
@@ -166,11 +149,6 @@ public class AddMemberActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-                            // TODO: Get the email from the field and find the token of the user corresponding to that email.
-
-                            SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
-                            String userName = sharedPreferences.getString("userName", "test");
-
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 // Change the condition to specific user via email from the field
                                 if (document.get("email") != null && document.get("email").equals(email_str)) {
@@ -200,6 +178,7 @@ public class AddMemberActivity extends AppCompatActivity {
         edit.putString("teamName", teamName);
         edit.apply();
 
+        // Add user to the list of appUsers.
         db.collection("appUsers").document(userName)
                 .update(team)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -232,6 +211,7 @@ public class AddMemberActivity extends AppCompatActivity {
                     }
                 });
 
+        // Add user to the team.
         Map<String, Object> user = new HashMap<>();
         user.put(userName, userToken);
         db.collection(teamName).document("Members")

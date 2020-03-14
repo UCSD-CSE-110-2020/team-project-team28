@@ -22,6 +22,7 @@ import java.util.Random;
 
 import static android.content.Context.MODE_PRIVATE;
 
+// An adapter class that allows the team members to be displayed as a RecyclerView.
 public class TeamPageScreenAdapter extends RecyclerView.Adapter<TeamPageScreenAdapter.TeamPageScreenViewHolder> {
     private ArrayList<Route> routeList;
     Context context;
@@ -69,7 +70,7 @@ public class TeamPageScreenAdapter extends RecyclerView.Adapter<TeamPageScreenAd
     @Override
     public void onBindViewHolder(@NonNull TeamPageScreenViewHolder holder, int position) {
         final Route currentRoute = routeList.get(position); // final
-
+        // Make distinct color icons for each user.
         Random rnd = new Random();
         int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
         TextDrawable drawable = TextDrawable.builder().buildRect(currentRoute.getUserName().charAt(0) + "", color);

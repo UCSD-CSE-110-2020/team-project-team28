@@ -46,8 +46,8 @@ public class RouteScreen extends AppCompatActivity {
     public static CheckedTextView checkedRoute;
     public String TAG = "Upload to firestore";
     public static final String CHAT_MESSAGE_SERVICE_EXTRA = "CHAT_MESSAGE_SERVICE";
-    private static final String FIRESTORE_CHAT_SERVICE = "FIRESTORE_CHAT_SERVICE";
 
+    // Load my routes and team routes.
     public void loadData() {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         Gson gson = new Gson();
@@ -56,6 +56,7 @@ public class RouteScreen extends AppCompatActivity {
         routeList = gson.fromJson(json, type);
         Log.d("loadRouteList", "Route list has been loaded");
 
+        // If the routeList is empty, initialize a new ArrayList.
         if (routeList == null) {
             routeList = new ArrayList<>();
         }
@@ -64,11 +65,10 @@ public class RouteScreen extends AppCompatActivity {
         json = sharedPreferences.getString("team route list", null);
         ArrayList<Route> teamRoute = gson.fromJson(json, type);
 
+        // If there are team routes, add team routes.
         if (teamRoute != null) {
-            // Add team routes
             addTeamRoute(teamRoute);
         }
-
     }
 
     @Override
@@ -78,6 +78,7 @@ public class RouteScreen extends AppCompatActivity {
         setContentView(R.layout.activity_route_screen);
         loadData();
 
+        // Initialize the RecyclerView.
         routeScreenView = findViewById(R.id.routeScreen);
         routeScreenView.setHasFixedSize(true);
         routeLayoutManager = new LinearLayoutManager(this);
@@ -86,7 +87,7 @@ public class RouteScreen extends AppCompatActivity {
         routeScreenView.setAdapter(routeAdapter);
         checkedRoute = findViewById(R.id.team_checkedRoute);
 
-        // if the route doesn't exist yet
+        // If the route does not exist yet, go to the routes activity in order to create a route.
         if (getIntent().getBooleanExtra("goToDetail", false)) {
             Intent intent = new Intent(this, RoutesActivity.class);
             if (getIntent().hasExtra(CHAT_MESSAGE_SERVICE_EXTRA)) {
@@ -99,12 +100,12 @@ public class RouteScreen extends AppCompatActivity {
 
         SharedPreferences sp = getSharedPreferences("prefs", MODE_PRIVATE);
         String currPos = sp.getString("currPos", "0");
+        // Get the current adapter position.
         currentPosition = Integer.parseInt(currPos);
 
-        // this gets called when we walk on an existing route
+        // When we walk on an existing route, update the route information.
         if (getIntent().getBooleanExtra("updateRoute", false)) {
             if (currentPosition < routeList.size()) {
-
                 // set the route as walked
                 routeList.get(currentPosition).setWalked();
                 // get the last walk's time, smiles, and distance
@@ -124,6 +125,7 @@ public class RouteScreen extends AppCompatActivity {
             }
         }
 
+        // Go back to the main menu.
         Button backToMainMenu = (Button) findViewById(R.id.backToMainMenuButton);
         backToMainMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,7 +134,7 @@ public class RouteScreen extends AppCompatActivity {
             }
         });
 
-        // add a manual route
+        // Add a manual route.
         Button addRouteButton = (Button) findViewById(R.id.addRouteButton);
         addRouteButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,7 +148,7 @@ public class RouteScreen extends AppCompatActivity {
             }
         });
 
-        // Upload the routes
+        // Upload my routes.
         Button uploadRouteButton = (Button) findViewById(R.id.uploadRouteButton);
         uploadRouteButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -193,11 +195,13 @@ public class RouteScreen extends AppCompatActivity {
         });
     }
 
+    // Add the route with the following information to my routes.
     public static void addToRouteList(String userName, String userEmail, String routeName, String startingLocation, long totalSteps,
                                       double totalMiles, long totalSeconds, String flatOrHilly,
                                       String loopOrOut, String streetOrTrail, String surface,
                                       String difficulty, String note, boolean isFavorite, boolean manuallyAdded) {
         int image = 0;
+        // If the route is favorited, show a star.
         if (isFavorite) {
             image = R.drawable.ic_stars_black_24dp;
         }
@@ -208,6 +212,7 @@ public class RouteScreen extends AppCompatActivity {
         Log.d("notifyList", "Notify list that the data has been updated.");
     }
 
+    // Save the routes.
     public void saveData() {
         SharedPreferences userPref = getSharedPreferences("shared preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = userPref.edit();
@@ -218,6 +223,7 @@ public class RouteScreen extends AppCompatActivity {
         Log.d("loadRouteList", "Route list has been saved");
     }
 
+    // Add routes of the team.
     public void addTeamRoute(ArrayList<Route> teamRouteList) {
         for (Route teamRoute: teamRouteList) {
             boolean isDuplicate = false;

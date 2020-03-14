@@ -16,6 +16,7 @@ public class GoogleFitSingleton extends Application {
         return fitnessService;
     }
 
+    // Allows fitnessService to be used globally.
     public static void setFitnessService(FitnessService service) {
         fitnessService = service;
         Log.d("setSingleton", "Google fit singleton has been set.");

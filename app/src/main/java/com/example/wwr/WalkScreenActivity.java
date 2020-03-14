@@ -21,7 +21,6 @@ public class WalkScreenActivity extends AppCompatActivity {
     private int mockTotalTime = 0;
     private boolean startPressed = false;
     public static final String CHAT_MESSAGE_SERVICE_EXTRA = "CHAT_MESSAGE_SERVICE";
-    private static final String FIRESTORE_CHAT_SERVICE = "FIRESTORE_CHAT_SERVICE";
     private IUser user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,13 +35,14 @@ public class WalkScreenActivity extends AppCompatActivity {
         Intent previous = getIntent();
         TextView routeName = findViewById(R.id.route_name);
 
+        // Determine if the route already has a name.
         String name = previous.getStringExtra("route name");
-
         if (name != null) {
             routeName.setText(name);
             Log.d("routeNameSet", "Route name has been set");
         }
 
+        // Starts the walk.
         Button startWalk = (Button) findViewById(R.id.startWalk);
         startWalk.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,7 +55,7 @@ public class WalkScreenActivity extends AppCompatActivity {
             }
         });
 
-        // button to grab mock time
+        // Button to allow the user to set a mock time.
         Button newStartTime = (Button) findViewById(R.id.submitStartTime);
         newStartTime.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +68,7 @@ public class WalkScreenActivity extends AppCompatActivity {
             }
         });
 
+        // Button to allow the user to end the mock time.
         Button newEndTime = (Button) findViewById(R.id.submitEndTime);
         newEndTime.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,6 +81,7 @@ public class WalkScreenActivity extends AppCompatActivity {
             }
         });
 
+        // Mock button to add 500 steps on each press.
         Button addSteps = (Button) findViewById(R.id.addMockSteps);
         addSteps.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,10 +90,11 @@ public class WalkScreenActivity extends AppCompatActivity {
             }
         });
 
-        // new addition - update the steps so we have a starting point for the walk
+        // Update the steps so we have a starting point for the walk
         FitnessService fitnessService = GoogleFitSingleton.getFitnessService();
         fitnessService.updateStepCount();
 
+        // Button to end the walk.
         Button endButton = (Button) findViewById(R.id.end_button);
         endButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -101,9 +104,8 @@ public class WalkScreenActivity extends AppCompatActivity {
                     wait(100000);
                 } catch (Exception e) {
                 }
-
                 long time;
-                // Need to see if mock time was used, if so need to use mock time
+                // Need to see if mock time was used, if so need to use mock time.
                 if (mockTotalTime == 0) {
                     if (!startPressed) {
                         time = 0;
@@ -136,13 +138,13 @@ public class WalkScreenActivity extends AppCompatActivity {
                 previousString = previous.getStringExtra("previousClass");
                 Intent intent = new Intent(getApplicationContext(), RouteScreen.class);
 
-                // the case where you start a brand new walk
+                // Handles the case where you start a brand new walk.
                 if (previousString != null && previousString.equals("MainActivity")) {
                     intent.putExtra("goToDetail", true);
                     intent.putExtra("newTime", time);
                 }
 
-                // the case where you started an existing walk
+                // Handles the case where you started an existing walk.
                 String previousActivity = previous.getStringExtra("previousScreen");
                 if (previousActivity != null && previousActivity.equals("Route Detail")) {
                     intent.putExtra("updateRoute", true);
@@ -155,7 +157,7 @@ public class WalkScreenActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        }); // end of end walk button
+        });
     }
 
 }

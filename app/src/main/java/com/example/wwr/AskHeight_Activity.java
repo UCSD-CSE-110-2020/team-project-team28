@@ -53,7 +53,7 @@ public class AskHeight_Activity extends AppCompatActivity {
         enter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
-
+                // Save the inches, feet, userName, and the userEmail.
                 int in = Integer.valueOf(inches.getText().toString());
                 int ft = Integer.valueOf(feet.getText().toString());
                 String userName = enterName.getText().toString();
@@ -66,12 +66,7 @@ public class AskHeight_Activity extends AppCompatActivity {
                 editor2.putString("userName", userName);
                 editor2.putString("userEmail", userEmail);
                 editor2.apply();
-
-
                 Log.d("saveHeight", "Height has been saved.");
-
-
-
                 finish();
 
             }
@@ -85,6 +80,7 @@ public class AskHeight_Activity extends AppCompatActivity {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
+            // Get the user fields when the text is changed.
             String feetInput = feet.getText().toString().trim();
             String inchInput = inches.getText().toString().trim();
             String nameInput = enterName.getText().toString().trim();
@@ -96,6 +92,4 @@ public class AskHeight_Activity extends AppCompatActivity {
         public void afterTextChanged(Editable s) {
         }
     };
-
-
 }

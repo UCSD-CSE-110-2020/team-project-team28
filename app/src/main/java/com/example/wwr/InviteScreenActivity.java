@@ -35,12 +35,10 @@ public class InviteScreenActivity extends AppCompatActivity {
     String accept = " joined your team!";
     String decline = " declined your team request";
     String COLLECTION_KEY = "chats";
-    String CHAT_ID = "chat1";
     String DOCUMENT_KEY = "chat1";
     String MESSAGES_KEY = "messages";
     String FROM_KEY = "from";
     String TEXT_KEY = "text";
-    String TIMESTAMP_KEY = "timestamp";
 
     CollectionReference chat;
 
@@ -51,10 +49,10 @@ public class InviteScreenActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // Define teamName and inviteFrom depending on whether we are testing or not for mocking.
         if (getIntent().getStringExtra("TEAM")!= null){
             teamName = getIntent().getStringExtra("TEAM");
         }
-
         if (getIntent().getStringExtra("FROM")!= null){
             inviteFrom = getIntent().getStringExtra("FROM");
         }
@@ -69,6 +67,7 @@ public class InviteScreenActivity extends AppCompatActivity {
         acceptInviteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // If user accepts invite, accept the invite and send the notification message to the team member.
                 acceptInvite();
                 sendToken(accept);
                 finish();
@@ -79,18 +78,9 @@ public class InviteScreenActivity extends AppCompatActivity {
         declineInviteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // If user declines invite, decline the invite and send the notification message to the team member.
                 sendToken(decline);
                 finish();
-            }
-        });
-
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
             }
         });
     }
@@ -108,6 +98,7 @@ public class InviteScreenActivity extends AppCompatActivity {
         edit.putString("teamName", teamName);
         edit.apply();
 
+        // Allow the user to be added to the team that he or she is invited to.
         db.collection("appUsers").document(userName)
                 .update(team)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -140,8 +131,7 @@ public class InviteScreenActivity extends AppCompatActivity {
                     }
                 });
 
-
-        //new
+        // Update the user to the pre-existing team.
         Map<String, Object> user = new HashMap<>();
         user.put(userName, userToken);
         db.collection(teamName).document("Members")
@@ -179,8 +169,6 @@ public class InviteScreenActivity extends AppCompatActivity {
 
     // Send a message to a specific user using a token.
     private void sendMessage(String token, String message) {
-
-
         // Load userName
         SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
         String userName = sharedPreferences.getString("userName", "test");
@@ -191,10 +179,8 @@ public class InviteScreenActivity extends AppCompatActivity {
         newMessage.put("token", token);
         newMessage.put("mtype", "TeamResponse");
         newMessage.put("mteam",teamName);
-        Toast.makeText(getApplicationContext(), token, Toast.LENGTH_LONG).show();
 
         chat.add(newMessage).addOnSuccessListener(result -> {
-            //messageView.setText("");
         }).addOnFailureListener(error -> {
             Log.e(TAG, error.getLocalizedMessage());
         });
@@ -209,16 +195,11 @@ public class InviteScreenActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-                            // TODO: Get the email from the field and find the token of the user corresponding to that email.
-
                             SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
-                            String userName = sharedPreferences.getString("userName", "test");
-
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 // Change the condition to specific user via email from the field
                                 if (document.getId().equals(inviteFrom)) {
                                     sendMessage((String) document.get("token"), message);
-
                                     return;
                                 }
                             }

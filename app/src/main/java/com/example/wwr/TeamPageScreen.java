@@ -44,6 +44,7 @@ public class TeamPageScreen extends AppCompatActivity {
     private static final String TAG = "TeamPageScreen";
     public static final String CHAT_MESSAGE_SERVICE_EXTRA = "CHAT_MESSAGE_SERVICE";
 
+    // Load all the team members.
     public void loadTeamUsers() {
         if (getIntent().getStringExtra("TEST") != null && getIntent().getStringExtra("TEST").equals("TEST")) {
             return;
@@ -86,8 +87,10 @@ public class TeamPageScreen extends AppCompatActivity {
         uploadUserInformation();
         routeList = new ArrayList<>();
 
+        // Load the team users.
         loadTeamUsers();
 
+        // Create a recycler view for the team members.
         routeScreenView = findViewById(R.id.teamPage);
         routeScreenView.setHasFixedSize(true);
         routeLayoutManager = new LinearLayoutManager(this);
@@ -95,6 +98,7 @@ public class TeamPageScreen extends AppCompatActivity {
         routeScreenView.setLayoutManager(routeLayoutManager);
         routeScreenView.setAdapter(routeAdapter);
 
+        // Go back to the main menu.
         Button backToMainMenu = (Button) findViewById(R.id.backToMainFromTeamPage);
         backToMainMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,6 +107,7 @@ public class TeamPageScreen extends AppCompatActivity {
             }
         });
 
+        // Invite a member to the team.
         Button addMember = findViewById(R.id.addMemberButton);
         addMember.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,24 +118,28 @@ public class TeamPageScreen extends AppCompatActivity {
 
     }
 
+    // Launch an activity to invite a member to the user's team.
     public void startAddMember(){
         Intent intent = new Intent(this, AddMemberActivity.class);
-        //new
+        // Used for mocking.
         if (getIntent().hasExtra(CHAT_MESSAGE_SERVICE_EXTRA)) {
             intent.putExtra(MainActivity.CHAT_MESSAGE_SERVICE_EXTRA, getIntent().getStringExtra(CHAT_MESSAGE_SERVICE_EXTRA));
         }
         startActivity(intent);
     }
 
+    // Upload the user information.
     public void uploadUserInformation() {
+        // Used for mocking.
         if (getIntent().getStringExtra("TEST") != null && getIntent().getStringExtra("TEST").equals("TEST")) {
             return;
         }
+        // Add the token and the email of the user to firebase.
         addTokenToFirebase();
         addEmailToFirebase();
     }
 
-
+    // Returns whether the team member has been added already.
     public boolean hasTeamMember(String userName) {
         for (Route route: routeList) {
             if (route.getUserName().equals(userName)) {
@@ -141,7 +150,7 @@ public class TeamPageScreen extends AppCompatActivity {
     }
 
     public void addTokenToFirebase() {
-        // Get user token
+        // Sends the user token to firebase.
         FirebaseInstanceId.getInstance().getInstanceId()
                 .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
                     @Override
@@ -150,10 +159,8 @@ public class TeamPageScreen extends AppCompatActivity {
                             Log.w(TAG, "getInstanceId failed", task.getException());
                             return;
                         }
-
                         // Get new Instance ID token
                         String token = task.getResult().getToken();
-                        // Log and toast
                         Log.d(TAG, token);
                         addToken(token);
                     }
@@ -161,6 +168,7 @@ public class TeamPageScreen extends AppCompatActivity {
     }
 
     public void addToken(String token) {
+        // Add the user token to firebase.
         SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
         String userName = sharedPreferences.getString("userName", "FirebaseTests");
         SharedPreferences.Editor edit = sharedPreferences.edit();
@@ -203,7 +211,7 @@ public class TeamPageScreen extends AppCompatActivity {
                 });
     }
 
-
+    // Add the email of the user to firebase.
     public void addEmailToFirebase() {
         SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
         String userName = sharedPreferences.getString("userName", "Test");
@@ -244,14 +252,13 @@ public class TeamPageScreen extends AppCompatActivity {
                 });
     }
 
+    // Mock method that allows team members to be added during testing.
     private void addTestMembers(){
         Gson gson = new Gson();
         SharedPreferences tprefs = getSharedPreferences("prefs", Context.MODE_PRIVATE);
         String storedHashMapString = tprefs.getString("team_members", "");
-        String hi = tprefs.getString("hi", "");
         java.lang.reflect.Type type = new TypeToken<HashMap<String, String>>(){}.getType();
         HashMap<String, String> testHashMap2 = gson.fromJson(storedHashMapString, type);
-
         if (testHashMap2 == null || testHashMap2.isEmpty()){
             return;
         }

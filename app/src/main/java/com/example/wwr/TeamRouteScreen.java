@@ -43,6 +43,7 @@ public class TeamRouteScreen extends AppCompatActivity {
     public static final String CHAT_MESSAGE_SERVICE_EXTRA = "CHAT_MESSAGE_SERVICE";
     private static final String FIRESTORE_CHAT_SERVICE = "FIRESTORE_CHAT_SERVICE";
 
+    // Load all the team routes.
     public void loadTeamRoutes() {
         routeList = new ArrayList<>();
         if (getIntent().getStringExtra("TEST") != null && getIntent().getStringExtra("TEST").equals("TEST")) {
@@ -72,8 +73,8 @@ public class TeamRouteScreen extends AppCompatActivity {
                                                         Long.parseLong(steps), Double.parseDouble(totalMiles), Long.parseLong(totalSeconds),
                                                         route.get("flatOrHilly"), route.get("loopOrOut"), route.get("streetOrTrail"),
                                                         route.get("surface"), route.get("difficulty"), route.get("note"), false, 0, true);
-
                                                 boolean isDuplicate = false;
+                                                // If the route is not a duplicate, add the route to routeList.
                                                 for (Route addedRoutes : routeList) {
                                                     if (addedRoutes.getUserName().equals(newRoute.getUserName()) && addedRoutes.getStartLocation().equals(newRoute.getStartLocation())
                                                             && addedRoutes.getName().equals(newRoute.getName()) && addedRoutes.getStartLocation().equals(newRoute.getStartLocation())) {
@@ -88,6 +89,7 @@ public class TeamRouteScreen extends AppCompatActivity {
                                         }
                                     }
                                 }
+                                // Save the route and notify the routeAdapter that routeList changed.
                                 saveData();
                                 routeAdapter.notifyDataSetChanged();
                             }
@@ -98,9 +100,9 @@ public class TeamRouteScreen extends AppCompatActivity {
                 });
         Log.d("loadRouteList", "Route list has been loaded");
         this.loadMyRouteData();
-
     }
 
+    // Load my route data.
     public void loadMyRouteData() {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         Gson gson = new Gson();
@@ -108,7 +110,6 @@ public class TeamRouteScreen extends AppCompatActivity {
         Type type = new TypeToken<ArrayList<Route>>() {}.getType();
         myRouteList = gson.fromJson(json, type);
         Log.d("loadRouteList", "Route list has been loaded");
-        // Toast.makeText(getApplicationContext(), "Team Routes Loaded!", Toast.LENGTH_LONG).show();
 
         if (myRouteList == null) {
             myRouteList = new ArrayList<>();
@@ -119,6 +120,7 @@ public class TeamRouteScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_team_route_screen);
+        // Load the team routes.
         loadTeamRoutes();
 
         routeScreenView = findViewById(R.id.teamRouteScreen);
@@ -128,6 +130,7 @@ public class TeamRouteScreen extends AppCompatActivity {
         routeScreenView.setLayoutManager(routeLayoutManager);
         routeScreenView.setAdapter(routeAdapter);
 
+        // Go back to the main menu.
         Button backToMainMenu = (Button) findViewById(R.id.backToMainMenuButtonFromTeam);
         backToMainMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,6 +139,7 @@ public class TeamRouteScreen extends AppCompatActivity {
             }
         });
 
+        // Go to the current proposed walk.
         Button currentProposedWalk = findViewById(R.id.current_proposed_walk_button);
         currentProposedWalk.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,6 +150,7 @@ public class TeamRouteScreen extends AppCompatActivity {
         });
     }
 
+    // Saves the team routes.
     public void saveData() {
         SharedPreferences userPref = getSharedPreferences("shared preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = userPref.edit();

@@ -47,9 +47,7 @@ public class ProposeWalkActivity extends AppCompatActivity {
     String status;
     CollectionReference chat;
 
-    //new
     public static final String CHAT_MESSAGE_SERVICE_EXTRA = "CHAT_MESSAGE_SERVICE";
-    private static final String FIRESTORE_CHAT_SERVICE = "FIRESTORE_CHAT_SERVICE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +65,7 @@ public class ProposeWalkActivity extends AppCompatActivity {
         proposeWalk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Propose the walk to the team.
                 status = "Proposed";
                 addWalkToFirebase();
                 sendMessageToTeam(" proposed a team walk!");
@@ -77,6 +76,7 @@ public class ProposeWalkActivity extends AppCompatActivity {
         cancelWalk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Cancel the already scheduled walk.
                 status = "Canceled";
                 addWalkToFirebase();
                 sendMessageToTeam(" canceled the team walk.");
@@ -86,6 +86,7 @@ public class ProposeWalkActivity extends AppCompatActivity {
         Button exitButton = findViewById(R.id.propose_walk_exit_button);
         exitButton.setOnClickListener(new View.OnClickListener() {
             @Override
+            // Exit the page.
             public void onClick(View v) {
                 finish();
             }
@@ -95,14 +96,15 @@ public class ProposeWalkActivity extends AppCompatActivity {
         scheduleWalk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Schedule the walk to the team.
                 status = "Scheduled";
                 addWalkToFirebase();
                 sendMessageToTeam(" scheduled the team walk!");
             }
         });
 
-        // Get route name and starting location
-        if (getIntent().getStringExtra("route name") != null && getIntent().getStringExtra("starting location")!=null) {
+        // Get route name and starting location.
+        if (getIntent().getStringExtra("route name") != null && getIntent().getStringExtra("starting location")!= null) {
             routeName = getIntent().getStringExtra("route name");
             startingLocation = getIntent().getStringExtra("starting location");
             information = routeName + "\n" + startingLocation;
@@ -113,10 +115,9 @@ public class ProposeWalkActivity extends AppCompatActivity {
         }
     }
 
-    //send a message to the entire team
-    private void sendMessageToTeam(String message){
+    private void sendMessageToTeam(String message) {
+        // Send the specific intent of the walk to each team member.
         SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
-        String userName = sharedPreferences.getString("userName", "Test");
         String teamName = sharedPreferences.getString("teamName", "");
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -153,16 +154,15 @@ public class ProposeWalkActivity extends AppCompatActivity {
         newMessage.put("token", token);
         newMessage.put("mtype", "TeamWalk");
         newMessage.put("mteam", "team name");
-        //Toast.makeText(getApplicationContext(), token, Toast.LENGTH_LONG).show();
 
         chat.add(newMessage).addOnSuccessListener(result -> {
-            //messageView.setText("");
         }).addOnFailureListener(error -> {
             Log.e(TAG, error.getLocalizedMessage());
         });
     }
 
     public void addWalkToFirebase() {
+        // Add the proposed walk to the firebase.
         SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
         String userName = sharedPreferences.getString("userName", "Test");
         TextView proposedTime = findViewById(R.id.propose_walk_time);
@@ -178,7 +178,6 @@ public class ProposeWalkActivity extends AppCompatActivity {
         walkInfo.put("Time", time);
         walkInfo.put("Owner", userName);
         walkInfo.put("Status", status);
-
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection(teamName).document("proposedWalk")
@@ -221,8 +220,8 @@ public class ProposeWalkActivity extends AppCompatActivity {
     }
 
     public void loadRouteInfo() {
+        // Load information of the proposed walk.
         SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
-        String userName = sharedPreferences.getString("userName", "Test");
         String teamName = sharedPreferences.getString("teamName", "");
         Log.d("team name", teamName);
 
@@ -250,5 +249,4 @@ public class ProposeWalkActivity extends AppCompatActivity {
                     }
                 });
     }
-
 }
