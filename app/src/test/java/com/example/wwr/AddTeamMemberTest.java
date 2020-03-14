@@ -24,7 +24,7 @@ public class AddTeamMemberTest {
     @Before
     public void setUp() {
         intent = new Intent(ApplicationProvider.getApplicationContext(), TeamPageScreen.class);
-        FirebaseApp.initializeApp(ApplicationProvider.getApplicationContext());
+        intent.putExtra("TEST", "TEST");
     }
 
     @Test

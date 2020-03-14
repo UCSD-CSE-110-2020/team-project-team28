@@ -22,6 +22,8 @@ public class RoutesActivity extends AppCompatActivity {
     private UserInfo user;
     public CheckedTextView checkedRoute;
     private boolean manuallyAdded;
+    public static final String CHAT_MESSAGE_SERVICE_EXTRA = "CHAT_MESSAGE_SERVICE";
+    private static final String FIRESTORE_CHAT_SERVICE = "FIRESTORE_CHAT_SERVICE";
 
     RadioGroup flatGroup, loopGroup, streetGroup, surfaceGroup, difficultyGroup;
     RadioButton flatButton, loopButton, streetButton, surfaceButton, difficultyButton;

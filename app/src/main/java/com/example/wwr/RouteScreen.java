@@ -89,6 +89,9 @@ public class RouteScreen extends AppCompatActivity {
         // if the route doesn't exist yet
         if (getIntent().getBooleanExtra("goToDetail", false)) {
             Intent intent = new Intent(this, RoutesActivity.class);
+            if (getIntent().hasExtra(CHAT_MESSAGE_SERVICE_EXTRA)) {
+                intent.putExtra(RoutesActivity.CHAT_MESSAGE_SERVICE_EXTRA, getIntent().getStringExtra(CHAT_MESSAGE_SERVICE_EXTRA));
+            }
             intent.putExtra("newTime", getIntent().getLongExtra("newTime", 0));
             Log.d("goToDetail", "Add the completed route from walk screen.");
             startActivity(intent);
@@ -135,6 +138,9 @@ public class RouteScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), RoutesActivity.class);
+                if (getIntent().hasExtra(CHAT_MESSAGE_SERVICE_EXTRA)) {
+                    intent.putExtra(RoutesActivity.CHAT_MESSAGE_SERVICE_EXTRA, getIntent().getStringExtra(CHAT_MESSAGE_SERVICE_EXTRA));
+                }
                 intent.putExtra("addNewRoute", true);
                 startActivity(intent);
             }

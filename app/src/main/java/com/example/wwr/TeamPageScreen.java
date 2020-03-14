@@ -45,6 +45,9 @@ public class TeamPageScreen extends AppCompatActivity {
     public static final String CHAT_MESSAGE_SERVICE_EXTRA = "CHAT_MESSAGE_SERVICE";
 
     public void loadTeamUsers() {
+        if (getIntent().getStringExtra("TEST") != null && getIntent().getStringExtra("TEST").equals("TEST")) {
+            return;
+        }
         addTestMembers();
         SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
         String userName = sharedPreferences.getString("userName", "Test");
@@ -82,6 +85,7 @@ public class TeamPageScreen extends AppCompatActivity {
         setContentView(R.layout.activity_team_page);
         uploadUserInformation();
         routeList = new ArrayList<>();
+
         loadTeamUsers();
 
         routeScreenView = findViewById(R.id.teamPage);
@@ -119,6 +123,9 @@ public class TeamPageScreen extends AppCompatActivity {
     }
 
     public void uploadUserInformation() {
+        if (getIntent().getStringExtra("TEST") != null && getIntent().getStringExtra("TEST").equals("TEST")) {
+            return;
+        }
         addTokenToFirebase();
         addEmailToFirebase();
     }
